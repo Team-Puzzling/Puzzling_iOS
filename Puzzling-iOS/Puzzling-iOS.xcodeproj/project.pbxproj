@@ -38,6 +38,10 @@
 		03E6D2532A532FD300F4453C /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 03E6D2522A532FD300F4453C /* Realm */; };
 		03E6D2552A532FD300F4453C /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 03E6D2542A532FD300F4453C /* RealmSwift */; };
 		03E6D2582A53303800F4453C /* KakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 03E6D2572A53303800F4453C /* KakaoSDK */; };
+		03E6D25A2A5331ED00F4453C /* APIConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E6D2592A5331ED00F4453C /* APIConst.swift */; };
+		03E6D25C2A5331FF00F4453C /* GeneralResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E6D25B2A5331FF00F4453C /* GeneralResponse.swift */; };
+		03E6D25E2A53321000F4453C /* NetworkLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E6D25D2A53321000F4453C /* NetworkLoggerPlugin.swift */; };
+		03E6D2602A53322300F4453C /* URLConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E6D25F2A53322300F4453C /* URLConst.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +71,10 @@
 		03E6D23F2A532C2500F4453C /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		03E6D2412A532C3300F4453C /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		03E6D2432A532C6300F4453C /* Literals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Literals.swift; sourceTree = "<group>"; };
+		03E6D2592A5331ED00F4453C /* APIConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConst.swift; sourceTree = "<group>"; };
+		03E6D25B2A5331FF00F4453C /* GeneralResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralResponse.swift; sourceTree = "<group>"; };
+		03E6D25D2A53321000F4453C /* NetworkLoggerPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLoggerPlugin.swift; sourceTree = "<group>"; };
+		03E6D25F2A53322300F4453C /* URLConst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLConst.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +179,10 @@
 		03E6D2082A53274500F4453C /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
+				03E6D2592A5331ED00F4453C /* APIConst.swift */,
+				03E6D25B2A5331FF00F4453C /* GeneralResponse.swift */,
+				03E6D25D2A53321000F4453C /* NetworkLoggerPlugin.swift */,
+				03E6D25F2A53322300F4453C /* URLConst.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -403,13 +415,17 @@
 				03E6D2422A532C3300F4453C /* Image.swift in Sources */,
 				03E6D1E92A53219600F4453C /* HomeViewController.swift in Sources */,
 				03E6D2402A532C2500F4453C /* Color.swift in Sources */,
+				03E6D25C2A5331FF00F4453C /* GeneralResponse.swift in Sources */,
 				03E6D1E52A53219600F4453C /* AppDelegate.swift in Sources */,
+				03E6D2602A53322300F4453C /* URLConst.swift in Sources */,
 				03E6D2442A532C6300F4453C /* Literals.swift in Sources */,
 				03E6D23C2A532BC600F4453C /* CustomClass.swift in Sources */,
 				03E6D1E72A53219600F4453C /* SceneDelegate.swift in Sources */,
 				03E6D2262A532AAC00F4453C /* BaseView.swift in Sources */,
 				03E6D2282A532AB900F4453C /* BaseViewController.swift in Sources */,
+				03E6D25A2A5331ED00F4453C /* APIConst.swift in Sources */,
 				03E6D23E2A532C1800F4453C /* FontLevel.swift in Sources */,
+				03E6D25E2A53321000F4453C /* NetworkLoggerPlugin.swift in Sources */,
 				03E6D2072A5326DD00F4453C /* APIService.swift in Sources */,
 				03E6D2052A5326D400F4453C /* DTO.swift in Sources */,
 			);
