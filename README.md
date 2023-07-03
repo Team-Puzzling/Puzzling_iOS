@@ -27,6 +27,7 @@ Then | UI 선언 | SPM
 Lottie | 스플래쉬 화면 | SPM
 fsCalendar | 캘린더 구현 | SPM
 Realm | 데이터 관리 | SPM
+KakaoOpenSDK | 카카오 소셜로그인 | SPM
 
 <br>
 
