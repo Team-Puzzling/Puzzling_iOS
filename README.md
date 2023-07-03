@@ -34,10 +34,10 @@ KakaoOpenSDK | 카카오 소셜로그인 | SPM
 ## 📝 Code Convention
 
 <details>
-<summary> 💦 네이밍 </summary>
+<summary> 🌤️ 네이밍 </summary>
 <div markdown="1">
 
-### 💧클래스, 구조체
+### ⛅️ **클래스, 구조체**
 
 - **UpperCamelCase** 사용
 
@@ -51,7 +51,7 @@ class UserInfo {
 }
 ```
 
-### 💧함수
+### ⛅️ **함수**
 
 - **lowerCamelCase** 사용하고 동사로 시작
 
@@ -62,7 +62,7 @@ private func setDataBind() {
 }
 ```
 
-### 💧**뷰 전환**
+### ⛅️ **뷰 전환**
 
 - pop, push, present, dismiss
 - 동사 + To + 목적지 뷰 (다음에 보일 뷰)
@@ -78,7 +78,7 @@ presentToFirstViewController()
 dismissFirstViewController()
 ```
 
-### 💧**register**
+### ⛅️ **register**
 
 - register + 목적어
 
@@ -89,7 +89,7 @@ registerXib()
 registerCell()
 ```
 
-### 💧서버 통신
+### ⛅️ **서버 통신**
 
 - 서비스함수명 + WithAPI
 
@@ -105,7 +105,7 @@ fetch는 무조건 성공
 
 request는 실패할 수도 있는 요청
 
-### 💧애니메이션
+### ⛅️ **애니메이션**
 
 - 동사원형 + 목적어 + WithAnimation
 
@@ -113,7 +113,7 @@ request는 실패할 수도 있는 요청
 showButtonsWithAnimation()
 ```
 
-### 💧**델리게이트**
+### ⛅️ **델리게이트**
 
 delegate 메서드는 프로토콜명으로 네임스페이스를 구분
 
@@ -153,7 +153,7 @@ protocol UserCellDelegate {
 
 함수 이름 앞에는 되도록이면 `get` 을 붙이지 않습니다.
 
-### 💧**변수, 상수**
+### ⛅️ **변수, 상수**
 
 - **lowerCamelCase** 사용
 
@@ -161,7 +161,7 @@ protocol UserCellDelegate {
 let userName: String
 ```
 
-### 💧**열거형**
+### ⛅️ **열거형**
 
 - 각 case 에는 **lowerCamelCase** 사용
 
@@ -172,7 +172,7 @@ enum UserType {
 }
 ```
 
-### 💧**약어**
+### ⛅️ **약어**
 
 약어로 시작하는 경우 소문자로 표기, 그 외에는 항상 대문자
 
@@ -192,7 +192,7 @@ let websiteUrl: NSURL?
 let URLString: String?
 ```
 
-### 💧**기타 네이밍**
+### ⛅️ **기타 네이밍**
 
 ```swift
 setUI() : @IBOutlet 속성 설정
@@ -212,10 +212,10 @@ setNotification() : NotificationCenter addObserver 모음
 </details>
 
 <details>
-<summary> 💦코드 레이아웃 </summary>
+<summary> 🌤️ 코드 레이아웃 </summary>
 <div markdown="1">
 
-### 💧**들여쓰기 및 띄어쓰기**
+### ⛅️ **들여쓰기 및 띄어쓰기**
 
 - 들여쓰기에는 탭(tab) 대신 **4개의 space**를 사용합니다.
 - 콜론(`:`)을 쓸 때에는 콜론의 오른쪽에만 공백을 둡니다.
@@ -229,7 +229,7 @@ setNotification() : NotificationCenter addObserver 모음
     `func ** (lhs: Int, rhs: Int)`
     
 
-### 💧**줄바꿈**
+### ⛅️ **줄바꿈**
 
 - 함수를 호출하는 코드가 최대 길이를 초과하는 경우에는 파라미터 이름을 기준으로 줄바꿈합니다.
 **파라미터가 3개 이상이면 줄바꿈하도록!!**
@@ -274,7 +274,7 @@ setNotification() : NotificationCenter addObserver 모음
 - else 구문이 길 시 줄바꿈
   
 
-### 💧**빈 줄**
+### ⛅️ **빈 줄**
 
 - 클래스 선언 다음에 , extension 다음에 한 줄 띄어주기
 - 빈 줄에는 공백이 포함되지 않도록 합니다.  ( 띄어쓰기 쓸데없이 넣지 말기 )
@@ -296,7 +296,7 @@ setNotification() : NotificationCenter addObserver 모음
     ```
     
 
-### 💧**임포트**
+### ⛅️ **임포트**
 
 모듈 임포트는 알파벳 순으로 정렬합니다. 내장 프레임워크를 먼저 임포트하고, 빈 줄로 구분하여 서드파티 프레임워크를 임포트합니다.
 
@@ -323,7 +323,7 @@ import URLNavigator
 
 
 <details>
-<summary> 💦클로저 </summary>
+<summary> 🌤️ 클로저 </summary>
 <div markdown="1">
 
 - 파라미터와 리턴 타입이 없는 Closure 정의시에는 `() -> Void`를 사용합니다.
@@ -401,12 +401,12 @@ import URLNavigator
 </details>
 
 <details>
-<summary> 💦주석 </summary>
+<summary> 🌤️ 주석 </summary>
 <div markdown="1">
 
 코드는 가능하면 자체적으로 문서가 되어야 하므로, 코드와 함께 있는 인라인(inline) 주석은 피한다.
 
-### 💧**MARK 주석**
+### ⛅️ **MARK 주석**
 
 ```swift
 // MARK: - UI Components
@@ -447,7 +447,7 @@ import URLNavigator
 > 네트워크 목적을 가진 함수들
 ```
 
-### 💧**퀵헬프 주석**
+### ⛅️ **퀵헬프 주석**
 
 커스텀 메서드, 프로토콜, 클래스의 경우에 퀵헬프 주석 달기
 
@@ -482,10 +482,10 @@ func printProperty(property: Int) {
 </details>
 
 <details>
-<summary> 💦프로그래밍 권장사항 </summary>
+<summary> 🌤️ 프로그래밍 권장사항 </summary>
 <div markdown="1">
 
-### 💧**Type Annotation 사용**
+### ⛅️ **Type Annotation 사용**
 
 **좋은 예:**
 
@@ -501,7 +501,7 @@ let name = "철수"
 let height = "10.0"
 ```
 
-### 💧**UICollectionViewDelegate, UICollectionViewDatsource 등 시스템 프로토콜**
+### ⛅️ **UICollectionViewDelegate, UICollectionViewDatsource 등 시스템 프로토콜**
 
 프로토콜을 적용할 때에는 extension을 만들어서 관련된 메서드를 모아둡니다.
 
@@ -539,7 +539,7 @@ final class MyViewController: UIViewController, UITableViewDataSource, UITableVi
 
 
 <details>
-<summary> 💦기타규칙 </summary>
+<summary> 🌤️ 기타규칙 </summary>
 <div markdown="1">
 
 - `self` 는 최대한 사용을 지양 → `**알잘딱깔센 self…**`
