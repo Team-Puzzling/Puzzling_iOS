@@ -59,7 +59,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		03E6D1E12A53219600F4453C /* Puzzling-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Puzzling-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		03E6D1E12A53219600F4453C /* Puzzling.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Puzzling.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03E6D1E42A53219600F4453C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		03E6D1E62A53219600F4453C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		03E6D1E82A53219600F4453C /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -126,7 +126,7 @@
 		03E6D1D82A53219600F4453C = {
 			isa = PBXGroup;
 			children = (
-				03E6D1E32A53219600F4453C /* Puzzling-iOS */,
+				03E6D1E32A53219600F4453C /* Puzzling */,
 				03E6D1E22A53219600F4453C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -134,12 +134,12 @@
 		03E6D1E22A53219600F4453C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				03E6D1E12A53219600F4453C /* Puzzling-iOS.app */,
+				03E6D1E12A53219600F4453C /* Puzzling.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		03E6D1E32A53219600F4453C /* Puzzling-iOS */ = {
+		03E6D1E32A53219600F4453C /* Puzzling */ = {
 			isa = PBXGroup;
 			children = (
 				03E6D1F82A53257B00F4453C /* Application */,
@@ -149,7 +149,7 @@
 				03E6D2142A53285700F4453C /* Resource */,
 				03E6D2182A53298400F4453C /* Util */,
 			);
-			path = "Puzzling-iOS";
+			path = Puzzling;
 			sourceTree = "<group>";
 		};
 		03E6D1F82A53257B00F4453C /* Application */ = {
@@ -360,9 +360,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		03E6D1E02A53219600F4453C /* Puzzling-iOS */ = {
+		03E6D1E02A53219600F4453C /* Puzzling */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 03E6D1F52A53219800F4453C /* Build configuration list for PBXNativeTarget "Puzzling-iOS" */;
+			buildConfigurationList = 03E6D1F52A53219800F4453C /* Build configuration list for PBXNativeTarget "Puzzling" */;
 			buildPhases = (
 				03E6D1DD2A53219600F4453C /* Sources */,
 				03E6D1DE2A53219600F4453C /* Frameworks */,
@@ -372,7 +372,7 @@
 			);
 			dependencies = (
 			);
-			name = "Puzzling-iOS";
+			name = Puzzling;
 			packageProductDependencies = (
 				03E6D2462A532D5D00F4453C /* Moya */,
 				03E6D2492A532D6B00F4453C /* Then */,
@@ -383,7 +383,7 @@
 				03E6D2572A53303800F4453C /* KakaoSDK */,
 			);
 			productName = "Puzzling-iOS";
-			productReference = 03E6D1E12A53219600F4453C /* Puzzling-iOS.app */;
+			productReference = 03E6D1E12A53219600F4453C /* Puzzling.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -401,7 +401,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 03E6D1DC2A53219600F4453C /* Build configuration list for PBXProject "Puzzling-iOS" */;
+			buildConfigurationList = 03E6D1DC2A53219600F4453C /* Build configuration list for PBXProject "Puzzling" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -422,7 +422,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				03E6D1E02A53219600F4453C /* Puzzling-iOS */,
+				03E6D1E02A53219600F4453C /* Puzzling */,
 			);
 		};
 /* End PBXProject section */
@@ -624,7 +624,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = DGT9BQA4KH;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Puzzling-iOS/Application/Info.plist";
+				INFOPLIST_FILE = Puzzling/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -635,7 +635,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "kwonjeong.Puzzling-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = kwonjeong.Puzzling;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -652,7 +652,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = DGT9BQA4KH;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Puzzling-iOS/Application/Info.plist";
+				INFOPLIST_FILE = Puzzling/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -663,7 +663,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "kwonjeong.Puzzling-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = kwonjeong.Puzzling;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -674,7 +674,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		03E6D1DC2A53219600F4453C /* Build configuration list for PBXProject "Puzzling-iOS" */ = {
+		03E6D1DC2A53219600F4453C /* Build configuration list for PBXProject "Puzzling" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				03E6D1F32A53219800F4453C /* Debug */,
@@ -683,7 +683,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		03E6D1F52A53219800F4453C /* Build configuration list for PBXNativeTarget "Puzzling-iOS" */ = {
+		03E6D1F52A53219800F4453C /* Build configuration list for PBXNativeTarget "Puzzling" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				03E6D1F62A53219800F4453C /* Debug */,
