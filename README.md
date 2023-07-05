@@ -715,8 +715,12 @@ final class MyViewController: UIViewController, UITableViewDataSource, UITableVi
 │       ├── Image.xcassets
 │       └── Color.xcassets
 └── 📁 Util
+    ├── 📁 CustomClass
     ├── 📁 Extension
-    ├── 📁 Literals
+    ├── 📁 NameSpace
+    │   ├── Color
+    │   ├── Image
+    │   └── Literals
     └── 📁 StyleGuide
         └── FontLevel
 ```
