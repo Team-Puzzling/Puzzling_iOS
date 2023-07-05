@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03B004A92A556C7400E71CA7 /* UIWindow+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B004A82A556C7400E71CA7 /* UIWindow+.swift */; };
 		03E6D1E52A53219600F4453C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E6D1E42A53219600F4453C /* AppDelegate.swift */; };
 		03E6D1E72A53219600F4453C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E6D1E62A53219600F4453C /* SceneDelegate.swift */; };
 		03E6D1E92A53219600F4453C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E6D1E82A53219600F4453C /* HomeViewController.swift */; };
@@ -59,6 +60,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		03B004A82A556C7400E71CA7 /* UIWindow+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+.swift"; sourceTree = "<group>"; };
 		03E6D1E12A53219600F4453C /* Puzzling.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Puzzling.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03E6D1E42A53219600F4453C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		03E6D1E62A53219600F4453C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -335,6 +337,7 @@
 				03E6D2772A5333BF00F4453C /* UITabBar+.swift */,
 				03E6D2792A5333C900F4453C /* UIImage+.swift */,
 				03E6D27B2A5333E400F4453C /* UIViewController+.swift */,
+				03B004A82A556C7400E71CA7 /* UIWindow+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -464,6 +467,7 @@
 				03E6D25C2A5331FF00F4453C /* GeneralResponse.swift in Sources */,
 				03E6D1E52A53219600F4453C /* AppDelegate.swift in Sources */,
 				03E6D2602A53322300F4453C /* URLConst.swift in Sources */,
+				03B004A92A556C7400E71CA7 /* UIWindow+.swift in Sources */,
 				03E6D2442A532C6300F4453C /* Literals.swift in Sources */,
 				03E6D2682A53334A00F4453C /* UITextField+.swift in Sources */,
 				03E6D26E2A53337600F4453C /* UICollectionView+.swift in Sources */,

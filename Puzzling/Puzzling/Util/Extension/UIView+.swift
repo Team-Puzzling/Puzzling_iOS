@@ -40,6 +40,35 @@ extension UIView {
         layer.cornerRadius = cornerRadius
         layer.maskedCorners = CACornerMask(arrayLiteral: maskedCorners)
     }
+    
+    func makeRounded(radius: CGFloat) {
+        self.clipsToBounds = true
+        self.layer.cornerRadius = radius
+    }
+    
+    func makeShadow(
+        color: UIColor,
+        offset : CGSize,
+        radius : CGFloat,
+        opacity : Float)
+    {
+        layer.shadowColor = color.cgColor
+        layer.shadowOffset = offset
+        layer.shadowRadius = radius
+        layer.shadowOpacity = opacity
+        layer.masksToBounds = false
+    }
+    
+    func makeCornerRadius(ratio: CGFloat){
+        layer.cornerRadius = ratio
+        layer.masksToBounds = false
+        clipsToBounds = true
+    }
+    
+    func makeCornerBorder(borderWidth: CGFloat, borderColor: UIColor) {
+        layer.borderWidth = borderWidth
+        layer.borderColor = borderColor.cgColor
+    }
 }
 
 
