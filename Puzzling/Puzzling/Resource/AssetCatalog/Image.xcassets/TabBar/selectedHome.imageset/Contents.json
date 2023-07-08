@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "selected=yes, ic_type=home.png",
+      "filename" : "Vector.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "selected=yes, ic_type=home@2x.png",
+      "filename" : "Vector@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "selected=yes, ic_type=home@3x.png",
+      "filename" : "Vector@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

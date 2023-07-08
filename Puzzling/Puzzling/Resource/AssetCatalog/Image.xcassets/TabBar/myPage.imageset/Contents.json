@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "selected=no, ic_type=mypage.png",
+      "filename" : "Vector-3.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "selected=no, ic_type=mypage@2x.png",
+      "filename" : "Vector@2x-3.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "selected=no, ic_type=mypage@3x.png",
+      "filename" : "Vector@3x-3.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
