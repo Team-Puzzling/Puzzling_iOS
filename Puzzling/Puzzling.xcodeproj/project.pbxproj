@@ -145,9 +145,25 @@
 		03734EB92A59A1A600B401D6 /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
-				03734EBE2A59A26800B401D6 /* MyPageViewController.swift */,
+				03734EC12A59AB6A00B401D6 /* ViewController */,
 			);
 			path = MyPage;
+			sourceTree = "<group>";
+		};
+		03734EC02A59AB5E00B401D6 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				03E6D1E82A53219600F4453C /* HomeViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		03734EC12A59AB6A00B401D6 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				03734EBE2A59A26800B401D6 /* MyPageViewController.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		03E6D1D82A53219600F4453C = {
@@ -264,7 +280,7 @@
 		03E6D20F2A5327E600F4453C /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				03E6D1E82A53219600F4453C /* HomeViewController.swift */,
+				03734EC02A59AB5E00B401D6 /* ViewController */,
 			);
 			path = Home;
 			sourceTree = "<group>";
