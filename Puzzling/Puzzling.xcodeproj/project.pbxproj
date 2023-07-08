@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		03734EB52A599FDB00B401D6 /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03734EB42A599FDB00B401D6 /* Image.xcassets */; };
+		03734EB82A59A0BD00B401D6 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03734EB72A59A0BD00B401D6 /* TabBarController.swift */; };
+		03734EBD2A59A1F800B401D6 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03734EBC2A59A1F800B401D6 /* TabBarItem.swift */; };
+		03734EBF2A59A26800B401D6 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03734EBE2A59A26800B401D6 /* MyPageViewController.swift */; };
 		03B004A92A556C7400E71CA7 /* UIWindow+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B004A82A556C7400E71CA7 /* UIWindow+.swift */; };
 		03E6D1E52A53219600F4453C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E6D1E42A53219600F4453C /* AppDelegate.swift */; };
 		03E6D1E72A53219600F4453C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E6D1E62A53219600F4453C /* SceneDelegate.swift */; };
@@ -62,6 +65,9 @@
 
 /* Begin PBXFileReference section */
 		03734EB42A599FDB00B401D6 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = "<group>"; };
+		03734EB72A59A0BD00B401D6 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		03734EBC2A59A1F800B401D6 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
+		03734EBE2A59A26800B401D6 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		03B004A82A556C7400E71CA7 /* UIWindow+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+.swift"; sourceTree = "<group>"; };
 		03E6D1E12A53219600F4453C /* Puzzling.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Puzzling.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03E6D1E42A53219600F4453C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -127,6 +133,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		03734EB62A59A08E00B401D6 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				03734EB72A59A0BD00B401D6 /* TabBarController.swift */,
+				03734EBC2A59A1F800B401D6 /* TabBarItem.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		03734EB92A59A1A600B401D6 /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				03734EBE2A59A26800B401D6 /* MyPageViewController.swift */,
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
 		03E6D1D82A53219600F4453C = {
 			isa = PBXGroup;
 			children = (
@@ -224,6 +247,8 @@
 			children = (
 				03E6D20E2A5327D300F4453C /* Common */,
 				03E6D20F2A5327E600F4453C /* Home */,
+				03734EB92A59A1A600B401D6 /* MyPage */,
+				03734EB62A59A08E00B401D6 /* TabBar */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -484,12 +509,15 @@
 				03E6D25A2A5331ED00F4453C /* APIConst.swift in Sources */,
 				03E6D2642A53330E00F4453C /* NSObject+.swift in Sources */,
 				03E6D23E2A532C1800F4453C /* FontLevel.swift in Sources */,
+				03734EB82A59A0BD00B401D6 /* TabBarController.swift in Sources */,
 				03E6D25E2A53321000F4453C /* NetworkLoggerPlugin.swift in Sources */,
 				03E6D2622A5332F700F4453C /* Encodable+.swift in Sources */,
 				03E6D26A2A53335700F4453C /* UIStackView+.swift in Sources */,
 				03E6D2072A5326DD00F4453C /* APIService.swift in Sources */,
 				03E6D27A2A5333C900F4453C /* UIImage+.swift in Sources */,
+				03734EBF2A59A26800B401D6 /* MyPageViewController.swift in Sources */,
 				03E6D27C2A5333E400F4453C /* UIViewController+.swift in Sources */,
+				03734EBD2A59A1F800B401D6 /* TabBarItem.swift in Sources */,
 				03E6D2052A5326D400F4453C /* DTO.swift in Sources */,
 				03E6D26C2A53336900F4453C /* UITableView+.swift in Sources */,
 			);
