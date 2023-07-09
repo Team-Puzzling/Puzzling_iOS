@@ -59,6 +59,7 @@
 		03FFD2CC2A5B175C00A3B70D /* SFProType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FFD2CB2A5B175C00A3B70D /* SFProType.swift */; };
 		03FFD2CE2A5B1A8B00A3B70D /* AppleSDGothicNeoType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FFD2CD2A5B1A8B00A3B70D /* AppleSDGothicNeoType.swift */; };
 		03FFD2D12A5B21D600A3B70D /* AppleSDGothicNeoH.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03FFD2D02A5B21D600A3B70D /* AppleSDGothicNeoH.ttf */; };
+		03FFD2D32A5B250800A3B70D /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03FFD2D22A5B250800A3B70D /* Color.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -109,6 +110,7 @@
 		03FFD2CB2A5B175C00A3B70D /* SFProType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFProType.swift; sourceTree = "<group>"; };
 		03FFD2CD2A5B1A8B00A3B70D /* AppleSDGothicNeoType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSDGothicNeoType.swift; sourceTree = "<group>"; };
 		03FFD2D02A5B21D600A3B70D /* AppleSDGothicNeoH.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AppleSDGothicNeoH.ttf; sourceTree = "<group>"; };
+		03FFD2D22A5B250800A3B70D /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -321,6 +323,7 @@
 			children = (
 				03E6D1ED2A53219800F4453C /* Assets.xcassets */,
 				03734EB42A599FDB00B401D6 /* Image.xcassets */,
+				03FFD2D22A5B250800A3B70D /* Color.xcassets */,
 			);
 			path = AssetCatalog;
 			sourceTree = "<group>";
@@ -474,6 +477,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				03E6D1F12A53219800F4453C /* LaunchScreen.storyboard in Resources */,
+				03FFD2D32A5B250800A3B70D /* Color.xcassets in Resources */,
 				03734EB52A599FDB00B401D6 /* Image.xcassets in Resources */,
 				03FFD2D12A5B21D600A3B70D /* AppleSDGothicNeoH.ttf in Resources */,
 				03E6D2352A532B9400F4453C /* SF-Pro-Text-Black.otf in Resources */,
