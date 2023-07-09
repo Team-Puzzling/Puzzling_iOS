@@ -39,6 +39,108 @@ extension UIColor {
     }
 }
 
+extension UIColor {
+    static var blue100: UIColor {
+        return UIColor(hex: "#DDEBFF")
+    }
+    
+    static var blue200: UIColor {
+        return UIColor(hex: "#B4D2FF")
+    }
+    
+    static var blue300: UIColor {
+        return UIColor(hex: "#83B4FF")
+    }
+    
+    static var blue400: UIColor {
+        return UIColor(hex: "#5085FF")
+    }
+    
+    static var blue500: UIColor {
+        return UIColor(hex: "#3C6EE0")
+    }
+    
+    static var blue600: UIColor {
+        return UIColor(hex: "#3258B0")
+    }
+    
+    static var blue700: UIColor {
+        return UIColor(hex: "#1D366D")
+    }
+    
+    static var yellow100: UIColor {
+        return UIColor(hex: "#FFF6D6")
+    }
+    
+    static var yellow200: UIColor {
+        return UIColor(hex: "#FFEBA5")
+    }
+    
+    static var yellow400: UIColor {
+        return UIColor(hex: "#FFCD6B")
+    }
+    
+    static var yellow500: UIColor {
+        return UIColor(hex: "#FF9F10")
+    }
+    
+    static var red200: UIColor {
+        return UIColor(hex: "#FF9F9F")
+    }
+    
+    static var red400: UIColor {
+        return UIColor(hex: "#ff4f4f")
+    }
+    
+    static var red600: UIColor {
+        return UIColor(hex: "#D00000")
+    }
+    
+    static var gray100: UIColor {
+        return UIColor(hex: "#F2F4F5")
+    }
+    
+    static var gray200: UIColor {
+        return UIColor(hex: "#EAECF0")
+    }
+    
+    static var gray300: UIColor {
+        return UIColor(hex: "#D1D3D9")
+    }
+    
+    static var gray400: UIColor {
+        return UIColor(hex: "#ABADB2")
+    }
+    
+    static var gray500: UIColor {
+        return UIColor(hex: "#83858A")
+    }
+    
+    static var gray600: UIColor {
+        return UIColor(hex: "#5C5E62")
+    }
+    
+    static var gray700: UIColor {
+        return UIColor(hex: "#353638")
+    }
+    
+    static var black000: UIColor {
+        return UIColor(hex: "#151515")
+    }
+    
+    static var white000: UIColor {
+        return UIColor(hex: "#FFFFFF")
+    }
+    
+    static var background500: UIColor {
+        return UIColor(hex: "#151515", alpha: 0.3)
+    }
+    
+    static var background050: UIColor {
+        return UIColor(hex: "#FAFAFA")
+    }
+}
+
 public enum Color {
     
     // MARK: - Achromatic Color
