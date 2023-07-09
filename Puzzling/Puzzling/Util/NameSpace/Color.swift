@@ -40,6 +40,9 @@ extension UIColor {
 }
 
 extension UIColor {
+    
+    // MARK: - Blue
+    
     static var blue100: UIColor {
         return UIColor(hex: "#DDEBFF")
     }
@@ -68,6 +71,8 @@ extension UIColor {
         return UIColor(hex: "#1D366D")
     }
     
+    // MARK: - Yellow
+    
     static var yellow100: UIColor {
         return UIColor(hex: "#FFF6D6")
     }
@@ -84,6 +89,8 @@ extension UIColor {
         return UIColor(hex: "#FF9F10")
     }
     
+    // MARK: - Red
+    
     static var red200: UIColor {
         return UIColor(hex: "#FF9F9F")
     }
@@ -95,6 +102,8 @@ extension UIColor {
     static var red600: UIColor {
         return UIColor(hex: "#D00000")
     }
+    
+    // MARK: - Gray
     
     static var gray100: UIColor {
         return UIColor(hex: "#F2F4F5")
@@ -124,6 +133,8 @@ extension UIColor {
         return UIColor(hex: "#353638")
     }
     
+    // MARK: - Black and White
+    
     static var black000: UIColor {
         return UIColor(hex: "#151515")
     }
@@ -131,6 +142,8 @@ extension UIColor {
     static var white000: UIColor {
         return UIColor(hex: "#FFFFFF")
     }
+    
+    // MARK: - Background
     
     static var background500: UIColor {
         return UIColor(hex: "#151515", alpha: 0.3)
@@ -141,6 +154,7 @@ extension UIColor {
     }
 }
 
+    // 정이가 보고 필요없을 것 같으면 지워도 되고 남겨도 되고!
 public enum Color {
     
     // MARK: - Achromatic Color
