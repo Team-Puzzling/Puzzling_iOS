@@ -7,40 +7,26 @@
 
 import UIKit
 
+import UIKit
+
 class HomeViewController: UIViewController {
 
-    private let nameLabel: UILabel = {
-        let label = UILabel()
-        label.text = "내 이름은 권정임"
-        label.font = .fontGuide(.heading1_kor)
-        return label
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setStyle()
-        setLayout()
-    }
-}
-
-private extension HomeViewController {
-    
-    func setStyle() {
-        
         view.backgroundColor = .white
+        // Do any additional setup after loading the view.
     }
     
-    func setLayout() {
-        
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.addSubview(nameLabel)
-        
-        NSLayoutConstraint.activate([nameLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 300),
-                                     nameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50)])
-    }
 
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+    */
 
 }
 
