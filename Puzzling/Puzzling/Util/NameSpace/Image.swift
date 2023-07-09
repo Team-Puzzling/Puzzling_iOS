@@ -18,7 +18,7 @@ public enum Image {
     
     // MARK: - Icon
     
-    public static let icnClose_ = UIImage(named: "icn_close")!
+    public static let icnClose = UIImage(named: "icn_close")!
     public static let icnExpandDown = UIImage(named: "icn_expand_down")!
     public static let iconExpandLeft = UIImage(named: "icn_expand_left")!
     public static let iconBell = UIImage(named: "icon_bell")!
