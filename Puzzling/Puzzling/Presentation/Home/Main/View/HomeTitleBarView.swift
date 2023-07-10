@@ -1,5 +1,5 @@
 //
-//  DefaultUIViewFile.swift
+//  HomeTitleBarView.swift
 //  Puzzling
 //
 //  Created by KYUBO A. SHIM on 2023/07/10.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DefaultUIViewFile: UIView {
+class HomeTitleBarView: UIView {
 
     /*
     // Only override draw() if you perform custom drawing.
