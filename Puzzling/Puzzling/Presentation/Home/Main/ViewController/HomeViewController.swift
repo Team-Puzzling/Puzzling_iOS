@@ -17,6 +17,7 @@ final class HomeViewController: UIViewController {
     private lazy var dashboardViewControllers: [UIViewController] = [indivisualDashboardViewController, teamDashboardViewController]
     
     private let pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
+    private var currentPage: UIViewController!
     
     private var tabBarHeight: CGFloat {
         guard let height = self.tabBarController?.tabBar.frame.size.height else { return 0.0 }
@@ -35,14 +36,17 @@ final class HomeViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
+    
+    deinit {
+        print(className)
+    }
 }
 
 extension HomeViewController {
     
     private func setDelegate() {
-        pageViewController.dataSource = self
-        pageViewController.delegate = self
         titleBarView.delegate = self
+//        segmentedView.delegate = self
     }
     
     private func setUI() {
@@ -65,7 +69,7 @@ extension HomeViewController {
         
         segmentedView.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(60)
+            $0.height.equalTo(50)
             $0.top.equalTo(titleBarView.snp.bottom)
         }
         
@@ -79,12 +83,7 @@ extension HomeViewController {
     private func setPage() {
         if let firstViewController = dashboardViewControllers.first {
             pageViewController.setViewControllers([firstViewController], direction: .forward, animated: false)
-        }
-        
-        for view in self.pageViewController.view.subviews {
-            if let subView = view as? UIScrollView {
-                subView.isScrollEnabled = false
-            }
+            currentPage = firstViewController
         }
     }
 }
@@ -99,22 +98,28 @@ extension HomeViewController: HomeBottomSheetDelegate {
     }
 }
 
-extension HomeViewController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        guard let index = dashboardViewControllers.firstIndex(of: viewController) else { return nil }
-        let previousIndex = index - 1
-        if previousIndex < 0 {
-            return nil
-        }
-        return dashboardViewControllers[previousIndex]
-    }
+//extension HomeViewController: HomeSegmentDelegate {
+//    func movePage(to index: Int) {
+//        switch index {
+//        case 0:
+//            switchPage(difference: 1)
+//        case 1:
+//            switchPage(difference: -1)
+//        default:
+//            break
+//        }
+//    }
     
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let index = dashboardViewControllers.firstIndex(of: viewController) else { return nil }
-        let nextIndex = index + 1
-        if nextIndex == dashboardViewControllers.count {
-            return nil
-        }
-        return dashboardViewControllers[nextIndex]
-    }
-}
+//    private func switchPage(difference: Int) {
+//        guard let page = dashboardViewControllers.firstIndex(of: currentPage) else { return }
+//        switch difference {
+//        case 1:
+//            pageViewController.setViewControllers([dashboardViewControllers[page + difference]], direction: .forward, animated: true)
+//        case -1:
+//            pageViewController.setViewControllers([dashboardViewControllers[page + difference]], direction: .reverse, animated: true)
+//        default:
+//            break
+//        }
+//        currentPage = dashboardViewControllers[page + difference]
+//    }
+//}
