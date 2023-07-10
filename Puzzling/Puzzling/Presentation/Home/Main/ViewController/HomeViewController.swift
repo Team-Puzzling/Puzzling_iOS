@@ -98,28 +98,28 @@ extension HomeViewController: HomeBottomSheetDelegate {
     }
 }
 
-//extension HomeViewController: HomeSegmentDelegate {
-//    func movePage(to index: Int) {
-//        switch index {
-//        case 0:
-//            switchPage(difference: 1)
-//        case 1:
-//            switchPage(difference: -1)
-//        default:
-//            break
-//        }
-//    }
+extension HomeViewController: HomeSegmentDelegate {
+    func movePage(to index: Int) {
+        switch index {
+        case 0:
+            switchPage(difference: 1)
+        case 1:
+            switchPage(difference: -1)
+        default:
+            break
+        }
+    }
     
-//    private func switchPage(difference: Int) {
-//        guard let page = dashboardViewControllers.firstIndex(of: currentPage) else { return }
-//        switch difference {
-//        case 1:
-//            pageViewController.setViewControllers([dashboardViewControllers[page + difference]], direction: .forward, animated: true)
-//        case -1:
-//            pageViewController.setViewControllers([dashboardViewControllers[page + difference]], direction: .reverse, animated: true)
-//        default:
-//            break
-//        }
-//        currentPage = dashboardViewControllers[page + difference]
-//    }
-//}
+    private func switchPage(difference: Int) {
+        guard let page = dashboardViewControllers.firstIndex(of: currentPage) else { return }
+        switch difference {
+        case 1:
+            pageViewController.setViewControllers([dashboardViewControllers[page + difference]], direction: .forward, animated: true)
+        case -1:
+            pageViewController.setViewControllers([dashboardViewControllers[page + difference]], direction: .reverse, animated: true)
+        default:
+            break
+        }
+        currentPage = dashboardViewControllers[page + difference]
+    }
+}
