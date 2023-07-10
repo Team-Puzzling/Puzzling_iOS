@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  Puzzling-iOS
 //
-//  Created by KJ on 2023/07/04.
+//  Created by KYUBO A. SHIM on 2023/07/10.
 //
 
 import UIKit
@@ -46,7 +46,7 @@ extension HomeViewController {
     
     private func setDelegate() {
         titleBarView.delegate = self
-//        segmentedView.delegate = self
+        segmentedView.delegate = self
     }
     
     private func setUI() {
