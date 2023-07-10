@@ -7,6 +7,154 @@
 
 import UIKit
 
+extension UIColor {
+    
+    /// Color Picker 에서 UIColor 를 고르면 Hex String 으로 변환한다.
+    func toHexString() -> String {
+        var r:CGFloat = 0
+        var g:CGFloat = 0
+        var b:CGFloat = 0
+        var a:CGFloat = 0
+        getRed(&r, green: &g, blue: &b, alpha: &a)
+        let rgb:Int = (Int)(r*255)<<16 | (Int)(g*255)<<8 | (Int)(b*255)<<0
+        
+        return String(format:"#%06x", rgb)
+    }
+    
+    /// Hex Code 를 입력하면 UIColor 로 반환한다.
+    convenience init(hex: String, alpha: CGFloat = 1.0) {
+        var hexFormatted: String = hex.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines).uppercased()
+
+        if hexFormatted.hasPrefix("#") {
+            hexFormatted = String(hexFormatted.dropFirst())
+        }
+
+        assert(hexFormatted.count == 6, "Invalid hex code used.")
+        var rgbValue: UInt64 = 0
+        Scanner(string: hexFormatted).scanHexInt64(&rgbValue)
+
+        self.init(red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0, alpha: alpha)
+    }
+}
+
+extension UIColor {
+    
+    // MARK: - Blue
+    
+    static var blue100: UIColor {
+        return UIColor(hex: "#DDEBFF")
+    }
+    
+    static var blue200: UIColor {
+        return UIColor(hex: "#B4D2FF")
+    }
+    
+    static var blue300: UIColor {
+        return UIColor(hex: "#83B4FF")
+    }
+    
+    static var blue400: UIColor {
+        return UIColor(hex: "#5085FF")
+    }
+    
+    static var blue500: UIColor {
+        return UIColor(hex: "#3C6EE0")
+    }
+    
+    static var blue600: UIColor {
+        return UIColor(hex: "#3258B0")
+    }
+    
+    static var blue700: UIColor {
+        return UIColor(hex: "#1D366D")
+    }
+    
+    // MARK: - Yellow
+    
+    static var yellow100: UIColor {
+        return UIColor(hex: "#FFF6D6")
+    }
+    
+    static var yellow200: UIColor {
+        return UIColor(hex: "#FFEBA5")
+    }
+    
+    static var yellow400: UIColor {
+        return UIColor(hex: "#FFCD6B")
+    }
+    
+    static var yellow500: UIColor {
+        return UIColor(hex: "#FF9F10")
+    }
+    
+    // MARK: - Red
+    
+    static var red200: UIColor {
+        return UIColor(hex: "#FF9F9F")
+    }
+    
+    static var red400: UIColor {
+        return UIColor(hex: "#ff4f4f")
+    }
+    
+    static var red600: UIColor {
+        return UIColor(hex: "#D00000")
+    }
+    
+    // MARK: - Gray
+    
+    static var gray100: UIColor {
+        return UIColor(hex: "#F2F4F5")
+    }
+    
+    static var gray200: UIColor {
+        return UIColor(hex: "#EAECF0")
+    }
+    
+    static var gray300: UIColor {
+        return UIColor(hex: "#D1D3D9")
+    }
+    
+    static var gray400: UIColor {
+        return UIColor(hex: "#ABADB2")
+    }
+    
+    static var gray500: UIColor {
+        return UIColor(hex: "#83858A")
+    }
+    
+    static var gray600: UIColor {
+        return UIColor(hex: "#5C5E62")
+    }
+    
+    static var gray700: UIColor {
+        return UIColor(hex: "#353638")
+    }
+    
+    // MARK: - Black and White
+    
+    static var black000: UIColor {
+        return UIColor(hex: "#151515")
+    }
+    
+    static var white000: UIColor {
+        return UIColor(hex: "#FFFFFF")
+    }
+    
+    // MARK: - Background
+    
+    static var background500: UIColor {
+        return UIColor(hex: "#151515", alpha: 0.3)
+    }
+    
+    static var background050: UIColor {
+        return UIColor(hex: "#FAFAFA")
+    }
+}
+
+    // 정이가 보고 필요없을 것 같으면 지워도 되고 남겨도 되고!
 public enum Color {
     
     // MARK: - Achromatic Color

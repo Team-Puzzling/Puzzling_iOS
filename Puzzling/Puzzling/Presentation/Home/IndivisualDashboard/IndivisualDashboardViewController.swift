@@ -1,19 +1,17 @@
 //
-//  ViewController.swift
-//  Puzzling-iOS
+//  IndivisualDashboardViewController.swift
+//  Puzzling
 //
-//  Created by KJ on 2023/07/04.
+//  Created by KYUBO A. SHIM on 2023/07/10.
 //
 
 import UIKit
 
-import UIKit
-
-class HomeViewController: UIViewController {
+class IndivisualDashboardViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+
         // Do any additional setup after loading the view.
     }
     
@@ -29,4 +27,3 @@ class HomeViewController: UIViewController {
     */
 
 }
-
