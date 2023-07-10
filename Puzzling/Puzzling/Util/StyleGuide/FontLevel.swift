@@ -31,7 +31,7 @@ public enum FontLevel {
     
     // MARK: - Eng
     
-    case heading1_eng           // 24pt / black
+    case heading1_eng           // 24pt / bold
     case heading2_eng           // 22pt / bold
     case heading3_eng           // 20pt / bold
     case heading4_eng           // 18pt / bold
@@ -55,7 +55,7 @@ extension FontLevel {
     public var fontWeight: String {
         switch self {
         case .heading1_kor:
-            return AppleSDGothicNeoType.heavy.rawValue
+            return AppleSDGothicNeoType.bold.rawValue
         case .heading2_kor:
             return AppleSDGothicNeoType.bold.rawValue
         case .heading3_kor:
@@ -85,7 +85,7 @@ extension FontLevel {
         case .detail3_regular_kor:
             return AppleSDGothicNeoType.regular.rawValue
         case .heading1_eng:
-            return SFProType.black.rawValue
+            return SFProType.bold.rawValue
         case .heading2_eng:
             return SFProType.bold.rawValue
         case .heading3_eng:
