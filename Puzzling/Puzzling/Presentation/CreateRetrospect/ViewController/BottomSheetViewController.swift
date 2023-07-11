@@ -1,5 +1,5 @@
 //
-//  BottomSheetView.swift
+//  BottomSheetViewController.swift
 //  Puzzling
 //
 //  Created by 천성우 on 2023/07/11.
@@ -8,15 +8,16 @@
 import UIKit
 
 import Then
-import SnapKit
 
-class BottomSheetView: UIView {
+final class BottomSheetViewController: UIViewController {
     
     // MARK: - Properties
     
-    private let optionTILButton = CustomRadioButton(frame: CGRect(x: 0, y: 0, width: 16, height: 16))
-    private let optionFiveFButton = CustomRadioButton(frame: CGRect(x: 0, y: 0, width: 16, height: 16))
-    private let optionAARButton = CustomRadioButton(frame: CGRect(x: 0, y: 0, width: 16, height: 16))
+    private var selectedOption: Bool = false
+        
+    let optionTILButton = CustomRadioButton(frame: CGRect(x: 0, y: 0, width: 16, height: 16))
+    let optionFiveFButton = CustomRadioButton(frame: CGRect(x: 0, y: 0, width: 16, height: 16))
+    let optionAARButton = CustomRadioButton(frame: CGRect(x: 0, y: 0, width: 16, height: 16))
     
     private let optionTILTitle = UILabel().then{
         $0.text = "TIL"
@@ -57,23 +58,34 @@ class BottomSheetView: UIView {
         $0.font = .fontGuide(.detail1_regular_kor)
     }
     
-    // MARK: - Initialization
+    // MARK: - View Life Cycle
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setDelegate()
+        setUI()
         setLayout()
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        fatalError("init(coder:) has not been implemented")
+    private func setDelegate() {
+        
     }
     
-    // MARK: - Method
+    private func setUI() {
+        if let sheetPresentationController = sheetPresentationController {
+            sheetPresentationController.preferredCornerRadius = 20
+            sheetPresentationController.detents = [.custom { context in
+                return context.maximumDetentValue * 0.33
+            }]
+        }
+    }
     
     private func setLayout() {
+        view.backgroundColor = .white
         
-        addSubviews(
+        
+        view.addSubviews(
             optionTILButton,
             optionTILTitle,
             optionTILSubtitle,
@@ -136,6 +148,12 @@ class BottomSheetView: UIView {
             $0.leading.equalTo(optionAARTitle.snp.trailing).inset(-22)
         }
     }
+    
+    func dismissBottomSheet() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    deinit {
+        print("BottomSheetViewController deinit")
+    }
 }
-
-
