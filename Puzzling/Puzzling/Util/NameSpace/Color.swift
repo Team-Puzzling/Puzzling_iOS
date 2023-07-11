@@ -43,6 +43,10 @@ extension UIColor {
     
     // MARK: - Blue
     
+    static var blue50: UIColor {
+        return UIColor(hex: "#EEF5FF")
+    }
+    
     static var blue100: UIColor {
         return UIColor(hex: "#DDEBFF")
     }
