@@ -101,7 +101,6 @@ extension HomeTitleBarView {
 extension HomeTitleBarView {
     private func setAlarmAction() -> UIAction? {
         let action = UIAction(handler: { [weak self] _ in
-            print("aaaaaaaa")
             self?.delegate?.popAlarmAction()
         })
         return action
