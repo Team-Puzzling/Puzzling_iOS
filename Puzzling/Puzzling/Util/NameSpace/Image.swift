@@ -24,6 +24,7 @@ public enum Image {
     public static let defaultPuzzle = UIImage(named: "defaultPuzzle")!
     public static let notificationBell = UIImage(named: "notificationBell")!
     public static let warning = UIImage(named: "warning")!
+    public static let textFieldXMark = UIImage(named: "textFieldxMark")!
     
     // MARK: - Rank
     

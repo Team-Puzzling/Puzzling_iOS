@@ -24,6 +24,8 @@ final class InputContentView: UIView {
     private let titleLabel = UILabel()
     private let inputTextField = UITextField()
     private let countLabel = UILabel()
+    private let textFieldButtonView = UIView()
+    private let removeTextButton = UIButton()
     
     // MARK: - Properties
     
@@ -33,6 +35,8 @@ final class InputContentView: UIView {
         super.init(frame: .zero)
         setUI()
         setLayout()
+        setDelegate()
+//        setAddTarget()
         setInputContent(type: type)
     }
     
@@ -61,11 +65,18 @@ extension InputContentView {
             $0.setLeftPaddingPoints(16)
             $0.setRightPaddingPoints(16)
             $0.makeCornerRadius(ratio: 16)
+            $0.rightView = textFieldButtonView
         }
         
         countLabel.do {
             $0.font = .fontGuide(.detail1_regular_kor)
             $0.textColor = .gray400
+        }
+        
+        removeTextButton.do {
+            $0.setImage(Image.textFieldXMark, for: .normal)
+            $0.isHidden = true
+            $0.addTarget(self, action: #selector(removeTextButtonDidTap), for: .touchUpInside)
         }
     }
     
@@ -73,6 +84,7 @@ extension InputContentView {
     
     private func setLayout() {
         
+        textFieldButtonView.addSubview(removeTextButton)
         addSubviews(titleLabel, inputTextField, countLabel)
         
         titleLabel.snp.makeConstraints {
@@ -86,6 +98,16 @@ extension InputContentView {
             $0.height.equalTo(49)
         }
         
+        textFieldButtonView.snp.makeConstraints {
+            $0.width.equalTo(36)
+            $0.height.equalTo(22)
+        }
+        
+        removeTextButton.snp.makeConstraints {
+            $0.leading.equalToSuperview()
+            $0.width.height.equalTo(22)
+        }
+        
         countLabel.snp.makeConstraints {
             $0.top.equalTo(inputTextField.snp.bottom).offset(5)
             $0.trailing.equalToSuperview().inset(8)
@@ -93,6 +115,14 @@ extension InputContentView {
     }
     
     // MARK: - Methods
+    
+    private func setDelegate() {
+        inputTextField.delegate = self
+    }
+    
+//    private func setAddTarget() {
+//        removeTextButton.addTarget(self, action: #selector(removeTextButtonDidTap), for: .touchUpInside)
+//    }
     
     private func setInputContent(type: InputContentType) {
         
@@ -116,5 +146,36 @@ extension InputContentView {
         }
     }
     
+    private func textFieldBorderSetting(textField: UITextField) {
+        
+        textField.layer.borderColor = UIColor.blue200.cgColor
+        textField.layer.borderWidth = 2
+        textField.placeholder = .none
+        textField.font = .fontGuide(.body2_bold_kor)
+    }
+    
     // MARK: - @objc Methods
+    
+    @objc
+    private func removeTextButtonDidTap() {
+        inputTextField.text?.removeAll()
+    }
+}
+
+extension InputContentView: UITextFieldDelegate {
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        textFieldBorderSetting(textField: textField)
+        return true
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        textField.layer.borderColor = .none
+        textField.layer.borderWidth = 0
+        return true
+    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        removeTextButton.isHidden = textField.text?.isEmpty ?? true
+    }
 }
