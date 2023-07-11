@@ -60,6 +60,10 @@
 		03FFD2CE2A5B1A8B00A3B70D /* AppleSDGothicNeoType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FFD2CD2A5B1A8B00A3B70D /* AppleSDGothicNeoType.swift */; };
 		03FFD2D12A5B21D600A3B70D /* AppleSDGothicNeoH.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03FFD2D02A5B21D600A3B70D /* AppleSDGothicNeoH.ttf */; };
 		03FFD2D32A5B250800A3B70D /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03FFD2D22A5B250800A3B70D /* Color.xcassets */; };
+		096755BB2A5C61BE00A1E691 /* TeamMemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755BA2A5C61BE00A1E691 /* TeamMemberTableViewCell.swift */; };
+		09C0A4F32A5BEC1600691FFD /* TeamMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C0A4F22A5BEC1600691FFD /* TeamMemberViewController.swift */; };
+		09C0A4F52A5BEE4C00691FFD /* TeamMemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C0A4F42A5BEE4C00691FFD /* TeamMemberView.swift */; };
+		09C0A4F72A5C305200691FFD /* TeamMemberDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C0A4F62A5C305200691FFD /* TeamMemberDataModel.swift */; };
 		583117A12A5B71920099B517 /* TeamDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583117A02A5B71920099B517 /* TeamDashboardViewController.swift */; };
 		583117A32A5B71A00099B517 /* IndivisualDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583117A22A5B71A00099B517 /* IndivisualDashboardViewController.swift */; };
 		583117A62A5B71C50099B517 /* DefaultUIViewFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583117A52A5B71C50099B517 /* DefaultUIViewFile.swift */; };
@@ -114,6 +118,10 @@
 		03FFD2CD2A5B1A8B00A3B70D /* AppleSDGothicNeoType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSDGothicNeoType.swift; sourceTree = "<group>"; };
 		03FFD2D02A5B21D600A3B70D /* AppleSDGothicNeoH.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AppleSDGothicNeoH.ttf; sourceTree = "<group>"; };
 		03FFD2D22A5B250800A3B70D /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
+		096755BA2A5C61BE00A1E691 /* TeamMemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberTableViewCell.swift; sourceTree = "<group>"; };
+		09C0A4F22A5BEC1600691FFD /* TeamMemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberViewController.swift; sourceTree = "<group>"; };
+		09C0A4F42A5BEE4C00691FFD /* TeamMemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberView.swift; sourceTree = "<group>"; };
+		09C0A4F62A5C305200691FFD /* TeamMemberDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberDataModel.swift; sourceTree = "<group>"; };
 		583117A02A5B71920099B517 /* TeamDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDashboardViewController.swift; sourceTree = "<group>"; };
 		583117A22A5B71A00099B517 /* IndivisualDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndivisualDashboardViewController.swift; sourceTree = "<group>"; };
 		583117A52A5B71C50099B517 /* DefaultUIViewFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUIViewFile.swift; sourceTree = "<group>"; };
@@ -266,6 +274,7 @@
 		03E6D20D2A5327BA00F4453C /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				09C0A4EF2A5BEBB800691FFD /* TeamMember */,
 				03E6D20E2A5327D300F4453C /* Common */,
 				03E6D20F2A5327E600F4453C /* Home */,
 				03734EB92A59A1A600B401D6 /* MyPage */,
@@ -410,6 +419,41 @@
 			path = StyleGuide;
 			sourceTree = "<group>";
 		};
+		09C0A4EF2A5BEBB800691FFD /* TeamMember */ = {
+			isa = PBXGroup;
+			children = (
+				09D11B452A5C42F900F12669 /* DataModel */,
+				09C0A4F12A5BEBE800691FFD /* ViewController */,
+				09C0A4F02A5BEBDF00691FFD /* View */,
+			);
+			path = TeamMember;
+			sourceTree = "<group>";
+		};
+		09C0A4F02A5BEBDF00691FFD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				09C0A4F42A5BEE4C00691FFD /* TeamMemberView.swift */,
+				096755BA2A5C61BE00A1E691 /* TeamMemberTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		09C0A4F12A5BEBE800691FFD /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				09C0A4F22A5BEC1600691FFD /* TeamMemberViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		09D11B452A5C42F900F12669 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				09C0A4F62A5C305200691FFD /* TeamMemberDataModel.swift */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
 		5831179C2A5B71280099B517 /* TeamDashboard */ = {
 			isa = PBXGroup;
 			children = (
@@ -539,9 +583,12 @@
 				583117A32A5B71A00099B517 /* IndivisualDashboardViewController.swift in Sources */,
 				03E6D2722A53339000F4453C /* UIImageView+.swift in Sources */,
 				03E6D2002A5325F200F4453C /* Model.swift in Sources */,
+				096755BB2A5C61BE00A1E691 /* TeamMemberTableViewCell.swift in Sources */,
 				03E6D2422A532C3300F4453C /* Image.swift in Sources */,
 				03E6D2782A5333BF00F4453C /* UITabBar+.swift in Sources */,
+				09C0A4F72A5C305200691FFD /* TeamMemberDataModel.swift in Sources */,
 				03FFD2CC2A5B175C00A3B70D /* SFProType.swift in Sources */,
+				09C0A4F32A5BEC1600691FFD /* TeamMemberViewController.swift in Sources */,
 				03E6D1E92A53219600F4453C /* HomeViewController.swift in Sources */,
 				03E6D2402A532C2500F4453C /* Color.swift in Sources */,
 				03E6D2662A53333500F4453C /* UIView+.swift in Sources */,
@@ -565,6 +612,7 @@
 				03E6D2642A53330E00F4453C /* NSObject+.swift in Sources */,
 				03E6D23E2A532C1800F4453C /* FontLevel.swift in Sources */,
 				03734EB82A59A0BD00B401D6 /* TabBarController.swift in Sources */,
+				09C0A4F52A5BEE4C00691FFD /* TeamMemberView.swift in Sources */,
 				03E6D25E2A53321000F4453C /* NetworkLoggerPlugin.swift in Sources */,
 				03E6D2622A5332F700F4453C /* Encodable+.swift in Sources */,
 				03E6D26A2A53335700F4453C /* UIStackView+.swift in Sources */,
