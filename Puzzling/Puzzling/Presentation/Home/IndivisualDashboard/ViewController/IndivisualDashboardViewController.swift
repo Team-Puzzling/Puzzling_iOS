@@ -14,5 +14,4 @@ final class IndivisualDashboardViewController: UIViewController {
         
         view.backgroundColor = .red
     }
-    
 }

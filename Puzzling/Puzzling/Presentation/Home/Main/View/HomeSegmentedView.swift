@@ -28,7 +28,6 @@ final class HomeSegmentedView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setDelegate()
         setUI()
         setLayout()
     }
@@ -39,10 +38,6 @@ final class HomeSegmentedView: UIView {
 }
 
 extension HomeSegmentedView {
-    
-    private func setDelegate() {
-        
-    }
     
     private func setUI() {
         indivisualDashboardButton.do {
@@ -131,19 +126,6 @@ extension HomeSegmentedView {
     
     private func moveBarAction(index: Int) {
         switch index {
-        case 1:
-            segmentedLineView.snp.remakeConstraints {
-                $0.width.equalToSuperview().dividedBy(2)
-                $0.height.equalTo(2)
-                $0.bottom.equalToSuperview()
-                $0.leading.equalTo(indivisualDashboardButton.snp.leading).inset(1)
-            }
-            
-            UIView.animate(withDuration: 0.2) {
-                self.layoutIfNeeded()
-            }
-            
-            selectedIndex = 0
         case 0:
             segmentedLineView.snp.remakeConstraints {
                 $0.width.equalToSuperview().dividedBy(2)
@@ -157,6 +139,19 @@ extension HomeSegmentedView {
             }
             
             selectedIndex = 1
+        case 1:
+            segmentedLineView.snp.remakeConstraints {
+                $0.width.equalToSuperview().dividedBy(2)
+                $0.height.equalTo(2)
+                $0.bottom.equalToSuperview()
+                $0.leading.equalTo(indivisualDashboardButton.snp.leading).inset(1)
+            }
+            
+            UIView.animate(withDuration: 0.2) {
+                self.layoutIfNeeded()
+            }
+            
+            selectedIndex = 0
         default:
             break
         }
@@ -164,12 +159,12 @@ extension HomeSegmentedView {
     
     private func updateButton(index: Int) {
         switch index {
-        case 1:
-            indivisualDashboardButton.setTitleColor(.blue400, for: .normal)
-            teamDashboardButton.setTitleColor(.gray400, for: .normal)
         case 0:
             indivisualDashboardButton.setTitleColor(.gray400, for: .normal)
             teamDashboardButton.setTitleColor(.blue400, for: .normal)
+        case 1:
+            indivisualDashboardButton.setTitleColor(.blue400, for: .normal)
+            teamDashboardButton.setTitleColor(.gray400, for: .normal)
         default:
             break
         }
