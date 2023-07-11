@@ -9,7 +9,7 @@ import UIKit
 
 class CustomRadioButton: UIButton {
     
-    private var btnSelected: Bool = false
+    var btnSelected: Bool = false
     
     // MARK: - UI Components
     

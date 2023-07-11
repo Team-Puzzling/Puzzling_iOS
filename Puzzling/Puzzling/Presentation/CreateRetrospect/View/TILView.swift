@@ -88,6 +88,9 @@ class TILView: UIView {
         wellTextView.delegate = self
         regretTextView.delegate = self
         learnTextView.delegate = self
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapScreen))
+        self.addGestureRecognizer(tapGestureRecognizer)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -124,12 +127,12 @@ class TILView: UIView {
         }
         
         wellNumLabel.snp.makeConstraints {
-            $0.bottom.equalTo(wellTextView.snp.bottom).inset(16)
+            $0.top.equalTo(wellTextView.snp.bottom).inset(-4)
             $0.trailing.equalTo(wellTextView.snp.trailing).inset(16)
         }
         
         regretLabel.snp.makeConstraints {
-            $0.top.equalTo(wellTextView.snp.bottom).offset(40)
+            $0.top.equalTo(wellTextView.snp.bottom).offset(45)
             $0.leading.equalToSuperview().offset(16)
         }
         
@@ -140,26 +143,30 @@ class TILView: UIView {
         }
         
         regretNumLabel.snp.makeConstraints {
-            $0.bottom.equalTo(regretTextView.snp.bottom).inset(16)
+            $0.top.equalTo(regretTextView.snp.bottom).inset(-4)
             $0.trailing.equalTo(regretTextView.snp.trailing).inset(16)
         }
         
         learnLabel.snp.makeConstraints {
-            $0.top.equalTo(regretTextView.snp.bottom).offset(16)
+            $0.top.equalTo(regretTextView.snp.bottom).offset(45)
             $0.leading.equalToSuperview().offset(16)
         }
         
         learnTextView.snp.makeConstraints {
-            $0.top.equalTo(learnLabel.snp.bottom).offset(40)
+            $0.top.equalTo(learnLabel.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview().inset(16)
             $0.height.equalTo(118)
             $0.bottom.equalToSuperview().offset(-16)
         }
         
         learnNumLabel.snp.makeConstraints {
-            $0.bottom.equalTo(learnTextView.snp.bottom).inset(16)
+            $0.top.equalTo(learnTextView.snp.bottom).inset(-4)
             $0.trailing.equalTo(learnTextView.snp.trailing).inset(16)
         }
+    }
+    
+    @objc private func didTapScreen() {
+          self.endEditing(true)
     }
 }
 
@@ -189,6 +196,9 @@ extension TILView: UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         
+        textView.layer.borderColor = UIColor.blue200.cgColor
+        textView.layer.borderWidth = 2.0
+        
         if textView == wellTextView {
             if textView.textColor == .gray400 {
                 textView.text = nil
@@ -212,6 +222,9 @@ extension TILView: UITextViewDelegate {
     }
 
     func textViewDidEndEditing(_ textView: UITextView) {
+        
+        textView.layer.borderColor = UIColor.clear.cgColor
+        textView.layer.borderWidth = 0.0
                 
         if textView == wellTextView {
             if textView.text.isEmpty {
