@@ -26,9 +26,9 @@ extension TabBarItemType {
     var unSelectedIcon: UIImage {
         switch self {
         case .home:
-            return Image.home
+            return Image.deselectedHome
         case .myPage:
-            return Image.myPage
+            return Image.deselectedPerson
         }
     }
     
@@ -37,7 +37,7 @@ extension TabBarItemType {
         case .home:
             return Image.selectedHome
         case .myPage:
-            return Image.myPage
+            return Image.selectedPerson
         }
     }
     
