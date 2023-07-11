@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class IndivisualCardView: UIView {
+final class IndivisualCardButtonView: UIView {
     
     private let backgroundImageView = UIImageView()
     private let puzzleBoardLabel = UILabel()
@@ -37,7 +37,7 @@ final class IndivisualCardView: UIView {
     }
 }
  
-extension IndivisualCardView {
+extension IndivisualCardButtonView {
     
     private func setDelegate() {
         
