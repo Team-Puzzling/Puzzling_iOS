@@ -56,7 +56,7 @@ extension HomeTitleBarView {
         }
         
         chevronImageView.do {
-            $0.image = Image.icnExpandDown
+            $0.image = Image.chevronDown
             $0.contentMode = .scaleAspectFit
         }
         
@@ -68,7 +68,7 @@ extension HomeTitleBarView {
         }
         
         alarmButton.do {
-            $0.setImage(Image.iconBell, for: .normal)
+            $0.setImage(Image.notificationBell, for: .normal)
         }
     }
     
@@ -81,9 +81,14 @@ extension HomeTitleBarView {
             $0.centerY.equalToSuperview()
         }
         
+        chevronImageView.snp.makeConstraints {
+            $0.size.equalTo(36)
+        }
+        
         alarmButton.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(8)
             $0.centerY.equalToSuperview()
+            $0.size.equalTo(48)
         }
     }
     
