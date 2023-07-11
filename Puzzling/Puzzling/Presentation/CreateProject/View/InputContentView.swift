@@ -29,12 +29,11 @@ final class InputContentView: UIView {
     
     // MARK: - Initializer
     
-    // MARK: - View Life Cycle
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(type: InputContentType) {
+        super.init(frame: .zero)
         setUI()
         setLayout()
+        setInputContent(type: type)
     }
     
     required init?(coder: NSCoder) {
@@ -59,6 +58,8 @@ extension InputContentView {
             $0.backgroundColor = .background050
             $0.textColor = .black000
             $0.font = .fontGuide(.body2_regular_kor)
+            $0.setLeftPaddingPoints(16)
+            $0.setRightPaddingPoints(16)
             $0.makeCornerRadius(ratio: 16)
         }
         
@@ -92,6 +93,28 @@ extension InputContentView {
     }
     
     // MARK: - Methods
+    
+    private func setInputContent(type: InputContentType) {
+        
+        switch type {
+        case .name:
+            titleLabel.text = "프로젝트 이름"
+            inputTextField.placeholder = "프로젝트 이름을 설정해 주세요."
+            countLabel.text = "0/10"
+        case .description:
+            titleLabel.text = "프로젝트 한줄소개"
+            inputTextField.placeholder = "프로젝트에 대해 간단히 소개해 주세요."
+            countLabel.text = "0/10"
+        case .role:
+            titleLabel.text = "내 역할"
+            inputTextField.placeholder = "프로젝트 이름을 설정해 주세요."
+            countLabel.text = "0/10"
+        case .nickname:
+            titleLabel.text = "닉네임"
+            inputTextField.placeholder = "닉네임을 입력해 주세요."
+            countLabel.text = "0/10"
+        }
+    }
     
     // MARK: - @objc Methods
 }
