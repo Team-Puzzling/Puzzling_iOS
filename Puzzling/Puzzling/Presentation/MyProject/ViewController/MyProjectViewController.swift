@@ -46,15 +46,16 @@ final class MyProjectViewController: UIViewController {
     
     func setLayout() {
         view.addSubviews(nicknameLabel, myProjectTableView)
+        
         nicknameLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(32)
             $0.leading.equalToSuperview().inset(24)
         }
+        
         myProjectTableView.snp.makeConstraints {
             $0.top.equalTo(nicknameLabel.snp.bottom).offset(24)
             $0.leading.trailing.equalToSuperview().inset(16)
             $0.bottom.equalToSuperview()
-            
         }
     }
     
@@ -68,6 +69,16 @@ final class MyProjectViewController: UIViewController {
     }
     
     private func setNavigationBar() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: Image.notification,
+            style: .plain,
+            target: self,
+            action: #selector(notificationButtonTapped)
+        )
+        
+        navigationItem.rightBarButtonItem?.tintColor = .gray500
+        let appearance = UINavigationBarAppearance()
+        
         
         let title = "내 프로젝트"
         let attributes: [NSAttributedString.Key: Any] = [
@@ -82,6 +93,10 @@ final class MyProjectViewController: UIViewController {
             titleLabel.attributedText = NSAttributedString(string: title, attributes: attributes)
             navigationItem.titleView = titleLabel
         }
+    }
+    
+    @objc
+    private func notificationButtonTapped() {
     }
     
     private func setTarget() {

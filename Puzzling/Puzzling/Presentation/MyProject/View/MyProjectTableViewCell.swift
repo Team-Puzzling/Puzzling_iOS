@@ -129,7 +129,6 @@ final class MyProjectTableViewCell: UITableViewCell {
         dateFormatter.dateFormat = "yyyy-MM-dd"
         guard let startDate = dateFormatter.date(from: date) else { return 0 }
         daysCount = days(from: startDate)
-        let hundred = calendar.date(byAdding: .day, value: 100, to: startDate)
         return daysCount
     }
     

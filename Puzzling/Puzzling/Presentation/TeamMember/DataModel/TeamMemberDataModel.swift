@@ -16,6 +16,8 @@ struct Icon {
         .withTintColor(.label, renderingMode: .alwaysOriginal)
     static let rightIcon = UIImage(systemName: "chevron.right")?
         .withTintColor(.label, renderingMode: .alwaysOriginal)
+    static let notificationIcon = UIImage(systemName: "bell")?
+        .withTintColor(.gray500, renderingMode: .alwaysOriginal)
 }
 
 struct ReviewWriters {

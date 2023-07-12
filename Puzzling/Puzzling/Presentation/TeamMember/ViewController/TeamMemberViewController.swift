@@ -74,6 +74,7 @@ class TeamMemberViewController: UIViewController {
             $0.subtype = .fromLeft
             $0.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         }
+        
         view.window?.layer.add(transition, forKey: kCATransition)
         dismiss(animated: false)
         self.navigationController?.popViewController(animated: false)

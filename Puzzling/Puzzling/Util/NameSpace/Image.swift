@@ -23,6 +23,8 @@ public enum Image {
     public static let chevronBack = UIImage(named: "chevronBack")!
     public static let defaultPuzzle = UIImage(named: "defaultPuzzle")!
     public static let notificationBell = UIImage(named: "notificationBell")!
+//    public static let notification = UIImage(named: "notification")!
+    public static let notification = UIImage(named: "bell1")!
     public static let warning = UIImage(named: "warning")!
     
     // MARK: - Rank
