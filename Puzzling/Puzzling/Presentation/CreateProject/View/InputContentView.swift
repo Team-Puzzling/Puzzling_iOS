@@ -33,6 +33,7 @@ final class InputContentView: UIView {
         super.init(frame: .zero)
         setUI()
         setLayout()
+        setDelegate()
         setInputContent(type: type)
     }
     
