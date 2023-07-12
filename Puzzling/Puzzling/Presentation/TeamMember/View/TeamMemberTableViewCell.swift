@@ -21,7 +21,6 @@ final class TeamMemberTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
         setUI()
         setLayout()
     }
@@ -76,7 +75,7 @@ final class TeamMemberTableViewCell: UITableViewCell {
         }
     }
     
-    func configureCell(nickname: String, part: String) {
+    func setDataBind(nickname: String, part: String) {
         nicknameLabel.text = nickname
         partLabel.text = part
     }

@@ -19,11 +19,11 @@ struct Icon {
         .withTintColor(.label, renderingMode: .alwaysOriginal)
 }
 
-
 struct ReviewWriters {
     let memberNickname: String
     let memberRole: String
 }
+
 struct NonReviewWriters {
     let memberNickname: String
     let memberRole: String

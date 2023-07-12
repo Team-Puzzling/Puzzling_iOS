@@ -11,11 +11,10 @@ import FSCalendar
 import SnapKit
 import Then
 
-class TeamMemberViewController: UIViewController {
+final class TeamMemberViewController: UIViewController {
     
     private let teamMemberCalenderView = TeamMemberCalendarView()
-    private let teamMemberTableView = UITableView(frame: .zero,
-                                                  style: .grouped)
+    private let teamMemberTableView = UITableView()
     
     public let TeamMemberData = TeamMemberDataModel.dummy()
     
@@ -23,21 +22,32 @@ class TeamMemberViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setNavigationBar()
+        setDelegate()
         setUI()
         setLayout()
-        configureCalendar()
-        setTarget()
-        setDelegate()
-        registerCell()
+        setAddTarget()
+        setRegister()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNavigationBar()
+    }
+    
+    deinit {
+        print(className)
+    }
+}
+extension TeamMemberViewController {
+    
     func setDelegate() {
+        teamMemberCalenderView.calendarView.delegate = self
+        teamMemberCalenderView.calendarView.dataSource = self
         teamMemberTableView.delegate = self
         teamMemberTableView.dataSource = self
     }
     
-    func registerCell() {
+    func setRegister() {
         teamMemberTableView.register(TeamMemberTableViewCell.self, forCellReuseIdentifier:  TeamMemberTableViewCell.identifier)
         teamMemberTableView.register(TeamMemberCustomHeaderView.self, forHeaderFooterViewReuseIdentifier: "sectionHeader")
     }
@@ -88,7 +98,7 @@ class TeamMemberViewController: UIViewController {
         }
     }
     
-    func setTarget() {
+    func setAddTarget() {
         teamMemberCalenderView.toggleButton.addTarget(self, action: #selector(tapToggleButton), for: .touchUpInside)
     }
     
@@ -104,7 +114,6 @@ class TeamMemberViewController: UIViewController {
             $0.top.equalTo(teamMemberCalenderView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
-            
         }
     }
 }
@@ -130,11 +139,6 @@ extension TeamMemberViewController: FSCalendarDelegate, FSCalendarDataSource, FS
 
 extension TeamMemberViewController {
     
-    private func configureCalendar() {
-        teamMemberCalenderView.calendarView.delegate = self
-        teamMemberCalenderView.calendarView.dataSource = self
-    }
-    
     // MARK: - Selector
     
     @objc func tapToggleButton() {
@@ -143,7 +147,6 @@ extension TeamMemberViewController {
             teamMemberCalenderView.headerDateFormatter.dateFormat = "YYYY년 M월"
             teamMemberCalenderView.toggleButton.setImage(Icon.downIcon, for: .normal)
             teamMemberCalenderView.headerLabel.text = teamMemberCalenderView.headerDateFormatter.string(from: teamMemberCalenderView.calendarView.currentPage)
-            
         } else {
             teamMemberCalenderView.calendarView.setScope(.month, animated: true)
             teamMemberCalenderView.headerDateFormatter.dateFormat = "YYYY년 M월"
@@ -170,7 +173,6 @@ extension TeamMemberViewController: UITableViewDataSource {
         default:
             return 0
         }
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -183,11 +185,11 @@ extension TeamMemberViewController: UITableViewDataSource {
         case 0:
             nickname = TeamMemberData[0].reviewWriters?[indexPath.row].memberNickname ?? ""
             part = TeamMemberData[0].reviewWriters?[indexPath.row].memberRole ?? ""
-            cell.configureCell(nickname: nickname, part: part)
+            cell.setDataBind(nickname: nickname, part: part)
         case 1:
             nickname = TeamMemberData[0].nonReviewWriters?[indexPath.row].memberNickname ?? ""
             part = TeamMemberData[0].nonReviewWriters?[indexPath.row].memberRole ?? ""
-            cell.configureCell(nickname: nickname, part: part)
+            cell.setDataBind(nickname: nickname, part: part)
         default:
             break
         }
