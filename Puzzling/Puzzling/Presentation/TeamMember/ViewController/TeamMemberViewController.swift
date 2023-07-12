@@ -14,9 +14,9 @@ import Then
 final class TeamMemberViewController: UIViewController {
     
     private let teamMemberCalenderView = TeamMemberCalendarView()
-    private let teamMemberTableView = UITableView()
+    private let teamMemberTableView = UITableView(frame: .zero, style: .grouped)
     
-    public let TeamMemberData = TeamMemberDataModel.dummy()
+    private let TeamMemberData = TeamMemberDataModel.dummy()
     
     // MARK: - Lifecycle
     
@@ -38,16 +38,46 @@ final class TeamMemberViewController: UIViewController {
         print(className)
     }
 }
+
 extension TeamMemberViewController {
     
-    func setDelegate() {
+    private func setDelegate() {
         teamMemberCalenderView.calendarView.delegate = self
         teamMemberCalenderView.calendarView.dataSource = self
         teamMemberTableView.delegate = self
         teamMemberTableView.dataSource = self
     }
     
-    func setRegister() {
+    private func setUI() {
+        view.backgroundColor = .white000
+        teamMemberTableView.do {
+            $0.register(TeamMemberTableViewCell.self, forCellReuseIdentifier: TeamMemberTableViewCell.identifier)
+            $0.separatorStyle = .none
+            $0.backgroundColor = .clear
+        }
+    }
+    
+    private func setLayout() {
+        view.addSubviews(teamMemberCalenderView, teamMemberTableView)
+        
+        teamMemberCalenderView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(32.0)
+            $0.trailing.leading.equalToSuperview().inset(16)
+            $0.height.equalTo(150)
+        }
+        
+        teamMemberTableView.snp.makeConstraints {
+            $0.top.equalTo(teamMemberCalenderView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview()
+        }
+    }
+    
+    private func setAddTarget() {
+        teamMemberCalenderView.toggleButton.addTarget(self, action: #selector(tapToggleButton), for: .touchUpInside)
+    }
+    
+    private func setRegister() {
         teamMemberTableView.register(TeamMemberTableViewCell.self, forCellReuseIdentifier:  TeamMemberTableViewCell.identifier)
         teamMemberTableView.register(TeamMemberCustomHeaderView.self, forHeaderFooterViewReuseIdentifier: "sectionHeader")
     }
@@ -76,46 +106,6 @@ extension TeamMemberViewController {
             navigationItem.titleView = titleLabel
         }
     }
-    
-    @objc
-    func backButtonTapped() {
-        let transition = CATransition().then {
-            $0.duration = 0.25
-            $0.type = .push
-            $0.subtype = .fromLeft
-            $0.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-        }
-        view.window?.layer.add(transition, forKey: kCATransition)
-        dismiss(animated: false)
-        self.navigationController?.popViewController(animated: false)
-    }
-    
-    func setUI() {        view.backgroundColor = .white000
-        teamMemberTableView.do {
-            $0.register(TeamMemberTableViewCell.self, forCellReuseIdentifier: TeamMemberTableViewCell.identifier)
-            $0.separatorStyle = .none
-            $0.backgroundColor = .clear
-        }
-    }
-    
-    func setAddTarget() {
-        teamMemberCalenderView.toggleButton.addTarget(self, action: #selector(tapToggleButton), for: .touchUpInside)
-    }
-    
-    func setLayout() {
-        view.addSubviews(teamMemberCalenderView, teamMemberTableView)
-        teamMemberCalenderView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(32.0)
-            $0.trailing.leading.equalToSuperview().inset(16)
-            $0.height.equalTo(150)
-        }
-        
-        teamMemberTableView.snp.makeConstraints {
-            $0.top.equalTo(teamMemberCalenderView.snp.bottom)
-            $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview()
-        }
-    }
 }
 
 extension TeamMemberViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
@@ -139,9 +129,22 @@ extension TeamMemberViewController: FSCalendarDelegate, FSCalendarDataSource, FS
 
 extension TeamMemberViewController {
     
-    // MARK: - Selector
+    @objc
+    private func backButtonTapped() {
+        let transition = CATransition().then {
+            $0.duration = 0.25
+            $0.type = .push
+            $0.subtype = .fromLeft
+            $0.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        }
+        
+        view.window?.layer.add(transition, forKey: kCATransition)
+        dismiss(animated: false)
+        self.navigationController?.popViewController(animated: false)
+    }
     
-    @objc func tapToggleButton() {
+    @objc
+    private func tapToggleButton() {
         if teamMemberCalenderView.calendarView.scope == .month {
             teamMemberCalenderView.calendarView.setScope(.week, animated: true)
             teamMemberCalenderView.headerDateFormatter.dateFormat = "YYYY년 M월"
