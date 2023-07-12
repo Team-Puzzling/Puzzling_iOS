@@ -191,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				03ADF38E2A5E932A002CEDDC /* ProjectCycleCollectionViewCell.swift */,
+				03734EC02A59AB5E00B401D6 /* Main */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -313,7 +314,6 @@
 			children = (
 				5831179D2A5B713D0099B517 /* IndivisualDashboard */,
 				5831179C2A5B71280099B517 /* TeamDashboard */,
-				03734EC02A59AB5E00B401D6 /* Main */,
 			);
 			path = Home;
 			sourceTree = "<group>";

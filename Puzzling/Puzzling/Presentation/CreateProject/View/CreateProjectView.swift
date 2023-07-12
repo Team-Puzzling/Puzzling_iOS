@@ -31,6 +31,11 @@ final class CreateProjectView: UIScrollView {
     }()
     private let projectCycleModel: [ProjectCycleModel] = ProjectCycleModel.projectCycleModelData()
     
+    // MARK: - Properties
+    
+    private var selectedCycleIndex: [Int] = []
+    private var selectedCycleList: [String] = []
+    
     // MARK: - View Life Cycle
     
     override init(frame: CGRect) {
@@ -150,14 +155,42 @@ extension CreateProjectView {
         cycleCollectionView.registerCell(ProjectCycleCollectionViewCell.self)
     }
     
+    private func getSelectedProjectCycle(list: [Int]) -> [String] {
+        var selectedList = list
+        selectedList.sort()
+        let dayOfWeekList = selectedList.map { index in
+            switch index {
+            case 0:
+                return "월"
+            case 1:
+                return "화"
+            case 2:
+                return "수"
+            case 3:
+                return "목"
+            case 4:
+                return "금"
+            case 5:
+                return "토"
+            case 6:
+                return "일"
+            default:
+                return ""
+            }
+        }
+        print(dayOfWeekList)
+        return dayOfWeekList
+    }
+    
     // MARK: - @objc Methods
 }
 
 extension CreateProjectView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = 48
-        let height = 48
+        let screenWidth = UIScreen.main.bounds.width - 7 - 32
+        let width = Int(screenWidth / 7)
+        let height = width
         return CGSize(width: width, height: height)
     }
     
