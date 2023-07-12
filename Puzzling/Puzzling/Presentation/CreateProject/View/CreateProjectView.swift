@@ -31,10 +31,6 @@ final class CreateProjectView: UIScrollView {
     }()
     private let projectCycleModel: [ProjectCycleModel] = ProjectCycleModel.projectCycleModelData()
     
-    // MARK: - Properties
-    
-    // MARK: - Initializer
-    
     // MARK: - View Life Cycle
     
     override init(frame: CGRect) {

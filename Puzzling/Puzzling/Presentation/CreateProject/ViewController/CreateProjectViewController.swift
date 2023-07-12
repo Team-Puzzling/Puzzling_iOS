@@ -21,10 +21,6 @@ final class CreateProjectViewController: UIViewController {
     private let createProjectView = CreateProjectView()
     private let registerProjectButton = CheckButton()
     
-    // MARK: - Properties
-    
-    // MARK: - Initializer
-    
     // MARK: - View Life Cycle
     
     override func viewWillAppear(_ animated: Bool) {
@@ -96,8 +92,4 @@ extension CreateProjectViewController {
             $0.bottom.equalTo(registerProjectButton.snp.top).offset(-25)
         }
     }
-    
-    // MARK: - Methods
-    
-    // MARK: - @objc Methods
 }

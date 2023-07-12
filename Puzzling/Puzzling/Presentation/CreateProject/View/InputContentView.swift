@@ -27,8 +27,6 @@ final class InputContentView: UIView {
     private let textFieldButtonView = UIView()
     private let removeTextButton = UIButton()
     
-    // MARK: - Properties
-    
     // MARK: - Initializer
     
     init(type: InputContentType) {

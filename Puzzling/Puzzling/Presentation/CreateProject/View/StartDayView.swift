@@ -19,10 +19,6 @@ final class StartDayView: UIView {
     private let startDayLabel = UILabel()
     private let chevronDownButton = UIButton()
     
-    // MARK: - Properties
-    
-    // MARK: - Initializer
-    
     // MARK: - View Life Cycle
     
     override init(frame: CGRect) {
@@ -103,6 +99,4 @@ extension StartDayView {
     private func chevronDownButtonDidTap() {
         print("tap")
     }
-    
-    // MARK: - @objc Methods
 }
