@@ -13,7 +13,7 @@ import Then
 
 final class MyProjectViewController: UIViewController {
     
-    private let nickname:String = "공듀"
+    private let nickname: String = "공듀"
     
     private let myProjectTableView = UITableView()
     
