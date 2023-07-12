@@ -34,10 +34,10 @@ class TeamMemberCalendarView: UIView {
         setStyle()
         setLayout()
     }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     //MARK: - Custom Method
     
@@ -75,6 +75,7 @@ class TeamMemberCalendarView: UIView {
             $0.scrollEnabled = true
             $0.scrollDirection = .horizontal
         }
+        
         toggleButton.do {
             $0.setImage(Icon.downIcon, for: .normal)
             $0.semanticContentAttribute = .forceRightToLeft
@@ -100,7 +101,6 @@ class TeamMemberCalendarView: UIView {
         headerLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.leading.equalToSuperview().inset(8)
-            
         }
         
         toggleButton.snp.makeConstraints {
@@ -108,6 +108,5 @@ class TeamMemberCalendarView: UIView {
             $0.leading.equalTo(headerLabel.snp.trailing)
             $0.size.equalTo(36)
         }
-        
     }
 }

@@ -24,7 +24,6 @@ final class TeamMemberTableViewCell: UITableViewCell {
         
         setUI()
         setLayout()
-        
     }
     
     @available(*, unavailable)

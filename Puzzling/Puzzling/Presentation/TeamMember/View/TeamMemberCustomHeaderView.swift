@@ -15,7 +15,6 @@ class TeamMemberCustomHeaderView: UITableViewHeaderFooterView {
     static let identifier = "sectionHeader"
     let title = UILabel()
 
-
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         setLayout()
@@ -25,12 +24,14 @@ class TeamMemberCustomHeaderView: UITableViewHeaderFooterView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     func setUI() {
         title.do {
             $0.textColor = .black000
             $0.font = .fontGuide(.body1_bold_kor)
         }
     }
+    
     func setLayout() {
         title.translatesAutoresizingMaskIntoConstraints = false
 
