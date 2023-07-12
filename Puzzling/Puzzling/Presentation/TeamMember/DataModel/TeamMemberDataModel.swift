@@ -19,6 +19,13 @@ struct Icon {
         .withTintColor(.label, renderingMode: .alwaysOriginal)
 }
 
+struct TeamMemberDataModel {
+    let reviewDay: String
+    let reviewDate: String
+    let reviewWriters: [ReviewWriters]?
+    let nonReviewWriters: [NonReviewWriters]?
+}
+
 struct ReviewWriters {
     let memberNickname: String
     let memberRole: String
@@ -27,13 +34,6 @@ struct ReviewWriters {
 struct NonReviewWriters {
     let memberNickname: String
     let memberRole: String
-}
-
-struct TeamMemberDataModel {
-    let reviewDay: String
-    let reviewDate: String
-    let reviewWriters: [ReviewWriters]?
-    let nonReviewWriters: [NonReviewWriters]?
 }
 
 extension TeamMemberDataModel {

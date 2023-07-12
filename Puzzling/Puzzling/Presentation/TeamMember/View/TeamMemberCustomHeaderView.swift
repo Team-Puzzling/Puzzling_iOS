@@ -10,10 +10,9 @@ import UIKit
 import Then
 import SnapKit
 
-class TeamMemberCustomHeaderView: UITableViewHeaderFooterView {
+final class TeamMemberCustomHeaderView: UITableViewHeaderFooterView {
     
-    static let identifier = "sectionHeader"
-    let title = UILabel()
+    private let title = UILabel()
 
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
@@ -25,22 +24,31 @@ class TeamMemberCustomHeaderView: UITableViewHeaderFooterView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setUI() {
+    private func setUI() {
         title.do {
             $0.textColor = .black000
             $0.font = .fontGuide(.body1_bold_kor)
         }
     }
     
-    func setLayout() {
+    private func setLayout() {
         title.translatesAutoresizingMaskIntoConstraints = false
-
         contentView.addSubview(title)
         
         title.snp.makeConstraints {
             $0.top.equalToSuperview().inset(16)
             $0.bottom.equalToSuperview().inset(8)
             $0.leading.equalToSuperview().inset(16)
+        }
+    }
+}
+
+extension TeamMemberCustomHeaderView {
+    func setDataBind(section: Int) {
+        switch section {
+        case 0: title.text = "회고를 진행했어요"
+        case 1: title.text = "회고를 진행해야 해요"
+        default: title.text = ""
         }
     }
 }
