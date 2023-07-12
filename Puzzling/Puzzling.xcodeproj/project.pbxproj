@@ -61,6 +61,8 @@
 		03FFD2D12A5B21D600A3B70D /* AppleSDGothicNeoH.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03FFD2D02A5B21D600A3B70D /* AppleSDGothicNeoH.ttf */; };
 		03FFD2D32A5B250800A3B70D /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03FFD2D22A5B250800A3B70D /* Color.xcassets */; };
 		096755BB2A5C61BE00A1E691 /* TeamMemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755BA2A5C61BE00A1E691 /* TeamMemberTableViewCell.swift */; };
+		096755BF2A5D9E1A00A1E691 /* TeamMemberCustomHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755BE2A5D9E1A00A1E691 /* TeamMemberCustomHeaderView.swift */; };
+		096755C12A5E8F6A00A1E691 /* MyProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755C02A5E8F6A00A1E691 /* MyProjectViewController.swift */; };
 		09C0A4F32A5BEC1600691FFD /* TeamMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C0A4F22A5BEC1600691FFD /* TeamMemberViewController.swift */; };
 		09C0A4F52A5BEE4C00691FFD /* TeamMemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C0A4F42A5BEE4C00691FFD /* TeamMemberView.swift */; };
 		09C0A4F72A5C305200691FFD /* TeamMemberDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C0A4F62A5C305200691FFD /* TeamMemberDataModel.swift */; };
@@ -119,6 +121,8 @@
 		03FFD2D02A5B21D600A3B70D /* AppleSDGothicNeoH.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AppleSDGothicNeoH.ttf; sourceTree = "<group>"; };
 		03FFD2D22A5B250800A3B70D /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 		096755BA2A5C61BE00A1E691 /* TeamMemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberTableViewCell.swift; sourceTree = "<group>"; };
+		096755BE2A5D9E1A00A1E691 /* TeamMemberCustomHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberCustomHeaderView.swift; sourceTree = "<group>"; };
+		096755C02A5E8F6A00A1E691 /* MyProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProjectViewController.swift; sourceTree = "<group>"; };
 		09C0A4F22A5BEC1600691FFD /* TeamMemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberViewController.swift; sourceTree = "<group>"; };
 		09C0A4F42A5BEE4C00691FFD /* TeamMemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberView.swift; sourceTree = "<group>"; };
 		09C0A4F62A5C305200691FFD /* TeamMemberDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberDataModel.swift; sourceTree = "<group>"; };
@@ -434,6 +438,7 @@
 			children = (
 				09C0A4F42A5BEE4C00691FFD /* TeamMemberView.swift */,
 				096755BA2A5C61BE00A1E691 /* TeamMemberTableViewCell.swift */,
+				096755BE2A5D9E1A00A1E691 /* TeamMemberCustomHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -442,6 +447,7 @@
 			isa = PBXGroup;
 			children = (
 				09C0A4F22A5BEC1600691FFD /* TeamMemberViewController.swift */,
+				096755C02A5E8F6A00A1E691 /* MyProjectViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -601,10 +607,12 @@
 				03E6D26E2A53337600F4453C /* UICollectionView+.swift in Sources */,
 				03FFD2CE2A5B1A8B00A3B70D /* AppleSDGothicNeoType.swift in Sources */,
 				583117A12A5B71920099B517 /* TeamDashboardViewController.swift in Sources */,
+				096755C12A5E8F6A00A1E691 /* MyProjectViewController.swift in Sources */,
 				583117A62A5B71C50099B517 /* DefaultUIViewFile.swift in Sources */,
 				03E6D23C2A532BC600F4453C /* CustomClass.swift in Sources */,
 				03E6D2702A53338200F4453C /* String+.swift in Sources */,
 				03E6D2762A5333B100F4453C /* UIButton+.swift in Sources */,
+				096755BF2A5D9E1A00A1E691 /* TeamMemberCustomHeaderView.swift in Sources */,
 				03E6D1E72A53219600F4453C /* SceneDelegate.swift in Sources */,
 				03E6D2262A532AAC00F4453C /* BaseView.swift in Sources */,
 				03E6D2282A532AB900F4453C /* BaseViewController.swift in Sources */,

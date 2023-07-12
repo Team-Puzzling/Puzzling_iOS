@@ -14,28 +14,35 @@ import Then
 class TeamMemberViewController: UIViewController {
     
     private let teamMemberView = TeamMemberView()
-    private let teamMemberTableView = UITableView()
+    private let teamMemberTableView = UITableView(frame: .zero,
+                                                  style: .grouped)
     
     public let TeamMemberData = TeamMemberDataModel.dummy()
-    
-//    override func loadView() {
-//        self.view = teamMemberView
-//    }
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setNavigationBar()
         setUI()
         setLayout()
         configureCalendar()
         setTarget()
+        setDelegate()
+        registerCell()
+    }
+    
+    func setDelegate() {
+        teamMemberTableView.delegate = self
+        teamMemberTableView.dataSource = self
+    }
+    
+    func registerCell() {
+        teamMemberTableView.register(TeamMemberTableViewCell.self, forCellReuseIdentifier:  TeamMemberTableViewCell.identifier)
+        teamMemberTableView.register(TeamMemberCustomHeaderView.self, forHeaderFooterViewReuseIdentifier: "sectionHeader")
     }
     
     private func setNavigationBar() {
-        navigationController?.navigationBar.backgroundColor = .white
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: Icon.leftIcon,
             style: .plain,
@@ -73,13 +80,11 @@ class TeamMemberViewController: UIViewController {
         self.navigationController?.popViewController(animated: false)
     }
     
-    func setUI() {
+    func setUI() {        view.backgroundColor = .white000
         teamMemberTableView.do {
-            $0.backgroundColor = .white000
             $0.register(TeamMemberTableViewCell.self, forCellReuseIdentifier: TeamMemberTableViewCell.identifier)
-            $0.rowHeight = 50
-            $0.delegate = self
-            $0.dataSource = self
+            $0.separatorStyle = .none
+            $0.backgroundColor = .clear
         }
     }
     
@@ -96,15 +101,16 @@ class TeamMemberViewController: UIViewController {
         }
         
         teamMemberTableView.snp.makeConstraints {
-            $0.top.equalTo(teamMemberView.snp.bottom).offset(500)
+            $0.top.equalTo(teamMemberView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview()
+            
         }
     }
 }
 
 extension TeamMemberViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
-        print(bounds.height)
         teamMemberView.calendarView.snp.updateConstraints {
             $0.height.equalTo(bounds.height)
         }
@@ -128,7 +134,7 @@ extension TeamMemberViewController {
         teamMemberView.calendarView.delegate = self
         teamMemberView.calendarView.dataSource = self
     }
-
+    
     // MARK: - Selector
     
     @objc func tapToggleButton() {
@@ -152,13 +158,20 @@ extension TeamMemberViewController {
 extension TeamMemberViewController: UITableViewDelegate {}
 
 extension TeamMemberViewController: UITableViewDataSource {
-
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("\(section)✅✅✅✅✅✅✅✅")
         print(TeamMemberData.count)
         switch section {
         case 0:
+            print("\(TeamMemberData[0].reviewWriters?.count ?? 0)💟💟💟💟💟💟💟💟💟")
             return TeamMemberData[0].reviewWriters?.count ?? 0
         case 1:
+            print("\(TeamMemberData[0].nonReviewWriters?.count ?? 0)🍀🍀🍀🍀🍀🍀🍀🍀")
             return TeamMemberData[0].nonReviewWriters?.count ?? 0
         default:
             return 0
@@ -167,10 +180,64 @@ extension TeamMemberViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print(#function)
         
+        let section = indexPath.section
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TeamMemberTableViewCell.identifier, for: indexPath) as? TeamMemberTableViewCell else { return UITableViewCell() }
-        
-        cell.configureCell(TeamMemberData[indexPath.row])
+        let nickname: String
+        let part: String
+        switch section {
+        case 0:
+            nickname = TeamMemberData[0].reviewWriters?[indexPath.row].memberNickname ?? ""
+            part = TeamMemberData[0].reviewWriters?[indexPath.row].memberRole ?? ""
+            print("\(nickname)🎁🎁🎁\(part)")
+            cell.configureCell(nickname: nickname, part: part)
+        case 1:
+            nickname = TeamMemberData[0].nonReviewWriters?[indexPath.row].memberNickname ?? ""
+            part = TeamMemberData[0].nonReviewWriters?[indexPath.row].memberRole ?? ""
+            print("\(nickname)🎁🎁🎁\(part)")
+            cell.configureCell(nickname: nickname, part: part)
+        default:
+            break
+        }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        print(#function)
+        guard let view = tableView.dequeueReusableHeaderFooterView(withIdentifier:TeamMemberCustomHeaderView.identifier) as? TeamMemberCustomHeaderView else { return UIView() }
+        switch section {
+        case 0: view.title.text = "회고를 진행했어요"
+        case 1: view.title.text = "회고를 진행해야 해요"
+        default: view.title.text = ""
+        }
+        return view
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch section {
+        case 0: if(TeamMemberData[0].reviewWriters == nil) { return 0 }
+            else { return 48 }
+        case 1: if(TeamMemberData[0].nonReviewWriters == nil) { return 0 }
+            else { return 48 }
+        default: return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        switch section {
+        case 0: if(TeamMemberData[0].reviewWriters == nil) { return 0 }
+            else { return 16 }
+        default: return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let section = indexPath.section
+        switch section {
+        case 0: return 48
+        case 1: return 48
+        default: return 0
+        }
     }
 }

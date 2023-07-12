@@ -17,7 +17,6 @@ final class TeamMemberTableViewCell: UITableViewCell {
     
     private lazy var nicknameLabel = UILabel()
     private lazy var partLabel = UILabel()
-    private let horizontalStackView = UIStackView()
     public let divisionLabel = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -25,6 +24,7 @@ final class TeamMemberTableViewCell: UITableViewCell {
         
         setUI()
         setLayout()
+        
     }
     
     @available(*, unavailable)
@@ -37,52 +37,49 @@ final class TeamMemberTableViewCell: UITableViewCell {
         separatorInset.left = 0
         
         selectionStyle = .none
-        backgroundColor = .white000
         
         nicknameLabel.do {
-            $0.font = .systemFont(ofSize: 14)
+            $0.font = .fontGuide(.body3_bold_kor)
             $0.textColor = .black
         }
         
         partLabel.do {
-            $0.font = .systemFont(ofSize: 14)
+            $0.font = .fontGuide(.body3_regular_kor)
             $0.textColor = .black
         }
         
         divisionLabel.do {
-            $0.backgroundColor = Color.gray3
+            $0.backgroundColor = .gray200
         }
-
     }
     
     func setLayout() {
         
         contentView.addSubviews(nicknameLabel, partLabel, divisionLabel)
+        
         nicknameLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(16)
-            $0.trailing.equalToSuperview().dividedBy(2)
-            $0.top.equalToSuperview()
-            $0.height.equalTo(30)
+            $0.leading.equalToSuperview().inset(32)
+            $0.width.equalTo(122)
+            $0.top.bottom.equalToSuperview()
         }
         
         partLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().dividedBy(2)
-            $0.trailing.equalToSuperview().inset(16)
-            $0.top.equalToSuperview()
+            $0.width.equalTo(122)
+            $0.trailing.equalToSuperview().inset(32)
+            $0.top.bottom.equalToSuperview()
             $0.height.equalTo(30)
         }
         
         divisionLabel.snp.makeConstraints {
             $0.bottom.equalToSuperview()
-            $0.leading.trailing.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(16)
             $0.height.equalTo(1)
         }
     }
     
-    func configureCell(_ data: TeamMemberDataModel) {
-        
-        nicknameLabel.text = data.reviewWriters?[0].memberNickname
-        partLabel.text = data.reviewWriters?[0].memberRole
+    func configureCell(nickname: String, part: String) {
+        nicknameLabel.text = nickname
+        partLabel.text = part
     }
 }
 

@@ -42,9 +42,6 @@ class TeamMemberView: UIView {
     //MARK: - Custom Method
     
     private func setStyle() {
-        
-        self.backgroundColor = .white
-        
         calendarView.do {
             $0.select(Date())
             
@@ -61,11 +58,11 @@ class TeamMemberView: UIView {
                 .width - 16.0 ) / 2.0
             $0.appearance.headerTitleOffset = CGPoint(x: -offset, y: 0)
             
-            $0.weekdayHeight = 36.0
-            $0.headerHeight = 36.0
+            $0.weekdayHeight = 22
+            $0.headerHeight = 54
             
-            $0.appearance.weekdayFont = .systemFont(ofSize: 13)
-            $0.appearance.titleFont = .boldSystemFont(ofSize: 15)
+            $0.appearance.weekdayFont = .fontGuide(.detail1_regular_kor)
+            $0.appearance.titleFont = .fontGuide(.body2_bold_kor)
             
             $0.appearance.titleTodayColor = .gray400
             $0.appearance.titleDefaultColor = .secondaryLabel
@@ -79,7 +76,6 @@ class TeamMemberView: UIView {
             $0.scrollDirection = .horizontal
         }
         toggleButton.do {
-            $0.titleLabel?.font = .systemFont(ofSize: 22.0)
             $0.setImage(Icon.downIcon, for: .normal)
             $0.semanticContentAttribute = .forceRightToLeft
         }
@@ -91,18 +87,13 @@ class TeamMemberView: UIView {
             $0.text = self.headerDateFormatter.string(from: Date())
             
         }
-        
-        //        testLabel.do {
-        //            $0.text = "라벨입니다"
-        //        }
     }
     
     private func setLayout() {
         self.addSubviews(calendarView, headerLabel, toggleButton)
         
         calendarView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.trailing.leading.equalToSuperview().inset(12.0)
+            $0.top.leading.trailing.equalToSuperview()
             $0.height.equalTo(300)
         }
         

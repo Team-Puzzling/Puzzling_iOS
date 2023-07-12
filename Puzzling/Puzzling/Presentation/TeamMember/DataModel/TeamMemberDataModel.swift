@@ -40,10 +40,13 @@ extension TeamMemberDataModel {
     static func dummy() -> [TeamMemberDataModel] {
         return [TeamMemberDataModel(reviewDay: "월요일",
                                         reviewDate: "2023-07-10",
-                                        reviewWriters: [ReviewWriters(memberNickname: "박솝트", memberRole: "iOS"),
+                                        reviewWriters:
+//                                        nil,
+                                        [ReviewWriters(memberNickname: "닉네임은닉네임최대10자보이게할게요", memberRole: "역할도최대10글자일걸요ㅋㅋㅋ"),
                                                         ReviewWriters(memberNickname: "박솝트", memberRole: "iOS"),
                                                         ReviewWriters(memberNickname: "박솝트", memberRole: "iOS")],
-                                        nonReviewWriters: nil)
+//                                        nonReviewWriters: nil)
+                                        nonReviewWriters: [NonReviewWriters(memberNickname: "나지롱", memberRole: "Server")])
                ]
     }
 }
