@@ -14,8 +14,7 @@ import Then
 class TeamMemberViewController: UIViewController {
     
     private let teamMemberCalenderView = TeamMemberCalendarView()
-    private let teamMemberTableView = UITableView(frame: .zero,
-                                                  style: .grouped)
+    private let teamMemberTableView = UITableView()
     
     public let TeamMemberData = TeamMemberDataModel.dummy()
     
@@ -80,9 +79,9 @@ class TeamMemberViewController: UIViewController {
         self.navigationController?.popViewController(animated: false)
     }
     
-    func setUI() {        view.backgroundColor = .white000
+    func setUI() {
+        view.backgroundColor = .white000
         teamMemberTableView.do {
-            $0.register(TeamMemberTableViewCell.self, forCellReuseIdentifier: TeamMemberTableViewCell.identifier)
             $0.separatorStyle = .none
             $0.backgroundColor = .clear
         }
