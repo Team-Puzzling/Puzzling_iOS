@@ -153,8 +153,6 @@ extension TeamMemberViewController {
     }
 }
 
-
-
 extension TeamMemberViewController: UITableViewDelegate {}
 
 extension TeamMemberViewController: UITableViewDataSource {
@@ -164,14 +162,10 @@ extension TeamMemberViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("\(section)✅✅✅✅✅✅✅✅")
-        print(TeamMemberData.count)
         switch section {
         case 0:
-            print("\(TeamMemberData[0].reviewWriters?.count ?? 0)💟💟💟💟💟💟💟💟💟")
             return TeamMemberData[0].reviewWriters?.count ?? 0
         case 1:
-            print("\(TeamMemberData[0].nonReviewWriters?.count ?? 0)🍀🍀🍀🍀🍀🍀🍀🍀")
             return TeamMemberData[0].nonReviewWriters?.count ?? 0
         default:
             return 0
@@ -180,7 +174,6 @@ extension TeamMemberViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print(#function)
         
         let section = indexPath.section
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TeamMemberTableViewCell.identifier, for: indexPath) as? TeamMemberTableViewCell else { return UITableViewCell() }
@@ -190,12 +183,10 @@ extension TeamMemberViewController: UITableViewDataSource {
         case 0:
             nickname = TeamMemberData[0].reviewWriters?[indexPath.row].memberNickname ?? ""
             part = TeamMemberData[0].reviewWriters?[indexPath.row].memberRole ?? ""
-            print("\(nickname)🎁🎁🎁\(part)")
             cell.configureCell(nickname: nickname, part: part)
         case 1:
             nickname = TeamMemberData[0].nonReviewWriters?[indexPath.row].memberNickname ?? ""
             part = TeamMemberData[0].nonReviewWriters?[indexPath.row].memberRole ?? ""
-            print("\(nickname)🎁🎁🎁\(part)")
             cell.configureCell(nickname: nickname, part: part)
         default:
             break
@@ -204,7 +195,6 @@ extension TeamMemberViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        print(#function)
         guard let view = tableView.dequeueReusableHeaderFooterView(withIdentifier:TeamMemberCustomHeaderView.identifier) as? TeamMemberCustomHeaderView else { return UIView() }
         switch section {
         case 0: view.title.text = "회고를 진행했어요"
