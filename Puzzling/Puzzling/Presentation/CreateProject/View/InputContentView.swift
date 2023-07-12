@@ -130,7 +130,7 @@ extension InputContentView {
             countLabel.text = "0/10"
         case .role:
             titleLabel.text = "내 역할"
-            inputTextField.placeholder = "프로젝트 이름을 설정해 주세요."
+            inputTextField.placeholder = "역할을 입력해 주세요. (ex. iOS 개발자)"
             countLabel.text = "0/10"
         case .nickname:
             titleLabel.text = "닉네임"
