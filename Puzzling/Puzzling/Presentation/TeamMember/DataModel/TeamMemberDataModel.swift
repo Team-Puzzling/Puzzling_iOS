@@ -5,19 +5,11 @@
 //  Created by Minjoo Kim on 2023/07/10.
 //
 
-import UIKit
-
-struct Icon {
-    static let downIcon = UIImage(systemName: "chevron.down")?
-        .withTintColor(.gray500, renderingMode: .alwaysOriginal)
-    static let upIcon = UIImage(systemName: "chevron.up")?
-        .withTintColor(.gray500, renderingMode: .alwaysOriginal)
-    static let leftIcon = UIImage(systemName: "chevron.left")?
-        .withTintColor(.label, renderingMode: .alwaysOriginal)
-    static let rightIcon = UIImage(systemName: "chevron.right")?
-        .withTintColor(.label, renderingMode: .alwaysOriginal)
-    static let notificationIcon = UIImage(systemName: "bell")?
-        .withTintColor(.gray500, renderingMode: .alwaysOriginal)
+struct TeamMemberDataModel {
+    let reviewDay: String
+    let reviewDate: String
+    let reviewWriters: [ReviewWriters]?
+    let nonReviewWriters: [NonReviewWriters]?
 }
 
 struct ReviewWriters {
@@ -28,13 +20,6 @@ struct ReviewWriters {
 struct NonReviewWriters {
     let memberNickname: String
     let memberRole: String
-}
-
-struct TeamMemberDataModel {
-    let reviewDay: String
-    let reviewDate: String
-    let reviewWriters: [ReviewWriters]?
-    let nonReviewWriters: [NonReviewWriters]?
 }
 
 extension TeamMemberDataModel {

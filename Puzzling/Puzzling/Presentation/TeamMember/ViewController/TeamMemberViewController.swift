@@ -11,39 +11,72 @@ import FSCalendar
 import SnapKit
 import Then
 
-class TeamMemberViewController: UIViewController {
+final class TeamMemberViewController: UIViewController {
     
     private let teamMemberCalenderView = TeamMemberCalendarView()
-    private let teamMemberTableView = UITableView()
+    private let teamMemberTableView = UITableView(frame: .zero, style: .grouped)
     
-    public let TeamMemberData = TeamMemberDataModel.dummy()
+    private let teamMemberData = TeamMemberDataModel.dummy()
     
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setNavigationBar()
+        setDelegate()
         setUI()
         setLayout()
-        configureCalendar()
-        setTarget()
-        setDelegate()
-        registerCell()
+        setRegister()
     }
     
-    func setDelegate() {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNavigationBar()
+    }
+    
+    deinit {
+        print(className)
+    }
+}
+
+extension TeamMemberViewController {
+    
+    private func setDelegate() {
         teamMemberTableView.delegate = self
         teamMemberTableView.dataSource = self
     }
     
-    func registerCell() {
-        teamMemberTableView.register(TeamMemberTableViewCell.self, forCellReuseIdentifier:  TeamMemberTableViewCell.identifier)
-        teamMemberTableView.register(TeamMemberCustomHeaderView.self, forHeaderFooterViewReuseIdentifier: "sectionHeader")
+    private func setUI() {
+        view.backgroundColor = .white000
+        teamMemberTableView.do {
+            $0.separatorStyle = .none
+            $0.backgroundColor = .clear
+        }
+    }
+    
+    private func setLayout() {
+        view.addSubviews(teamMemberCalenderView, teamMemberTableView)
+        
+        teamMemberCalenderView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(32.0)
+            $0.trailing.leading.equalToSuperview().inset(16)
+            $0.height.equalTo(150)
+        }
+        
+        teamMemberTableView.snp.makeConstraints {
+            $0.top.equalTo(teamMemberCalenderView.snp.bottom)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview()
+        }
+    }
+    
+    private func setRegister() {
+        teamMemberTableView.registerCell(TeamMemberTableViewCell.self)
+        teamMemberTableView.registerReusableView(TeamMemberCustomHeaderView.self)
     }
     
     private func setNavigationBar() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: Icon.leftIcon,
+            image: Image.leftIcon,
             style: .plain,
             target: self,
             action: #selector(backButtonTapped)
@@ -65,9 +98,12 @@ class TeamMemberViewController: UIViewController {
             navigationItem.titleView = titleLabel
         }
     }
+}
+
+extension TeamMemberViewController {
     
     @objc
-    func backButtonTapped() {
+    private func backButtonTapped() {
         let transition = CATransition().then {
             $0.duration = 0.25
             $0.type = .push
@@ -80,76 +116,9 @@ class TeamMemberViewController: UIViewController {
         self.navigationController?.popViewController(animated: false)
     }
     
-    func setUI() {
-        view.backgroundColor = .white000
-        teamMemberTableView.do {
-            $0.separatorStyle = .none
-            $0.backgroundColor = .clear
-        }
-    }
-    
-    func setTarget() {
-        teamMemberCalenderView.toggleButton.addTarget(self, action: #selector(tapToggleButton), for: .touchUpInside)
-    }
-    
-    func setLayout() {
-        view.addSubviews(teamMemberCalenderView, teamMemberTableView)
-        teamMemberCalenderView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(32.0)
-            $0.trailing.leading.equalToSuperview().inset(16)
-            $0.height.equalTo(150)
-        }
-        
-        teamMemberTableView.snp.makeConstraints {
-            $0.top.equalTo(teamMemberCalenderView.snp.bottom)
-            $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview()
-            
-        }
-    }
-}
-
-extension TeamMemberViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
-    func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
-        teamMemberCalenderView.calendarView.snp.updateConstraints {
-            $0.height.equalTo(bounds.height)
-        }
-        
-        teamMemberCalenderView.snp.updateConstraints {
-            $0.height.equalTo(bounds.height)
-        }
-        
-        self.view.layoutIfNeeded()
-    }
-    
-    func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
-        let currentPage = teamMemberCalenderView.calendarView.currentPage
-        teamMemberCalenderView.headerLabel.text = teamMemberCalenderView.headerDateFormatter.string(from: currentPage)
-    }
-}
-
-extension TeamMemberViewController {
-    
-    private func configureCalendar() {
-        teamMemberCalenderView.calendarView.delegate = self
-        teamMemberCalenderView.calendarView.dataSource = self
-    }
-    
-    // MARK: - Selector
-    
-    @objc func tapToggleButton() {
-        if teamMemberCalenderView.calendarView.scope == .month {
-            teamMemberCalenderView.calendarView.setScope(.week, animated: true)
-            teamMemberCalenderView.headerDateFormatter.dateFormat = "YYYY년 M월"
-            teamMemberCalenderView.toggleButton.setImage(Icon.downIcon, for: .normal)
-            teamMemberCalenderView.headerLabel.text = teamMemberCalenderView.headerDateFormatter.string(from: teamMemberCalenderView.calendarView.currentPage)
-            
-        } else {
-            teamMemberCalenderView.calendarView.setScope(.month, animated: true)
-            teamMemberCalenderView.headerDateFormatter.dateFormat = "YYYY년 M월"
-            teamMemberCalenderView.toggleButton.setImage(Icon.upIcon, for: .normal)
-            teamMemberCalenderView.headerLabel.text = teamMemberCalenderView.headerDateFormatter.string(from: teamMemberCalenderView.calendarView.currentPage)
-        }
+    @objc
+    private func tapToggleButton() {
+        teamMemberCalenderView.setDataBind()
     }
 }
 
@@ -164,51 +133,44 @@ extension TeamMemberViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return TeamMemberData[0].reviewWriters?.count ?? 0
+            return teamMemberData[0].reviewWriters?.count ?? 0
         case 1:
-            return TeamMemberData[0].nonReviewWriters?.count ?? 0
+            return teamMemberData[0].nonReviewWriters?.count ?? 0
         default:
             return 0
         }
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let section = indexPath.section
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: TeamMemberTableViewCell.identifier, for: indexPath) as? TeamMemberTableViewCell else { return UITableViewCell() }
-        let nickname: String
-        let part: String
+        let cell = tableView.dequeueCell(type: TeamMemberTableViewCell.self, indexPath: indexPath)
+        var nickname: String = ""
+        var part: String = ""
         switch section {
         case 0:
-            nickname = TeamMemberData[0].reviewWriters?[indexPath.row].memberNickname ?? ""
-            part = TeamMemberData[0].reviewWriters?[indexPath.row].memberRole ?? ""
-            cell.configureCell(nickname: nickname, part: part)
+            nickname = teamMemberData[0].reviewWriters?[indexPath.row].memberNickname ?? ""
+            part = teamMemberData[0].reviewWriters?[indexPath.row].memberRole ?? ""
         case 1:
-            nickname = TeamMemberData[0].nonReviewWriters?[indexPath.row].memberNickname ?? ""
-            part = TeamMemberData[0].nonReviewWriters?[indexPath.row].memberRole ?? ""
-            cell.configureCell(nickname: nickname, part: part)
+            nickname = teamMemberData[0].nonReviewWriters?[indexPath.row].memberNickname ?? ""
+            part = teamMemberData[0].nonReviewWriters?[indexPath.row].memberRole ?? ""
         default:
             break
         }
+        cell.setDataBind(nickname: nickname, part: part)
         return cell
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let view = tableView.dequeueReusableHeaderFooterView(withIdentifier:TeamMemberCustomHeaderView.identifier) as? TeamMemberCustomHeaderView else { return UIView() }
-        switch section {
-        case 0: view.title.text = "회고를 진행했어요"
-        case 1: view.title.text = "회고를 진행해야 해요"
-        default: view.title.text = ""
-        }
+        let view = tableView.dequeueReusableView(type: TeamMemberCustomHeaderView.self)
+        view.setDataBind(section: section)
         return view
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         switch section {
-        case 0: if(TeamMemberData[0].reviewWriters == nil) { return 0 }
+        case 0: if(teamMemberData[0].reviewWriters == nil) { return 0 }
             else { return 48 }
-        case 1: if(TeamMemberData[0].nonReviewWriters == nil) { return 0 }
+        case 1: if(teamMemberData[0].nonReviewWriters == nil) { return 0 }
             else { return 48 }
         default: return 0
         }
@@ -216,7 +178,7 @@ extension TeamMemberViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         switch section {
-        case 0: if(TeamMemberData[0].reviewWriters == nil) { return 0 }
+        case 0: if(teamMemberData[0].reviewWriters == nil) { return 0 }
             else { return 16 }
         default: return 0
         }

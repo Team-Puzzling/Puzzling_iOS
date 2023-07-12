@@ -5,24 +5,19 @@
 //  Created by Minjoo Kim on 2023/07/10.
 //
 
-
 import UIKit
 
 import FSCalendar
 import SnapKit
 import Then
 
-class TeamMemberCalendarView: UIView {
+final class TeamMemberCalendarView: UIView {
     
-    public lazy var calendarView = FSCalendar(frame: .zero)
-    
-    public lazy var toggleButton = UIButton()
-    
-    public lazy var headerLabel = UILabel()
-    
+    lazy var calendarView = FSCalendar(frame: .zero)
+    private lazy var headerLabel = UILabel()
     private lazy var testLabel = UILabel()
     
-    let headerDateFormatter = DateFormatter().then {
+    private let headerDateFormatter = DateFormatter().then {
         $0.dateFormat = "YYYY년 M월"
         $0.locale = Locale(identifier: "ko_kr")
         $0.timeZone = TimeZone(identifier: "KST")
@@ -31,17 +26,18 @@ class TeamMemberCalendarView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setStyle()
+        setUI()
         setLayout()
+        setDelegate()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    //MARK: - Custom Method
-    
-    private func setStyle() {
+}
+
+extension TeamMemberCalendarView {
+    private func setUI() {
         calendarView.do {
             $0.select(Date())
             
@@ -76,22 +72,16 @@ class TeamMemberCalendarView: UIView {
             $0.scrollDirection = .horizontal
         }
         
-        toggleButton.do {
-            $0.setImage(Icon.downIcon, for: .normal)
-            $0.semanticContentAttribute = .forceRightToLeft
-        }
-        
         headerLabel.do { [weak self] in
             guard let self = self else { return }
             $0.font = .systemFont(ofSize: 22.0, weight: .bold)
             $0.textColor = .label
             $0.text = self.headerDateFormatter.string(from: Date())
-            
         }
     }
     
     private func setLayout() {
-        self.addSubviews(calendarView, headerLabel, toggleButton)
+        self.addSubviews(calendarView, headerLabel)
         
         calendarView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
@@ -102,11 +92,25 @@ class TeamMemberCalendarView: UIView {
             $0.top.equalToSuperview()
             $0.leading.equalToSuperview().inset(8)
         }
-        
-        toggleButton.snp.makeConstraints {
-            $0.centerY.equalTo(headerLabel.snp.centerY)
-            $0.leading.equalTo(headerLabel.snp.trailing)
-            $0.size.equalTo(36)
-        }
+    }
+    
+    private func setDelegate() {
+        calendarView.delegate = self
+        calendarView.dataSource = self
+    }
+}
+
+extension TeamMemberCalendarView: FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
+    func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
+        let currentPage = calendarView.currentPage
+        headerLabel.text = headerDateFormatter.string(from: currentPage)
+    }
+}
+
+extension TeamMemberCalendarView {
+    func setDataBind() {
+        calendarView.setScope(.month, animated: true)
+        headerDateFormatter.dateFormat = "YYYY년 M월"
+        headerLabel.text = headerDateFormatter.string(from: calendarView.currentPage)
     }
 }

@@ -12,15 +12,12 @@ import Then
 
 final class TeamMemberTableViewCell: UITableViewCell {
     
-    static let identifier = "TeamMemberTableViewCell"
-    
     private lazy var nicknameLabel = UILabel()
     private lazy var partLabel = UILabel()
-    public let divisionLabel = UILabel()
+    private let divisionLabel = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
         setUI()
         setLayout()
     }
@@ -30,10 +27,9 @@ final class TeamMemberTableViewCell: UITableViewCell {
         super.init(coder: coder)
     }
     
-    func setUI() {
+    private func setUI() {
         
         separatorInset.left = 0
-        
         selectionStyle = .none
         
         nicknameLabel.do {
@@ -51,7 +47,7 @@ final class TeamMemberTableViewCell: UITableViewCell {
         }
     }
     
-    func setLayout() {
+    private func setLayout() {
         
         contentView.addSubviews(nicknameLabel, partLabel, divisionLabel)
         
@@ -74,17 +70,11 @@ final class TeamMemberTableViewCell: UITableViewCell {
             $0.height.equalTo(1)
         }
     }
-    
-    func configureCell(nickname: String, part: String) {
+}
+
+extension TeamMemberTableViewCell {
+    func setDataBind(nickname: String, part: String) {
         nicknameLabel.text = nickname
         partLabel.text = part
     }
 }
-
-extension UITableViewCell{
-    
-    static var cellIdentifier : String {
-        return String(describing: self)
-    }
-}
-
