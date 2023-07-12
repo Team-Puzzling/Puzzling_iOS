@@ -75,7 +75,7 @@ extension StartDayView {
         addSubviews(titleLabel, startDayView)
         
         titleLabel.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
+            $0.top.equalToSuperview().inset(13)
             $0.leading.equalToSuperview().inset(8)
         }
         
@@ -86,8 +86,9 @@ extension StartDayView {
         }
         
         startDayLabel.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
+            $0.top.equalToSuperview()
             $0.leading.equalToSuperview().inset(16)
+            $0.height.equalTo(50)
         }
         
         chevronDownButton.snp.makeConstraints {

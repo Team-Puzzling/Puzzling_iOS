@@ -18,11 +18,8 @@ final class CreateProjectViewController: UIViewController {
     private let navigationView = UIView()
     private let navigationTitleLabel = UILabel()
     private let closeButton = UIButton()
-    private let nameView = InputContentView(type: .name)
-    private let descriptionView = InputContentView(type: .description)
-    private let startDayView = StartDayView()
-    private let roleView = InputContentView(type: .role)
-    private let nicknameView = InputContentView(type: .nickname)
+    private let createProjectView = CreateProjectView()
+    private let registerProjectButton = CheckButton()
     
     // MARK: - Properties
     
@@ -57,6 +54,10 @@ extension CreateProjectViewController {
         closeButton.do {
             $0.setImage(Image.xMark, for: .normal)
         }
+        
+        registerProjectButton.do {
+            $0.setTitle("프로젝트 등록하기", for: .normal)
+        }
     }
     
     // MARK: - Layout Helper
@@ -64,8 +65,7 @@ extension CreateProjectViewController {
     private func setLayout() {
         
         navigationView.addSubviews(navigationTitleLabel, closeButton)
-        view.addSubviews(navigationView, nameView, startDayView,
-                         descriptionView, roleView, nicknameView)
+        view.addSubviews(navigationView, createProjectView, registerProjectButton)
         
         navigationView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
@@ -84,36 +84,17 @@ extension CreateProjectViewController {
             $0.width.height.equalTo(48)
         }
         
-        nameView.snp.makeConstraints {
-            $0.top.equalTo(navigationView.snp.bottom).offset(32)
+        registerProjectButton.snp.makeConstraints {
+            $0.bottom.equalToSuperview().inset(50)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(16)
-            $0.height.equalTo(106)
+            $0.height.equalTo(55)
         }
         
-        descriptionView.snp.makeConstraints {
-            $0.top.equalTo(nameView.snp.bottom).offset(16)
-            $0.leading.trailing.equalTo(nameView)
-            $0.height.equalTo(nameView)
+        createProjectView.snp.makeConstraints {
+            $0.top.equalTo(navigationView.snp.bottom)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(registerProjectButton.snp.top).offset(-25)
         }
-        
-        startDayView.snp.makeConstraints {
-            $0.top.equalTo(descriptionView.snp.bottom).offset(16)
-            $0.leading.trailing.equalTo(nameView)
-            $0.height.equalTo(50)
-        }
-        
-        roleView.snp.makeConstraints {
-            $0.top.equalTo(startDayView.snp.bottom).offset(40)
-            $0.leading.trailing.equalTo(nameView)
-            $0.height.equalTo(nameView)
-        }
-        
-        nicknameView.snp.makeConstraints {
-            $0.top.equalTo(roleView.snp.bottom).offset(16)
-            $0.leading.trailing.equalTo(nameView)
-            $0.height.equalTo(nameView)
-        }
-        
     }
     
     // MARK: - Methods

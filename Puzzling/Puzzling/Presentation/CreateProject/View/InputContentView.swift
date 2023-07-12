@@ -35,8 +35,6 @@ final class InputContentView: UIView {
         super.init(frame: .zero)
         setUI()
         setLayout()
-        setDelegate()
-//        setAddTarget()
         setInputContent(type: type)
     }
     
@@ -109,7 +107,7 @@ extension InputContentView {
         }
         
         countLabel.snp.makeConstraints {
-            $0.top.equalTo(inputTextField.snp.bottom).offset(5)
+            $0.bottom.equalToSuperview()
             $0.trailing.equalToSuperview().inset(8)
         }
     }
@@ -119,10 +117,6 @@ extension InputContentView {
     private func setDelegate() {
         inputTextField.delegate = self
     }
-    
-//    private func setAddTarget() {
-//        removeTextButton.addTarget(self, action: #selector(removeTextButtonDidTap), for: .touchUpInside)
-//    }
     
     private func setInputContent(type: InputContentType) {
         
@@ -173,6 +167,10 @@ extension InputContentView: UITextFieldDelegate {
         textField.layer.borderColor = .none
         textField.layer.borderWidth = 0
         return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        // delegate
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {

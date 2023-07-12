@@ -13,6 +13,10 @@
 		03734EBF2A59A26800B401D6 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03734EBE2A59A26800B401D6 /* MyPageViewController.swift */; };
 		03ADF3872A5D9F91002CEDDC /* InputContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ADF3862A5D9F91002CEDDC /* InputContentView.swift */; };
 		03ADF3892A5E7322002CEDDC /* StartDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ADF3882A5E7322002CEDDC /* StartDayView.swift */; };
+		03ADF38D2A5E8A5F002CEDDC /* CreateProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ADF38C2A5E8A5F002CEDDC /* CreateProjectView.swift */; };
+		03ADF38F2A5E932A002CEDDC /* ProjectCycleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ADF38E2A5E932A002CEDDC /* ProjectCycleCollectionViewCell.swift */; };
+		03ADF3922A5E9534002CEDDC /* ProjectCycleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ADF3912A5E9534002CEDDC /* ProjectCycleModel.swift */; };
+		03ADF3942A5EA4DB002CEDDC /* CheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ADF3932A5EA4DB002CEDDC /* CheckButton.swift */; };
 		03B004A92A556C7400E71CA7 /* UIWindow+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B004A82A556C7400E71CA7 /* UIWindow+.swift */; };
 		03E6D1E52A53219600F4453C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E6D1E42A53219600F4453C /* AppDelegate.swift */; };
 		03E6D1E72A53219600F4453C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E6D1E62A53219600F4453C /* SceneDelegate.swift */; };
@@ -76,6 +80,10 @@
 		03734EBE2A59A26800B401D6 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		03ADF3862A5D9F91002CEDDC /* InputContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputContentView.swift; sourceTree = "<group>"; };
 		03ADF3882A5E7322002CEDDC /* StartDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDayView.swift; sourceTree = "<group>"; };
+		03ADF38C2A5E8A5F002CEDDC /* CreateProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectView.swift; sourceTree = "<group>"; };
+		03ADF38E2A5E932A002CEDDC /* ProjectCycleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCycleCollectionViewCell.swift; sourceTree = "<group>"; };
+		03ADF3912A5E9534002CEDDC /* ProjectCycleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCycleModel.swift; sourceTree = "<group>"; };
+		03ADF3932A5EA4DB002CEDDC /* CheckButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckButton.swift; sourceTree = "<group>"; };
 		03B004A82A556C7400E71CA7 /* UIWindow+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+.swift"; sourceTree = "<group>"; };
 		03E6D1E12A53219600F4453C /* Puzzling.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Puzzling.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03E6D1E42A53219600F4453C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -179,6 +187,14 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
+		03ADF3902A5E932F002CEDDC /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				03ADF38E2A5E932A002CEDDC /* ProjectCycleCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		03E6D1D82A53219600F4453C = {
 			isa = PBXGroup;
 			children = (
@@ -239,6 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				03E6D1FF2A5325F100F4453C /* Model.swift */,
+				03ADF3912A5E9534002CEDDC /* ProjectCycleModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -372,6 +389,7 @@
 			isa = PBXGroup;
 			children = (
 				03E6D23B2A532BC600F4453C /* CustomClass.swift */,
+				03ADF3932A5EA4DB002CEDDC /* CheckButton.swift */,
 			);
 			path = CustomClass;
 			sourceTree = "<group>";
@@ -424,6 +442,7 @@
 			children = (
 				03FFD2D72A5D931200A3B70D /* View */,
 				03FFD2D62A5D92FB00A3B70D /* ViewController */,
+				03ADF3902A5E932F002CEDDC /* Cell */,
 			);
 			path = CreateProject;
 			sourceTree = "<group>";
@@ -439,6 +458,7 @@
 		03FFD2D72A5D931200A3B70D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				03ADF38C2A5E8A5F002CEDDC /* CreateProjectView.swift */,
 				03ADF3882A5E7322002CEDDC /* StartDayView.swift */,
 				03ADF3862A5D9F91002CEDDC /* InputContentView.swift */,
 			);
@@ -600,6 +620,7 @@
 				03E6D2662A53333500F4453C /* UIView+.swift in Sources */,
 				583117AA2A5BE2D90099B517 /* HomeSegmentedView.swift in Sources */,
 				03E6D25C2A5331FF00F4453C /* GeneralResponse.swift in Sources */,
+				03ADF3942A5EA4DB002CEDDC /* CheckButton.swift in Sources */,
 				03E6D1E52A53219600F4453C /* AppDelegate.swift in Sources */,
 				03E6D2602A53322300F4453C /* URLConst.swift in Sources */,
 				03B004A92A556C7400E71CA7 /* UIWindow+.swift in Sources */,
@@ -613,9 +634,11 @@
 				03E6D2762A5333B100F4453C /* UIButton+.swift in Sources */,
 				03E6D1E72A53219600F4453C /* SceneDelegate.swift in Sources */,
 				03E6D2262A532AAC00F4453C /* BaseView.swift in Sources */,
+				03ADF38F2A5E932A002CEDDC /* ProjectCycleCollectionViewCell.swift in Sources */,
 				03E6D2282A532AB900F4453C /* BaseViewController.swift in Sources */,
 				03E6D25A2A5331ED00F4453C /* APIConst.swift in Sources */,
 				03ADF3892A5E7322002CEDDC /* StartDayView.swift in Sources */,
+				03ADF38D2A5E8A5F002CEDDC /* CreateProjectView.swift in Sources */,
 				03E6D2642A53330E00F4453C /* NSObject+.swift in Sources */,
 				03E6D23E2A532C1800F4453C /* FontLevel.swift in Sources */,
 				03734EB82A59A0BD00B401D6 /* TabBarController.swift in Sources */,
@@ -627,6 +650,7 @@
 				03E6D27A2A5333C900F4453C /* UIImage+.swift in Sources */,
 				03734EBF2A59A26800B401D6 /* MyPageViewController.swift in Sources */,
 				583117A82A5BE1490099B517 /* HomeTitleBarView.swift in Sources */,
+				03ADF3922A5E9534002CEDDC /* ProjectCycleModel.swift in Sources */,
 				03ADF3872A5D9F91002CEDDC /* InputContentView.swift in Sources */,
 				03E6D27C2A5333E400F4453C /* UIViewController+.swift in Sources */,
 				03734EBD2A59A1F800B401D6 /* TabBarItem.swift in Sources */,
