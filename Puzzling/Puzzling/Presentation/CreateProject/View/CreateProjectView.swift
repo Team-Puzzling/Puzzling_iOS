@@ -76,6 +76,8 @@ extension CreateProjectView {
         cycleCollectionView.do {
             $0.backgroundColor = .clear
             $0.showsHorizontalScrollIndicator = false
+            $0.isScrollEnabled = false
+            $0.allowsMultipleSelection = true
         }
     }
     
@@ -132,8 +134,8 @@ extension CreateProjectView {
         
         cycleCollectionView.snp.makeConstraints {
             $0.top.equalTo(projectCycleDescriptionLabel.snp.bottom).offset(8)
-            $0.width.equalTo(343)
-            $0.height.equalTo(48)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(69)
         }
     }
     
@@ -174,5 +176,21 @@ extension CreateProjectView: UICollectionViewDataSource {
         let cell = collectionView.dequeueCell(type: ProjectCycleCollectionViewCell.self, indexPath: indexPath)
         cell.setDataBind(model: projectCycleModel[indexPath.row])
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
+        cell?.isSelected = true
+        selectedCycleIndex.append(indexPath.row)
+        print(selectedCycleIndex)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
+        cell?.isSelected = false
+        if let index = selectedCycleIndex.firstIndex(of: indexPath.row) {
+            selectedCycleIndex.remove(at: index)
+        }
+        print(selectedCycleIndex)
     }
 }
