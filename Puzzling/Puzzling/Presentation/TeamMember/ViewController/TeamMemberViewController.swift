@@ -13,7 +13,7 @@ import Then
 
 class TeamMemberViewController: UIViewController {
     
-    private let teamMemberView = TeamMemberView()
+    private let teamMemberCalenderView = TeamMemberCalendarView()
     private let teamMemberTableView = UITableView(frame: .zero,
                                                   style: .grouped)
     
@@ -89,19 +89,19 @@ class TeamMemberViewController: UIViewController {
     }
     
     func setTarget() {
-        teamMemberView.toggleButton.addTarget(self, action: #selector(tapToggleButton), for: .touchUpInside)
+        teamMemberCalenderView.toggleButton.addTarget(self, action: #selector(tapToggleButton), for: .touchUpInside)
     }
     
     func setLayout() {
-        view.addSubviews(teamMemberView, teamMemberTableView)
-        teamMemberView.snp.makeConstraints {
+        view.addSubviews(teamMemberCalenderView, teamMemberTableView)
+        teamMemberCalenderView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide).offset(32.0)
             $0.trailing.leading.equalToSuperview().inset(16)
             $0.height.equalTo(150)
         }
         
         teamMemberTableView.snp.makeConstraints {
-            $0.top.equalTo(teamMemberView.snp.bottom)
+            $0.top.equalTo(teamMemberCalenderView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
             
@@ -111,11 +111,11 @@ class TeamMemberViewController: UIViewController {
 
 extension TeamMemberViewController: FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
-        teamMemberView.calendarView.snp.updateConstraints {
+        teamMemberCalenderView.calendarView.snp.updateConstraints {
             $0.height.equalTo(bounds.height)
         }
         
-        teamMemberView.snp.updateConstraints {
+        teamMemberCalenderView.snp.updateConstraints {
             $0.height.equalTo(bounds.height)
         }
         
@@ -123,32 +123,32 @@ extension TeamMemberViewController: FSCalendarDelegate, FSCalendarDataSource, FS
     }
     
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
-        let currentPage = teamMemberView.calendarView.currentPage
-        teamMemberView.headerLabel.text = teamMemberView.headerDateFormatter.string(from: currentPage)
+        let currentPage = teamMemberCalenderView.calendarView.currentPage
+        teamMemberCalenderView.headerLabel.text = teamMemberCalenderView.headerDateFormatter.string(from: currentPage)
     }
 }
 
 extension TeamMemberViewController {
     
     private func configureCalendar() {
-        teamMemberView.calendarView.delegate = self
-        teamMemberView.calendarView.dataSource = self
+        teamMemberCalenderView.calendarView.delegate = self
+        teamMemberCalenderView.calendarView.dataSource = self
     }
     
     // MARK: - Selector
     
     @objc func tapToggleButton() {
-        if teamMemberView.calendarView.scope == .month {
-            teamMemberView.calendarView.setScope(.week, animated: true)
-            teamMemberView.headerDateFormatter.dateFormat = "YYYY년 M월"
-            teamMemberView.toggleButton.setImage(Icon.downIcon, for: .normal)
-            teamMemberView.headerLabel.text = teamMemberView.headerDateFormatter.string(from: teamMemberView.calendarView.currentPage)
+        if teamMemberCalenderView.calendarView.scope == .month {
+            teamMemberCalenderView.calendarView.setScope(.week, animated: true)
+            teamMemberCalenderView.headerDateFormatter.dateFormat = "YYYY년 M월"
+            teamMemberCalenderView.toggleButton.setImage(Icon.downIcon, for: .normal)
+            teamMemberCalenderView.headerLabel.text = teamMemberCalenderView.headerDateFormatter.string(from: teamMemberCalenderView.calendarView.currentPage)
             
         } else {
-            teamMemberView.calendarView.setScope(.month, animated: true)
-            teamMemberView.headerDateFormatter.dateFormat = "YYYY년 M월"
-            teamMemberView.toggleButton.setImage(Icon.upIcon, for: .normal)
-            teamMemberView.headerLabel.text = teamMemberView.headerDateFormatter.string(from: teamMemberView.calendarView.currentPage)
+            teamMemberCalenderView.calendarView.setScope(.month, animated: true)
+            teamMemberCalenderView.headerDateFormatter.dateFormat = "YYYY년 M월"
+            teamMemberCalenderView.toggleButton.setImage(Icon.upIcon, for: .normal)
+            teamMemberCalenderView.headerLabel.text = teamMemberCalenderView.headerDateFormatter.string(from: teamMemberCalenderView.calendarView.currentPage)
         }
     }
 }

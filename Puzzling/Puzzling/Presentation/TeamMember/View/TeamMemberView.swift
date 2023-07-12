@@ -1,5 +1,5 @@
 //
-//  TeamMemberView.swift
+//  TeamMemberCalendarView.swift
 //  Puzzling
 //
 //  Created by Minjoo Kim on 2023/07/10.
@@ -12,7 +12,7 @@ import FSCalendar
 import SnapKit
 import Then
 
-class TeamMemberView: UIView {
+class TeamMemberCalendarView: UIView {
     
     public lazy var calendarView = FSCalendar(frame: .zero)
     
