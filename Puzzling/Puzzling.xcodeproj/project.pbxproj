@@ -12,6 +12,7 @@
 		03734EBD2A59A1F800B401D6 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03734EBC2A59A1F800B401D6 /* TabBarItem.swift */; };
 		03734EBF2A59A26800B401D6 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03734EBE2A59A26800B401D6 /* MyPageViewController.swift */; };
 		03ADF3872A5D9F91002CEDDC /* InputContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ADF3862A5D9F91002CEDDC /* InputContentView.swift */; };
+		03ADF3892A5E7322002CEDDC /* StartDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ADF3882A5E7322002CEDDC /* StartDayView.swift */; };
 		03B004A92A556C7400E71CA7 /* UIWindow+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B004A82A556C7400E71CA7 /* UIWindow+.swift */; };
 		03E6D1E52A53219600F4453C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E6D1E42A53219600F4453C /* AppDelegate.swift */; };
 		03E6D1E72A53219600F4453C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E6D1E62A53219600F4453C /* SceneDelegate.swift */; };
@@ -74,6 +75,7 @@
 		03734EBC2A59A1F800B401D6 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
 		03734EBE2A59A26800B401D6 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		03ADF3862A5D9F91002CEDDC /* InputContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputContentView.swift; sourceTree = "<group>"; };
+		03ADF3882A5E7322002CEDDC /* StartDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDayView.swift; sourceTree = "<group>"; };
 		03B004A82A556C7400E71CA7 /* UIWindow+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+.swift"; sourceTree = "<group>"; };
 		03E6D1E12A53219600F4453C /* Puzzling.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Puzzling.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03E6D1E42A53219600F4453C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -437,6 +439,7 @@
 		03FFD2D72A5D931200A3B70D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				03ADF3882A5E7322002CEDDC /* StartDayView.swift */,
 				03ADF3862A5D9F91002CEDDC /* InputContentView.swift */,
 			);
 			path = View;
@@ -612,6 +615,7 @@
 				03E6D2262A532AAC00F4453C /* BaseView.swift in Sources */,
 				03E6D2282A532AB900F4453C /* BaseViewController.swift in Sources */,
 				03E6D25A2A5331ED00F4453C /* APIConst.swift in Sources */,
+				03ADF3892A5E7322002CEDDC /* StartDayView.swift in Sources */,
 				03E6D2642A53330E00F4453C /* NSObject+.swift in Sources */,
 				03E6D23E2A532C1800F4453C /* FontLevel.swift in Sources */,
 				03734EB82A59A0BD00B401D6 /* TabBarController.swift in Sources */,

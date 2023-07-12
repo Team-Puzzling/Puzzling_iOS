@@ -20,6 +20,7 @@ final class CreateProjectViewController: UIViewController {
     private let closeButton = UIButton()
     private let nameView = InputContentView(type: .name)
     private let descriptionView = InputContentView(type: .description)
+    private let startDayView = StartDayView()
     private let roleView = InputContentView(type: .role)
     private let nicknameView = InputContentView(type: .nickname)
     
@@ -63,7 +64,8 @@ extension CreateProjectViewController {
     private func setLayout() {
         
         navigationView.addSubviews(navigationTitleLabel, closeButton)
-        view.addSubviews(navigationView, nameView, descriptionView, roleView, nicknameView)
+        view.addSubviews(navigationView, nameView, startDayView,
+                         descriptionView, roleView, nicknameView)
         
         navigationView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
@@ -94,8 +96,14 @@ extension CreateProjectViewController {
             $0.height.equalTo(nameView)
         }
         
-        roleView.snp.makeConstraints {
+        startDayView.snp.makeConstraints {
             $0.top.equalTo(descriptionView.snp.bottom).offset(16)
+            $0.leading.trailing.equalTo(nameView)
+            $0.height.equalTo(50)
+        }
+        
+        roleView.snp.makeConstraints {
+            $0.top.equalTo(startDayView.snp.bottom).offset(40)
             $0.leading.trailing.equalTo(nameView)
             $0.height.equalTo(nameView)
         }
