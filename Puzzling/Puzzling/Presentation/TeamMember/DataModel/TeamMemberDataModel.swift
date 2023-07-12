@@ -7,18 +7,6 @@
 
 import UIKit
 
-
-struct Icon {
-    static let downIcon = UIImage(systemName: "chevron.down")?
-        .withTintColor(.gray500, renderingMode: .alwaysOriginal)
-    static let upIcon = UIImage(systemName: "chevron.up")?
-        .withTintColor(.gray500, renderingMode: .alwaysOriginal)
-    static let leftIcon = UIImage(systemName: "chevron.left")?
-        .withTintColor(.label, renderingMode: .alwaysOriginal)
-    static let rightIcon = UIImage(systemName: "chevron.right")?
-        .withTintColor(.label, renderingMode: .alwaysOriginal)
-}
-
 struct TeamMemberDataModel {
     let reviewDay: String
     let reviewDate: String

@@ -76,7 +76,7 @@ extension TeamMemberViewController {
     
     private func setNavigationBar() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: Icon.leftIcon,
+            image: Image.leftIcon,
             style: .plain,
             target: self,
             action: #selector(backButtonTapped)
