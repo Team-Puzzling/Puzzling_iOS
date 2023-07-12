@@ -27,6 +27,10 @@ final class InputContentView: UIView {
     private let textFieldButtonView = UIView()
     private let removeTextButton = UIButton()
     
+    // MARK: - Properties
+    
+    var activeTextField: InputContentType?
+    
     // MARK: - Initializer
     
     init(type: InputContentType) {
@@ -35,6 +39,7 @@ final class InputContentView: UIView {
         setLayout()
         setDelegate()
         setInputContent(type: type)
+        activeTextField = type
     }
     
     required init?(coder: NSCoder) {
@@ -117,26 +122,35 @@ extension InputContentView {
         inputTextField.delegate = self
     }
     
+    private func textFieldPlaceholder(textField: InputContentType) -> String {
+        switch textField {
+        case .name:
+            return "프로젝트 이름을 설정해 주세요."
+        case .description:
+            return "프로젝트에 대해 간단히 소개해 주세요."
+        case .role:
+            return "역할을 입력해 주세요. (ex. iOS 개발자)"
+        case .nickname:
+            return "닉네임을 입력해 주세요."
+        }
+    }
+    
     private func setInputContent(type: InputContentType) {
-        
         switch type {
         case .name:
             titleLabel.text = "프로젝트 이름"
-            inputTextField.placeholder = "프로젝트 이름을 설정해 주세요."
             countLabel.text = "0/10"
         case .description:
             titleLabel.text = "프로젝트 한줄소개"
-            inputTextField.placeholder = "프로젝트에 대해 간단히 소개해 주세요."
             countLabel.text = "0/10"
         case .role:
             titleLabel.text = "내 역할"
-            inputTextField.placeholder = "역할을 입력해 주세요. (ex. iOS 개발자)"
             countLabel.text = "0/10"
         case .nickname:
             titleLabel.text = "닉네임"
-            inputTextField.placeholder = "닉네임을 입력해 주세요."
             countLabel.text = "0/10"
         }
+        inputTextField.placeholder = textFieldPlaceholder(textField: type)
     }
     
     private func textFieldBorderSetting(textField: UITextField) {
@@ -165,11 +179,10 @@ extension InputContentView: UITextFieldDelegate {
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         textField.layer.borderColor = .none
         textField.layer.borderWidth = 0
+        if ((textField.text?.isEmpty) != nil) {
+            textField.placeholder = textFieldPlaceholder(textField: activeTextField ?? .name)
+        }
         return true
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        // delegate
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
