@@ -37,7 +37,6 @@ final class CreateProjectViewController: UIViewController {
         super.viewDidLoad()
         setUI()
         setLayout()
-//        setNavigationBar()
     }
 }
 
