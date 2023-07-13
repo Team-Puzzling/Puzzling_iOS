@@ -27,7 +27,6 @@ class AARView: UIView {
     private let continuouslyNumLabel = UILabel()
     private let purposeNumLabel = UILabel()
 
-    
     let targetTextView = UITextView()
     let resultTextView = UITextView()
     let differenceTextView = UITextView()
@@ -47,7 +46,6 @@ class AARView: UIView {
         differenceTextView.delegate = self
         continuouslyTextView.delegate = self
         purposeTextView.delegate = self
-
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapScreen))
         self.addGestureRecognizer(tapGestureRecognizer)

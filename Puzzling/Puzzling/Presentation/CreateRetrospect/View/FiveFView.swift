@@ -26,7 +26,6 @@ class FiveFView: UIView {
     private let findingNumLabel = UILabel()
     private let futureNumLabel = UILabel()
     private let feedbackNumLabel = UILabel()
-
     
     let factTextView = UITextView()
     let feelingTextView = UITextView()
@@ -48,7 +47,6 @@ class FiveFView: UIView {
         futureTextView.delegate = self
         feedbackTextView.delegate = self
 
-        
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapScreen))
         self.addGestureRecognizer(tapGestureRecognizer)
     }

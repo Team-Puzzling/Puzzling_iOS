@@ -12,79 +12,27 @@ import SnapKit
 
 
 class TILView: UIView {
+        
+    // MARK: - UI Components
+
+    private let wellLabel = UILabel()
+    private let regretLabel = UILabel()
+    private let learnLabel = UILabel()
     
-    // MARK: - Properties
+    private let wellNumLabel = UILabel()
+    private let regretNumLabel = UILabel()
+    private let learnNumLabel = UILabel()
     
-    private let wellLabel = UILabel().then {
-        $0.text = "잘한 점은 무엇인가요?"
-        $0.textColor = .black000
-        $0.font = .fontGuide(.body1_bold_kor)
-    }
+    let wellTextView = UITextView()
+    let regretTextView = UITextView()
+    let learnTextView = UITextView()
     
-    private let regretLabel = UILabel().then {
-        $0.text = "아쉬운 점은 무엇인가요"
-        $0.textColor = .black000
-        $0.font = .fontGuide(.body1_bold_kor)
-    }
-    
-    private let learnLabel = UILabel().then {
-        $0.text = "배운 점은 무엇인가요?"
-        $0.textColor = .black000
-        $0.font = .fontGuide(.body1_bold_kor)
-    }
-    
-    private let wellNumLabel = UILabel().then{
-        $0.text = "0/200"
-        $0.textAlignment = .right
-        $0.textColor = .gray400
-        $0.font = .fontGuide(.detail3_regular_kor)
-    }
-    
-    private let regretNumLabel = UILabel().then{
-        $0.text = "0/200"
-        $0.textAlignment = .right
-        $0.textColor = .gray400
-        $0.font = .fontGuide(.detail3_regular_kor)
-    }
-    
-    private let learnNumLabel = UILabel().then{
-        $0.text = "0/200"
-        $0.textAlignment = .right
-        $0.textColor = .gray400
-        $0.font = .fontGuide(.detail3_regular_kor)
-    }
-    
-    let wellTextView = UITextView().then {
-        $0.text = "\"오늘의 나는 무엇을 잘했는지\" 작성해 보세요"
-        $0.textColor = .gray400
-        $0.backgroundColor = UIColor.background050
-        $0.textContainerInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
-        $0.layer.cornerRadius = 16
-        $0.font = .fontGuide(.body2_regular_kor)    }
-    
-    let regretTextView = UITextView().then {
-        $0.text = "\"어떤 문제/어려움을 겪었는지, 향후 어떤 액션으로 이를 해결해볼 것인지\" 작성해 보세요"
-        $0.textColor = .gray400
-        $0.backgroundColor = UIColor.background050
-        $0.textContainerInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
-        $0.layer.cornerRadius = 16
-        $0.font = .fontGuide(.body2_regular_kor)
-    }
-    
-    let learnTextView = UITextView().then {
-        $0.text = "\"오늘은 일에서 어떤 것을 배웠는지\" 작성해 보세요"
-        $0.textColor = .gray400
-        $0.backgroundColor = UIColor.background050
-        $0.textContainerInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
-        $0.layer.cornerRadius = 16
-        $0.font = .fontGuide(.body2_regular_kor)
-    }
-    
-    // MARK: - Initialization
-    
+    // MARK: - View Life Cycle
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setLayout()
+        setUI()
         wellTextView.delegate = self
         regretTextView.delegate = self
         learnTextView.delegate = self
@@ -98,8 +46,77 @@ class TILView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Method
+    // MARK: - UI Components Property
     
+    private func setUI() {
+        wellLabel.do {
+            $0.text = "잘한 점은 무엇인가요?"
+            $0.textColor = .black000
+            $0.font = .fontGuide(.body1_bold_kor)
+        }
+        regretLabel.do {
+            $0.text = "아쉬운 점은 무엇인가요"
+            $0.textColor = .black000
+            $0.font = .fontGuide(.body1_bold_kor)
+        }
+        
+        learnLabel.do {
+            $0.text = "배운 점은 무엇인가요?"
+            $0.textColor = .black000
+            $0.font = .fontGuide(.body1_bold_kor)
+        }
+        
+        wellNumLabel.do {
+            $0.text = "0/200"
+            $0.textAlignment = .right
+            $0.textColor = .gray400
+            $0.font = .fontGuide(.detail3_regular_kor)
+        }
+        
+        regretNumLabel.do {
+            $0.text = "0/200"
+            $0.textAlignment = .right
+            $0.textColor = .gray400
+            $0.font = .fontGuide(.detail3_regular_kor)
+        }
+        
+        learnNumLabel.do {
+            $0.text = "0/200"
+            $0.textAlignment = .right
+            $0.textColor = .gray400
+            $0.font = .fontGuide(.detail3_regular_kor)
+        }
+        
+        wellTextView.do {
+            $0.text = "\"오늘의 나는 무엇을 잘했는지\" 작성해 보세요"
+            $0.textColor = .gray400
+            $0.backgroundColor = UIColor.background050
+            $0.textContainerInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+            $0.layer.cornerRadius = 16
+            $0.font = .fontGuide(.body2_regular_kor)
+        }
+        
+        regretTextView.do {
+            $0.text = "\"어떤 문제/어려움을 겪었는지, 향후 어떤 액션으로 이를 해결해볼 것인지\" 작성해 보세요"
+            $0.textColor = .gray400
+            $0.backgroundColor = UIColor.background050
+            $0.textContainerInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+            $0.layer.cornerRadius = 16
+            $0.font = .fontGuide(.body2_regular_kor)
+        }
+        
+        learnTextView.do {
+            $0.text = "\"오늘은 일에서 어떤 것을 배웠는지\" 작성해 보세요"
+            $0.textColor = .gray400
+            $0.backgroundColor = UIColor.background050
+            $0.textContainerInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+            $0.layer.cornerRadius = 16
+            $0.font = .fontGuide(.body2_regular_kor)
+        }
+    }
+    
+    // MARK: - Layout Helper
+
     private func setLayout() {
         self.backgroundColor = .white000
         
@@ -118,6 +135,7 @@ class TILView: UIView {
         wellLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(16)
             $0.leading.equalToSuperview().offset(16)
+            $0.height.equalTo(24)
         }
         
         wellTextView.snp.makeConstraints {
@@ -134,6 +152,7 @@ class TILView: UIView {
         regretLabel.snp.makeConstraints {
             $0.top.equalTo(wellTextView.snp.bottom).offset(45)
             $0.leading.equalToSuperview().offset(16)
+            $0.height.equalTo(24)
         }
         
         regretTextView.snp.makeConstraints {
@@ -150,13 +169,13 @@ class TILView: UIView {
         learnLabel.snp.makeConstraints {
             $0.top.equalTo(regretTextView.snp.bottom).offset(45)
             $0.leading.equalToSuperview().offset(16)
+            $0.height.equalTo(24)
         }
         
         learnTextView.snp.makeConstraints {
             $0.top.equalTo(learnLabel.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview().inset(16)
             $0.height.equalTo(118)
-            $0.bottom.equalToSuperview().offset(-16)
         }
         
         learnNumLabel.snp.makeConstraints {
@@ -164,6 +183,8 @@ class TILView: UIView {
             $0.trailing.equalTo(learnTextView.snp.trailing).inset(16)
         }
     }
+    
+    // MARK: - @objc Methods
     
     @objc private func didTapScreen() {
           self.endEditing(true)
