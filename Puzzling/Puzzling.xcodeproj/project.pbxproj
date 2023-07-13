@@ -65,6 +65,9 @@
 		096755C62A5E970500A1E691 /* MyProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755C52A5E970500A1E691 /* MyProjectViewController.swift */; };
 		096755C92A5E997500A1E691 /* MyProjectDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755C82A5E997500A1E691 /* MyProjectDataModel.swift */; };
 		096755CB2A5E9AF500A1E691 /* MyProjectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755CA2A5E9AF500A1E691 /* MyProjectTableViewCell.swift */; };
+		096755D82A5FE0BF00A1E691 /* MyReviewListDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755D72A5FE0BF00A1E691 /* MyReviewListDataModel.swift */; };
+		096755DA2A6012DA00A1E691 /* MyReviewListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755D92A6012DA00A1E691 /* MyReviewListViewController.swift */; };
+		096755DC2A6015CB00A1E691 /* MyProjectTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755DB2A6015CB00A1E691 /* MyProjectTableHeaderView.swift */; };
 		09C0A4F32A5BEC1600691FFD /* TeamMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C0A4F22A5BEC1600691FFD /* TeamMemberViewController.swift */; };
 		09C0A4F52A5BEE4C00691FFD /* TeamMemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C0A4F42A5BEE4C00691FFD /* TeamMemberView.swift */; };
 		09C0A4F72A5C305200691FFD /* TeamMemberDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C0A4F62A5C305200691FFD /* TeamMemberDataModel.swift */; };
@@ -128,6 +131,9 @@
 		096755C52A5E970500A1E691 /* MyProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProjectViewController.swift; sourceTree = "<group>"; };
 		096755C82A5E997500A1E691 /* MyProjectDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProjectDataModel.swift; sourceTree = "<group>"; };
 		096755CA2A5E9AF500A1E691 /* MyProjectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProjectTableViewCell.swift; sourceTree = "<group>"; };
+		096755D72A5FE0BF00A1E691 /* MyReviewListDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReviewListDataModel.swift; sourceTree = "<group>"; };
+		096755D92A6012DA00A1E691 /* MyReviewListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReviewListViewController.swift; sourceTree = "<group>"; };
+		096755DB2A6015CB00A1E691 /* MyProjectTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProjectTableHeaderView.swift; sourceTree = "<group>"; };
 		09C0A4F22A5BEC1600691FFD /* TeamMemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberViewController.swift; sourceTree = "<group>"; };
 		09C0A4F42A5BEE4C00691FFD /* TeamMemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberView.swift; sourceTree = "<group>"; };
 		09C0A4F62A5C305200691FFD /* TeamMemberDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberDataModel.swift; sourceTree = "<group>"; };
@@ -284,6 +290,7 @@
 		03E6D20D2A5327BA00F4453C /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				096755D12A5FDDBD00A1E691 /* MyReview */,
 				096755C22A5E96DC00A1E691 /* MyProject */,
 				09C0A4EF2A5BEBB800691FFD /* TeamMember */,
 				03E6D20E2A5327D300F4453C /* Common */,
@@ -434,8 +441,8 @@
 			isa = PBXGroup;
 			children = (
 				096755C72A5E996700A1E691 /* DataModel */,
-				096755C42A5E96F700A1E691 /* View */,
 				096755C32A5E96F100A1E691 /* ViewController */,
+				096755C42A5E96F700A1E691 /* View */,
 			);
 			path = MyProject;
 			sourceTree = "<group>";
@@ -451,6 +458,7 @@
 		096755C42A5E96F700A1E691 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				096755DB2A6015CB00A1E691 /* MyProjectTableHeaderView.swift */,
 				096755CA2A5E9AF500A1E691 /* MyProjectTableViewCell.swift */,
 			);
 			path = View;
@@ -462,6 +470,39 @@
 				096755C82A5E997500A1E691 /* MyProjectDataModel.swift */,
 			);
 			path = DataModel;
+			sourceTree = "<group>";
+		};
+		096755D12A5FDDBD00A1E691 /* MyReview */ = {
+			isa = PBXGroup;
+			children = (
+				096755D22A5FDDC600A1E691 /* DataModel */,
+				096755D42A5FDDD800A1E691 /* ViewController */,
+				096755D32A5FDDCE00A1E691 /* View */,
+			);
+			path = MyReview;
+			sourceTree = "<group>";
+		};
+		096755D22A5FDDC600A1E691 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				096755D72A5FE0BF00A1E691 /* MyReviewListDataModel.swift */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
+		096755D32A5FDDCE00A1E691 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		096755D42A5FDDD800A1E691 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				096755D92A6012DA00A1E691 /* MyReviewListViewController.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		09C0A4EF2A5BEBB800691FFD /* TeamMember */ = {
@@ -642,6 +683,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				096755DA2A6012DA00A1E691 /* MyReviewListViewController.swift in Sources */,
 				03E6D2742A5333A500F4453C /* UILabel+.swift in Sources */,
 				583117A32A5B71A00099B517 /* IndivisualDashboardViewController.swift in Sources */,
 				03E6D2722A53339000F4453C /* UIImageView+.swift in Sources */,
@@ -658,6 +700,7 @@
 				03E6D2662A53333500F4453C /* UIView+.swift in Sources */,
 				583117AA2A5BE2D90099B517 /* HomeSegmentedView.swift in Sources */,
 				03E6D25C2A5331FF00F4453C /* GeneralResponse.swift in Sources */,
+				096755DC2A6015CB00A1E691 /* MyProjectTableHeaderView.swift in Sources */,
 				03E6D1E52A53219600F4453C /* AppDelegate.swift in Sources */,
 				03E6D2602A53322300F4453C /* URLConst.swift in Sources */,
 				03B004A92A556C7400E71CA7 /* UIWindow+.swift in Sources */,
@@ -675,6 +718,7 @@
 				03E6D2282A532AB900F4453C /* BaseViewController.swift in Sources */,
 				096755CB2A5E9AF500A1E691 /* MyProjectTableViewCell.swift in Sources */,
 				03E6D25A2A5331ED00F4453C /* APIConst.swift in Sources */,
+				096755D82A5FE0BF00A1E691 /* MyReviewListDataModel.swift in Sources */,
 				03E6D2642A53330E00F4453C /* NSObject+.swift in Sources */,
 				03E6D23E2A532C1800F4453C /* FontLevel.swift in Sources */,
 				03734EB82A59A0BD00B401D6 /* TabBarController.swift in Sources */,
