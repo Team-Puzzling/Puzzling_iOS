@@ -2,7 +2,7 @@
 //  MyProjectDataModel.swift
 //  Puzzling
 //
-//  Created by Minjoo Kim on 2023/07/12.
+//  Created by Minjoo Kim on 2023/07/14.
 //
 
 struct MyProjectDataModel {

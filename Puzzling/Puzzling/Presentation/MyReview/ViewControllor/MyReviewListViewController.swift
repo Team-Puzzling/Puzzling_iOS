@@ -2,7 +2,7 @@
 //  MyReviewListViewController.swift
 //  Puzzling
 //
-//  Created by Minjoo Kim on 2023/07/13.
+//  Created by Minjoo Kim on 2023/07/14.
 //
 
 import UIKit

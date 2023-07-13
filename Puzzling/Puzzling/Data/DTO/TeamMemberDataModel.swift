@@ -1,8 +1,8 @@
 //
-//  WhoWriteReviewsDataModel.swift
+//  TeamMemberDataModel.swift
 //  Puzzling
 //
-//  Created by Minjoo Kim on 2023/07/10.
+//  Created by Minjoo Kim on 2023/07/14.
 //
 
 struct TeamMemberDataModel {

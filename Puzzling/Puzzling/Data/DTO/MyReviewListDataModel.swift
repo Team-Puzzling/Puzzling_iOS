@@ -2,9 +2,8 @@
 //  MyReviewListDataModel.swift
 //  Puzzling
 //
-//  Created by Minjoo Kim on 2023/07/13.
+//  Created by Minjoo Kim on 2023/07/14.
 //
-
 
 struct MyReviewListDataModel {
     let reviewId: Int
