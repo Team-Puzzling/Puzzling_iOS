@@ -27,7 +27,8 @@ extension String {
         return CGSize(width: size.width + buffer, height: size.height)
     }
     
-    func toDate() -> Date? { //"yyyy-MM-dd HH:mm:ss"
+    /// "yyyy-MM-dd" 형식의 String을 Date 형식으로 리턴합니다.
+    func toDate() -> Date? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         dateFormatter.timeZone = TimeZone(identifier: "KST")
