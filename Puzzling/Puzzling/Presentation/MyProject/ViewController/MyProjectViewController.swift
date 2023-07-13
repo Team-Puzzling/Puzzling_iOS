@@ -12,21 +12,21 @@ import Then
 
 final class MyProjectViewController: UIViewController {
     
-    private let nickname: String = "공듀"
-    
-    private let myProjectTableView = UITableView()
-    private let nicknameLabel = UILabel()
-    
+    private let myProjectTableView = UITableView(frame: .zero, style: .grouped)
     private let MyProjectData = MyProjectDataModel.dummy()
     
     // MARK: - Lifecycle
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNavigationBar()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setNavigationBar()
         setUI()
         setLayout()
-        setTarget()
+        setAddTarget()
         setDelegate()
         setRegister()
     }
@@ -36,25 +36,17 @@ extension MyProjectViewController {
     
     private func setUI() {
         view.backgroundColor = .white000
-        nicknameLabel.do {
-            $0.text = "\(nickname)님 안녕하세요 :)"
-            $0.font = .fontGuide(.heading2_kor)
-        }
         myProjectTableView.do {
             $0.separatorStyle = .none
+            $0.backgroundColor = .clear
         }
     }
     
     private func setLayout() {
-        view.addSubviews(nicknameLabel, myProjectTableView)
-        
-        nicknameLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(32)
-            $0.leading.equalToSuperview().inset(24)
-        }
-        
+        view.addSubviews(myProjectTableView)
+
         myProjectTableView.snp.makeConstraints {
-            $0.top.equalTo(nicknameLabel.snp.bottom).offset(24)
+            $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.leading.trailing.equalToSuperview().inset(16)
             $0.bottom.equalToSuperview()
         }
@@ -67,6 +59,7 @@ extension MyProjectViewController {
     
     private func setRegister() {
         myProjectTableView.registerCell(MyProjectTableViewCell.self)
+        myProjectTableView.registerReusableView(MyProjectTableHeaderView.self)
     }
     
     private func setNavigationBar() {
@@ -94,7 +87,7 @@ extension MyProjectViewController {
         }
     }
     
-    private func setTarget() { }
+    private func setAddTarget() { }
 }
 
 extension MyProjectViewController {
@@ -117,5 +110,14 @@ extension MyProjectViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 128
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = tableView.dequeueReusableView(type: MyProjectTableHeaderView.self)
+        return view
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 82
     }
 }
