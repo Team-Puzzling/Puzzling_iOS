@@ -13,8 +13,8 @@ import Then
 final class MyProjectTableViewCell: UITableViewCell {
     
     private let view = UIView()
-    private lazy var projectNameLabel = UILabel()
-    private lazy var durationLabel = UILabel()
+    private let projectNameLabel = UILabel()
+    private let durationLabel = UILabel()
     private let dashboardLabel = UIButton()
     private let myReviewLabel = UIButton()
     
@@ -110,6 +110,8 @@ extension MyProjectTableViewCell {
         let dateFormatter = DateFormatter()
         var daysCount:Int = 0
         dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.locale = Locale(identifier: "ko_kr")
+        dateFormatter.timeZone = TimeZone(identifier: "KST")
         guard let startDate = dateFormatter.date(from: date) else { return 0 }
         daysCount = days(from: startDate)
         return daysCount
@@ -118,6 +120,7 @@ extension MyProjectTableViewCell {
     private func days(from date: Date) -> Int {
         let calendar = Calendar.current
         let currentDate = Date()
+        print(Date())
         return (calendar.dateComponents([.day], from: date, to: currentDate).day ?? 0) + 1
     }
 }

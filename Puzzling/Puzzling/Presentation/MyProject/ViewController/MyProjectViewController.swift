@@ -17,12 +17,16 @@ final class MyProjectViewController: UIViewController {
     
     // MARK: - Lifecycle
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNavigationBar()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setNavigationBar()
         setUI()
         setLayout()
-        setTarget()
+        setAddTarget()
         setDelegate()
         setRegister()
     }
@@ -83,7 +87,7 @@ extension MyProjectViewController {
         }
     }
     
-    private func setTarget() { }
+    private func setAddTarget() { }
 }
 
 extension MyProjectViewController {

@@ -11,7 +11,9 @@ import SnapKit
 import Then
 
 final class MyReviewListViewController: UIViewController {
-
+    
+    private let currentProject = "Piickleeeeeeeeee"
+    
     private let myReviewListCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
     private let myReviewListData = MyReviewListDataModel.dummy()
@@ -23,7 +25,6 @@ final class MyReviewListViewController: UIViewController {
         setNavigationBar()
         setUI()
         setLayout()
-        setTarget()
         setDelegate()
         setRegister()
     }
@@ -50,7 +51,7 @@ extension MyReviewListViewController {
             $0.bottom.equalToSuperview()
         }
     }
-
+    
     private func setDelegate() {
         myReviewListCollectionView.delegate = self
         myReviewListCollectionView.dataSource = self
@@ -58,14 +59,15 @@ extension MyReviewListViewController {
     
     private func setRegister() {
         myReviewListCollectionView.registerCell(MyReviewListCollectionViewCell.self)
+        myReviewListCollectionView.registerHeader(ProjectNameCollecionReusableView.self)
     }
     
     private func setNavigationBar() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: Image.notification,
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: Image.leftIcon,
             style: .plain,
             target: self,
-            action: #selector(notificationButtonTapped)
+            action: #selector(leftChevronButtonTapped)
         )
         
         navigationItem.rightBarButtonItem?.tintColor = .gray500
@@ -84,13 +86,13 @@ extension MyReviewListViewController {
             navigationItem.titleView = titleLabel
         }
     }
-    
-    private func setTarget() { }
 }
 
 extension MyReviewListViewController {
     @objc
-    private func notificationButtonTapped() { }
+    private func leftChevronButtonTapped() {
+        self.navigationController?.popViewController(animated: true)
+    }
 }
 
 extension MyReviewListViewController: UICollectionViewDelegate { }
@@ -105,6 +107,12 @@ extension MyReviewListViewController: UICollectionViewDataSource {
         cell.setDataBind(myReviewListData[indexPath.row])
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let view = myReviewListCollectionView.dequeueReusableCell(kind: UICollectionView.elementKindSectionHeader , type: ProjectNameCollecionReusableView.self, indexPath: indexPath)
+        view.setDataBind(projectName: currentProject)
+        return view
+    }
 }
 
 extension MyReviewListViewController: UICollectionViewDelegateFlowLayout {
@@ -114,5 +122,9 @@ extension MyReviewListViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 16, bottom: 12, right: 16)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: UIScreen.main.bounds.width-32, height: 82)
     }
 }

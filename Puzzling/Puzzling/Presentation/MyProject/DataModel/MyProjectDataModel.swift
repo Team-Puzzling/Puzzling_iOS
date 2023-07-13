@@ -13,7 +13,8 @@ struct MyProjectDataModel {
 
 extension MyProjectDataModel {
     static func dummy() -> [MyProjectDataModel] {
-        return [MyProjectDataModel(projectName: "Piickle", startDate: "2023-07-03", projectId: 2),
-                MyProjectDataModel(projectName: "HARA", startDate: "2023-07-28", projectId: 8)]
+        return [MyProjectDataModel(projectName: "Piickle", startDate: "2023-07-13", projectId: 2),
+                MyProjectDataModel(projectName: "HARA", startDate: "2023-07-14", projectId: 8),
+                MyProjectDataModel(projectName: "HARA", startDate: "2023-07-15", projectId: 8)]
     }
 }

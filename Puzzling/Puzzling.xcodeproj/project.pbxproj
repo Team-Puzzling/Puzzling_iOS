@@ -69,6 +69,8 @@
 		096755DA2A6012DA00A1E691 /* MyReviewListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755D92A6012DA00A1E691 /* MyReviewListViewController.swift */; };
 		096755DC2A6015CB00A1E691 /* MyProjectTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755DB2A6015CB00A1E691 /* MyProjectTableHeaderView.swift */; };
 		096755DE2A60250600A1E691 /* MyReviewListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755DD2A60250600A1E691 /* MyReviewListCollectionViewCell.swift */; };
+		096755E02A6042E900A1E691 /* ProjectNameCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755DF2A6042E900A1E691 /* ProjectNameCollectionReusableView.swift */; };
+		096755E42A60589C00A1E691 /* ProjectListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755E32A60589C00A1E691 /* ProjectListViewController.swift */; };
 		09C0A4F32A5BEC1600691FFD /* TeamMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C0A4F22A5BEC1600691FFD /* TeamMemberViewController.swift */; };
 		09C0A4F52A5BEE4C00691FFD /* TeamMemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C0A4F42A5BEE4C00691FFD /* TeamMemberView.swift */; };
 		09C0A4F72A5C305200691FFD /* TeamMemberDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C0A4F62A5C305200691FFD /* TeamMemberDataModel.swift */; };
@@ -136,6 +138,8 @@
 		096755D92A6012DA00A1E691 /* MyReviewListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReviewListViewController.swift; sourceTree = "<group>"; };
 		096755DB2A6015CB00A1E691 /* MyProjectTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProjectTableHeaderView.swift; sourceTree = "<group>"; };
 		096755DD2A60250600A1E691 /* MyReviewListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReviewListCollectionViewCell.swift; sourceTree = "<group>"; };
+		096755DF2A6042E900A1E691 /* ProjectNameCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectNameCollectionReusableView.swift; sourceTree = "<group>"; };
+		096755E32A60589C00A1E691 /* ProjectListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListViewController.swift; sourceTree = "<group>"; };
 		09C0A4F22A5BEC1600691FFD /* TeamMemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberViewController.swift; sourceTree = "<group>"; };
 		09C0A4F42A5BEE4C00691FFD /* TeamMemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberView.swift; sourceTree = "<group>"; };
 		09C0A4F62A5C305200691FFD /* TeamMemberDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberDataModel.swift; sourceTree = "<group>"; };
@@ -496,6 +500,7 @@
 			isa = PBXGroup;
 			children = (
 				096755DD2A60250600A1E691 /* MyReviewListCollectionViewCell.swift */,
+				096755DF2A6042E900A1E691 /* ProjectNameCollectionReusableView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -504,6 +509,7 @@
 			isa = PBXGroup;
 			children = (
 				096755D92A6012DA00A1E691 /* MyReviewListViewController.swift */,
+				096755E32A60589C00A1E691 /* ProjectListViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -706,6 +712,7 @@
 				096755DC2A6015CB00A1E691 /* MyProjectTableHeaderView.swift in Sources */,
 				03E6D1E52A53219600F4453C /* AppDelegate.swift in Sources */,
 				03E6D2602A53322300F4453C /* URLConst.swift in Sources */,
+				096755E42A60589C00A1E691 /* ProjectListViewController.swift in Sources */,
 				03B004A92A556C7400E71CA7 /* UIWindow+.swift in Sources */,
 				03E6D2442A532C6300F4453C /* Literals.swift in Sources */,
 				03E6D2682A53334A00F4453C /* UITextField+.swift in Sources */,
@@ -725,6 +732,7 @@
 				03E6D2642A53330E00F4453C /* NSObject+.swift in Sources */,
 				03E6D23E2A532C1800F4453C /* FontLevel.swift in Sources */,
 				03734EB82A59A0BD00B401D6 /* TabBarController.swift in Sources */,
+				096755E02A6042E900A1E691 /* ProjectNameCollectionReusableView.swift in Sources */,
 				09C0A4F52A5BEE4C00691FFD /* TeamMemberView.swift in Sources */,
 				03E6D25E2A53321000F4453C /* NetworkLoggerPlugin.swift in Sources */,
 				03E6D2622A5332F700F4453C /* Encodable+.swift in Sources */,
