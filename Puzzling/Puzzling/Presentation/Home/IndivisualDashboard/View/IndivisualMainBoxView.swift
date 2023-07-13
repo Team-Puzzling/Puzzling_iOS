@@ -12,11 +12,23 @@ import Then
 
 final class IndivisualMainBoxView: UIView {
     
+    private var userName: String = "User" {
+        didSet {
+            userNameLabel.text = "\(userName)님이 모은 퍼즐"
+        }
+    }
+    
+    private var piecesCount: Int = 0 {
+        didSet {
+            piecesCountLabel.text = "\(piecesCount) 조각"
+        }
+    }
+    
     private let userNameLabel = UILabel()
-    private let pieceCountLabel = UILabel()
-    private let baseCountLabel = UILabel()
+    private let piecesCountLabel = UILabel()
+    private let maxCountLabel = UILabel()
     private let ToBeCollectionView = UIView()
-    private let cardView = IndivisualCardButtonView()
+    private let cardButtonView = IndivisualCardButtonView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -43,14 +55,65 @@ extension IndivisualMainBoxView {
     
     private func setUI() {
         self.backgroundColor = .blue50
+        
+        userNameLabel.do {
+            $0.font = .fontGuide(.heading4_kor)
+            $0.textColor = .black000
+        }
+        
+        piecesCountLabel.do {
+            $0.font = .fontGuide(.heading4_kor)
+            $0.textColor = .blue400
+            $0.textAlignment = .right
+        }
+        
+        maxCountLabel.do {
+            $0.text = "/15"
+            $0.font = .fontGuide(.detail1_regular_kor)
+            $0.textColor = .gray500
+        }
+        
+        ToBeCollectionView.do {
+            $0.backgroundColor = .blue100
+        }
     }
     
     private func setLayout() {
+        self.addSubviews(userNameLabel, maxCountLabel, piecesCountLabel, ToBeCollectionView, cardButtonView)
         
+        userNameLabel.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(20)
+            $0.top.equalToSuperview().inset(24)
+        }
+        
+        maxCountLabel.snp.makeConstraints {
+            $0.trailing.equalToSuperview().inset(29)
+            $0.top.equalToSuperview().inset(30)
+        }
+        
+        piecesCountLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(24)
+            $0.trailing.equalTo(maxCountLabel.snp.leading).offset(-6)
+        }
+        
+        ToBeCollectionView.snp.makeConstraints {
+            $0.horizontalEdges.equalToSuperview()
+            $0.height.equalTo(90)
+            $0.top.equalTo(userNameLabel.snp.bottom).offset(10)
+        }
+        
+        cardButtonView.snp.makeConstraints {
+            $0.horizontalEdges.equalToSuperview().inset(16)
+            $0.bottom.equalToSuperview().inset(24)
+            $0.height.equalToSuperview().dividedBy(3.78)
+        }
     }
 }
 
 extension IndivisualMainBoxView {
-    
+    func passPuzzleData(userName: String, piecesCount: Int) {
+        self.userName = userName
+        self.piecesCount = piecesCount
+    }
 }
 
