@@ -11,13 +11,10 @@ import SnapKit
 import Then
 
 final class MyReviewListViewController: UIViewController {
+
+    private let myReviewListCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
-    private let nickname: String = "공듀"
-    
-    private let myProjectTableView = UITableView()
-    private let nicknameLabel = UILabel()
-    
-    private let MyProjectData = MyProjectDataModel.dummy()
+    private let myReviewListData = MyReviewListDataModel.dummy()
     
     // MARK: - Lifecycle
     
@@ -36,37 +33,31 @@ extension MyReviewListViewController {
     
     private func setUI() {
         view.backgroundColor = .white000
-        nicknameLabel.do {
-            $0.text = "\(nickname)님 안녕하세요 :)"
-            $0.font = .fontGuide(.heading2_kor)
-        }
-        myProjectTableView.do {
-            $0.separatorStyle = .none
+        
+        myReviewListCollectionView.do {
+            $0.contentInsetAdjustmentBehavior = .never
+            $0.collectionViewLayout = UICollectionViewFlowLayout()
+            $0.showsVerticalScrollIndicator = false
         }
     }
     
     private func setLayout() {
-        view.addSubviews(nicknameLabel, myProjectTableView)
+        view.addSubviews(myReviewListCollectionView)
         
-        nicknameLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(32)
-            $0.leading.equalToSuperview().inset(24)
-        }
-        
-        myProjectTableView.snp.makeConstraints {
-            $0.top.equalTo(nicknameLabel.snp.bottom).offset(24)
+        myReviewListCollectionView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.leading.trailing.equalToSuperview().inset(16)
             $0.bottom.equalToSuperview()
         }
     }
-    
+
     private func setDelegate() {
-        myProjectTableView.delegate = self
-        myProjectTableView.dataSource = self
+        myReviewListCollectionView.delegate = self
+        myReviewListCollectionView.dataSource = self
     }
     
     private func setRegister() {
-        myProjectTableView.registerCell(MyProjectTableViewCell.self)
+        myReviewListCollectionView.registerCell(MyReviewListCollectionViewCell.self)
     }
     
     private func setNavigationBar() {
@@ -102,20 +93,26 @@ extension MyReviewListViewController {
     private func notificationButtonTapped() { }
 }
 
-extension MyReviewListViewController: UITableViewDelegate { }
+extension MyReviewListViewController: UICollectionViewDelegate { }
 
-extension MyReviewListViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return MyProjectData.count
+extension MyReviewListViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        myReviewListData.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueCell(type: MyProjectTableViewCell.self, indexPath: indexPath)
-        cell.setDataBind(MyProjectData[indexPath.row])
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = myReviewListCollectionView.dequeueCell(type: MyReviewListCollectionViewCell.self, indexPath: indexPath)
+        cell.setDataBind(myReviewListData[indexPath.row])
         return cell
     }
+}
+
+extension MyReviewListViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: UIScreen.main.bounds.width-32, height: 80)
+    }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 128
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 16, bottom: 12, right: 16)
     }
 }

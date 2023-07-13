@@ -68,6 +68,7 @@
 		096755D82A5FE0BF00A1E691 /* MyReviewListDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755D72A5FE0BF00A1E691 /* MyReviewListDataModel.swift */; };
 		096755DA2A6012DA00A1E691 /* MyReviewListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755D92A6012DA00A1E691 /* MyReviewListViewController.swift */; };
 		096755DC2A6015CB00A1E691 /* MyProjectTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755DB2A6015CB00A1E691 /* MyProjectTableHeaderView.swift */; };
+		096755DE2A60250600A1E691 /* MyReviewListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755DD2A60250600A1E691 /* MyReviewListCollectionViewCell.swift */; };
 		09C0A4F32A5BEC1600691FFD /* TeamMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C0A4F22A5BEC1600691FFD /* TeamMemberViewController.swift */; };
 		09C0A4F52A5BEE4C00691FFD /* TeamMemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C0A4F42A5BEE4C00691FFD /* TeamMemberView.swift */; };
 		09C0A4F72A5C305200691FFD /* TeamMemberDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C0A4F62A5C305200691FFD /* TeamMemberDataModel.swift */; };
@@ -134,6 +135,7 @@
 		096755D72A5FE0BF00A1E691 /* MyReviewListDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReviewListDataModel.swift; sourceTree = "<group>"; };
 		096755D92A6012DA00A1E691 /* MyReviewListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReviewListViewController.swift; sourceTree = "<group>"; };
 		096755DB2A6015CB00A1E691 /* MyProjectTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProjectTableHeaderView.swift; sourceTree = "<group>"; };
+		096755DD2A60250600A1E691 /* MyReviewListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReviewListCollectionViewCell.swift; sourceTree = "<group>"; };
 		09C0A4F22A5BEC1600691FFD /* TeamMemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberViewController.swift; sourceTree = "<group>"; };
 		09C0A4F42A5BEE4C00691FFD /* TeamMemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberView.swift; sourceTree = "<group>"; };
 		09C0A4F62A5C305200691FFD /* TeamMemberDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberDataModel.swift; sourceTree = "<group>"; };
@@ -493,6 +495,7 @@
 		096755D32A5FDDCE00A1E691 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				096755DD2A60250600A1E691 /* MyReviewListCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -729,6 +732,7 @@
 				096755C62A5E970500A1E691 /* MyProjectViewController.swift in Sources */,
 				03FFD2CA2A5B15BA00A3B70D /* UIFont+.swift in Sources */,
 				03E6D2072A5326DD00F4453C /* APIService.swift in Sources */,
+				096755DE2A60250600A1E691 /* MyReviewListCollectionViewCell.swift in Sources */,
 				03E6D27A2A5333C900F4453C /* UIImage+.swift in Sources */,
 				03734EBF2A59A26800B401D6 /* MyPageViewController.swift in Sources */,
 				583117A82A5BE1490099B517 /* HomeTitleBarView.swift in Sources */,

@@ -36,7 +36,6 @@ extension MyProjectTableViewCell {
     private func setUI() {
         
         separatorInset.left = 0
-        
         selectionStyle = .none
         
         view.do {
