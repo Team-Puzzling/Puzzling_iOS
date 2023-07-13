@@ -25,6 +25,14 @@ public enum Image {
     public static let notificationBell = UIImage(named: "notificationBell")!
     public static let warning = UIImage(named: "warning")!
     public static let textFieldXMark = UIImage(named: "textFieldxMark")!
+    static let downIcon = UIImage(systemName: "chevron.down")?
+        .withTintColor(.gray500, renderingMode: .alwaysOriginal)
+    static let upIcon = UIImage(systemName: "chevron.up")?
+        .withTintColor(.gray500, renderingMode: .alwaysOriginal)
+    static let leftIcon = UIImage(systemName: "chevron.left")?
+        .withTintColor(.label, renderingMode: .alwaysOriginal)
+    static let rightIcon = UIImage(systemName: "chevron.right")?
+        .withTintColor(.label, renderingMode: .alwaysOriginal)
     
     // MARK: - Rank
     
