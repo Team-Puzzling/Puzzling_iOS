@@ -17,8 +17,8 @@ final class MyProjectTableViewCell: UITableViewCell {
     private let view = UIView()
     private lazy var projectNameLabel = UILabel()
     private lazy var durationLabel = UILabel()
-    private let dashboardLabel = UILabel()
-    private let myReviewLabel = UILabel()
+    private let dashboardLabel = UIButton()
+    private let myReviewLabel = UIButton()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -50,24 +50,21 @@ final class MyProjectTableViewCell: UITableViewCell {
         
         durationLabel.do {
             $0.font = .fontGuide(.detail1_regular_kor)
-            $0.text = "헤헤"
         }
         
         dashboardLabel.do {
-            $0.font = .fontGuide(.body3_bold_kor)
-            $0.textColor = .black
-            $0.text = "대시보드 보기"
+            $0.setTitle("대시보드 보기", for: .normal)
+            $0.setTitleColor(.black000, for: .normal)
+            $0.titleLabel?.font = .fontGuide(.body3_bold_kor)
             $0.makeRounded(radius: 16)
-            $0.textAlignment = .center
             $0.backgroundColor = .white000
         }
         
         myReviewLabel.do {
-            $0.font = .fontGuide(.body3_bold_kor)
-            $0.textColor = .black
-            $0.text = "내 회고 모음"
+            $0.setTitle("내 회고 모음", for: .normal)
+            $0.setTitleColor(.black000, for: .normal)
+            $0.titleLabel?.font = .fontGuide(.body3_bold_kor)
             $0.makeRounded(radius: 16)
-            $0.textAlignment = .center
             $0.backgroundColor = .white000
         }
     }
