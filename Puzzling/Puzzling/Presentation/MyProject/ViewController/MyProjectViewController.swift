@@ -7,7 +7,6 @@
 
 import UIKit
 
-import FSCalendar
 import SnapKit
 import Then
 
@@ -16,10 +15,9 @@ final class MyProjectViewController: UIViewController {
     private let nickname: String = "공듀"
     
     private let myProjectTableView = UITableView()
-    
     private let nicknameLabel = UILabel()
     
-    public let MyProjectData = MyProjectDataModel.dummy()
+    private let MyProjectData = MyProjectDataModel.dummy()
     
     // MARK: - Lifecycle
     
@@ -30,10 +28,13 @@ final class MyProjectViewController: UIViewController {
         setLayout()
         setTarget()
         setDelegate()
-        registerCell()
+        setRegister()
     }
+}
+
+extension MyProjectViewController {
     
-    func setUI() {
+    private func setUI() {
         view.backgroundColor = .white000
         nicknameLabel.do {
             $0.text = "\(nickname)님 안녕하세요 :)"
@@ -44,7 +45,7 @@ final class MyProjectViewController: UIViewController {
         }
     }
     
-    func setLayout() {
+    private func setLayout() {
         view.addSubviews(nicknameLabel, myProjectTableView)
         
         nicknameLabel.snp.makeConstraints {
@@ -59,13 +60,13 @@ final class MyProjectViewController: UIViewController {
         }
     }
     
-    func setDelegate() {
+    private func setDelegate() {
         myProjectTableView.delegate = self
         myProjectTableView.dataSource = self
     }
     
-    func registerCell() {
-        myProjectTableView.register(MyProjectTableViewCell.self, forCellReuseIdentifier:  MyProjectTableViewCell.identifier)
+    private func setRegister() {
+        myProjectTableView.registerCell(MyProjectTableViewCell.self)
     }
     
     private func setNavigationBar() {
@@ -77,8 +78,6 @@ final class MyProjectViewController: UIViewController {
         )
         
         navigationItem.rightBarButtonItem?.tintColor = .gray500
-        let appearance = UINavigationBarAppearance()
-        
         
         let title = "내 프로젝트"
         let attributes: [NSAttributedString.Key: Any] = [
@@ -95,29 +94,24 @@ final class MyProjectViewController: UIViewController {
         }
     }
     
-    @objc
-    private func notificationButtonTapped() {
-    }
-    
-    private func setTarget() {
-        
-    }
+    private func setTarget() { }
 }
 
-extension MyProjectViewController: UITableViewDelegate {}
+extension MyProjectViewController {
+    @objc
+    private func notificationButtonTapped() { }
+}
 
+extension MyProjectViewController: UITableViewDelegate { }
 
 extension MyProjectViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(MyProjectData.count)
         return MyProjectData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print(#function)
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: MyProjectTableViewCell.identifier, for: indexPath) as? MyProjectTableViewCell else { return UITableViewCell() }
-        cell.configureCell(MyProjectData[indexPath.row])
-        cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 12, right: 0)
+        let cell = tableView.dequeueCell(type: MyProjectTableViewCell.self, indexPath: indexPath)
+        cell.setDataBind(MyProjectData[indexPath.row])
         return cell
     }
     

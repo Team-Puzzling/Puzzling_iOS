@@ -12,8 +12,6 @@ import Then
 
 final class MyProjectTableViewCell: UITableViewCell {
     
-    static let identifier = "MyProjectTableViewCell"
-    
     private let view = UIView()
     private lazy var projectNameLabel = UILabel()
     private lazy var durationLabel = UILabel()
@@ -31,8 +29,11 @@ final class MyProjectTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
+}
+
+extension MyProjectTableViewCell {
     
-    func setUI() {
+    private func setUI() {
         
         separatorInset.left = 0
         
@@ -69,8 +70,7 @@ final class MyProjectTableViewCell: UITableViewCell {
         }
     }
     
-    func setLayout() {
-        
+    private func setLayout() {
         contentView.addSubview(view)
         view.addSubviews(projectNameLabel, durationLabel, dashboardLabel, myReviewLabel)
         
@@ -104,10 +104,28 @@ final class MyProjectTableViewCell: UITableViewCell {
             $0.bottom.equalToSuperview().inset(12)
         }
     }
+}
+
+extension MyProjectTableViewCell {
+    private func calculateDays(date: String) -> Int {
+        let dateFormatter = DateFormatter()
+        var daysCount:Int = 0
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        guard let startDate = dateFormatter.date(from: date) else { return 0 }
+        daysCount = days(from: startDate)
+        return daysCount
+    }
     
-    func configureCell(_ data: MyProjectDataModel) {
+    private func days(from date: Date) -> Int {
+        let calendar = Calendar.current
+        let currentDate = Date()
+        return (calendar.dateComponents([.day], from: date, to: currentDate).day ?? 0) + 1
+    }
+}
+
+extension MyProjectTableViewCell {
+    func setDataBind(_ data: MyProjectDataModel) {
         projectNameLabel.text  = data.projectName
-        guard let startdate = data.startDate.toDate() else { return }
         let duration:Int = calculateDays(date: data.startDate)
         if (duration < 0) {
             durationLabel.text = "D - \(duration * (-1))"
@@ -115,23 +133,5 @@ final class MyProjectTableViewCell: UITableViewCell {
         else {
             durationLabel.text = "D + \(duration)"
         }
-    }
-    
-    let calendar = Calendar.current
-    let currentDate = Date()
-    let dateFormatter = DateFormatter()
-    var daysCount:Int = 0
-    
-    func calculateDays(date: String) -> Int {
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        guard let startDate = dateFormatter.date(from: date) else { return 0 }
-        daysCount = days(from: startDate)
-        return daysCount
-    }
-    
-    func days(from date: Date) -> Int {
-        let calendar = Calendar.current
-        let currentDate = Date()
-        return (calendar.dateComponents([.day], from: date, to: currentDate).day ?? 0) + 1
     }
 }
