@@ -153,7 +153,7 @@ extension InputContentView {
         inputTextField.placeholder = textFieldPlaceholder(textField: type)
     }
     
-    private func textFieldBorderSetting(textField: UITextField) {
+    private func activeTextFieldBorderSetting(textField: UITextField) {
         
         textField.layer.borderColor = UIColor.blue200.cgColor
         textField.layer.borderWidth = 2
@@ -191,8 +191,7 @@ extension InputContentView {
 extension InputContentView: UITextFieldDelegate {
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        textFieldBorderSetting(textField: textField)
-//        updateCharacterCount()
+        activeTextFieldBorderSetting(textField: textField)
         return true
     }
     
@@ -202,7 +201,6 @@ extension InputContentView: UITextFieldDelegate {
         if ((textField.text?.isEmpty) != nil) {
             textField.placeholder = textFieldPlaceholder(textField: activeTextField ?? .name)
         }
-//        updateCharacterCount()
         removeTextButton.isHidden = true
         return true
     }
@@ -212,11 +210,9 @@ extension InputContentView: UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        updateCharacterCount()
         let currentText = textField.text ?? ""
         guard let stringRange = Range(range, in: currentText) else { return false }
         let changedText = currentText.replacingCharacters(in: stringRange, with: string)
-//        let newLength = text.count + string.count - range.length
         let text = changedText.count
         switch activeTextField {
         case .name:
