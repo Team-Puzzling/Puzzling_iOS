@@ -27,16 +27,9 @@ extension String {
         return CGSize(width: size.width + buffer, height: size.height)
     }
     
-    func isOnlyKorEng() -> Bool{
-        do{
-            let regex = try NSRegularExpression(pattern: "^[a-zA-Z가-힣ㄱ-ㅎㅏ-ㅣ\\s]$", options: .caseInsensitive)
-            if let _ = regex.firstMatch(in: self, options: NSRegularExpression.MatchingOptions.reportCompletion, range: NSMakeRange(0, self.count)){
-                return true
-            }
-        }catch{
-            print(error.localizedDescription)
-            return false
-        }
-        return false
+    func isOnlyKorEng() -> Bool {
+        let pattern = "^[0-9a-zA-Z가-힣ㄱ-ㅎㅏ-ㅣ\\s]{0,}$"
+        guard self.range(of: pattern, options: .regularExpression) != nil else { return false }
+        return true
     }
 }

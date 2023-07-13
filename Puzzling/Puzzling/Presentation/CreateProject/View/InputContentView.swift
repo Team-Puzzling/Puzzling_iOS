@@ -25,7 +25,10 @@ final class InputContentView: UIView {
     private let inputTextField = UITextField()
     private let countLabel = UILabel()
     private let textFieldButtonView = UIView()
-    private let removeTextButton = UIButton()
+    private let textFieldButton = UIButton()
+    private let textFieldWarningView = UIView()
+    private let warningImageView = UIImageView()
+    private let warningLabel = UILabel()
     
     // MARK: - Properties
     
@@ -75,10 +78,22 @@ extension InputContentView {
             $0.textColor = .gray400
         }
         
-        removeTextButton.do {
+        textFieldButton.do {
             $0.setImage(Image.textFieldXMark, for: .normal)
             $0.isHidden = true
             $0.addTarget(self, action: #selector(removeTextButtonDidTap), for: .touchUpInside)
+        }
+        
+        warningImageView.do {
+            $0.image = Image.warning
+            $0.isHidden = true
+        }
+        
+        warningLabel.do {
+            $0.text = "특수문자, 이모지를 사용할 수 없어요."
+            $0.font = .fontGuide(.detail1_regular_kor)
+            $0.textColor = .red400
+            $0.isHidden = true
         }
     }
     
@@ -86,8 +101,8 @@ extension InputContentView {
     
     private func setLayout() {
         
-        textFieldButtonView.addSubview(removeTextButton)
-        addSubviews(titleLabel, inputTextField, countLabel)
+        textFieldButtonView.addSubview(textFieldButton)
+        addSubviews(titleLabel, inputTextField, countLabel, warningLabel)
         
         titleLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
@@ -105,14 +120,19 @@ extension InputContentView {
             $0.height.equalTo(22)
         }
         
-        removeTextButton.snp.makeConstraints {
+        textFieldButton.snp.makeConstraints {
             $0.leading.equalToSuperview()
             $0.width.height.equalTo(22)
         }
         
         countLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview()
+            $0.top.equalTo(inputTextField.snp.bottom).offset(5)
             $0.trailing.equalToSuperview().inset(8)
+        }
+        
+        warningLabel.snp.makeConstraints {
+            $0.top.equalTo(countLabel)
+            $0.leading.equalToSuperview().inset(8)
         }
     }
     
@@ -154,11 +174,21 @@ extension InputContentView {
     }
     
     private func activeTextFieldBorderSetting(textField: UITextField) {
-        
         textField.layer.borderColor = UIColor.blue200.cgColor
         textField.layer.borderWidth = 2
         textField.placeholder = .none
         textField.font = .fontGuide(.body2_bold_kor)
+        textFieldButton.setImage(Image.textFieldXMark, for: .normal)
+        textFieldButton.isEnabled = true
+        warningLabel.isHidden = true
+    }
+    
+    private func emojiLimitTextFieldBorderSetting(textField: UITextField) {
+        textField.layer.borderColor = UIColor.red200.cgColor
+        textFieldButton.isHidden = false
+        textFieldButton.setImage(Image.warning, for: .normal)
+        textFieldButton.isEnabled = false
+        warningLabel.isHidden = false
     }
     
     private func updateCharacterCount() {
@@ -175,6 +205,16 @@ extension InputContentView {
                 countLabel.text = "\(count)/50"
             default:
                 countLabel.text = ""
+            }
+        }
+    }
+    
+    private func textFieldStatus(textField: UITextField) {
+        if let text = textField.text {
+            if text.isOnlyKorEng() {
+                activeTextFieldBorderSetting(textField: textField)
+            } else {
+                emojiLimitTextFieldBorderSetting(textField: textField)
             }
         }
     }
@@ -196,47 +236,61 @@ extension InputContentView: UITextFieldDelegate {
     }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        textField.layer.borderColor = .none
-        textField.layer.borderWidth = 0
-        if ((textField.text?.isEmpty) != nil) {
-            textField.placeholder = textFieldPlaceholder(textField: activeTextField ?? .name)
+        if let text = textField.text {
+            if text.isOnlyKorEng() {
+                textField.layer.borderColor = .none
+                textField.layer.borderWidth = 0
+                textFieldButton.isHidden = true
+                warningLabel.isHidden = true
+            } else {
+                emojiLimitTextFieldBorderSetting(textField: textField)
+                textFieldButton.isHidden = false
+            }
+            
+            if text.isEmpty {
+                textField.layer.borderColor = .none
+                textField.layer.borderWidth = 0
+                textFieldButton.isHidden = true
+                warningLabel.isHidden = true
+                textField.placeholder = textFieldPlaceholder(textField: activeTextField ?? .name)
+            }
         }
-        removeTextButton.isHidden = true
         return true
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        removeTextButton.isHidden = textField.text?.isEmpty ?? true
+        textFieldButton.isHidden = textField.text?.isEmpty ?? true
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        textFieldStatus(textField: textField)
         let currentText = textField.text ?? ""
         guard let stringRange = Range(range, in: currentText) else { return false }
         let changedText = currentText.replacingCharacters(in: stringRange, with: string)
-        let text = changedText.count
+        let textCount = changedText.count
         switch activeTextField {
         case .name:
-            if (text <= 10) {
+            if (textCount <= 10) {
                 countLabel.text = "\(changedText.count)/10"
-                return text <= 10
+                return textCount <= 10
             }
         case .description:
-            if (text <= 50) {
+            if (textCount <= 50) {
                 countLabel.text = "\(changedText.count)/50"
-                return text <= 50
+                return textCount <= 50
             }
         case .role:
-            if (text <= 20) {
+            if (textCount <= 20) {
                 countLabel.text = "\(changedText.count)/20"
-                return text <= 20
+                return textCount <= 20
             }
         case .nickname:
-            if (text <= 50) {
+            if (textCount <= 50) {
                 countLabel.text = "\(changedText.count)/50"
-                return text <= 50
+                return textCount <= 50
             }
         default:
-            return changedText.count <= 0
+            return false
         }
         return false
     }
