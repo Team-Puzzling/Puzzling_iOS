@@ -23,7 +23,10 @@ final class IndivisualCardButtonView: UIView {
         }
     }
     
-    override init(frame: CGRect) {
+    private var cardTitle: String!
+    
+    init(frame: CGRect, cardTitle: String) {
+        self.cardTitle = cardTitle
         super.init(frame: frame)
         setDelegate()
         setUI()
@@ -43,9 +46,7 @@ final class IndivisualCardButtonView: UIView {
  
 extension IndivisualCardButtonView {
     
-    private func setDelegate() {
-        
-    }
+    private func setDelegate() {}
     
     private func setUI() {
         
@@ -55,7 +56,7 @@ extension IndivisualCardButtonView {
         }
         
         puzzleBoardLabel.do {
-            $0.text = "퍼즐판 보러가기"
+            $0.text = cardTitle
             $0.font = .fontGuide(.heading3_kor)
             $0.textColor = .black000
         }
@@ -101,28 +102,9 @@ extension IndivisualCardButtonView {
         }
     }
 }
-
-extension CALayer {
-    func applyCornerRadiusShadow(
-        color: UIColor = .black,
-        alpha: Float = 0.5,
-        x: CGFloat = 0,
-        y: CGFloat = 2,
-        blur: CGFloat = 4,
-        spread: CGFloat = 0,
-        cornerRadiusValue: CGFloat = 0)
-    {
-        cornerRadius = cornerRadiusValue
-        shadowColor = color.cgColor
-        shadowOpacity = alpha
-        shadowOffset = CGSize(width: x, height: y)
-        shadowRadius = blur / 2.0
-        if spread == 0 {
-            shadowPath = nil
-        } else {
-            let dx = -spread
-            let rect = bounds.insetBy(dx: dx, dy: dx)
-            shadowPath = UIBezierPath(rect: rect).cgPath
-        }
-    }
-}
+//
+//extension IndivisualCardButtonView {
+//    func passCardTitle(title: String) {
+//        self.puzzleBoardLabel.text = title
+//    }
+//}
