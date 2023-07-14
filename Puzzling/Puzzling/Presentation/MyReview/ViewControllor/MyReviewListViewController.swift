@@ -12,7 +12,7 @@ import Then
 
 final class MyReviewListViewController: UIViewController {
     
-    private var currentProject = "Piickleeeeeeeeee"
+    private var currentProject: String = "Project1"
     
     private let myReviewListCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
@@ -100,22 +100,26 @@ extension MyReviewListViewController {
 
 extension MyReviewListViewController: projectNameProtocol {
     func nameData(text: String) {
+        print(#function, text)
         currentProject = text
+        reloadHeaderView(text: text)
     }
 }
 
 extension MyReviewListViewController: buttonTappedProtocol {
-    func passButtonEvent() {
-        print(#function)
+    func passButtonEvent(projectName: String) {
+        print(#function, projectName)
+        self.currentProject = projectName
         
         let vc = ProjectListViewController()
+        vc.delegate = self
+        vc.setProjectName(projectName: projectName)
         vc.modalPresentationStyle = .pageSheet
         if let sheet = vc.sheetPresentationController {
             sheet.detents = [.medium()]
             sheet.prefersGrabberVisible = true
         }
         present(vc, animated: true, completion: nil)
-
     }
 }
 
@@ -133,16 +137,16 @@ extension MyReviewListViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let view = myReviewListCollectionView.dequeueReusableCell(kind: UICollectionView.elementKindSectionHeader , type: ProjectNameCollecionReusableView.self, indexPath: indexPath)
+        let view = myReviewListCollectionView.dequeueReusableCell(kind: UICollectionView.elementKindSectionHeader, type: ProjectNameCollecionReusableView.self, indexPath: indexPath)
         view.delegate = self
         view.setDataBind(projectName: currentProject)
         return view
     }
     
-    private func reloadHeaderView() {
+    private func reloadHeaderView(text: String) {
         guard let randomText = ["aaaaaa", "bbbbb", "ccccc"].randomElement() else {return}
         guard let headerView = myReviewListCollectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: IndexPath(item: 0, section: 0)) as? ProjectNameCollecionReusableView else { return }
-        headerView.setDataBind(projectName: randomText)
+        headerView.setDataBind(projectName: text)
 //        headerView.reloadInputViews()
     }
 }

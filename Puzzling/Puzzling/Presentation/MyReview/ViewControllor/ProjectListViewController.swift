@@ -15,12 +15,13 @@ protocol projectNameProtocol: AnyObject {
 
 final class ProjectListViewController: UIViewController {
     
+    private var projectName: String = "Project1"
     weak var delegate: projectNameProtocol?
     private let myProjectData = MyProjectDataModel.dummy()
     // MARK: - Properties
     
     private let modalView = UIView()
-    private let tableView = UITableView(frame: .zero, style: .grouped)
+    private let tableView = UITableView(frame: .zero, style: .plain)
     // MARK: - View Life Cycle
     
     override func viewDidLoad() {
@@ -38,12 +39,12 @@ final class ProjectListViewController: UIViewController {
         }
         
         modalView.do {
-            $0.backgroundColor = .blue100
+            $0.backgroundColor = .white000
         }
         
         tableView.do {
             $0.separatorStyle = .none
-            $0.backgroundColor = .white000
+            $0.backgroundColor = .background050
         }
     }
     
@@ -56,29 +57,17 @@ final class ProjectListViewController: UIViewController {
         
         tableView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(60)
-            $0.bottom.equalToSuperview().inset(98)
+            $0.bottom.equalToSuperview()
             $0.horizontalEdges.equalToSuperview()
         }
     }
-    
     
     private func setDelegate() {
         tableView.delegate = self
         tableView.dataSource = self
     }
     
-    
-//    func setModalView(height: CGFloat) {
-//        UIView.animate(withDuration: 0.3) {
-//            self.modalView.snp.remakeConstraints {
-//                $0.height.equalTo(height)
-//                $0.leading.trailing.bottom.equalToSuperview()
-//            }
-//            self.view.layoutIfNeeded()
-//        }
-//    }
     private func setRegister() {
-        print("🥲🥲🥲🥲🥲")
         tableView.registerCell(ProjectNameTableViewCell.self)
     }
     
@@ -87,21 +76,48 @@ final class ProjectListViewController: UIViewController {
     }
 }
 
-extension ProjectListViewController: UITableViewDelegate {}
+extension ProjectListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("\(indexPath.row) 눌럿음")
+        projectName = myProjectData[indexPath.row].projectName
+        print("\(projectName)?????????????????????")
+        self.delegate?.nameData(text: myProjectData[indexPath.row].projectName)
+        self.dismiss(animated: true)
+    }
+}
 
 extension ProjectListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(myProjectData.count)
         return myProjectData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueCell(type: ProjectNameTableViewCell.self, indexPath: indexPath)
-        cell.setDataBind(name: myProjectData[indexPath.row].projectName)
+//        print("\( myProjectData[indexPath.row].projectName)     \(projectName)")
+        let nameData = myProjectData[indexPath.row].projectName
+        cell.setDataBind(name: nameData)
+        print("----🧩----")
+        print(#function, projectName)
+        print(myProjectData[indexPath.row].projectName)
+        print(indexPath.row)
+        print("---------------------")
+        
+        if nameData == projectName {
+            print("🍀🍀🍀")
+            print(nameData)
+            print(indexPath.row)
+            cell.setPointLabel()
+        }
         return cell
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
+    }
+}
+
+extension ProjectListViewController {
+    func setProjectName(projectName: String) {
+        self.projectName = projectName
     }
 }

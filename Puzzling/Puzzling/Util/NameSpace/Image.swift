@@ -34,6 +34,7 @@ public enum Image {
         .withTintColor(.label, renderingMode: .alwaysOriginal)
     static let rightIcon = UIImage(systemName: "chevron.right")?
         .withTintColor(.label, renderingMode: .alwaysOriginal)
+    static let point = UIImage(named: "point")!
     
     // MARK: - Rank
     

@@ -11,7 +11,7 @@ import SnapKit
 import Then
 
 protocol buttonTappedProtocol: AnyObject {
-    func passButtonEvent()
+    func passButtonEvent(projectName: String)
 }
 
 final class ProjectNameCollecionReusableView: UICollectionReusableView {
@@ -88,7 +88,8 @@ extension ProjectNameCollecionReusableView {
     
     @objc
     func projectButtonTapped() {
-        self.delegate?.passButtonEvent()
+        guard let text = projectNameLabel.text else { return }
+        self.delegate?.passButtonEvent(projectName: text)
     }
 }
 
