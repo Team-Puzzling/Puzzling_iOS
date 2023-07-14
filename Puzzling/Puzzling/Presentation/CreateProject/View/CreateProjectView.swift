@@ -17,7 +17,7 @@ final class CreateProjectView: UIScrollView {
     private let createProjectStackView = UIStackView()
     private let nameView = InputContentView(type: .name)
     private let descriptionView = InputContentView(type: .description)
-    private let startDayView = StartDayView()
+    let startDayView = StartDayView()
     private let roleView = InputContentView(type: .role)
     private let nicknameView = InputContentView(type: .nickname)
     private let projectCycleView = UIView()

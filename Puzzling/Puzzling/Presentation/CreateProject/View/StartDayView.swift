@@ -10,6 +10,10 @@ import UIKit
 import SnapKit
 import Then
 
+protocol ProjectStartProtocol: AnyObject {
+    func presentToStartTimeVC()
+}
+
 final class StartDayView: UIView {
     
     // MARK: - UI Components
@@ -19,12 +23,17 @@ final class StartDayView: UIView {
     private let startDayLabel = UILabel()
     private let chevronDownButton = UIButton()
     
+    // MARK: - Properties
+    
+    weak var projectStartDelegate: ProjectStartProtocol?
+    
     // MARK: - View Life Cycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUI()
         setLayout()
+        setAddTarget()
     }
     
     required init?(coder: NSCoder) {
@@ -59,7 +68,6 @@ extension StartDayView {
         
         chevronDownButton.do {
             $0.setImage(Image.chevronDown, for: .normal)
-            $0.addTarget(self, action: #selector(chevronDownButtonDidTap), for: .touchUpInside)
         }
     }
     
@@ -95,8 +103,15 @@ extension StartDayView {
     
     // MARK: - Methods
     
+    private func setAddTarget() {
+        chevronDownButton.addTarget(self, action: #selector(chevronDownButtonDidTap), for: .touchUpInside)
+    }
+    
+    // MARK: - @objc Methods
+    
     @objc
     private func chevronDownButtonDidTap() {
-        print("tap")
+        print("눌림")
+        projectStartDelegate?.presentToStartTimeVC()
     }
 }
