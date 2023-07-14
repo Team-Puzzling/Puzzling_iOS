@@ -10,9 +10,15 @@ import UIKit
 import SnapKit
 import Then
 
+protocol buttonTappedProtocol: AnyObject {
+    func passButtonEvent()
+}
+
 final class ProjectNameCollecionReusableView: UICollectionReusableView {
     
-    private let button = UIButton()
+    weak var delegate: buttonTappedProtocol?
+    
+    let button = UIButton()
     private let projectNameLabel = UILabel()
     private let chevronDownImageView = UIImageView()
 
@@ -72,21 +78,17 @@ extension ProjectNameCollecionReusableView {
             $0.size.equalTo(36)
         }
     }
-    
+ 
     private func setAddTarget() {
-//        button.addTarget(self, action: , for: <#T##UIControl.Event#>)
+        button.addTarget(self, action: #selector(projectButtonTapped), for: .touchUpInside)
     }
 }
 
 extension ProjectNameCollecionReusableView {
+    
     @objc
     func projectButtonTapped() {
-//        let vc = ProjectListViewController()
-//        vc.delegate = self
-//        vc.modalPresentationStyle = .overCurrentContext
-//        self.present(vc, animated: false) {
-//            vc.modalNicknameView(height: UIScreen.main.bounds.height * 0.5)
-//        }
+        self.delegate?.passButtonEvent()
     }
 }
 
