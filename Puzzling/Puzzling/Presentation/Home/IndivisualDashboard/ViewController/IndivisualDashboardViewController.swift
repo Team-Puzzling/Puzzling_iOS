@@ -17,7 +17,7 @@ final class IndivisualDashboardViewController: UIViewController {
         return height
     }
     
-    private let mainView: IndivisualMainBoxView = IndivisualMainBoxView()
+    private let mainView: DashboardMainBoxView = DashboardMainBoxView(frame: .zero, type: .indivisual)
     private let actionPlanView = ActionPlanView()
     private var homeMainButton = HomeMainButton(frame: .zero, type: .notToday)
     
@@ -27,13 +27,15 @@ final class IndivisualDashboardViewController: UIViewController {
         setUI()
         setLayout()
     }
+    
+    deinit {
+        print(className)
+    }
 }
 
 extension IndivisualDashboardViewController {
     
-    private func setDelegate() {
-        
-    }
+    private func setDelegate() {}
     
     private func setUI() {
         view.backgroundColor = .white000
