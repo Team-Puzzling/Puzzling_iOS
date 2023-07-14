@@ -506,6 +506,7 @@
 		5831179C2A5B71280099B517 /* TeamDashboard */ = {
 			isa = PBXGroup;
 			children = (
+				58DC6A652A6152DE0039242C /* ViewController */,
 				583117A02A5B71920099B517 /* TeamDashboardViewController.swift */,
 			);
 			path = TeamDashboard;
@@ -545,6 +546,13 @@
 				588AA0782A5EF4930017CB1E /* HomeMainButton.swift */,
 			);
 			path = Component;
+			sourceTree = "<group>";
+		};
+		58DC6A652A6152DE0039242C /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		58EDAF902A5D9026004EF5D3 /* View */ = {
