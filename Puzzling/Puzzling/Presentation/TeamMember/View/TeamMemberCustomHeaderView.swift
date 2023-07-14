@@ -7,8 +7,8 @@
 
 import UIKit
 
-import Then
 import SnapKit
+import Then
 
 final class TeamMemberCustomHeaderView: UITableViewHeaderFooterView {
     
