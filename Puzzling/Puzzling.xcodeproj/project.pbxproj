@@ -72,6 +72,7 @@
 		096756012A607D3A00A1E691 /* SF-Pro-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 03E6D22A2A532B9300F4453C /* SF-Pro-Text-Regular.otf */; };
 		096756022A607D4B00A1E691 /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03FFD2D22A5B250800A3B70D /* Color.xcassets */; };
 		096756042A60824C00A1E691 /* ProjectListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096756032A60824C00A1E691 /* ProjectListViewController.swift */; };
+		096756062A61610300A1E691 /* ProjectNameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096756052A61610300A1E691 /* ProjectNameTableViewCell.swift */; };
 		09C0A4F32A5BEC1600691FFD /* TeamMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C0A4F22A5BEC1600691FFD /* TeamMemberViewController.swift */; };
 		09C0A4F52A5BEE4C00691FFD /* TeamMemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C0A4F42A5BEE4C00691FFD /* TeamMemberView.swift */; };
 		583117A12A5B71920099B517 /* TeamDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583117A02A5B71920099B517 /* TeamDashboardViewController.swift */; };
@@ -141,6 +142,7 @@
 		096755F72A607A5400A1E691 /* ProjectNameCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectNameCollectionReusableView.swift; sourceTree = "<group>"; };
 		096755F92A607A7D00A1E691 /* MyReviewListDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReviewListDataModel.swift; sourceTree = "<group>"; };
 		096756032A60824C00A1E691 /* ProjectListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListViewController.swift; sourceTree = "<group>"; };
+		096756052A61610300A1E691 /* ProjectNameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectNameTableViewCell.swift; sourceTree = "<group>"; };
 		09C0A4F22A5BEC1600691FFD /* TeamMemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberViewController.swift; sourceTree = "<group>"; };
 		09C0A4F42A5BEE4C00691FFD /* TeamMemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberView.swift; sourceTree = "<group>"; };
 		583117A02A5B71920099B517 /* TeamDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDashboardViewController.swift; sourceTree = "<group>"; };
@@ -486,6 +488,7 @@
 			children = (
 				096755F52A607A3A00A1E691 /* MyReviewListCollectionViewCell.swift */,
 				096755F72A607A5400A1E691 /* ProjectNameCollectionReusableView.swift */,
+				096756052A61610300A1E691 /* ProjectNameTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -691,6 +694,7 @@
 				03E6D2442A532C6300F4453C /* Literals.swift in Sources */,
 				03E6D2682A53334A00F4453C /* UITextField+.swift in Sources */,
 				03E6D26E2A53337600F4453C /* UICollectionView+.swift in Sources */,
+				096756062A61610300A1E691 /* ProjectNameTableViewCell.swift in Sources */,
 				03FFD2CE2A5B1A8B00A3B70D /* AppleSDGothicNeoType.swift in Sources */,
 				583117A12A5B71920099B517 /* TeamDashboardViewController.swift in Sources */,
 				03E6D23C2A532BC600F4453C /* CustomClass.swift in Sources */,
@@ -862,7 +866,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = DGT9BQA4KH;
+				DEVELOPMENT_TEAM = KKFK367WP8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Puzzling/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -894,7 +898,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = DGT9BQA4KH;
+				DEVELOPMENT_TEAM = KKFK367WP8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Puzzling/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

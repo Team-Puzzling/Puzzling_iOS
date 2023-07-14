@@ -16,7 +16,7 @@ protocol projectNameProtocol: AnyObject {
 final class ProjectListViewController: UIViewController {
     
     weak var delegate: projectNameProtocol?
-    
+    private let myProjectData = MyProjectDataModel.dummy()
     // MARK: - Properties
     
     private let modalView = UIView()
@@ -25,13 +25,10 @@ final class ProjectListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setDelegate()
         setUI()
         setLayout()
-    }
-    
-    private func setDelegate() {
-        
+        setDelegate()
+        setRegister()
     }
     
     private func setUI() {
@@ -64,6 +61,13 @@ final class ProjectListViewController: UIViewController {
         }
     }
     
+    
+    private func setDelegate() {
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
+    
+    
 //    func setModalView(height: CGFloat) {
 //        UIView.animate(withDuration: 0.3) {
 //            self.modalView.snp.remakeConstraints {
@@ -73,12 +77,31 @@ final class ProjectListViewController: UIViewController {
 //            self.view.layoutIfNeeded()
 //        }
 //    }
-//
-    func dismissBottomSheet() {
-        dismiss(animated: true, completion: nil)
+    private func setRegister() {
+        print("🥲🥲🥲🥲🥲")
+        tableView.registerCell(ProjectNameTableViewCell.self)
     }
     
     deinit {
         print("\(className)deinit")
+    }
+}
+
+extension ProjectListViewController: UITableViewDelegate {}
+
+extension ProjectListViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(myProjectData.count)
+        return myProjectData.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueCell(type: ProjectNameTableViewCell.self, indexPath: indexPath)
+        cell.setDataBind(name: myProjectData[indexPath.row].projectName)
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
     }
 }

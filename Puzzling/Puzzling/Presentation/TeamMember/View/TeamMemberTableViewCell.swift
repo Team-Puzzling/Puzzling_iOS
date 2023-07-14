@@ -12,8 +12,8 @@ import Then
 
 final class TeamMemberTableViewCell: UITableViewCell {
     
-    private lazy var nicknameLabel = UILabel()
-    private lazy var partLabel = UILabel()
+    private let nicknameLabel = UILabel()
+    private let partLabel = UILabel()
     private let divisionLabel = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
