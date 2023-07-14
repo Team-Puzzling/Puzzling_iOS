@@ -7,6 +7,7 @@
 
 import UIKit
 
+import SnapKit
 import Then
 
 protocol projectNameProtocol: AnyObject {
@@ -16,12 +17,16 @@ protocol projectNameProtocol: AnyObject {
 final class ProjectListViewController: UIViewController {
     
     private var projectName: String = "Project1"
+    
     weak var delegate: projectNameProtocol?
+    
     private let myProjectData = MyProjectDataModel.dummy()
+    
     // MARK: - Properties
     
     private let modalView = UIView()
     private let tableView = UITableView(frame: .zero, style: .plain)
+    
     // MARK: - View Life Cycle
     
     override func viewDidLoad() {
@@ -32,6 +37,13 @@ final class ProjectListViewController: UIViewController {
         setRegister()
     }
     
+    deinit {
+        print(className)
+    }
+}
+
+extension ProjectListViewController {
+
     private func setUI() {
         
         if let sheetPresentationController = sheetPresentationController {
@@ -70,17 +82,11 @@ final class ProjectListViewController: UIViewController {
     private func setRegister() {
         tableView.registerCell(ProjectNameTableViewCell.self)
     }
-    
-    deinit {
-        print("\(className)deinit")
-    }
 }
 
 extension ProjectListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("\(indexPath.row) 눌럿음")
         projectName = myProjectData[indexPath.row].projectName
-        print("\(projectName)?????????????????????")
         self.delegate?.nameData(text: myProjectData[indexPath.row].projectName)
         self.dismiss(animated: true)
     }
@@ -93,7 +99,6 @@ extension ProjectListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueCell(type: ProjectNameTableViewCell.self, indexPath: indexPath)
-//        print("\( myProjectData[indexPath.row].projectName)     \(projectName)")
         let nameData = myProjectData[indexPath.row].projectName
         cell.setDataBind(name: nameData)
         print("----🧩----")

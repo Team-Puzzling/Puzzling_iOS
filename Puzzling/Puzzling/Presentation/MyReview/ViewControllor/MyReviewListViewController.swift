@@ -32,6 +32,10 @@ final class MyReviewListViewController: UIViewController {
         setDelegate()
         setRegister()
     }
+    
+    deinit {
+        print(className)
+    }
 }
 
 extension MyReviewListViewController {
@@ -75,7 +79,7 @@ extension MyReviewListViewController {
         )
         navigationItem.rightBarButtonItem?.tintColor = .gray500
         
-        let title = "내 프로젝트"
+        let title = currentProject
         let attributes: [NSAttributedString.Key: Any] = [
             NSAttributedString.Key.foregroundColor: UIColor.black000,
             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: .bold)
@@ -88,6 +92,11 @@ extension MyReviewListViewController {
             titleLabel.attributedText = NSAttributedString(string: title, attributes: attributes)
             navigationItem.titleView = titleLabel
         }
+    }
+    
+    private func reloadHeaderView(text: String) {
+        guard let headerView = myReviewListCollectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: IndexPath(item: 0, section: 0)) as? ProjectNameCollecionReusableView else { return }
+        headerView.setDataBind(projectName: text)
     }
 }
 
@@ -141,13 +150,6 @@ extension MyReviewListViewController: UICollectionViewDataSource {
         view.delegate = self
         view.setDataBind(projectName: currentProject)
         return view
-    }
-    
-    private func reloadHeaderView(text: String) {
-        guard let randomText = ["aaaaaa", "bbbbb", "ccccc"].randomElement() else {return}
-        guard let headerView = myReviewListCollectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: IndexPath(item: 0, section: 0)) as? ProjectNameCollecionReusableView else { return }
-        headerView.setDataBind(projectName: text)
-//        headerView.reloadInputViews()
     }
 }
 

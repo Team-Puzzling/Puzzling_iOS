@@ -20,17 +20,19 @@ final class ProjectNameTableViewCell: UITableViewCell {
     private let nameLabel = UILabel()
     private let divisionLabel = UILabel()
     private let pointImageView = UIImageView()
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setUI()
         setLayout()
     }
     
-    @available(*, unavailable)
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
+}
+
+extension ProjectNameTableViewCell {
     
     private func setUI() {
         contentView.backgroundColor = .background050

@@ -18,7 +18,7 @@ final class ProjectNameCollecionReusableView: UICollectionReusableView {
     
     weak var delegate: buttonTappedProtocol?
     
-    let button = UIButton()
+    private let button = UIButton()
     private let projectNameLabel = UILabel()
     private let chevronDownImageView = UIImageView()
 

@@ -7,6 +7,9 @@
 
 import UIKit
 
+import SnapKit
+import Then
+
 final class MyReviewListCollectionViewCell: UICollectionViewCell {
     
     static var isFromNib: Bool = false
@@ -36,7 +39,7 @@ final class MyReviewListCollectionViewCell: UICollectionViewCell {
 
 extension MyReviewListCollectionViewCell {
     
-    func setUI() {
+    private func setUI() {
         view.do {
             $0.backgroundColor = .background050
             $0.makeRounded(radius: 16)
@@ -83,19 +86,21 @@ extension MyReviewListCollectionViewCell {
             $0.centerY.equalToSuperview()
         }
     }
+}
+
+extension MyReviewListCollectionViewCell {
     
     func setDataBind(_ reviewListData: MyReviewListDataModel) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
                 
-        let convertDate = dateFormatter.date(from: reviewListData.reviewDate) // Date 타입으로 변환
+        let convertDate = dateFormatter.date(from: reviewListData.reviewDate)
                 
         let myDateFormatter = DateFormatter()
-        myDateFormatter.dateFormat = "yyyy.MM.dd" // 2020년 08월 13일 오후 04시 30분
+        myDateFormatter.dateFormat = "yyyy.MM.dd"
         let convertStr = myDateFormatter.string(from: convertDate!)
         
         dateLabel.text = convertStr
         descriptionLabel.text = reviewListData.contents
-        
     }
 }
