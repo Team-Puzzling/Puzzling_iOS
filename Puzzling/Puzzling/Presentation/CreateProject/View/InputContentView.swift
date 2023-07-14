@@ -219,6 +219,17 @@ extension InputContentView {
         }
     }
     
+    private func textFieldNotification(textField: UITextField, contentType: InputContentType) {
+        if let text = textField.text {
+            let userInfo = TextFieldInfo(text: text, type: contentType)
+            NotificationCenter.default.post(
+                name: Notification.Name("textFieldNotification"),
+                object: nil,
+                userInfo: ["userInfo": userInfo]
+            )
+        }
+    }
+    
     // MARK: - @objc Methods
     
     @objc
@@ -243,6 +254,7 @@ extension InputContentView: UITextFieldDelegate {
                 textField.layer.borderWidth = 0
                 textFieldButton.isHidden = true
                 warningLabel.isHidden = true
+                textFieldNotification(textField: textField, contentType: activeTextField ?? .name)
             } else {
                 emojiLimitTextFieldBorderSetting(textField: textField)
                 textFieldButton.isHidden = false

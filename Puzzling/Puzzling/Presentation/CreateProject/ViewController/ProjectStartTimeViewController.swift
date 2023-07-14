@@ -84,12 +84,16 @@ extension ProjectStartTimeViewController {
     }
     
     private func dismissToCreateProjectVC() {
+        dateFormatter()
+        self.dismiss(animated: true)
+    }
+    
+    private func dateFormatter() {
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "yyyy/MM/dd"
         let strDate = timeFormatter.string(from: datePicker.date)
         let userInfo = ["selectedDate": strDate]
         NotificationCenter.default.post(name: Notification.Name("SelectedDateNotification"), object: nil, userInfo: userInfo)
-        self.dismiss(animated: true)
     }
     
     // MARK: - @objc Methods

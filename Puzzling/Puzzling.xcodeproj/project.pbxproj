@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0351AB3C2A605A7D006B0F4C /* ProjectStartTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB3B2A605A7D006B0F4C /* ProjectStartTimeViewController.swift */; };
+		0351AB3E2A619F04006B0F4C /* textFieldNotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB3D2A619F04006B0F4C /* textFieldNotificationModel.swift */; };
 		03734EB52A599FDB00B401D6 /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03734EB42A599FDB00B401D6 /* Image.xcassets */; };
 		03734EB82A59A0BD00B401D6 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03734EB72A59A0BD00B401D6 /* TabBarController.swift */; };
 		03734EBD2A59A1F800B401D6 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03734EBC2A59A1F800B401D6 /* TabBarItem.swift */; };
@@ -81,6 +82,7 @@
 
 /* Begin PBXFileReference section */
 		0351AB3B2A605A7D006B0F4C /* ProjectStartTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectStartTimeViewController.swift; sourceTree = "<group>"; };
+		0351AB3D2A619F04006B0F4C /* textFieldNotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = textFieldNotificationModel.swift; sourceTree = "<group>"; };
 		03734EB42A599FDB00B401D6 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = "<group>"; };
 		03734EB72A59A0BD00B401D6 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		03734EBC2A59A1F800B401D6 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 			children = (
 				03E6D1FF2A5325F100F4453C /* Model.swift */,
 				03ADF3912A5E9534002CEDDC /* ProjectCycleModel.swift */,
+				0351AB3D2A619F04006B0F4C /* textFieldNotificationModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -673,6 +676,7 @@
 				03E6D2402A532C2500F4453C /* Color.swift in Sources */,
 				03E6D2662A53333500F4453C /* UIView+.swift in Sources */,
 				583117AA2A5BE2D90099B517 /* HomeSegmentedView.swift in Sources */,
+				0351AB3E2A619F04006B0F4C /* textFieldNotificationModel.swift in Sources */,
 				03E6D25C2A5331FF00F4453C /* GeneralResponse.swift in Sources */,
 				03ADF3942A5EA4DB002CEDDC /* CheckButton.swift in Sources */,
 				03E6D1E52A53219600F4453C /* AppDelegate.swift in Sources */,

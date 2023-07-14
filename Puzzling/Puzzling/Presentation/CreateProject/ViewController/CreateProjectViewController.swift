@@ -20,6 +20,12 @@ final class CreateProjectViewController: UIViewController {
     private let closeButton = UIButton()
     private let createProjectView = CreateProjectView()
     private let registerProjectButton = CheckButton()
+    private var projectName: String = ""
+    private var projectDescription: String = ""
+    private var projectStartDate: String = ""
+    private var projectRole: String = ""
+    private var projectNickname: String = ""
+    private var projectCycle: [String] = []
     
     // MARK: - Properties
     
@@ -36,6 +42,7 @@ final class CreateProjectViewController: UIViewController {
         setLayout()
         setAddTarget()
         setDelegate()
+        setNotificationCenter()
     }
     
     deinit {
@@ -62,6 +69,7 @@ extension CreateProjectViewController {
         
         registerProjectButton.do {
             $0.setTitle("프로젝트 등록하기", for: .normal)
+            $0.setState(.allow)
         }
     }
     
@@ -112,6 +120,10 @@ extension CreateProjectViewController {
         createProjectView.startDayView.projectStartDelegate = self
     }
     
+    private func setNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(getTextFieldInfo(_:)), name: Notification.Name("textFieldNotification"), object: nil)
+    }
+    
     func presentToHalfModalViewController() {
         let projectStartTimeVC = ProjectStartTimeViewController()
         projectStartTimeVC.modalPresentationStyle = .pageSheet
@@ -134,9 +146,35 @@ extension CreateProjectViewController {
         present(projectStartTimeVC, animated: true, completion: nil)
     }
     
+    private func projectRegister() {
+        print("registerProjectButtonTap!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        print(projectName)
+        print(projectDescription)
+        print(projectStartDate)
+        print(projectRole)
+        print(projectNickname)
+        print(projectCycle)
+    }
+    
     @objc
     private func registerProjectButtonDidTap() {
-        print("registerProjectButtonTap!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        projectRegister()
+    }
+    
+    @objc
+    private func getTextFieldInfo(_ notification: Notification) {
+        if let textInfo = notification.userInfo as? [String: TextFieldInfo], let updateTextInfo = textInfo["userInfo"] {
+            switch updateTextInfo.type {
+            case .name:
+                projectName = updateTextInfo.text
+            case .description:
+                projectDescription = updateTextInfo.text
+            case .role:
+                projectRole = updateTextInfo.text
+            case .nickname:
+                projectRole = updateTextInfo.text
+            }
+        }
     }
 }
 
