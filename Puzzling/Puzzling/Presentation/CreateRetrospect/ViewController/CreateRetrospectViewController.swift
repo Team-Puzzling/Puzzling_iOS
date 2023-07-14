@@ -12,68 +12,197 @@ import SnapKit
 
 final class CreateRetrospectViewController: UIViewController {
     
-    // templates didset
+    // MARK: - UI Components
+        
+    private let templatesButton = UIButton()
     
-    private let templatesButton = UIButton().then {
-        $0.backgroundColor = .background050
-        $0.layer.borderWidth = 1
-        $0.layer.borderColor = UIColor.background050.cgColor
-        $0.layer.cornerRadius = 16
-        $0.addTarget(self,
-                     action: #selector(presentButtonTapped),
-                     for: .touchUpInside)
-    }
+    private let scrollView = UIScrollView()
+    private let contentView = UIView()
     
-    private var tilView: TILView! = TILView()
+    private let tilView: TILView! = TILView()
+    private let fiveFView = FiveFView()
+    private let arrView = AARView()
+    
+    // MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setDelegate()
-        setUI()
+        setNavigation()
         setLayout()
+        setUI()
+        setAddTarget()
     }
     
-    private func setDelegate() {
-        
+    // MARK: - deinit
+
+    deinit {
+        print("CreateRetrospectViewController deinit")
     }
+}
+
+extension CreateRetrospectViewController {
+    
+    // MARK: - UI Components Property
     
     private func setUI() {
         view.backgroundColor = .white
         
-        view.addSubview(templatesButton)
-        view.addSubview(tilView)
+        templatesButton.do {
+            $0.backgroundColor = .background050
+            $0.setTitle("TIL", for: .normal)
+            $0.setTitleColor(UIColor.gray700, for: .normal)
+            $0.titleLabel?.font = .fontGuide(.body1_bold_kor)
+            $0.setImage(Image.chevronDown, for: .normal)
+            $0.layer.cornerRadius = 16
+            $0.tintColor = .gray700
+            var config = UIButton.Configuration.plain()
+            config.imagePlacement = NSDirectionalRectEdge.trailing
+            
+            templatesButton.configuration = config
+        }
+    }
+    
+    // MARK: - Layout Helper
+    
+    private func setLayout() {
         
-        templatesButton.snp.makeConstraints{
-            $0.top.equalToSuperview().inset(112)
+        contentView.addSubviews(templatesButton, tilView)
+        scrollView.addSubview(contentView)
+        view.addSubview(scrollView)
+        
+        scrollView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
+        
+        contentView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+            $0.width.equalToSuperview()
+            $0.height.equalTo(716)
+        }
+        
+        templatesButton.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(16)
             $0.leading.equalToSuperview().inset(18)
-            $0.width.equalTo(88)
             $0.height.equalTo(36)
         }
         
         tilView.snp.makeConstraints {
             $0.top.equalTo(templatesButton.snp.bottom).inset(-24)
-            $0.trailing.leading.equalToSuperview().inset(16)
+            $0.leading.trailing.bottom.equalToSuperview()
         }
     }
     
-    private func setLayout() {
-        
+    // MARK: - Methods
+    
+    private func setNavigation() {
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.tintColor = .gray500
+        navigationItem.title = "프로젝트 이름"
+        let backButton = UIBarButtonItem(image: Image.chevronBack, style: .plain, target: self, action: #selector(backButtonTapped))
+        backButton.imageInsets = UIEdgeInsets(top: 0, left: -8, bottom: 0, right: 0)
+         navigationItem.leftBarButtonItem = backButton
+        let saveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonTapped))
+        saveButton.tintColor = .gray400
+        navigationItem.rightBarButtonItem = saveButton
+    }
+
+    private func updateContentView(option: String) {
+        print(option)
+        switch option {
+        case "TIL":
+            contentView.subviews.forEach { $0.removeFromSuperview() }
+            contentView.addSubviews(templatesButton, tilView)
+            
+            contentView.snp.updateConstraints {
+                $0.edges.equalToSuperview()
+                $0.width.equalToSuperview()
+                $0.height.equalTo(716)
+            }
+            
+            templatesButton.snp.makeConstraints {
+                $0.top.equalToSuperview().inset(16)
+                $0.leading.equalToSuperview().inset(18)
+                $0.height.equalTo(36)
+            }
+            
+            tilView.snp.makeConstraints {
+                $0.top.equalTo(templatesButton.snp.bottom).inset(-24)
+                $0.leading.trailing.bottom.equalToSuperview()
+            }
+            
+        case "5F":
+            contentView.subviews.forEach { $0.removeFromSuperview() }
+            contentView.addSubviews(templatesButton, fiveFView)
+            
+            contentView.snp.updateConstraints {
+                $0.edges.equalToSuperview()
+                $0.width.equalToSuperview()
+                $0.height.equalTo(1163)
+            }
+            
+            templatesButton.snp.makeConstraints {
+                $0.top.equalToSuperview().inset(16)
+                $0.leading.equalToSuperview().inset(18)
+                $0.height.equalTo(36)
+            }
+            
+            fiveFView.snp.makeConstraints {
+                $0.top.equalTo(templatesButton.snp.bottom).inset(-24)
+                $0.leading.trailing.bottom.equalToSuperview()
+            }
+            
+        case "AAR":
+            contentView.subviews.forEach { $0.removeFromSuperview() }
+            contentView.addSubviews(templatesButton, arrView)
+
+            contentView.snp.updateConstraints {
+                $0.edges.equalToSuperview()
+                $0.width.equalToSuperview()
+                $0.height.equalTo(1163)
+            }
+            
+            templatesButton.snp.makeConstraints {
+                $0.top.equalToSuperview().inset(16)
+                $0.leading.equalToSuperview().inset(18)
+                $0.height.equalTo(36)
+            }
+            
+            arrView.snp.makeConstraints {
+                $0.top.equalTo(templatesButton.snp.bottom).inset(-24)
+                $0.leading.trailing.bottom.equalToSuperview()
+            }
+            
+        default:
+            break
+        }
     }
     
-    func presnetToBottomSheetViewController() {
-        print(self.view.subviews[1])
-        let VC = BottomSheetViewController()
-        self.present(VC, animated: true)
+    private func setAddTarget() {
+        templatesButton.addTarget(self, action: #selector(presnetToBottomSheetViewController), for: .touchUpInside)
+    }
+    
+    // MARK: - @objc Methods
+
+    @objc func presnetToBottomSheetViewController() {
+        let bottomSheetVC = BottomSheetViewController()
+        bottomSheetVC.selectedOption = templatesButton.title(for: .normal)
+        bottomSheetVC.onOptionSelected = { [weak self] option in
+            self?.templatesButton.setTitle("\(option)", for: .normal)
+            self?.updateContentView(option: option)
+        }
+        present(bottomSheetVC, animated: true, completion: nil)
+    }
+
+    
+    @objc
+    private func backButtonTapped() {
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc
-    func presentButtonTapped() {
-        presnetToBottomSheetViewController()
-//        tilView.removeFromSuperview()
-//        tilView = nil
-//        print(tilView)
-        print(self.view.subviews)
+    private func saveButtonTapped() {
+
     }
 }
-
