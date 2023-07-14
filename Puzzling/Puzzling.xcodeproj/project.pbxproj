@@ -71,9 +71,13 @@
 		03FFD2D92A5D968200A3B70D /* CreateProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FFD2D82A5D968200A3B70D /* CreateProjectViewController.swift */; };
 		096755BB2A5C61BE00A1E691 /* TeamMemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755BA2A5C61BE00A1E691 /* TeamMemberTableViewCell.swift */; };
 		096755BF2A5D9E1A00A1E691 /* TeamMemberCustomHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755BE2A5D9E1A00A1E691 /* TeamMemberCustomHeaderView.swift */; };
+		096755C62A5E970500A1E691 /* MyProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755C52A5E970500A1E691 /* MyProjectViewController.swift */; };
+		096755CB2A5E9AF500A1E691 /* MyProjectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755CA2A5E9AF500A1E691 /* MyProjectTableViewCell.swift */; };
+		096755E62A60700E00A1E691 /* MyProjectTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755E52A60700E00A1E691 /* MyProjectTableHeaderView.swift */; };
+		096755E82A6070DC00A1E691 /* TeamMemberDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755E72A6070DC00A1E691 /* TeamMemberDataModel.swift */; };
+		096755EA2A60710100A1E691 /* MyProjectDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755E92A60710100A1E691 /* MyProjectDataModel.swift */; };
 		09C0A4F32A5BEC1600691FFD /* TeamMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C0A4F22A5BEC1600691FFD /* TeamMemberViewController.swift */; };
 		09C0A4F52A5BEE4C00691FFD /* TeamMemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C0A4F42A5BEE4C00691FFD /* TeamMemberView.swift */; };
-		09C0A4F72A5C305200691FFD /* TeamMemberDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C0A4F62A5C305200691FFD /* TeamMemberDataModel.swift */; };
 		583117A12A5B71920099B517 /* TeamDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583117A02A5B71920099B517 /* TeamDashboardViewController.swift */; };
 		583117A32A5B71A00099B517 /* IndivisualDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583117A22A5B71A00099B517 /* IndivisualDashboardViewController.swift */; };
 		583117A82A5BE1490099B517 /* HomeTitleBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583117A72A5BE1490099B517 /* HomeTitleBarView.swift */; };
@@ -140,9 +144,13 @@
 		03FFD2D82A5D968200A3B70D /* CreateProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectViewController.swift; sourceTree = "<group>"; };
 		096755BA2A5C61BE00A1E691 /* TeamMemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberTableViewCell.swift; sourceTree = "<group>"; };
 		096755BE2A5D9E1A00A1E691 /* TeamMemberCustomHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberCustomHeaderView.swift; sourceTree = "<group>"; };
+		096755C52A5E970500A1E691 /* MyProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProjectViewController.swift; sourceTree = "<group>"; };
+		096755CA2A5E9AF500A1E691 /* MyProjectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProjectTableViewCell.swift; sourceTree = "<group>"; };
+		096755E52A60700E00A1E691 /* MyProjectTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProjectTableHeaderView.swift; sourceTree = "<group>"; };
+		096755E72A6070DC00A1E691 /* TeamMemberDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberDataModel.swift; sourceTree = "<group>"; };
+		096755E92A60710100A1E691 /* MyProjectDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProjectDataModel.swift; sourceTree = "<group>"; };
 		09C0A4F22A5BEC1600691FFD /* TeamMemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberViewController.swift; sourceTree = "<group>"; };
 		09C0A4F42A5BEE4C00691FFD /* TeamMemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberView.swift; sourceTree = "<group>"; };
-		09C0A4F62A5C305200691FFD /* TeamMemberDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberDataModel.swift; sourceTree = "<group>"; };
 		583117A02A5B71920099B517 /* TeamDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDashboardViewController.swift; sourceTree = "<group>"; };
 		583117A22A5B71A00099B517 /* IndivisualDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndivisualDashboardViewController.swift; sourceTree = "<group>"; };
 		583117A72A5BE1490099B517 /* HomeTitleBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTitleBarView.swift; sourceTree = "<group>"; };
@@ -262,6 +270,8 @@
 			isa = PBXGroup;
 			children = (
 				03E6D2042A5326D400F4453C /* DTO.swift */,
+				096755E72A6070DC00A1E691 /* TeamMemberDataModel.swift */,
+				096755E92A60710100A1E691 /* MyProjectDataModel.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -307,6 +317,8 @@
 		03E6D20D2A5327BA00F4453C /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				096755CC2A5FDC3700A1E691 /* MyReview */,
+				096755C22A5E96DC00A1E691 /* MyProject */,
 				09C0A4EF2A5BEBB800691FFD /* TeamMember */,
 				03E6D20E2A5327D300F4453C /* Common */,
 				03E6D20F2A5327E600F4453C /* Home */,
@@ -482,10 +494,66 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		096755C22A5E96DC00A1E691 /* MyProject */ = {
+			isa = PBXGroup;
+			children = (
+				096755C32A5E96F100A1E691 /* ViewController */,
+				096755C42A5E96F700A1E691 /* View */,
+			);
+			path = MyProject;
+			sourceTree = "<group>";
+		};
+		096755C32A5E96F100A1E691 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				096755C52A5E970500A1E691 /* MyProjectViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		096755C42A5E96F700A1E691 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				096755CA2A5E9AF500A1E691 /* MyProjectTableViewCell.swift */,
+				096755E52A60700E00A1E691 /* MyProjectTableHeaderView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		096755CC2A5FDC3700A1E691 /* MyReview */ = {
+			isa = PBXGroup;
+			children = (
+				096755CF2A5FDC5C00A1E691 /* DataModel */,
+				096755CE2A5FDC5200A1E691 /* ViewController */,
+				096755CD2A5FDC4E00A1E691 /* View */,
+			);
+			path = MyReview;
+			sourceTree = "<group>";
+		};
+		096755CD2A5FDC4E00A1E691 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		096755CE2A5FDC5200A1E691 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		096755CF2A5FDC5C00A1E691 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
 		09C0A4EF2A5BEBB800691FFD /* TeamMember */ = {
 			isa = PBXGroup;
 			children = (
-				09D11B452A5C42F900F12669 /* DataModel */,
 				09C0A4F12A5BEBE800691FFD /* ViewController */,
 				09C0A4F02A5BEBDF00691FFD /* View */,
 			);
@@ -508,14 +576,6 @@
 				09C0A4F22A5BEC1600691FFD /* TeamMemberViewController.swift */,
 			);
 			path = ViewController;
-			sourceTree = "<group>";
-		};
-		09D11B452A5C42F900F12669 /* DataModel */ = {
-			isa = PBXGroup;
-			children = (
-				09C0A4F62A5C305200691FFD /* TeamMemberDataModel.swift */,
-			);
-			path = DataModel;
 			sourceTree = "<group>";
 		};
 		5831179C2A5B71280099B517 /* TeamDashboard */ = {
@@ -667,7 +727,6 @@
 				096755BB2A5C61BE00A1E691 /* TeamMemberTableViewCell.swift in Sources */,
 				03E6D2422A532C3300F4453C /* Image.swift in Sources */,
 				03E6D2782A5333BF00F4453C /* UITabBar+.swift in Sources */,
-				09C0A4F72A5C305200691FFD /* TeamMemberDataModel.swift in Sources */,
 				03FFD2CC2A5B175C00A3B70D /* SFProType.swift in Sources */,
 				0351AB3C2A605A7D006B0F4C /* ProjectStartTimeViewController.swift in Sources */,
 				09C0A4F32A5BEC1600691FFD /* TeamMemberViewController.swift in Sources */,
@@ -681,6 +740,7 @@
 				03ADF3942A5EA4DB002CEDDC /* CheckButton.swift in Sources */,
 				03E6D1E52A53219600F4453C /* AppDelegate.swift in Sources */,
 				03E6D2602A53322300F4453C /* URLConst.swift in Sources */,
+				096755E82A6070DC00A1E691 /* TeamMemberDataModel.swift in Sources */,
 				03B004A92A556C7400E71CA7 /* UIWindow+.swift in Sources */,
 				03E6D2442A532C6300F4453C /* Literals.swift in Sources */,
 				03E6D2682A53334A00F4453C /* UITextField+.swift in Sources */,
@@ -695,6 +755,8 @@
 				03E6D2262A532AAC00F4453C /* BaseView.swift in Sources */,
 				03ADF38F2A5E932A002CEDDC /* ProjectCycleCollectionViewCell.swift in Sources */,
 				03E6D2282A532AB900F4453C /* BaseViewController.swift in Sources */,
+				096755EA2A60710100A1E691 /* MyProjectDataModel.swift in Sources */,
+				096755CB2A5E9AF500A1E691 /* MyProjectTableViewCell.swift in Sources */,
 				03E6D25A2A5331ED00F4453C /* APIConst.swift in Sources */,
 				03ADF3892A5E7322002CEDDC /* StartDayView.swift in Sources */,
 				03ADF38D2A5E8A5F002CEDDC /* CreateProjectView.swift in Sources */,
@@ -705,6 +767,7 @@
 				03E6D25E2A53321000F4453C /* NetworkLoggerPlugin.swift in Sources */,
 				03E6D2622A5332F700F4453C /* Encodable+.swift in Sources */,
 				03E6D26A2A53335700F4453C /* UIStackView+.swift in Sources */,
+				096755C62A5E970500A1E691 /* MyProjectViewController.swift in Sources */,
 				03FFD2CA2A5B15BA00A3B70D /* UIFont+.swift in Sources */,
 				03E6D2072A5326DD00F4453C /* APIService.swift in Sources */,
 				03E6D27A2A5333C900F4453C /* UIImage+.swift in Sources */,
@@ -715,6 +778,7 @@
 				03E6D27C2A5333E400F4453C /* UIViewController+.swift in Sources */,
 				03734EBD2A59A1F800B401D6 /* TabBarItem.swift in Sources */,
 				03E6D2052A5326D400F4453C /* DTO.swift in Sources */,
+				096755E62A60700E00A1E691 /* MyProjectTableHeaderView.swift in Sources */,
 				03E6D26C2A53336900F4453C /* UITableView+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
