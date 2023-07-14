@@ -87,9 +87,6 @@ extension ProjectStartTimeViewController {
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "yyyy/MM/dd"
         let strDate = timeFormatter.string(from: datePicker.date)
-        print(strDate)
-        
-        // 전달할 데이터를 userInfo에 담아서 Notification 발송
         let userInfo = ["selectedDate": strDate]
         NotificationCenter.default.post(name: Notification.Name("SelectedDateNotification"), object: nil, userInfo: userInfo)
         self.dismiss(animated: true)

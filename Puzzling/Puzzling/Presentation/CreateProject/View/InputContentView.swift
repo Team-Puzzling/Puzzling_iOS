@@ -223,8 +223,9 @@ extension InputContentView {
     
     @objc
     private func removeTextButtonDidTap() {
-        inputTextField.text?.removeAll()
         setInputContent(type: activeTextField ?? .name)
+        inputTextField.placeholder = .none
+        inputTextField.text?.removeAll()
     }
 }
 
