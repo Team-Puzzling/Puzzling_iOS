@@ -147,7 +147,6 @@ extension CreateProjectViewController: UISheetPresentationControllerDelegate { }
 
 extension CreateProjectViewController: ProjectStartProtocol {
     func presentToStartTimeVC() {
-        print("ajsd;lfja;lejfl;aj")
         presentToHalfModalViewController()
     }
 }

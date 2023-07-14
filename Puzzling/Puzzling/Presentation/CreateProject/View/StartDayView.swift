@@ -20,7 +20,7 @@ final class StartDayView: UIView {
     
     private let titleLabel = UILabel()
     private let startDayView = UIView()
-    private let startDayLabel = UILabel()
+    let startDayLabel = UILabel()
     private let chevronDownButton = UIButton()
     
     // MARK: - Properties
@@ -34,6 +34,7 @@ final class StartDayView: UIView {
         setUI()
         setLayout()
         setAddTarget()
+        setNotificationCenter()
     }
     
     required init?(coder: NSCoder) {
@@ -107,11 +108,30 @@ extension StartDayView {
         chevronDownButton.addTarget(self, action: #selector(chevronDownButtonDidTap), for: .touchUpInside)
     }
     
+    private func setNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(handleSelectedDate(_:)), name: Notification.Name("SelectedDateNotification"), object: nil)
+    }
+    
     // MARK: - @objc Methods
     
     @objc
     private func chevronDownButtonDidTap() {
-        print("눌림")
+        startDayView.makeBorder(width: 2, color: .blue200)
         projectStartDelegate?.presentToStartTimeVC()
+    }
+    
+    @objc
+    private func handleSelectedDate(_ notification: Notification) {
+        if let selectedDate = notification.userInfo?["selectedDate"] as? String {
+            startDayView.makeBorder(width: 0, color: .background050)
+            print("Selected Date: \(selectedDate)")
+            if selectedDate == "0000/00/00" {
+                startDayLabel.font = .fontGuide(.body1_regular_kor)
+            } else {
+                startDayLabel.font = .fontGuide(.heading4_kor)
+                startDayLabel.textColor = .black000
+                startDayLabel.text = selectedDate
+            }
+        }
     }
 }
