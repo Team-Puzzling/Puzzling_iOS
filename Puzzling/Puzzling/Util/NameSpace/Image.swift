@@ -19,6 +19,7 @@ public enum Image {
     // MARK: - Icon
     
     static let xMark = UIImage(named: "xMark")!
+    static let textFieldXMark = UIImage(named: "textFieldXMark")!
     static let chevronDown = UIImage(named: "chevronDown")!
     static let chevronBack = UIImage(named: "chevronBack")!
     static let defaultPuzzle = UIImage(named: "defaultPuzzle")!
