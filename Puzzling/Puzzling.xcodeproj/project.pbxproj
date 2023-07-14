@@ -317,7 +317,6 @@
 		03E6D20D2A5327BA00F4453C /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				096755CC2A5FDC3700A1E691 /* MyReview */,
 				096755C22A5E96DC00A1E691 /* MyProject */,
 				09C0A4EF2A5BEBB800691FFD /* TeamMember */,
 				03E6D20E2A5327D300F4453C /* Common */,
@@ -518,37 +517,6 @@
 				096755E52A60700E00A1E691 /* MyProjectTableHeaderView.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		096755CC2A5FDC3700A1E691 /* MyReview */ = {
-			isa = PBXGroup;
-			children = (
-				096755CF2A5FDC5C00A1E691 /* DataModel */,
-				096755CE2A5FDC5200A1E691 /* ViewController */,
-				096755CD2A5FDC4E00A1E691 /* View */,
-			);
-			path = MyReview;
-			sourceTree = "<group>";
-		};
-		096755CD2A5FDC4E00A1E691 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		096755CE2A5FDC5200A1E691 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
-		096755CF2A5FDC5C00A1E691 /* DataModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = DataModel;
 			sourceTree = "<group>";
 		};
 		09C0A4EF2A5BEBB800691FFD /* TeamMember */ = {
