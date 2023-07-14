@@ -109,7 +109,6 @@ extension MyReviewListViewController {
 
 extension MyReviewListViewController: projectNameProtocol {
     func nameData(text: String) {
-        print(#function, text)
         currentProject = text
         reloadHeaderView(text: text)
     }
@@ -117,7 +116,6 @@ extension MyReviewListViewController: projectNameProtocol {
 
 extension MyReviewListViewController: buttonTappedProtocol {
     func passButtonEvent(projectName: String) {
-        print(#function, projectName)
         self.currentProject = projectName
         
         let vc = ProjectListViewController()

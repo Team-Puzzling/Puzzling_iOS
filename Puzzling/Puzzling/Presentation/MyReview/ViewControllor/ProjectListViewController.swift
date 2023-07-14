@@ -101,16 +101,8 @@ extension ProjectListViewController: UITableViewDataSource {
         let cell = tableView.dequeueCell(type: ProjectNameTableViewCell.self, indexPath: indexPath)
         let nameData = myProjectData[indexPath.row].projectName
         cell.setDataBind(name: nameData)
-        print("----🧩----")
-        print(#function, projectName)
-        print(myProjectData[indexPath.row].projectName)
-        print(indexPath.row)
-        print("---------------------")
         
         if nameData == projectName {
-            print("🍀🍀🍀")
-            print(nameData)
-            print(indexPath.row)
             cell.setPointLabel()
         }
         return cell
