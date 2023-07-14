@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0351AB3C2A605A7D006B0F4C /* ProjectStartTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB3B2A605A7D006B0F4C /* ProjectStartTimeViewController.swift */; };
 		03734EB52A599FDB00B401D6 /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03734EB42A599FDB00B401D6 /* Image.xcassets */; };
 		03734EB82A59A0BD00B401D6 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03734EB72A59A0BD00B401D6 /* TabBarController.swift */; };
 		03734EBD2A59A1F800B401D6 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03734EBC2A59A1F800B401D6 /* TabBarItem.swift */; };
@@ -79,6 +80,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0351AB3B2A605A7D006B0F4C /* ProjectStartTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectStartTimeViewController.swift; sourceTree = "<group>"; };
 		03734EB42A599FDB00B401D6 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = "<group>"; };
 		03734EB72A59A0BD00B401D6 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		03734EBC2A59A1F800B401D6 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
@@ -448,6 +450,35 @@
 			path = StyleGuide;
 			sourceTree = "<group>";
 		};
+		03FFD2D52A5D92CE00A3B70D /* CreateProject */ = {
+			isa = PBXGroup;
+			children = (
+				03FFD2D72A5D931200A3B70D /* View */,
+				03FFD2D62A5D92FB00A3B70D /* ViewController */,
+				03ADF3902A5E932F002CEDDC /* Cell */,
+			);
+			path = CreateProject;
+			sourceTree = "<group>";
+		};
+		03FFD2D62A5D92FB00A3B70D /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				03FFD2D82A5D968200A3B70D /* CreateProjectViewController.swift */,
+				0351AB3B2A605A7D006B0F4C /* ProjectStartTimeViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		03FFD2D72A5D931200A3B70D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				03ADF38C2A5E8A5F002CEDDC /* CreateProjectView.swift */,
+				03ADF3882A5E7322002CEDDC /* StartDayView.swift */,
+				03ADF3862A5D9F91002CEDDC /* InputContentView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		09C0A4EF2A5BEBB800691FFD /* TeamMember */ = {
 			isa = PBXGroup;
 			children = (
@@ -482,34 +513,6 @@
 				09C0A4F62A5C305200691FFD /* TeamMemberDataModel.swift */,
 			);
 			path = DataModel;
-			sourceTree = "<group>";
-		};
-		03FFD2D52A5D92CE00A3B70D /* CreateProject */ = {
-			isa = PBXGroup;
-			children = (
-				03FFD2D72A5D931200A3B70D /* View */,
-				03FFD2D62A5D92FB00A3B70D /* ViewController */,
-				03ADF3902A5E932F002CEDDC /* Cell */,
-			);
-			path = CreateProject;
-			sourceTree = "<group>";
-		};
-		03FFD2D62A5D92FB00A3B70D /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				03FFD2D82A5D968200A3B70D /* CreateProjectViewController.swift */,
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
-		03FFD2D72A5D931200A3B70D /* View */ = {
-			isa = PBXGroup;
-			children = (
-				03ADF38C2A5E8A5F002CEDDC /* CreateProjectView.swift */,
-				03ADF3882A5E7322002CEDDC /* StartDayView.swift */,
-				03ADF3862A5D9F91002CEDDC /* InputContentView.swift */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		5831179C2A5B71280099B517 /* TeamDashboard */ = {
@@ -663,6 +666,7 @@
 				03E6D2782A5333BF00F4453C /* UITabBar+.swift in Sources */,
 				09C0A4F72A5C305200691FFD /* TeamMemberDataModel.swift in Sources */,
 				03FFD2CC2A5B175C00A3B70D /* SFProType.swift in Sources */,
+				0351AB3C2A605A7D006B0F4C /* ProjectStartTimeViewController.swift in Sources */,
 				09C0A4F32A5BEC1600691FFD /* TeamMemberViewController.swift in Sources */,
 				03FFD2D92A5D968200A3B70D /* CreateProjectViewController.swift in Sources */,
 				03E6D1E92A53219600F4453C /* HomeViewController.swift in Sources */,
