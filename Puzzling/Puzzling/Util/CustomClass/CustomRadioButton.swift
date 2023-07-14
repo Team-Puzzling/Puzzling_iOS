@@ -1,3 +1,4 @@
+
 //
 //  UIRadioButton.swift
 //  Puzzling
@@ -13,7 +14,7 @@ class CustomRadioButton: UIButton {
     
     // MARK: - UI Components
     
-    private let innerCircle = UIView()
+    let innerCircle = UIView()
     
     // MARK: - Initializer
     
@@ -21,15 +22,17 @@ class CustomRadioButton: UIButton {
         super.init(frame: frame)
         setButton()
         setInnerCircle()
-        addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        setAddTarget()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setButton()
         setInnerCircle()
-        addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        setAddTarget()
     }
+    
+    // MARK: - UI Components Property
     
     private func setButton() {
         self.layer.cornerRadius = 8.0
@@ -68,11 +71,16 @@ class CustomRadioButton: UIButton {
         innerCircle.layer.cornerRadius = circleSize.width / 2
     }
     
+    // MARK: - Methods
+
+    private func setAddTarget() {
+        addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+    }
+    
     // MARK: - @objc Methods
     
     @objc private func buttonTapped() {
         innerCircle.isHidden = !innerCircle.isHidden
         btnSelected = !innerCircle.isHidden
-        print(btnSelected)
     }
 }
