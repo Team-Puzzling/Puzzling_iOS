@@ -10,7 +10,21 @@ import UIKit
 import SnapKit
 import Then
 
-final class IndivisualMainBoxView: UIView {
+final class DashboardMainBoxView: UIView {
+    
+    enum DashboardType {
+        case indivisual
+        case team
+        
+        var cardButtonTitle: String {
+            switch self {
+            case .indivisual:
+                return "퍼즐판 보러가기"
+            case .team:
+                return "팀 퍼즐판 보러가기"
+            }
+        }
+    }
     
     private var userName: String = "User" {
         didSet {
@@ -28,9 +42,12 @@ final class IndivisualMainBoxView: UIView {
     private let piecesCountLabel = UILabel()
     private let maxCountLabel = UILabel()
     private let ToBeCollectionView = UIView()
-    private let cardButtonView = IndivisualCardButtonView()
+    private lazy var cardButtonView = IndivisualCardButtonView(frame: .zero, cardTitle: boxType.cardButtonTitle)
     
-    override init(frame: CGRect) {
+    private var boxType: DashboardType!
+    
+    init(frame: CGRect, type: DashboardType) {
+        self.boxType = type
         super.init(frame: frame)
         setDelegate()
         setUI()
@@ -47,7 +64,7 @@ final class IndivisualMainBoxView: UIView {
     }
 }
  
-extension IndivisualMainBoxView {
+extension DashboardMainBoxView {
     
     private func setDelegate() {
         
@@ -110,7 +127,7 @@ extension IndivisualMainBoxView {
     }
 }
 
-extension IndivisualMainBoxView {
+extension DashboardMainBoxView {
     func passPuzzleData(userName: String, piecesCount: Int) {
         self.userName = userName
         self.piecesCount = piecesCount
