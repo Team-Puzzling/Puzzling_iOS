@@ -78,7 +78,9 @@
 		588AA0732A5ECDE70017CB1E /* IndivisualDashboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588AA0722A5ECDE70017CB1E /* IndivisualDashboardModel.swift */; };
 		588AA0752A5ECDF10017CB1E /* TeamDashboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588AA0742A5ECDF10017CB1E /* TeamDashboardModel.swift */; };
 		588AA0792A5EF4930017CB1E /* HomeMainButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588AA0782A5EF4930017CB1E /* HomeMainButton.swift */; };
-		58EDAF932A5DD25D004EF5D3 /* IndivisualMainBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EDAF922A5DD25D004EF5D3 /* IndivisualMainBoxView.swift */; };
+		58DC6A6B2A616A2E0039242C /* TeamDashboardRankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DC6A6A2A616A2E0039242C /* TeamDashboardRankView.swift */; };
+		58DC6A6D2A61708D0039242C /* TeamRankPodiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DC6A6C2A61708D0039242C /* TeamRankPodiumView.swift */; };
+		58EDAF932A5DD25D004EF5D3 /* DashboardMainBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EDAF922A5DD25D004EF5D3 /* DashboardMainBoxView.swift */; };
 		58EDAF952A5DDA04004EF5D3 /* IndivisualCardButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EDAF942A5DDA04004EF5D3 /* IndivisualCardButtonView.swift */; };
 /* End PBXBuildFile section */
 
@@ -149,7 +151,9 @@
 		588AA0722A5ECDE70017CB1E /* IndivisualDashboardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndivisualDashboardModel.swift; sourceTree = "<group>"; };
 		588AA0742A5ECDF10017CB1E /* TeamDashboardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDashboardModel.swift; sourceTree = "<group>"; };
 		588AA0782A5EF4930017CB1E /* HomeMainButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMainButton.swift; sourceTree = "<group>"; };
-		58EDAF922A5DD25D004EF5D3 /* IndivisualMainBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndivisualMainBoxView.swift; sourceTree = "<group>"; };
+		58DC6A6A2A616A2E0039242C /* TeamDashboardRankView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDashboardRankView.swift; sourceTree = "<group>"; };
+		58DC6A6C2A61708D0039242C /* TeamRankPodiumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRankPodiumView.swift; sourceTree = "<group>"; };
+		58EDAF922A5DD25D004EF5D3 /* DashboardMainBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardMainBoxView.swift; sourceTree = "<group>"; };
 		58EDAF942A5DDA04004EF5D3 /* IndivisualCardButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndivisualCardButtonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -325,6 +329,7 @@
 		03E6D20F2A5327E600F4453C /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				58DC6A692A615C2B0039242C /* Common */,
 				5831179D2A5B713D0099B517 /* IndivisualDashboard */,
 				5831179C2A5B71280099B517 /* TeamDashboard */,
 				03734EC02A59AB5E00B401D6 /* Main */,
@@ -506,8 +511,8 @@
 		5831179C2A5B71280099B517 /* TeamDashboard */ = {
 			isa = PBXGroup;
 			children = (
+				58DC6A662A6153500039242C /* View */,
 				58DC6A652A6152DE0039242C /* ViewController */,
-				583117A02A5B71920099B517 /* TeamDashboardViewController.swift */,
 			);
 			path = TeamDashboard;
 			sourceTree = "<group>";
@@ -551,14 +556,31 @@
 		58DC6A652A6152DE0039242C /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				583117A02A5B71920099B517 /* TeamDashboardViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		58DC6A662A6153500039242C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				58DC6A6A2A616A2E0039242C /* TeamDashboardRankView.swift */,
+				58DC6A6C2A61708D0039242C /* TeamRankPodiumView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		58DC6A692A615C2B0039242C /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				58EDAF922A5DD25D004EF5D3 /* DashboardMainBoxView.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		58EDAF902A5D9026004EF5D3 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				58EDAF922A5DD25D004EF5D3 /* IndivisualMainBoxView.swift */,
 				58EDAF942A5DDA04004EF5D3 /* IndivisualCardButtonView.swift */,
 				588AA06B2A5E77EF0017CB1E /* ActionPlanView.swift */,
 			);
@@ -670,6 +692,7 @@
 				583117A32A5B71A00099B517 /* IndivisualDashboardViewController.swift in Sources */,
 				03E6D2722A53339000F4453C /* UIImageView+.swift in Sources */,
 				03E6D2002A5325F200F4453C /* Model.swift in Sources */,
+				58DC6A6B2A616A2E0039242C /* TeamDashboardRankView.swift in Sources */,
 				096755BB2A5C61BE00A1E691 /* TeamMemberTableViewCell.swift in Sources */,
 				03E6D2422A532C3300F4453C /* Image.swift in Sources */,
 				03E6D2782A5333BF00F4453C /* UITabBar+.swift in Sources */,
@@ -713,13 +736,14 @@
 				588AA06F2A5E7F820017CB1E /* ActionPlanCollectionViewCell.swift in Sources */,
 				096755C62A5E970500A1E691 /* MyProjectViewController.swift in Sources */,
 				03FFD2CA2A5B15BA00A3B70D /* UIFont+.swift in Sources */,
-				58EDAF932A5DD25D004EF5D3 /* IndivisualMainBoxView.swift in Sources */,
+				58EDAF932A5DD25D004EF5D3 /* DashboardMainBoxView.swift in Sources */,
 				03E6D2072A5326DD00F4453C /* APIService.swift in Sources */,
 				03E6D27A2A5333C900F4453C /* UIImage+.swift in Sources */,
 				03734EBF2A59A26800B401D6 /* MyPageViewController.swift in Sources */,
 				583117A82A5BE1490099B517 /* HomeTitleBarView.swift in Sources */,
 				03E6D27C2A5333E400F4453C /* UIViewController+.swift in Sources */,
 				03734EBD2A59A1F800B401D6 /* TabBarItem.swift in Sources */,
+				58DC6A6D2A61708D0039242C /* TeamRankPodiumView.swift in Sources */,
 				03E6D2052A5326D400F4453C /* DTO.swift in Sources */,
 				588AA0792A5EF4930017CB1E /* HomeMainButton.swift in Sources */,
 				096755E62A60700E00A1E691 /* MyProjectTableHeaderView.swift in Sources */,
