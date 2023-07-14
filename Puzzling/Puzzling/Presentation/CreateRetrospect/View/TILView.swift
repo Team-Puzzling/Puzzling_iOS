@@ -10,11 +10,10 @@ import UIKit
 import Then
 import SnapKit
 
-
 class TILView: UIView {
-        
+    
     // MARK: - UI Components
-
+    
     private let wellLabel = UILabel()
     private let regretLabel = UILabel()
     private let learnLabel = UILabel()
@@ -27,33 +26,36 @@ class TILView: UIView {
     let regretTextView = UITextView()
     let learnTextView = UITextView()
     
-    // MARK: - View Life Cycle
+    // MARK: - Initializer
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         setLayout()
         setUI()
-        wellTextView.delegate = self
-        regretTextView.delegate = self
-        learnTextView.delegate = self
-        
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapScreen))
-        self.addGestureRecognizer(tapGestureRecognizer)
+        setDelegate()
+        setTapScreen()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+extension TILView {
     
     // MARK: - UI Components Property
     
     private func setUI() {
+        
+        self.backgroundColor = .white000
+
         wellLabel.do {
             $0.text = "잘한 점은 무엇인가요?"
             $0.textColor = .black000
             $0.font = .fontGuide(.body1_bold_kor)
         }
+        
         regretLabel.do {
             $0.text = "아쉬운 점은 무엇인가요"
             $0.textColor = .black000
@@ -118,23 +120,14 @@ class TILView: UIView {
     // MARK: - Layout Helper
 
     private func setLayout() {
-        self.backgroundColor = .white000
-        
-        addSubviews(
-            wellLabel,
-            regretLabel,
-            learnLabel,
-            wellTextView,
-            regretTextView,
-            learnTextView,
-            wellNumLabel,
-            regretNumLabel,
-            learnNumLabel
-        )
+                
+        addSubviews( wellLabel, regretLabel, learnLabel,
+                     wellTextView, regretTextView, learnTextView,
+                     wellNumLabel, regretNumLabel, learnNumLabel)
         
         wellLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(16)
-            $0.leading.equalToSuperview().offset(16)
+            $0.leading.equalToSuperview().offset(24)
             $0.height.equalTo(24)
         }
         
@@ -151,7 +144,7 @@ class TILView: UIView {
         
         regretLabel.snp.makeConstraints {
             $0.top.equalTo(wellTextView.snp.bottom).offset(45)
-            $0.leading.equalToSuperview().offset(16)
+            $0.leading.equalToSuperview().offset(24)
             $0.height.equalTo(24)
         }
         
@@ -168,7 +161,7 @@ class TILView: UIView {
         
         learnLabel.snp.makeConstraints {
             $0.top.equalTo(regretTextView.snp.bottom).offset(45)
-            $0.leading.equalToSuperview().offset(16)
+            $0.leading.equalToSuperview().offset(24)
             $0.height.equalTo(24)
         }
         
@@ -184,6 +177,19 @@ class TILView: UIView {
         }
     }
     
+    // MARK: - Methods
+
+    private func setDelegate() {
+        wellTextView.delegate = self
+        regretTextView.delegate = self
+        learnTextView.delegate = self
+    }
+    
+    private func setTapScreen() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapScreen))
+        self.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
     // MARK: - @objc Methods
     
     @objc private func didTapScreen() {
@@ -194,6 +200,7 @@ class TILView: UIView {
 extension TILView: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
+        
            if textView == wellTextView {
                let textCount = textView.text.count
                wellNumLabel.text = "\(textCount)/200"
@@ -249,17 +256,17 @@ extension TILView: UITextViewDelegate {
                 
         if textView == wellTextView {
             if textView.text.isEmpty {
-                textView.text = "\"오늘의 나는 무엇을 잘했는지\"작성해 보세요"
+                textView.text = "\"오늘의 나는 무엇을 잘했는지\" 작성해 보세요"
                 textView.textColor = .gray400
             }
         } else if textView == regretTextView {
             if textView.text.isEmpty {
-                textView.text = "\"어떤 문제/어려움을 겪었는지, 향후 어떤 액션으로 이를 해결해볼 것인지\"작성해 보세요"
+                textView.text = "\"어떤 문제/어려움을 겪었는지, 향후 어떤 액션으로 이를 해결해볼 것인지\" 작성해 보세요"
                 textView.textColor = .gray400
             }
         } else if textView == learnTextView {
             if textView.text.isEmpty {
-                textView.text = "\"오늘은 일에서 어떤 것을 배웠는지\"작성해 보세요"
+                textView.text = "\"오늘은 일에서 어떤 것을 배웠는지\" 작성해 보세요"
                 textView.textColor = .gray400
             }
         }

@@ -10,11 +10,10 @@ import UIKit
 import Then
 import SnapKit
 
-
 class AARView: UIView {
     
     // MARK: - UI Components
-
+    
     private let targetLabel = UILabel()
     private let resultLabel = UILabel()
     private let differenceLabel = UILabel()
@@ -26,7 +25,7 @@ class AARView: UIView {
     private let differenceNumLabel = UILabel()
     private let continuouslyNumLabel = UILabel()
     private let purposeNumLabel = UILabel()
-
+    
     let targetTextView = UITextView()
     let resultTextView = UITextView()
     let differenceTextView = UITextView()
@@ -34,36 +33,36 @@ class AARView: UIView {
     let purposeTextView = UITextView()
     
     
-    // MARK: - View Life Cycle
-
+    // MARK: - Initializer
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setLayout()
         setUI()
-        
-        targetTextView.delegate = self
-        resultTextView.delegate = self
-        differenceTextView.delegate = self
-        continuouslyTextView.delegate = self
-        purposeTextView.delegate = self
-        
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapScreen))
-        self.addGestureRecognizer(tapGestureRecognizer)
+        setDelegate()
+        setTapScreen()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+extension AARView {
     
     // MARK: - UI Components Property
     
     private func setUI() {
+        
+        self.backgroundColor = .white000
+
         targetLabel.do {
             $0.text = "초기 목표"
             $0.textColor = .black000
             $0.font = .fontGuide(.body1_bold_kor)
         }
+        
         resultLabel.do {
             $0.text = "결과"
             $0.textColor = .black000
@@ -172,29 +171,16 @@ class AARView: UIView {
     // MARK: - Layout Helper
 
     private func setLayout() {
-        self.backgroundColor = .white000
         
-        addSubviews(
-            targetLabel,
-            resultLabel,
-            differenceLabel,
-            continuouslyLabel,
-            purposeLabel,
-            targetTextView,
-            resultTextView,
-            differenceTextView,
-            continuouslyTextView,
-            purposeTextView,
-            targetNumLabel,
-            resultNumLabel,
-            differenceNumLabel,
-            continuouslyNumLabel,
-            purposeNumLabel
-        )
+        addSubviews(targetLabel, resultLabel, differenceLabel,
+                    continuouslyLabel, purposeLabel, targetTextView,
+                    resultTextView, differenceTextView, continuouslyTextView,
+                    purposeTextView, targetNumLabel, resultNumLabel,
+                    differenceNumLabel, continuouslyNumLabel, purposeNumLabel)
         
         targetLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(16)
-            $0.leading.equalToSuperview().offset(16)
+            $0.leading.equalToSuperview().offset(24)
         }
         
         targetTextView.snp.makeConstraints {
@@ -210,7 +196,7 @@ class AARView: UIView {
         
         resultLabel.snp.makeConstraints {
             $0.top.equalTo(targetTextView.snp.bottom).offset(45)
-            $0.leading.equalToSuperview().offset(16)
+            $0.leading.equalToSuperview().offset(24)
         }
         
         resultTextView.snp.makeConstraints {
@@ -226,7 +212,7 @@ class AARView: UIView {
         
         differenceLabel.snp.makeConstraints {
             $0.top.equalTo(resultTextView.snp.bottom).offset(45)
-            $0.leading.equalToSuperview().offset(16)
+            $0.leading.equalToSuperview().offset(24)
         }
      
         differenceTextView.snp.makeConstraints {
@@ -242,7 +228,7 @@ class AARView: UIView {
         
         continuouslyLabel.snp.makeConstraints {
             $0.top.equalTo(differenceTextView.snp.bottom).offset(45)
-            $0.leading.equalToSuperview().offset(16)
+            $0.leading.equalToSuperview().offset(24)
         }
      
         continuouslyTextView.snp.makeConstraints {
@@ -258,7 +244,7 @@ class AARView: UIView {
         
         purposeLabel.snp.makeConstraints {
             $0.top.equalTo(continuouslyTextView.snp.bottom).offset(45)
-            $0.leading.equalToSuperview().offset(16)
+            $0.leading.equalToSuperview().offset(24)
         }
      
         purposeTextView.snp.makeConstraints {
@@ -271,7 +257,21 @@ class AARView: UIView {
             $0.top.equalTo(purposeTextView.snp.bottom).inset(-4)
             $0.trailing.equalTo(continuouslyTextView.snp.trailing).inset(16)
         }
-
+    }
+    
+    // MARK: - Methods
+    
+    private func setDelegate() {
+        targetTextView.delegate = self
+        resultTextView.delegate = self
+        differenceTextView.delegate = self
+        continuouslyTextView.delegate = self
+        purposeTextView.delegate = self
+    }
+    
+    private func setTapScreen() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapScreen))
+        self.addGestureRecognizer(tapGestureRecognizer)
     }
     
     // MARK: - @objc Methods
@@ -315,8 +315,6 @@ extension AARView: UITextViewDelegate {
                    textView.deleteBackward()
                }
            }
-
-
        }
     
     func textViewDidBeginEditing(_ textView: UITextView) {

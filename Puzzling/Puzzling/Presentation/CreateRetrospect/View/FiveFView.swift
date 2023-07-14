@@ -10,11 +10,10 @@ import UIKit
 import Then
 import SnapKit
 
-
 class FiveFView: UIView {
-        
+    
     // MARK: - UI Components
-
+    
     private let factLabel = UILabel()
     private let feelingLabel = UILabel()
     private let findingLabel = UILabel()
@@ -34,36 +33,36 @@ class FiveFView: UIView {
     let feedbackTextView = UITextView()
     
     
-    // MARK: - View Life Cycle
+    // MARK: - Initializer
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         setLayout()
         setUI()
-        
-        factTextView.delegate = self
-        feelingTextView.delegate = self
-        findingTextView.delegate = self
-        futureTextView.delegate = self
-        feedbackTextView.delegate = self
-
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapScreen))
-        self.addGestureRecognizer(tapGestureRecognizer)
+        setDelegate()
+        setTapScreen()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+extension FiveFView {
     
     // MARK: - UI Components Property
     
     private func setUI() {
+
+        self.backgroundColor = .white000
+
         factLabel.do {
             $0.text = "Fact"
             $0.textColor = .black000
             $0.font = .fontGuide(.body1_bold_kor)
         }
+        
         feelingLabel.do {
             $0.text = "Feeling"
             $0.textColor = .black000
@@ -172,29 +171,16 @@ class FiveFView: UIView {
     // MARK: - Layout Helper
 
     private func setLayout() {
-        self.backgroundColor = .white000
         
-        addSubviews(
-            factLabel,
-            feelingLabel,
-            findingLabel,
-            futureLabel,
-            feedbackLabel,
-            factTextView,
-            feelingTextView,
-            findingTextView,
-            futureTextView,
-            feedbackTextView,
-            factNumLabel,
-            feelingNumLabel,
-            findingNumLabel,
-            futureNumLabel,
-            feedbackNumLabel
-        )
+        addSubviews(factLabel, feelingLabel, findingLabel,
+                    futureLabel, feedbackLabel, factTextView,
+                    feelingTextView, findingTextView, futureTextView,
+                    feedbackTextView, factNumLabel, feelingNumLabel,
+                    findingNumLabel, futureNumLabel, feedbackNumLabel)
         
         factLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(16)
-            $0.leading.equalToSuperview().offset(16)
+            $0.leading.equalToSuperview().offset(24)
         }
         
         factTextView.snp.makeConstraints {
@@ -210,7 +196,7 @@ class FiveFView: UIView {
         
         feelingLabel.snp.makeConstraints {
             $0.top.equalTo(factTextView.snp.bottom).offset(45)
-            $0.leading.equalToSuperview().offset(16)
+            $0.leading.equalToSuperview().offset(24)
         }
         
         feelingTextView.snp.makeConstraints {
@@ -226,7 +212,7 @@ class FiveFView: UIView {
         
         findingLabel.snp.makeConstraints {
             $0.top.equalTo(feelingTextView.snp.bottom).offset(45)
-            $0.leading.equalToSuperview().offset(16)
+            $0.leading.equalToSuperview().offset(24)
         }
      
         findingTextView.snp.makeConstraints {
@@ -242,7 +228,7 @@ class FiveFView: UIView {
         
         futureLabel.snp.makeConstraints {
             $0.top.equalTo(findingTextView.snp.bottom).offset(45)
-            $0.leading.equalToSuperview().offset(16)
+            $0.leading.equalToSuperview().offset(24)
         }
      
         futureTextView.snp.makeConstraints {
@@ -258,7 +244,7 @@ class FiveFView: UIView {
         
         feedbackLabel.snp.makeConstraints {
             $0.top.equalTo(futureTextView.snp.bottom).offset(45)
-            $0.leading.equalToSuperview().offset(16)
+            $0.leading.equalToSuperview().offset(24)
         }
      
         feedbackTextView.snp.makeConstraints {
@@ -274,6 +260,19 @@ class FiveFView: UIView {
 
     }
     
+    private func setDelegate() {
+        factTextView.delegate = self
+        feelingTextView.delegate = self
+        findingTextView.delegate = self
+        futureTextView.delegate = self
+        feedbackTextView.delegate = self
+    }
+    
+    private func setTapScreen() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapScreen))
+        self.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
     // MARK: - @objc Methods
     
     @objc private func didTapScreen() {
@@ -284,6 +283,7 @@ class FiveFView: UIView {
 extension FiveFView: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
+        
            if textView == factTextView {
                let textCount = textView.text.count
                factNumLabel.text = "\(textCount)/200"
@@ -315,8 +315,6 @@ extension FiveFView: UITextViewDelegate {
                    textView.deleteBackward()
                }
            }
-
-
        }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
