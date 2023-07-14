@@ -40,6 +40,10 @@ final class StartDayView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("SelectedDateNotification"), object: nil)
+    }
 }
 
 extension StartDayView {
@@ -112,6 +116,15 @@ extension StartDayView {
         NotificationCenter.default.addObserver(self, selector: #selector(handleSelectedDate(_:)), name: Notification.Name("SelectedDateNotification"), object: nil)
     }
     
+    private func startDateNotification(date: String) {
+        let userInfo = date
+        NotificationCenter.default.post(
+            name: Notification.Name("startDateNotification"),
+            object: nil,
+            userInfo: ["userInfo": userInfo]
+        )
+    }
+    
     // MARK: - @objc Methods
     
     @objc
@@ -130,6 +143,7 @@ extension StartDayView {
                 startDayLabel.font = .fontGuide(.heading4_kor)
                 startDayLabel.textColor = .black000
                 startDayLabel.text = selectedDate
+                startDateNotification(date: selectedDate)
             }
         }
     }

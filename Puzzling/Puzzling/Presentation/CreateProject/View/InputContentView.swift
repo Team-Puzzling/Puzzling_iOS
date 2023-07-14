@@ -43,6 +43,7 @@ final class InputContentView: UIView {
         setDelegate()
         setInputContent(type: type)
         activeTextField = type
+        setTapScreen()
     }
     
     required init?(coder: NSCoder) {
@@ -230,6 +231,11 @@ extension InputContentView {
         }
     }
     
+    private func setTapScreen() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapScreen))
+        self.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
     // MARK: - @objc Methods
     
     @objc
@@ -237,6 +243,11 @@ extension InputContentView {
         setInputContent(type: activeTextField ?? .name)
         inputTextField.placeholder = .none
         inputTextField.text?.removeAll()
+    }
+    
+    
+    @objc private func didTapScreen() {
+          self.endEditing(true)
     }
 }
 
@@ -307,5 +318,22 @@ extension InputContentView: UITextFieldDelegate {
             return false
         }
         return false
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if let text = textField.text {
+            if text.isEmpty {
+                textField.layer.borderColor = .none
+                textField.layer.borderWidth = 0
+                textFieldButton.isHidden = true
+                warningLabel.isHidden = true
+                textField.placeholder = textFieldPlaceholder(textField: activeTextField ?? .name)
+            } else {
+                if text.isOnlyKorean() {
+                    textFieldNotification(textField: textField, contentType: activeTextField ?? .name)
+                }
+            }
+        }
+        return true
     }
 }

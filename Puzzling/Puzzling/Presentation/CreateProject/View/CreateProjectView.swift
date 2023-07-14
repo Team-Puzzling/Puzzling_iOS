@@ -34,7 +34,6 @@ final class CreateProjectView: UIScrollView {
     // MARK: - Properties
     
     private var selectedCycleIndex: [Int] = []
-    private var selectedCycleList: [String] = []
     
     // MARK: - View Life Cycle
     
@@ -155,34 +154,31 @@ extension CreateProjectView {
         cycleCollectionView.registerCell(ProjectCycleCollectionViewCell.self)
     }
     
-    private func getSelectedProjectCycle(list: [Int]) -> [String] {
-        var selectedList = list
-        selectedList.sort()
-        let dayOfWeekList = selectedList.map { index in
-            switch index {
-            case 0:
-                return "월"
-            case 1:
-                return "화"
-            case 2:
-                return "수"
-            case 3:
-                return "목"
-            case 4:
-                return "금"
-            case 5:
-                return "토"
-            case 6:
-                return "일"
-            default:
-                return ""
-            }
-        }
-        print(dayOfWeekList)
-        return dayOfWeekList
+    private func cycleNotification(list: [Int]) {
+        let userInfo = list
+        NotificationCenter.default.post(
+            name: Notification.Name("cycleNotification"),
+            object: nil,
+            userInfo: ["userInfo": userInfo]
+        )
+    }
+    
+    private func setTapScreen() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapScreen))
+        tapGestureRecognizer.cancelsTouchesInView = false // 터치 이벤트를 뷰로 전달하기 위해 추가
+        self.addGestureRecognizer(tapGestureRecognizer)
     }
     
     // MARK: - @objc Methods
+    
+    @objc private func didTapScreen(_ gesture: UITapGestureRecognizer) {
+        let touchLocation = gesture.location(in: cycleCollectionView)
+        guard let indexPath = cycleCollectionView.indexPathForItem(at: touchLocation) else {
+            self.endEditing(true)
+            return
+        }
+        cycleCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredVertically)
+    }
 }
 
 extension CreateProjectView: UICollectionViewDelegateFlowLayout {
@@ -215,7 +211,7 @@ extension CreateProjectView: UICollectionViewDataSource {
         let cell = collectionView.cellForItem(at: indexPath)
         cell?.isSelected = true
         selectedCycleIndex.append(indexPath.row)
-        print(selectedCycleIndex)
+        cycleNotification(list: selectedCycleIndex)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -224,6 +220,6 @@ extension CreateProjectView: UICollectionViewDataSource {
         if let index = selectedCycleIndex.firstIndex(of: indexPath.row) {
             selectedCycleIndex.remove(at: index)
         }
-        print(selectedCycleIndex)
+        cycleNotification(list: selectedCycleIndex)
     }
 }

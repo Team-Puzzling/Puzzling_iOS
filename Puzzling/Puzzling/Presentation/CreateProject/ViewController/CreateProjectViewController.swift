@@ -47,6 +47,9 @@ final class CreateProjectViewController: UIViewController {
     
     deinit {
         print("CreateProjectViewController")
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("textFieldNotification"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("startDateNotification"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("cycleNotification"), object: nil)
     }
 }
 
@@ -69,7 +72,6 @@ extension CreateProjectViewController {
         
         registerProjectButton.do {
             $0.setTitle("프로젝트 등록하기", for: .normal)
-            $0.setState(.allow)
         }
     }
     
@@ -122,6 +124,8 @@ extension CreateProjectViewController {
     
     private func setNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(getTextFieldInfo(_:)), name: Notification.Name("textFieldNotification"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(getStartDateInfo(_:)), name: Notification.Name("startDateNotification"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(getCycleInfo(_:)), name: Notification.Name("cycleNotification"), object: nil)
     }
     
     func presentToHalfModalViewController() {
@@ -156,6 +160,43 @@ extension CreateProjectViewController {
         print(projectCycle)
     }
     
+    private func getSelectedProjectCycle(list: [Int]) -> [String] {
+        var selectedList = list
+        selectedList.sort()
+        let dayOfWeekList = selectedList.map { index in
+            switch index {
+            case 0:
+                return "월"
+            case 1:
+                return "화"
+            case 2:
+                return "수"
+            case 3:
+                return "목"
+            case 4:
+                return "금"
+            case 5:
+                return "토"
+            case 6:
+                return "일"
+            default:
+                return ""
+            }
+        }
+        return dayOfWeekList
+    }
+    
+    private func buttonStateSetting() {
+        if (!projectName.isEmpty && !projectDescription.isEmpty && !projectStartDate.isEmpty &&
+            !projectRole.isEmpty && !projectNickname.isEmpty && !projectCycle.isEmpty) {
+            registerProjectButton.setState(.allow)
+        } else {
+            registerProjectButton.setState(.notAllow)
+        }
+    }
+    
+    // MARK: - @objc Methods
+    
     @objc
     private func registerProjectButtonDidTap() {
         projectRegister()
@@ -172,8 +213,25 @@ extension CreateProjectViewController {
             case .role:
                 projectRole = updateTextInfo.text
             case .nickname:
-                projectRole = updateTextInfo.text
+                projectNickname = updateTextInfo.text
             }
+            buttonStateSetting()
+        }
+    }
+    
+    @objc
+    private func getStartDateInfo(_ notification: Notification) {
+        if let dateInfo = notification.userInfo?["userInfo"] as? String {
+            projectStartDate = dateInfo
+            buttonStateSetting()
+        }
+    }
+    
+    @objc
+    private func getCycleInfo(_ notification: Notification) {
+        if let cycleInfo = notification.userInfo?["userInfo"] as? [Int] {
+            projectCycle = getSelectedProjectCycle(list: cycleInfo)
+            buttonStateSetting()
         }
     }
 }
