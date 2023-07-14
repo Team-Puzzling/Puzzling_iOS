@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeMainButton: UIButton {
+final class HomeMainButton: UIButton {
 
     private var isButtonEnabled: Bool = false {
         didSet {
