@@ -124,7 +124,6 @@ extension StartDayView {
     private func handleSelectedDate(_ notification: Notification) {
         if let selectedDate = notification.userInfo?["selectedDate"] as? String {
             startDayView.makeBorder(width: 0, color: .background050)
-            print("Selected Date: \(selectedDate)")
             if selectedDate == "0000/00/00" {
                 startDayLabel.font = .fontGuide(.body1_regular_kor)
             } else {

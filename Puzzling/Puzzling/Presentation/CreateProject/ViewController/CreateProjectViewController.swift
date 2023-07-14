@@ -62,7 +62,6 @@ extension CreateProjectViewController {
         
         registerProjectButton.do {
             $0.setTitle("프로젝트 등록하기", for: .normal)
-            $0.setState(.allow)
         }
     }
     
