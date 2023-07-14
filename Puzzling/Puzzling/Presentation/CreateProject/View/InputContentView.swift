@@ -260,6 +260,7 @@ extension InputContentView: UITextFieldDelegate {
     }
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
+        textFieldStatus(textField: textField)
         textFieldButton.isHidden = textField.text?.isEmpty ?? true
     }
     

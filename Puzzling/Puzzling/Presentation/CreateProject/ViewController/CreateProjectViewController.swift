@@ -136,7 +136,7 @@ extension CreateProjectViewController {
     
     @objc
     private func registerProjectButtonDidTap() {
-        
+        print("registerProjectButtonTap!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     }
 }
 
