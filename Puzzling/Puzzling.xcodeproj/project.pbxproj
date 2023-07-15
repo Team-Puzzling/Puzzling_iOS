@@ -82,6 +82,7 @@
 		583117A32A5B71A00099B517 /* IndivisualDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583117A22A5B71A00099B517 /* IndivisualDashboardViewController.swift */; };
 		583117A82A5BE1490099B517 /* HomeTitleBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583117A72A5BE1490099B517 /* HomeTitleBarView.swift */; };
 		583117AA2A5BE2D90099B517 /* HomeSegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583117A92A5BE2D90099B517 /* HomeSegmentedView.swift */; };
+		9B1CA9782A62ADFD00CB81AC /* ReviewDetailEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1CA9772A62ADFD00CB81AC /* ReviewDetailEmptyView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -155,6 +156,7 @@
 		583117A22A5B71A00099B517 /* IndivisualDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndivisualDashboardViewController.swift; sourceTree = "<group>"; };
 		583117A72A5BE1490099B517 /* HomeTitleBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTitleBarView.swift; sourceTree = "<group>"; };
 		583117A92A5BE2D90099B517 /* HomeSegmentedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSegmentedView.swift; sourceTree = "<group>"; };
+		9B1CA9772A62ADFD00CB81AC /* ReviewDetailEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailEmptyView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -512,8 +514,8 @@
 		096756072A61DB3800A1E691 /* ReviewDetail */ = {
 			isa = PBXGroup;
 			children = (
-				0967560B2A61E05400A1E691 /* View */,
 				0967560A2A61DB5E00A1E691 /* ViewController */,
+				0967560B2A61E05400A1E691 /* View */,
 			);
 			path = ReviewDetail;
 			sourceTree = "<group>";
@@ -531,6 +533,7 @@
 			children = (
 				0967560C2A61E08C00A1E691 /* ProjectCalendarView.swift */,
 				0967560E2A61E73700A1E691 /* ReviewDetailView.swift */,
+				9B1CA9772A62ADFD00CB81AC /* ReviewDetailEmptyView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -741,6 +744,7 @@
 				03E6D2262A532AAC00F4453C /* BaseView.swift in Sources */,
 				03E6D2282A532AB900F4453C /* BaseViewController.swift in Sources */,
 				096755EA2A60710100A1E691 /* MyProjectDataModel.swift in Sources */,
+				9B1CA9782A62ADFD00CB81AC /* ReviewDetailEmptyView.swift in Sources */,
 				0967560F2A61E73700A1E691 /* ReviewDetailView.swift in Sources */,
 				096755CB2A5E9AF500A1E691 /* MyProjectTableViewCell.swift in Sources */,
 				03E6D25A2A5331ED00F4453C /* APIConst.swift in Sources */,

@@ -14,6 +14,7 @@ import Then
 final class ProjectCalendarView: UIView {
     
     lazy var calendarView = FSCalendar(frame: .zero)
+    var calendarViewHeight = NSLayoutConstraint()
     private lazy var headerLabel = UILabel()
     private lazy var testLabel = UILabel()
     
@@ -29,6 +30,7 @@ final class ProjectCalendarView: UIView {
         setUI()
         setLayout()
         setDelegate()
+        calendarViewHeight.constant = 350
     }
     
     required init?(coder: NSCoder) {
@@ -39,20 +41,23 @@ final class ProjectCalendarView: UIView {
 extension ProjectCalendarView {
     private func setUI() {
         calendarView.do {
+            $0.backgroundColor = .systemBlue
             $0.select(Date())
             
             $0.locale = Locale(identifier: "ko_KR")
             $0.scope = .week
+            $0.calendarWeekdayView.backgroundColor = .systemCyan
+            $0.calculator.calendar.backgroundColor = .systemYellow
             
-            $0.appearance.headerTitleColor = .clear
-            $0.appearance.headerMinimumDissolvedAlpha = 0.0
+//            $0.appearance.headerTitleColor = .systemIndigo
+//            $0.appearance.headerMinimumDissolvedAlpha = 0.0
             
             $0.appearance.selectionColor = .blue400
             
-            let offset: Double = (self.frame.width - ("YYYY년 M월" as NSString)
-                .size(withAttributes: [NSAttributedString.Key.font: UIFont.fontGuide(.heading2_kor)])
-                .width - 16.0 ) / 2.0
-            $0.appearance.headerTitleOffset = CGPoint(x: -offset, y: 0)
+//            let offset: Double = (self.frame.width - ("YYYY년 M월" as NSString)
+//                .size(withAttributes: [NSAttributedString.Key.font: UIFont.fontGuide(.heading2_kor)])
+//                .width - 16.0 ) / 2.0
+//            $0.appearance.headerTitleOffset = CGPoint(x: -offset, y: 0)
             
             $0.weekdayHeight = 30
             $0.headerHeight = 62
@@ -60,13 +65,15 @@ extension ProjectCalendarView {
             $0.appearance.weekdayFont = .fontGuide(.detail1_regular_kor)
             $0.appearance.titleFont = .fontGuide(.body2_bold_kor)
             
-            $0.appearance.titleTodayColor = .gray400
-            $0.appearance.titleDefaultColor = .secondaryLabel
+//            $0.appearance.titleTodayColor = .gray400
+            $0.appearance.titleDefaultColor = .gray400
             
             $0.appearance.todayColor = .clear
             $0.appearance.weekdayTextColor = .gray400
             
-            $0.placeholderType = .none
+            $0.calendarHeaderView.isHidden = true
+            
+//            $0.placeholderType = .none
             
             $0.scrollEnabled = true
             $0.scrollDirection = .horizontal
@@ -74,9 +81,10 @@ extension ProjectCalendarView {
         
         headerLabel.do { [weak self] in
             guard let self = self else { return }
-            $0.font = .systemFont(ofSize: 22.0, weight: .bold)
-            $0.textColor = .label
+            $0.font = .fontGuide(.heading2_kor)
+            $0.textColor = .black000
             $0.text = self.headerDateFormatter.string(from: Date())
+            $0.backgroundColor = .systemMint
         }
     }
     
@@ -104,6 +112,14 @@ extension ProjectCalendarView: FSCalendarDelegate, FSCalendarDataSource, FSCalen
         let currentPage = calendarView.currentPage
         headerLabel.text = headerDateFormatter.string(from: currentPage)
     }
+    
+    func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
+        calendar.frame = CGRect(origin: calendar.frame.origin , size: bounds.size)
+        // Do other updates here
+//        calendarView.snp.makeConstraints
+        print(bounds.height)
+        self.calendarViewHeight.constant = bounds.height
+    }
 }
 
 extension ProjectCalendarView {
@@ -111,5 +127,10 @@ extension ProjectCalendarView {
         calendarView.setScope(.month, animated: true)
         headerDateFormatter.dateFormat = "YYYY년 M월"
         headerLabel.text = headerDateFormatter.string(from: calendarView.currentPage)
+    }
+    
+    func getCalendarViewHeight() -> CGFloat{
+        print(self.calendarViewHeight.constant , #function)
+        return self.calendarViewHeight.constant
     }
 }
