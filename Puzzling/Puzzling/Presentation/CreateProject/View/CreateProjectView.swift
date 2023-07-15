@@ -34,6 +34,7 @@ final class CreateProjectView: UIScrollView {
     // MARK: - Properties
     
     private var selectedCycleIndex: [Int] = []
+    private var activateTextFieldType: InputContentType?
     
     // MARK: - View Life Cycle
     
@@ -46,7 +47,7 @@ final class CreateProjectView: UIScrollView {
         setTapScreen()
         print(nameView.frame.maxY)
         print(descriptionView.frame.maxY)
-        addKeyboardObserver()
+//        addKeyboardObserver()
         setNotificationCenter()
     }
     
@@ -207,7 +208,19 @@ extension CreateProjectView {
             return
         }
         let keyboardHeight = keyboardFrame.height
-        let containerViewMaxY = nicknameView.frame.maxY
+        var containerViewMaxY = nicknameView.frame.maxY
+        if let activateTextField = activateTextFieldType {
+            switch activateTextField {
+            case .name:
+                return
+            case .description:
+                containerViewMaxY = descriptionView.frame.maxY
+            case .role:
+                containerViewMaxY = roleView.frame.maxY
+            case .nickname:
+                containerViewMaxY = nicknameView.frame.maxY
+            }
+        }
         let screenHeight = UIScreen.main.bounds.height
         let distance = keyboardHeight - (screenHeight - containerViewMaxY)
         
@@ -215,6 +228,20 @@ extension CreateProjectView {
             self.frame.origin.y = distance > 0 ? -distance : 0
         }
     }
+    
+//    @objc func keyboardWillShow(_ sender: Notification) {
+//        guard let keyboardFrame = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue,
+//              let currentTextField = UIResponder.currentFirstResponder as? UITextField else { return }
+//        let keyboardTopY = keyboardFrame.cgRectValue.origin.y
+//        let convertedTextFieldFrame = view.convert(currentTextField.frame, from: currentTextField.superview)
+//        let textFieldBottomY = convertedTextFieldFrame.origin.y + convertedTextFieldFrame.size.height
+//
+//        if textFieldBottomY > keyboardTopY {
+//            let keyboardOverlap = textFieldBottomY - keyboardTopY
+//            view.frame.origin.y = -keyboardOverlap
+//        }
+//    }
+
     
     @objc
     private func keyboardWillHide() {
@@ -225,8 +252,8 @@ extension CreateProjectView {
     
     @objc
     private func getTextFieldInfo(_ notification: Notification) {
-        if let textInfo = notification.userInfo as? [String: TextFieldInfo], let updateTextInfo = textInfo["userInfo"] {
-            print(updateTextInfo.type)
+        if let textInfo = notification.userInfo?["userInfo"] as? InputContentType {
+            activateTextFieldType = textInfo
         }
     }
 }

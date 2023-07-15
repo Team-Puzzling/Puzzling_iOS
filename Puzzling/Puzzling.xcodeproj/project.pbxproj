@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0351AB3C2A605A7D006B0F4C /* ProjectStartTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB3B2A605A7D006B0F4C /* ProjectStartTimeViewController.swift */; };
 		0351AB3E2A619F04006B0F4C /* textFieldNotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB3D2A619F04006B0F4C /* textFieldNotificationModel.swift */; };
+		0351AB402A630EE6006B0F4C /* UIResponder+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB3F2A630EE6006B0F4C /* UIResponder+.swift */; };
 		03734EB52A599FDB00B401D6 /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03734EB42A599FDB00B401D6 /* Image.xcassets */; };
 		03734EB82A59A0BD00B401D6 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03734EB72A59A0BD00B401D6 /* TabBarController.swift */; };
 		03734EBD2A59A1F800B401D6 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03734EBC2A59A1F800B401D6 /* TabBarItem.swift */; };
@@ -87,6 +88,7 @@
 /* Begin PBXFileReference section */
 		0351AB3B2A605A7D006B0F4C /* ProjectStartTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectStartTimeViewController.swift; sourceTree = "<group>"; };
 		0351AB3D2A619F04006B0F4C /* textFieldNotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = textFieldNotificationModel.swift; sourceTree = "<group>"; };
+		0351AB3F2A630EE6006B0F4C /* UIResponder+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+.swift"; sourceTree = "<group>"; };
 		03734EB42A599FDB00B401D6 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = "<group>"; };
 		03734EB72A59A0BD00B401D6 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		03734EBC2A59A1F800B401D6 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
@@ -440,6 +442,7 @@
 				03E6D27B2A5333E400F4453C /* UIViewController+.swift */,
 				03B004A82A556C7400E71CA7 /* UIWindow+.swift */,
 				03FFD2C92A5B15BA00A3B70D /* UIFont+.swift */,
+				0351AB3F2A630EE6006B0F4C /* UIResponder+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -736,6 +739,7 @@
 				03E6D2622A5332F700F4453C /* Encodable+.swift in Sources */,
 				03E6D26A2A53335700F4453C /* UIStackView+.swift in Sources */,
 				096755C62A5E970500A1E691 /* MyProjectViewController.swift in Sources */,
+				0351AB402A630EE6006B0F4C /* UIResponder+.swift in Sources */,
 				03FFD2CA2A5B15BA00A3B70D /* UIFont+.swift in Sources */,
 				03E6D2072A5326DD00F4453C /* APIService.swift in Sources */,
 				03E6D27A2A5333C900F4453C /* UIImage+.swift in Sources */,
