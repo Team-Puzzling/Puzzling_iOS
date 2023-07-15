@@ -6,3 +6,14 @@
 //
 
 import Foundation
+
+struct TeamRankModel {
+    var userName: String
+    var role: String
+    var pieces: Int
+}
+
+struct TeamRankTopThreeModel {
+    var rankNumber: RankNumber?
+    var userInformation: TeamRankModel?
+}
