@@ -59,7 +59,7 @@ extension ProjectCalendarView {
 //                .width - 16.0 ) / 2.0
 //            $0.appearance.headerTitleOffset = CGPoint(x: -offset, y: 0)
             
-            $0.weekdayHeight = 30
+            $0.weekdayHeight = 20
             $0.headerHeight = 62
             
             $0.appearance.weekdayFont = .fontGuide(.detail1_regular_kor)

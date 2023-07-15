@@ -26,6 +26,7 @@ final class ReviewDetailViewController: UIViewController {
         setUI()
         setLayout()
         setRegister()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,6 +36,7 @@ final class ReviewDetailViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         setCalendarViewLayout()
     }
     
@@ -60,7 +62,7 @@ extension ReviewDetailViewController {
         projectCalenderView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.trailing.leading.equalToSuperview().inset(16)
-            $0.height.equalTo(projectCalenderView.getCalendarViewHeight())
+            $0.height.equalTo(300)
         }
         
         reviewDetailEmptyView.snp.makeConstraints {
@@ -103,6 +105,12 @@ extension ReviewDetailViewController {
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.trailing.leading.equalToSuperview().inset(16)
             $0.height.equalTo(projectCalenderView.getCalendarViewHeight())
+        }
+        
+        reviewDetailEmptyView.snp.remakeConstraints {
+            $0.top.equalTo(projectCalenderView.snp.bottom).offset(12)
+            $0.trailing.leading.equalToSuperview().inset(16)
+            $0.bottom.equalToSuperview()
         }
     }
 }

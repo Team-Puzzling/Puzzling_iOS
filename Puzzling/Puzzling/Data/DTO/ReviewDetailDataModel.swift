@@ -8,7 +8,7 @@
 import Foundation
 
 struct ReviewDetailDataModel {
-    let reviewId: Int
+    let reviewId: Int?
     let reviewDay: String
     let reviewDate: String
     let contents: [Contents]?
@@ -21,7 +21,7 @@ struct Contents {
 
 extension ReviewDetailDataModel {
     static func dummy() -> [ReviewDetailDataModel] {
-        return [ReviewDetailDataModel(reviewId: 1,
+        return [ReviewDetailDataModel(reviewId: nil,
                                       reviewDay: "월",
                                       reviewDate: "2023-07-10",
                                       contents: nil),
