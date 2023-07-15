@@ -45,10 +45,6 @@ final class CreateProjectView: UIScrollView {
         setDelegate()
         setRegister()
         setTapScreen()
-        print(nameView.frame.maxY)
-        print(descriptionView.frame.maxY)
-//        addKeyboardObserver()
-        setNotificationCenter()
     }
     
     required init?(coder: NSCoder) {
@@ -160,10 +156,6 @@ extension CreateProjectView {
         cycleCollectionView.registerCell(ProjectCycleCollectionViewCell.self)
     }
     
-    private func setNotificationCenter() {
-        NotificationCenter.default.addObserver(self, selector: #selector(getTextFieldInfo(_:)), name: Notification.Name("textFieldInfoNotification"), object: nil)
-    }
-    
     private func cycleNotification(list: [Int]) {
         let userInfo = list
         NotificationCenter.default.post(
@@ -179,19 +171,6 @@ extension CreateProjectView {
         self.addGestureRecognizer(tapGestureRecognizer)
     }
     
-    private func addKeyboardObserver() {
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillShow),
-            name: UIResponder.keyboardWillShowNotification,
-            object: nil)
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(keyboardWillHide),
-            name: UIResponder.keyboardWillHideNotification,
-            object: nil)
-    }
-    
     // MARK: - @objc Methods
     
     @objc
@@ -199,61 +178,6 @@ extension CreateProjectView {
         let touchLocation = gesture.location(in: self)
         if !cycleCollectionView.frame.contains(touchLocation) {
             self.endEditing(true)
-        }
-    }
-    
-    @objc
-    private func keyboardWillShow(_ notification: NSNotification) {
-        guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
-            return
-        }
-        let keyboardHeight = keyboardFrame.height
-        var containerViewMaxY = nicknameView.frame.maxY
-        if let activateTextField = activateTextFieldType {
-            switch activateTextField {
-            case .name:
-                return
-            case .description:
-                containerViewMaxY = descriptionView.frame.maxY
-            case .role:
-                containerViewMaxY = roleView.frame.maxY
-            case .nickname:
-                containerViewMaxY = nicknameView.frame.maxY
-            }
-        }
-        let screenHeight = UIScreen.main.bounds.height
-        let distance = keyboardHeight - (screenHeight - containerViewMaxY)
-        
-        UIView.animate(withDuration: 0.25) {
-            self.frame.origin.y = distance > 0 ? -distance : 0
-        }
-    }
-    
-//    @objc func keyboardWillShow(_ sender: Notification) {
-//        guard let keyboardFrame = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue,
-//              let currentTextField = UIResponder.currentFirstResponder as? UITextField else { return }
-//        let keyboardTopY = keyboardFrame.cgRectValue.origin.y
-//        let convertedTextFieldFrame = view.convert(currentTextField.frame, from: currentTextField.superview)
-//        let textFieldBottomY = convertedTextFieldFrame.origin.y + convertedTextFieldFrame.size.height
-//
-//        if textFieldBottomY > keyboardTopY {
-//            let keyboardOverlap = textFieldBottomY - keyboardTopY
-//            view.frame.origin.y = -keyboardOverlap
-//        }
-//    }
-
-    
-    @objc
-    private func keyboardWillHide() {
-        UIView.animate(withDuration: 0.25) {
-            self.frame.origin.y = 0
-        }
-    }
-    
-    @objc
-    private func getTextFieldInfo(_ notification: Notification) {
-        if let textInfo = notification.userInfo?["userInfo"] as? InputContentType {
-            activateTextFieldType = textInfo
         }
     }
 }

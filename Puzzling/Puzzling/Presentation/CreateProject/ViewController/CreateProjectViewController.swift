@@ -44,7 +44,6 @@ final class CreateProjectViewController: UIViewController {
         setAddTarget()
         setDelegate()
         setNotificationCenter()
-//        addKeyboardObserver()
         setupKeyboardEvent()
     }
     
@@ -258,7 +257,6 @@ extension CreateProjectViewController {
             let keyboardOverlap = textFieldBottomY - keyboardTopY
             view.frame.origin.y = -keyboardOverlap - 40
         }
-        print("🍄🍄v🍄🍄🍄🍄🍄🍄🍄🍄🍄🍄🍄🍄🍄🍄🍄🍄🍄🍄🍄🍄")
     }
     
     @objc func keyboardWillHide(_ sender: Notification) {
@@ -266,27 +264,6 @@ extension CreateProjectViewController {
             view.frame.origin.y = 0
         }
     }
-
-    
-//    @objc private func keyboardWillShow(_ notification: NSNotification) {
-//        guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
-//            return
-//        }
-//        let keyboardHeight = keyboardFrame.height
-//        let containerViewMaxY = createProjectView.nicknameView.frame.maxY
-//        let screenHeight = UIScreen.main.bounds.height
-//        let distance = keyboardHeight - (screenHeight - containerViewMaxY)
-//
-//        UIView.animate(withDuration: 0.25) {
-//            self.view.frame.origin.y = distance > 0 ? -distance : 0
-//        }
-//    }
-//
-//    @objc private func keyboardWillHide() {
-//        UIView.animate(withDuration: 0.25) {
-//            self.view.frame.origin.y = 0
-//        }
-//    }
 }
 
 // MARK: - UISheetPresentationControllerDelegate
