@@ -114,6 +114,7 @@ extension StartDayView {
     
     private func setNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(handleSelectedDate(_:)), name: Notification.Name("SelectedDateNotification"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(modalDismissed(_:)), name: NSNotification.Name("ModalDismissedNotification"), object: nil)
     }
     
     private func startDateNotification(date: String) {
@@ -136,10 +137,8 @@ extension StartDayView {
     @objc
     private func handleSelectedDate(_ notification: Notification) {
         if let selectedDate = notification.userInfo?["selectedDate"] as? String {
-            startDayView.makeBorder(width: 0, color: .background050)
             if selectedDate == "0000/00/00" {
                 startDayLabel.font = .fontGuide(.body1_regular_kor)
-                startDayLabel.layer.borderWidth = 0
             } else {
                 startDayLabel.font = .fontGuide(.heading4_kor)
                 startDayLabel.textColor = .black000
@@ -147,5 +146,10 @@ extension StartDayView {
                 startDateNotification(date: selectedDate)
             }
         }
+    }
+    
+    @objc
+    private func modalDismissed(_ notification: Notification) {
+        startDayView.makeBorder(width: 0, color: .background050)
     }
 }

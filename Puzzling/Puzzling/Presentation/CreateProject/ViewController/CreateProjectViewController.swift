@@ -244,9 +244,8 @@ extension CreateProjectViewController {
 
     }
     
-    // MARK: - @objc Methods
-    
-    @objc func keyboardWillShow(_ sender: Notification) {
+    @objc
+    func keyboardWillShow(_ sender: Notification) {
         guard let keyboardFrame = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue,
               let currentTextField = UIResponder.currentResponder as? UITextField else { return }
         let keyboardTopY = keyboardFrame.cgRectValue.origin.y
@@ -259,7 +258,8 @@ extension CreateProjectViewController {
         }
     }
     
-    @objc func keyboardWillHide(_ sender: Notification) {
+    @objc
+    func keyboardWillHide(_ sender: Notification) {
         if view.frame.origin.y != 0 {
             view.frame.origin.y = 0
         }

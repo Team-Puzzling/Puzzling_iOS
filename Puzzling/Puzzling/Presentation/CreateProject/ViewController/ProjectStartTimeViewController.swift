@@ -31,6 +31,13 @@ final class ProjectStartTimeViewController: UIViewController {
         setAddTarget()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if isBeingDismissed || isMovingFromParent {
+            NotificationCenter.default.post(name: NSNotification.Name("ModalDismissedNotification"), object: nil)
+        }
+    }
+    
     deinit {
         print("ProjectStartTimeViewController")
     }
