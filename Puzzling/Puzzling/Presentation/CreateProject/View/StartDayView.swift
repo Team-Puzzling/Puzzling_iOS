@@ -20,7 +20,7 @@ final class StartDayView: UIView {
     
     private let titleLabel = UILabel()
     private let startDayView = UIView()
-    let startDayLabel = UILabel()
+    private let startDayLabel = UILabel()
     private let chevronDownButton = UIButton()
     
     // MARK: - Properties

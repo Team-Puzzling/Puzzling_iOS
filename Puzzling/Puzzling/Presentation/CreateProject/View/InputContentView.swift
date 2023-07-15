@@ -143,8 +143,8 @@ extension InputContentView {
         inputTextField.delegate = self
     }
     
-    private func textFieldPlaceholder(textField: InputContentType) -> String {
-        switch textField {
+    private func textFieldPlaceholder(type: InputContentType) -> String {
+        switch type {
         case .name:
             return "프로젝트 이름을 설정해 주세요."
         case .description:
@@ -171,7 +171,7 @@ extension InputContentView {
             titleLabel.text = "닉네임"
             countLabel.text = "0/50"
         }
-        inputTextField.placeholder = textFieldPlaceholder(textField: type)
+        inputTextField.placeholder = textFieldPlaceholder(type: type)
     }
     
     private func activeTextFieldBorderSetting(textField: UITextField) {
@@ -192,22 +192,11 @@ extension InputContentView {
         warningLabel.isHidden = false
     }
     
-    private func updateCharacterCount() {
-        if let text = inputTextField.text {
-            let count = text.count
-            switch activeTextField {
-            case .name:
-                countLabel.text = "\(count)/10"
-            case .description:
-                countLabel.text = "\(count)/50"
-            case .role:
-                countLabel.text = "\(count)/20"
-            case .nickname:
-                countLabel.text = "\(count)/50"
-            default:
-                countLabel.text = ""
-            }
-        }
+    private func defaultTextFieldBorderSetting(textField: UITextField) {
+        textField.layer.borderColor = .none
+        textField.layer.borderWidth = 0
+        textFieldButton.isHidden = true
+        warningLabel.isHidden = true
     }
     
     private func textFieldStatus(textField: UITextField) {
@@ -261,10 +250,7 @@ extension InputContentView: UITextFieldDelegate {
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         if let text = textField.text {
             if text.isOnlyKorEng() {
-                textField.layer.borderColor = .none
-                textField.layer.borderWidth = 0
-                textFieldButton.isHidden = true
-                warningLabel.isHidden = true
+                defaultTextFieldBorderSetting(textField: textField)
                 textFieldNotification(textField: textField, contentType: activeTextField ?? .name)
             } else {
                 emojiLimitTextFieldBorderSetting(textField: textField)
@@ -272,11 +258,8 @@ extension InputContentView: UITextFieldDelegate {
             }
             
             if text.isEmpty {
-                textField.layer.borderColor = .none
-                textField.layer.borderWidth = 0
-                textFieldButton.isHidden = true
-                warningLabel.isHidden = true
-                textField.placeholder = textFieldPlaceholder(textField: activeTextField ?? .name)
+                defaultTextFieldBorderSetting(textField: textField)
+                textField.placeholder = textFieldPlaceholder(type: activeTextField ?? .name)
             }
         }
         return true
@@ -288,7 +271,6 @@ extension InputContentView: UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        textFieldStatus(textField: textField)
         let currentText = textField.text ?? ""
         guard let stringRange = Range(range, in: currentText) else { return false }
         let changedText = currentText.replacingCharacters(in: stringRange, with: string)
@@ -297,22 +279,22 @@ extension InputContentView: UITextFieldDelegate {
         case .name:
             if (textCount <= 10) {
                 countLabel.text = "\(changedText.count)/10"
-                return textCount <= 10
+                return true
             }
         case .description:
             if (textCount <= 50) {
                 countLabel.text = "\(changedText.count)/50"
-                return textCount <= 50
+                return true
             }
         case .role:
             if (textCount <= 20) {
                 countLabel.text = "\(changedText.count)/20"
-                return textCount <= 20
+                return true
             }
         case .nickname:
             if (textCount <= 50) {
                 countLabel.text = "\(changedText.count)/50"
-                return textCount <= 50
+                return true
             }
         default:
             return false
@@ -323,11 +305,8 @@ extension InputContentView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if let text = textField.text {
             if text.isEmpty {
-                textField.layer.borderColor = .none
-                textField.layer.borderWidth = 0
-                textFieldButton.isHidden = true
-                warningLabel.isHidden = true
-                textField.placeholder = textFieldPlaceholder(textField: activeTextField ?? .name)
+                defaultTextFieldBorderSetting(textField: textField)
+                textField.placeholder = textFieldPlaceholder(type: activeTextField ?? .name)
             } else {
                 if text.isOnlyKorean() {
                     textFieldNotification(textField: textField, contentType: activeTextField ?? .name)

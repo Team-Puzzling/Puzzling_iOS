@@ -154,41 +154,30 @@ extension CreateProjectViewController {
         print("registerProjectButtonTap!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         print(projectName)
         print(projectDescription)
-        print(projectStartDate)
+        print(projectStartDate.toDate())
         print(projectRole)
         print(projectNickname)
         print(projectCycle)
     }
     
     private func getSelectedProjectCycle(list: [Int]) -> [String] {
-        var selectedList = list
-        selectedList.sort()
-        let dayOfWeekList = selectedList.map { index in
-            switch index {
-            case 0:
-                return "월"
-            case 1:
-                return "화"
-            case 2:
-                return "수"
-            case 3:
-                return "목"
-            case 4:
-                return "금"
-            case 5:
-                return "토"
-            case 6:
-                return "일"
-            default:
-                return ""
-            }
-        }
+        let dayOfWeekMap: [Int: String] = [
+            0: "월",
+            1: "화",
+            2: "수",
+            3: "목",
+            4: "금",
+            5: "토",
+            6: "일"
+        ]
+
+        let dayOfWeekList = list.sorted().compactMap { dayOfWeekMap[$0] }
         return dayOfWeekList
     }
     
     private func buttonStateSetting() {
-        if (!projectName.isEmpty && !projectDescription.isEmpty && !projectStartDate.isEmpty &&
-            !projectRole.isEmpty && !projectNickname.isEmpty && !projectCycle.isEmpty) {
+        var projectInfoFields: [String] = [projectName, projectDescription, projectStartDate, projectRole, projectNickname]
+        if (projectInfoFields.contains { !$0.isEmpty } && !projectCycle.isEmpty) {
             registerProjectButton.setState(.allow)
         } else {
             registerProjectButton.setState(.notAllow)
