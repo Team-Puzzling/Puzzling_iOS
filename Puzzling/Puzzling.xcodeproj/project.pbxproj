@@ -73,6 +73,7 @@
 		583117A32A5B71A00099B517 /* IndivisualDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583117A22A5B71A00099B517 /* IndivisualDashboardViewController.swift */; };
 		583117A82A5BE1490099B517 /* HomeTitleBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583117A72A5BE1490099B517 /* HomeTitleBarView.swift */; };
 		583117AA2A5BE2D90099B517 /* HomeSegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583117A92A5BE2D90099B517 /* HomeSegmentedView.swift */; };
+		583BA7C52A62A7220030CF14 /* TeamRankTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583BA7C42A62A7220030CF14 /* TeamRankTableViewCell.swift */; };
 		588AA06C2A5E77EF0017CB1E /* ActionPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588AA06B2A5E77EF0017CB1E /* ActionPlanView.swift */; };
 		588AA06F2A5E7F820017CB1E /* ActionPlanCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588AA06E2A5E7F820017CB1E /* ActionPlanCollectionViewCell.swift */; };
 		588AA0732A5ECDE70017CB1E /* IndivisualDashboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588AA0722A5ECDE70017CB1E /* IndivisualDashboardModel.swift */; };
@@ -80,6 +81,8 @@
 		588AA0792A5EF4930017CB1E /* HomeMainButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588AA0782A5EF4930017CB1E /* HomeMainButton.swift */; };
 		58DC6A6B2A616A2E0039242C /* TeamDashboardRankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DC6A6A2A616A2E0039242C /* TeamDashboardRankView.swift */; };
 		58DC6A6D2A61708D0039242C /* TeamRankPodiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DC6A6C2A61708D0039242C /* TeamRankPodiumView.swift */; };
+		58DC6A702A617A5C0039242C /* TeamRankPodiumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DC6A6F2A617A5C0039242C /* TeamRankPodiumCell.swift */; };
+		58DC6A722A61B4940039242C /* TeamRankModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DC6A712A61B4940039242C /* TeamRankModel.swift */; };
 		58EDAF932A5DD25D004EF5D3 /* DashboardMainBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EDAF922A5DD25D004EF5D3 /* DashboardMainBoxView.swift */; };
 		58EDAF952A5DDA04004EF5D3 /* IndivisualCardButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EDAF942A5DDA04004EF5D3 /* IndivisualCardButtonView.swift */; };
 /* End PBXBuildFile section */
@@ -146,6 +149,7 @@
 		583117A22A5B71A00099B517 /* IndivisualDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndivisualDashboardViewController.swift; sourceTree = "<group>"; };
 		583117A72A5BE1490099B517 /* HomeTitleBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTitleBarView.swift; sourceTree = "<group>"; };
 		583117A92A5BE2D90099B517 /* HomeSegmentedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSegmentedView.swift; sourceTree = "<group>"; };
+		583BA7C42A62A7220030CF14 /* TeamRankTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRankTableViewCell.swift; sourceTree = "<group>"; };
 		588AA06B2A5E77EF0017CB1E /* ActionPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionPlanView.swift; sourceTree = "<group>"; };
 		588AA06E2A5E7F820017CB1E /* ActionPlanCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionPlanCollectionViewCell.swift; sourceTree = "<group>"; };
 		588AA0722A5ECDE70017CB1E /* IndivisualDashboardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndivisualDashboardModel.swift; sourceTree = "<group>"; };
@@ -153,6 +157,8 @@
 		588AA0782A5EF4930017CB1E /* HomeMainButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMainButton.swift; sourceTree = "<group>"; };
 		58DC6A6A2A616A2E0039242C /* TeamDashboardRankView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDashboardRankView.swift; sourceTree = "<group>"; };
 		58DC6A6C2A61708D0039242C /* TeamRankPodiumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRankPodiumView.swift; sourceTree = "<group>"; };
+		58DC6A6F2A617A5C0039242C /* TeamRankPodiumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRankPodiumCell.swift; sourceTree = "<group>"; };
+		58DC6A712A61B4940039242C /* TeamRankModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRankModel.swift; sourceTree = "<group>"; };
 		58EDAF922A5DD25D004EF5D3 /* DashboardMainBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardMainBoxView.swift; sourceTree = "<group>"; };
 		58EDAF942A5DDA04004EF5D3 /* IndivisualCardButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndivisualCardButtonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -273,6 +279,7 @@
 			isa = PBXGroup;
 			children = (
 				03E6D1FF2A5325F100F4453C /* Model.swift */,
+				58DC6A712A61B4940039242C /* TeamRankModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -511,6 +518,7 @@
 		5831179C2A5B71280099B517 /* TeamDashboard */ = {
 			isa = PBXGroup;
 			children = (
+				58DC6A6E2A617A3C0039242C /* Component */,
 				58DC6A662A6153500039242C /* View */,
 				58DC6A652A6152DE0039242C /* ViewController */,
 			);
@@ -576,6 +584,15 @@
 				58EDAF922A5DD25D004EF5D3 /* DashboardMainBoxView.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		58DC6A6E2A617A3C0039242C /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				58DC6A6F2A617A5C0039242C /* TeamRankPodiumCell.swift */,
+				583BA7C42A62A7220030CF14 /* TeamRankTableViewCell.swift */,
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 		58EDAF902A5D9026004EF5D3 /* View */ = {
@@ -701,6 +718,7 @@
 				03E6D1E92A53219600F4453C /* HomeViewController.swift in Sources */,
 				03E6D2402A532C2500F4453C /* Color.swift in Sources */,
 				03E6D2662A53333500F4453C /* UIView+.swift in Sources */,
+				583BA7C52A62A7220030CF14 /* TeamRankTableViewCell.swift in Sources */,
 				588AA0732A5ECDE70017CB1E /* IndivisualDashboardModel.swift in Sources */,
 				583117AA2A5BE2D90099B517 /* HomeSegmentedView.swift in Sources */,
 				03E6D25C2A5331FF00F4453C /* GeneralResponse.swift in Sources */,
@@ -732,6 +750,7 @@
 				03E6D25E2A53321000F4453C /* NetworkLoggerPlugin.swift in Sources */,
 				03E6D2622A5332F700F4453C /* Encodable+.swift in Sources */,
 				588AA0752A5ECDF10017CB1E /* TeamDashboardModel.swift in Sources */,
+				58DC6A702A617A5C0039242C /* TeamRankPodiumCell.swift in Sources */,
 				03E6D26A2A53335700F4453C /* UIStackView+.swift in Sources */,
 				588AA06F2A5E7F820017CB1E /* ActionPlanCollectionViewCell.swift in Sources */,
 				096755C62A5E970500A1E691 /* MyProjectViewController.swift in Sources */,
@@ -747,6 +766,7 @@
 				03E6D2052A5326D400F4453C /* DTO.swift in Sources */,
 				588AA0792A5EF4930017CB1E /* HomeMainButton.swift in Sources */,
 				096755E62A60700E00A1E691 /* MyProjectTableHeaderView.swift in Sources */,
+				58DC6A722A61B4940039242C /* TeamRankModel.swift in Sources */,
 				03E6D26C2A53336900F4453C /* UITableView+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
