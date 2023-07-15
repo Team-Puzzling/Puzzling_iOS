@@ -43,6 +43,10 @@ final class CreateProjectView: UIScrollView {
         setLayout()
         setDelegate()
         setRegister()
+        setTapScreen()
+        print(nameView.frame.maxY)
+        print(descriptionView.frame.maxY)
+        
     }
     
     required init?(coder: NSCoder) {
@@ -165,19 +169,18 @@ extension CreateProjectView {
     
     private func setTapScreen() {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapScreen))
-        tapGestureRecognizer.cancelsTouchesInView = false // 터치 이벤트를 뷰로 전달하기 위해 추가
+        tapGestureRecognizer.cancelsTouchesInView = false
         self.addGestureRecognizer(tapGestureRecognizer)
     }
-    
+
     // MARK: - @objc Methods
-    
-    @objc private func didTapScreen(_ gesture: UITapGestureRecognizer) {
-        let touchLocation = gesture.location(in: cycleCollectionView)
-        guard let indexPath = cycleCollectionView.indexPathForItem(at: touchLocation) else {
+
+    @objc
+    private func didTapScreen(_ gesture: UITapGestureRecognizer) {
+        let touchLocation = gesture.location(in: self)
+        if !cycleCollectionView.frame.contains(touchLocation) {
             self.endEditing(true)
-            return
         }
-        cycleCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredVertically)
     }
 }
 
@@ -204,6 +207,7 @@ extension CreateProjectView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueCell(type: ProjectCycleCollectionViewCell.self, indexPath: indexPath)
         cell.setDataBind(model: projectCycleModel[indexPath.row])
+        
         return cell
     }
     

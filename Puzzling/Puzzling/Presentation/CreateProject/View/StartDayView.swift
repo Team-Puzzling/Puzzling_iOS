@@ -139,6 +139,7 @@ extension StartDayView {
             startDayView.makeBorder(width: 0, color: .background050)
             if selectedDate == "0000/00/00" {
                 startDayLabel.font = .fontGuide(.body1_regular_kor)
+                startDayLabel.layer.borderWidth = 0
             } else {
                 startDayLabel.font = .fontGuide(.heading4_kor)
                 startDayLabel.textColor = .black000

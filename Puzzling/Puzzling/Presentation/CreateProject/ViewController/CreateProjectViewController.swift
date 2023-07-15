@@ -26,6 +26,7 @@ final class CreateProjectViewController: UIViewController {
     private var projectRole: String = ""
     private var projectNickname: String = ""
     private var projectCycle: [String] = []
+    private var viewHeight: String = ""
     
     // MARK: - Properties
     
@@ -43,6 +44,7 @@ final class CreateProjectViewController: UIViewController {
         setAddTarget()
         setDelegate()
         setNotificationCenter()
+//        addKeyboardObserver()
     }
     
     deinit {
@@ -151,10 +153,10 @@ extension CreateProjectViewController {
     }
     
     private func projectRegister() {
-        print("registerProjectButtonTap!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        print("-------------------------------------------")
         print(projectName)
         print(projectDescription)
-        print(projectStartDate.toDate())
+        print(replaceDate(date: projectStartDate))
         print(projectRole)
         print(projectNickname)
         print(projectCycle)
@@ -176,13 +178,32 @@ extension CreateProjectViewController {
     }
     
     private func buttonStateSetting() {
-        var projectInfoFields: [String] = [projectName, projectDescription, projectStartDate, projectRole, projectNickname]
-        if (projectInfoFields.contains { !$0.isEmpty } && !projectCycle.isEmpty) {
+        if (!projectName.isEmpty && !projectDescription.isEmpty && !projectStartDate.isEmpty &&
+            !projectRole.isEmpty && !projectNickname.isEmpty && !projectCycle.isEmpty) {
             registerProjectButton.setState(.allow)
         } else {
             registerProjectButton.setState(.notAllow)
         }
     }
+    
+    private func replaceDate(date: String) -> String {
+        let originalString = date
+        let modifiedString = originalString.replacingOccurrences(of: "/", with: "-")
+        return modifiedString
+    }
+    
+//    private func addKeyboardObserver() {
+//            NotificationCenter.default.addObserver(
+//                self,
+//                selector: #selector(keyboardWillShow),
+//                name: UIResponder.keyboardWillShowNotification,
+//                object: nil)
+//            NotificationCenter.default.addObserver(
+//                self,
+//                selector: #selector(keyboardWillHide),
+//                name: UIResponder.keyboardWillHideNotification,
+//                object: nil)
+//        }
     
     // MARK: - @objc Methods
     
@@ -223,6 +244,26 @@ extension CreateProjectViewController {
             buttonStateSetting()
         }
     }
+    
+//    @objc private func keyboardWillShow(_ notification: NSNotification) {
+//            guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
+//                return
+//            }
+//            let keyboardHeight = keyboardFrame.height
+//            let containerViewMaxY = nameView.frame.maxY
+//            let screenHeight = UIScreen.main.bounds.height
+//            let distance = keyboardHeight - (screenHeight - containerViewMaxY)
+//
+//            UIView.animate(withDuration: 0.25) {
+//                self.view.frame.origin.y = distance > 0 ? -distance : 0
+//            }
+//        }
+//
+//        @objc private func keyboardWillHide() {
+//            UIView.animate(withDuration: 0.25) {
+//                self.view.frame.origin.y = 0
+//            }
+//        }
 }
 
 // MARK: - UISheetPresentationControllerDelegate

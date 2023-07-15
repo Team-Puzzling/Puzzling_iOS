@@ -42,7 +42,9 @@ final class InputContentView: UIView {
         setLayout()
         setDelegate()
         setInputContent(type: type)
+        setAddTarget()
         activeTextField = type
+        setTapScreen()
         setTapScreen()
     }
     
@@ -82,7 +84,6 @@ extension InputContentView {
         textFieldButton.do {
             $0.setImage(Image.textFieldXMark, for: .normal)
             $0.isHidden = true
-            $0.addTarget(self, action: #selector(removeTextButtonDidTap), for: .touchUpInside)
         }
         
         warningImageView.do {
@@ -141,6 +142,10 @@ extension InputContentView {
     
     private func setDelegate() {
         inputTextField.delegate = self
+    }
+    
+    private func setAddTarget() {
+        textFieldButton.addTarget(self, action: #selector(removeTextButtonDidTap), for: .touchUpInside)
     }
     
     private func textFieldPlaceholder(type: InputContentType) -> String {
@@ -222,6 +227,7 @@ extension InputContentView {
     
     private func setTapScreen() {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapScreen))
+        tapGestureRecognizer.cancelsTouchesInView = false
         self.addGestureRecognizer(tapGestureRecognizer)
     }
     
@@ -233,10 +239,13 @@ extension InputContentView {
         inputTextField.placeholder = .none
         inputTextField.text?.removeAll()
     }
-    
-    
-    @objc private func didTapScreen() {
-          self.endEditing(true)
+
+    @objc
+    private func didTapScreen(_ gesture: UITapGestureRecognizer) {
+        let touchLocation = gesture.location(in: self)
+        if !inputTextField.frame.contains(touchLocation) {
+            self.endEditing(true)
+        }
     }
 }
 
@@ -307,6 +316,7 @@ extension InputContentView: UITextFieldDelegate {
             if text.isEmpty {
                 defaultTextFieldBorderSetting(textField: textField)
                 textField.placeholder = textFieldPlaceholder(type: activeTextField ?? .name)
+                textField.font = .fontGuide(.body2_regular_kor)
             } else {
                 if text.isOnlyKorean() {
                     textFieldNotification(textField: textField, contentType: activeTextField ?? .name)
