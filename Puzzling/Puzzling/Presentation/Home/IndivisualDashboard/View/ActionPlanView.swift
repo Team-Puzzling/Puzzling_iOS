@@ -17,6 +17,8 @@ final class ActionPlanView: UIView {
     
     private var actionPlanData: [ActionPlan] = [ActionPlan(actionPlanContent: "여기에는 글이 계속 작성되다가 작성되다가 작성되다가 작성되다가 이쯤 되면 끊기게 돼되면 끊기게 돼되면 끊기게 돼되면 끊기게 돼", actionPlanDate: "2023-06-19"), ActionPlan(actionPlanContent: "여기에는 글이 계속 작성되다가 작성되다가 작성되다가 작성되다가 이쯤 되면 끊기게 돼되면 끊기게 돼되면 끊기게 돼되면 끊기게 돼", actionPlanDate: "2023-04-29"), ActionPlan(actionPlanContent: "여기에는 글이 계속 작성되다가 작성되다가 작성되다가 작성되다가 이쯤 되면 끊기게 돼되면 끊기게 돼되면 끊기게 돼되면 끊기게 돼", actionPlanDate: "2023-02-05"), ActionPlan(actionPlanContent: "여기에는 글이 계속 작성되다가 작성되다가 작성되다가 작성되다가 이쯤 되면 끊기게 돼되면 끊기게 돼되면 끊기게 돼되면 끊기게 돼", actionPlanDate: "2023-04-19")]
     
+    private var collectionViewHeight: CGFloat = UIScreen.main.bounds.height / 5.8
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setDelegate()
@@ -39,7 +41,7 @@ extension ActionPlanView {
     private func setUI() {
         headerLabel.do {
             $0.text = "ACTION PLAN"
-            $0.font = .fontGuide(.body1_bold_kor)
+            $0.font = .fontGuide(.heading4_kor)
             $0.textColor = .black000
         }
         
@@ -63,7 +65,7 @@ extension ActionPlanView {
         actionPlanCollectionView.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview()
             $0.top.equalTo(headerLabel.snp.bottom).offset(16)
-            $0.height.equalTo(160)
+            $0.height.equalTo(collectionViewHeight)
         }
     }
     

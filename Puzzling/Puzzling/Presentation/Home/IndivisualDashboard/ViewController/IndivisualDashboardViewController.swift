@@ -62,8 +62,7 @@ extension IndivisualDashboardViewController {
         
         actionPlanView.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview()
-            $0.top.equalTo(mainView.snp.bottom).offset(20)
-//            $0.height.equalTo(300)
+            $0.top.equalTo(mainView.snp.bottom).offset(30)
             $0.bottom.equalTo(homeMainButton.snp.top).offset(-49)
         }
     }
