@@ -262,8 +262,17 @@ extension InputContentView {
 extension InputContentView: UITextFieldDelegate {
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        textFieldInfoNotification(contentType: activeTextField ?? .name)
         activeTextFieldBorderSetting(textField: textField)
+        if let text = textField.text {
+            if text.isOnlyKorEng() {
+                activeTextFieldBorderSetting(textField: textField)
+                textFieldNotification(textField: textField, contentType: activeTextField ?? .name)
+            } else {
+                emojiLimitTextFieldBorderSetting(textField: textField)
+                textFieldButton.isHidden = false
+            }
+            textFieldButton.isHidden = !text.isEmpty ? false : true
+        }
         return true
     }
     
