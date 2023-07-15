@@ -279,6 +279,11 @@ class CustomAlertView: UIView {
     }
     
     @objc
+    private func kakaoShareButtonTapped() {
+        print("kakaoShareButtonTapped")
+    }
+    
+    @objc
     private func closeButtonTapped() {
         closeAlertView()
     }
