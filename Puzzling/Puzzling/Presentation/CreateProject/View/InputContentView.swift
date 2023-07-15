@@ -45,7 +45,6 @@ final class InputContentView: UIView {
         setAddTarget()
         activeTextField = type
         setTapScreen()
-        setTapScreen()
     }
     
     required init?(coder: NSCoder) {
@@ -225,6 +224,17 @@ extension InputContentView {
         }
     }
     
+    private func textFieldInfoNotification(contentType: InputContentType) {
+        if let textFieldInfo = activeTextField {
+            let userInfo = textFieldInfo
+            NotificationCenter.default.post(
+                name: Notification.Name("textFieldInfoNotification"),
+                object: nil,
+                userInfo: ["userInfo": userInfo]
+            )
+        }
+    }
+    
     private func setTapScreen() {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapScreen))
         tapGestureRecognizer.cancelsTouchesInView = false
@@ -252,6 +262,7 @@ extension InputContentView {
 extension InputContentView: UITextFieldDelegate {
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        textFieldInfoNotification(contentType: activeTextField ?? .name)
         activeTextFieldBorderSetting(textField: textField)
         return true
     }
@@ -269,6 +280,7 @@ extension InputContentView: UITextFieldDelegate {
             if text.isEmpty {
                 defaultTextFieldBorderSetting(textField: textField)
                 textField.placeholder = textFieldPlaceholder(type: activeTextField ?? .name)
+                textField.font = .fontGuide(.body2_regular_kor)
             }
         }
         return true

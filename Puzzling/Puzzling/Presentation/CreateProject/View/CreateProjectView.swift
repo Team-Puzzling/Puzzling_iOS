@@ -46,7 +46,8 @@ final class CreateProjectView: UIScrollView {
         setTapScreen()
         print(nameView.frame.maxY)
         print(descriptionView.frame.maxY)
-        
+        addKeyboardObserver()
+        setNotificationCenter()
     }
     
     required init?(coder: NSCoder) {
@@ -158,6 +159,10 @@ extension CreateProjectView {
         cycleCollectionView.registerCell(ProjectCycleCollectionViewCell.self)
     }
     
+    private func setNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(getTextFieldInfo(_:)), name: Notification.Name("textFieldInfoNotification"), object: nil)
+    }
+    
     private func cycleNotification(list: [Int]) {
         let userInfo = list
         NotificationCenter.default.post(
@@ -172,14 +177,56 @@ extension CreateProjectView {
         tapGestureRecognizer.cancelsTouchesInView = false
         self.addGestureRecognizer(tapGestureRecognizer)
     }
-
+    
+    private func addKeyboardObserver() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillHide),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil)
+    }
+    
     // MARK: - @objc Methods
-
+    
     @objc
     private func didTapScreen(_ gesture: UITapGestureRecognizer) {
         let touchLocation = gesture.location(in: self)
         if !cycleCollectionView.frame.contains(touchLocation) {
             self.endEditing(true)
+        }
+    }
+    
+    @objc
+    private func keyboardWillShow(_ notification: NSNotification) {
+        guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
+            return
+        }
+        let keyboardHeight = keyboardFrame.height
+        let containerViewMaxY = nicknameView.frame.maxY
+        let screenHeight = UIScreen.main.bounds.height
+        let distance = keyboardHeight - (screenHeight - containerViewMaxY)
+        
+        UIView.animate(withDuration: 0.25) {
+            self.frame.origin.y = distance > 0 ? -distance : 0
+        }
+    }
+    
+    @objc
+    private func keyboardWillHide() {
+        UIView.animate(withDuration: 0.25) {
+            self.frame.origin.y = 0
+        }
+    }
+    
+    @objc
+    private func getTextFieldInfo(_ notification: Notification) {
+        if let textInfo = notification.userInfo as? [String: TextFieldInfo], let updateTextInfo = textInfo["userInfo"] {
+            print(updateTextInfo.type)
         }
     }
 }

@@ -172,7 +172,7 @@ extension CreateProjectViewController {
             5: "토",
             6: "일"
         ]
-
+        
         let dayOfWeekList = list.sorted().compactMap { dayOfWeekMap[$0] }
         return dayOfWeekList
     }
@@ -191,19 +191,6 @@ extension CreateProjectViewController {
         let modifiedString = originalString.replacingOccurrences(of: "/", with: "-")
         return modifiedString
     }
-    
-//    private func addKeyboardObserver() {
-//            NotificationCenter.default.addObserver(
-//                self,
-//                selector: #selector(keyboardWillShow),
-//                name: UIResponder.keyboardWillShowNotification,
-//                object: nil)
-//            NotificationCenter.default.addObserver(
-//                self,
-//                selector: #selector(keyboardWillHide),
-//                name: UIResponder.keyboardWillHideNotification,
-//                object: nil)
-//        }
     
     // MARK: - @objc Methods
     
@@ -246,24 +233,24 @@ extension CreateProjectViewController {
     }
     
 //    @objc private func keyboardWillShow(_ notification: NSNotification) {
-//            guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
-//                return
-//            }
-//            let keyboardHeight = keyboardFrame.height
-//            let containerViewMaxY = nameView.frame.maxY
-//            let screenHeight = UIScreen.main.bounds.height
-//            let distance = keyboardHeight - (screenHeight - containerViewMaxY)
-//
-//            UIView.animate(withDuration: 0.25) {
-//                self.view.frame.origin.y = distance > 0 ? -distance : 0
-//            }
+//        guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
+//            return
 //        }
+//        let keyboardHeight = keyboardFrame.height
+//        let containerViewMaxY = createProjectView.nicknameView.frame.maxY
+//        let screenHeight = UIScreen.main.bounds.height
+//        let distance = keyboardHeight - (screenHeight - containerViewMaxY)
 //
-//        @objc private func keyboardWillHide() {
-//            UIView.animate(withDuration: 0.25) {
-//                self.view.frame.origin.y = 0
-//            }
+//        UIView.animate(withDuration: 0.25) {
+//            self.view.frame.origin.y = distance > 0 ? -distance : 0
 //        }
+//    }
+//
+//    @objc private func keyboardWillHide() {
+//        UIView.animate(withDuration: 0.25) {
+//            self.view.frame.origin.y = 0
+//        }
+//    }
 }
 
 // MARK: - UISheetPresentationControllerDelegate
