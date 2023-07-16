@@ -41,6 +41,7 @@ final class InvitationCodeViewController: UIViewController {
         setupKeyboardEvent()
         setTapScreen()
         setNotification()
+        setAddTarget()
     }
 }
 
@@ -120,6 +121,10 @@ extension InvitationCodeViewController {
     
     // MARK: - Methods
     
+    private func setAddTarget() {
+        inputCompletionButton.addTarget(self, action: #selector(inputCompletionButtonDidTap), for: .touchUpInside)
+    }
+    
     private func setupKeyboardEvent() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardWillShow),
@@ -129,7 +134,6 @@ extension InvitationCodeViewController {
                                                selector: #selector(keyboardWillHide),
                                                name: UIResponder.keyboardWillHideNotification,
                                                object: nil)
-
     }
     
     private func setTapScreen() {
@@ -146,7 +150,17 @@ extension InvitationCodeViewController {
         !invitationCode.isEmpty ? inputCompletionButton.setState(.allow) : inputCompletionButton.setState(.notAllow)
     }
     
+    private func pushToCreateProfile() {
+        let createProfileVC = CreateProfileViewController()
+        navigationController?.pushViewController(createProfileVC, animated: true)
+    }
+    
     // MARK: - @objc Methods
+    
+    @objc
+    private func inputCompletionButtonDidTap() {
+        pushToCreateProfile()
+    }
     
     @objc
     private func didTapScreen(_ gesture: UITapGestureRecognizer) {
