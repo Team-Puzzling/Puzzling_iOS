@@ -24,6 +24,8 @@ final class InvitationCodeViewController: UIViewController {
     
     // MARK: - Properties
     
+    var invitationCode: String = ""
+    
     // MARK: - Initializer
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,6 +40,7 @@ final class InvitationCodeViewController: UIViewController {
         setLayout()
         setupKeyboardEvent()
         setTapScreen()
+        setNotification()
     }
 }
 
@@ -69,7 +72,7 @@ extension InvitationCodeViewController {
         
         inputCompletionButton.do {
             $0.setTitle("입력 완료", for: .normal)
-            $0.setState(.allow)
+            $0.setState(.notAllow)
         }
     }
     
@@ -135,6 +138,14 @@ extension InvitationCodeViewController {
         view.addGestureRecognizer(tapGestureRecognizer)
     }
     
+    private func setNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(getTextFieldInfo(_:)), name: Notification.Name("textFieldNotification"), object: nil)
+    }
+    
+    private func buttonStateSetting() {
+        !invitationCode.isEmpty ? inputCompletionButton.setState(.allow) : inputCompletionButton.setState(.notAllow)
+    }
+    
     // MARK: - @objc Methods
     
     @objc
@@ -158,6 +169,16 @@ extension InvitationCodeViewController {
     private func keyboardWillHide(_ sender: Notification) {
         if view.frame.origin.y != 0 {
             view.frame.origin.y = 0
+        }
+    }
+    
+    @objc
+    private func getTextFieldInfo(_ notification: Notification) {
+        if let textInfo = notification.userInfo as? [String: TextFieldInfo], let updateTextInfo = textInfo["userInfo"] {
+            if updateTextInfo.type == .invitationCode {
+                invitationCode = updateTextInfo.text
+            }
+            buttonStateSetting()
         }
     }
 }
