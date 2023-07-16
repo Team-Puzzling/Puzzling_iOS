@@ -16,6 +16,20 @@ final class ProjectCycleCollectionViewCell: UICollectionViewCell {
     
     private let dayLabel = UILabel()
     
+    // MARK: - Properties
+    
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                backgroundColor = .blue400
+                dayLabel.textColor = .white000
+            } else {
+                backgroundColor = .background050
+                dayLabel.textColor = .black000
+            }
+        }
+    }
+    
     // MARK: - View Life Cycle
     
     override init(frame: CGRect) {

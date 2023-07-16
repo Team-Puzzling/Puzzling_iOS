@@ -10,6 +10,10 @@ import UIKit
 import SnapKit
 import Then
 
+protocol ProjectStartProtocol: AnyObject {
+    func presentToStartTimeVC()
+}
+
 final class StartDayView: UIView {
     
     // MARK: - UI Components
@@ -19,16 +23,26 @@ final class StartDayView: UIView {
     private let startDayLabel = UILabel()
     private let chevronDownButton = UIButton()
     
+    // MARK: - Properties
+    
+    weak var projectStartDelegate: ProjectStartProtocol?
+    
     // MARK: - View Life Cycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUI()
         setLayout()
+        setAddTarget()
+        setNotificationCenter()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("SelectedDateNotification"), object: nil)
     }
 }
 
@@ -59,7 +73,6 @@ extension StartDayView {
         
         chevronDownButton.do {
             $0.setImage(Image.chevronDown, for: .normal)
-            $0.addTarget(self, action: #selector(chevronDownButtonDidTap), for: .touchUpInside)
         }
     }
     
@@ -95,8 +108,48 @@ extension StartDayView {
     
     // MARK: - Methods
     
+    private func setAddTarget() {
+        chevronDownButton.addTarget(self, action: #selector(chevronDownButtonDidTap), for: .touchUpInside)
+    }
+    
+    private func setNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(handleSelectedDate(_:)), name: Notification.Name("SelectedDateNotification"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(modalDismissed(_:)), name: NSNotification.Name("ModalDismissedNotification"), object: nil)
+    }
+    
+    private func startDateNotification(date: String) {
+        let userInfo = date
+        NotificationCenter.default.post(
+            name: Notification.Name("startDateNotification"),
+            object: nil,
+            userInfo: ["userInfo": userInfo]
+        )
+    }
+    
+    // MARK: - @objc Methods
+    
     @objc
     private func chevronDownButtonDidTap() {
-        print("tap")
+        startDayView.makeBorder(width: 2, color: .blue200)
+        projectStartDelegate?.presentToStartTimeVC()
+    }
+    
+    @objc
+    private func handleSelectedDate(_ notification: Notification) {
+        if let selectedDate = notification.userInfo?["selectedDate"] as? String {
+            if selectedDate == "0000/00/00" {
+                startDayLabel.font = .fontGuide(.body1_regular_kor)
+            } else {
+                startDayLabel.font = .fontGuide(.heading4_kor)
+                startDayLabel.textColor = .black000
+                startDayLabel.text = selectedDate
+                startDateNotification(date: selectedDate)
+            }
+        }
+    }
+    
+    @objc
+    private func modalDismissed(_ notification: Notification) {
+        startDayView.makeBorder(width: 0, color: .background050)
     }
 }

@@ -17,7 +17,7 @@ final class CreateProjectView: UIScrollView {
     private let createProjectStackView = UIStackView()
     private let nameView = InputContentView(type: .name)
     private let descriptionView = InputContentView(type: .description)
-    private let startDayView = StartDayView()
+    let startDayView = StartDayView()
     private let roleView = InputContentView(type: .role)
     private let nicknameView = InputContentView(type: .nickname)
     private let projectCycleView = UIView()
@@ -31,6 +31,11 @@ final class CreateProjectView: UIScrollView {
     }()
     private let projectCycleModel: [ProjectCycleModel] = ProjectCycleModel.projectCycleModelData()
     
+    // MARK: - Properties
+    
+    private var selectedCycleIndex: [Int] = []
+    private var activateTextFieldType: InputContentType?
+    
     // MARK: - View Life Cycle
     
     override init(frame: CGRect) {
@@ -39,6 +44,7 @@ final class CreateProjectView: UIScrollView {
         setLayout()
         setDelegate()
         setRegister()
+        setTapScreen()
     }
     
     required init?(coder: NSCoder) {
@@ -76,6 +82,8 @@ extension CreateProjectView {
         cycleCollectionView.do {
             $0.backgroundColor = .clear
             $0.showsHorizontalScrollIndicator = false
+            $0.isScrollEnabled = false
+            $0.allowsMultipleSelection = true
         }
     }
     
@@ -132,8 +140,8 @@ extension CreateProjectView {
         
         cycleCollectionView.snp.makeConstraints {
             $0.top.equalTo(projectCycleDescriptionLabel.snp.bottom).offset(8)
-            $0.width.equalTo(343)
-            $0.height.equalTo(48)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(69)
         }
     }
     
@@ -148,14 +156,38 @@ extension CreateProjectView {
         cycleCollectionView.registerCell(ProjectCycleCollectionViewCell.self)
     }
     
+    private func cycleNotification(list: [Int]) {
+        let userInfo = list
+        NotificationCenter.default.post(
+            name: Notification.Name("cycleNotification"),
+            object: nil,
+            userInfo: ["userInfo": userInfo]
+        )
+    }
+    
+    private func setTapScreen() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapScreen))
+        tapGestureRecognizer.cancelsTouchesInView = false
+        self.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
     // MARK: - @objc Methods
+    
+    @objc
+    private func didTapScreen(_ gesture: UITapGestureRecognizer) {
+        let touchLocation = gesture.location(in: self)
+        if !cycleCollectionView.frame.contains(touchLocation) {
+            self.endEditing(true)
+        }
+    }
 }
 
 extension CreateProjectView: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = 48
-        let height = 48
+        let screenWidth = UIScreen.main.bounds.width - 7 - 32
+        let width = Int(screenWidth / 7)
+        let height = width
         return CGSize(width: width, height: height)
     }
     
@@ -173,6 +205,23 @@ extension CreateProjectView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueCell(type: ProjectCycleCollectionViewCell.self, indexPath: indexPath)
         cell.setDataBind(model: projectCycleModel[indexPath.row])
+        
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
+        cell?.isSelected = true
+        selectedCycleIndex.append(indexPath.row)
+        cycleNotification(list: selectedCycleIndex)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
+        cell?.isSelected = false
+        if let index = selectedCycleIndex.firstIndex(of: indexPath.row) {
+            selectedCycleIndex.remove(at: index)
+        }
+        cycleNotification(list: selectedCycleIndex)
     }
 }
