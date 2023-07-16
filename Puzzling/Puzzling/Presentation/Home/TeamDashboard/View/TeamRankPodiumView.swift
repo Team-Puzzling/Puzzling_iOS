@@ -61,9 +61,9 @@ extension TeamRankPodiumView {
 }
 
 extension TeamRankPodiumView {
-    func setRank(firstRank: TeamRankModel, secondRank: TeamRankModel, thirdRank: TeamRankModel) {
-        firstRankView.setPodiumInformation(rankModel: firstRank)
-        secondRankView.setPodiumInformation(rankModel: secondRank)
-        thirdRankView.setPodiumInformation(rankModel: thirdRank)
+    func setRank(ranks: [TeamRankTopThreeModel]) {
+        firstRankView.setPodiumInformation(rankModel: ranks[0])
+        secondRankView.setPodiumInformation(rankModel: ranks[1])
+        thirdRankView.setPodiumInformation(rankModel: ranks[2])
     }
 }

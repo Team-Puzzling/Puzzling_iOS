@@ -7,23 +7,6 @@
 
 import UIKit
 
-enum RankNumber {
-    case first
-    case second
-    case third
-    
-    var rank: Int {
-        switch self {
-        case .first:
-            return 1
-        case .second:
-            return 2
-        case .third:
-            return 3
-        }
-    }
-}
-
 final class TeamRankPodiumCell: UIView {
     
     private let puzzleImageView = UIImageView()
@@ -113,8 +96,11 @@ extension TeamRankPodiumCell {
 }
 
 extension TeamRankPodiumCell {
-    func setPodiumInformation(rankModel: TeamRankModel) {
-        guard let rank = rankModel.rankNumber?.rank else { return }
+    func setPodiumInformation(rankModel: TeamRankTopThreeModel) {
+        guard let rank = rankModel.rankNumber else { return }
+        guard let userInformation = rankModel.userInformation else {
+            return
+        }
         switch rank {
         case 1:
             puzzleImageView.image = Image.rank1st
@@ -133,11 +119,11 @@ extension TeamRankPodiumCell {
             break
         }
         
-        piecesCount = rankModel.pieces
+        piecesCount = userInformation.pieces
         let pieceLabel: String = "\(piecesCount)조각"
         
         piecesCountLabel.text = pieceLabel
-        userNameLabel.text = rankModel.userName
-        roleLabel.text = rankModel.role
+        userNameLabel.text = userInformation.userName
+        roleLabel.text = userInformation.role
     }
 }

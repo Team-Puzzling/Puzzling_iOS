@@ -13,14 +13,12 @@ import Then
 final class TeamDashboardRankView: UIView {
     
     private let projectTitleLabel = UILabel()
-    private let rankView = TeamRankPodiumView()
+    private var rankView = TeamRankPodiumView()
     private let rankTableView = UITableView()
     
-    private var rankTableData: [TeamRankModel] = []
-    private lazy var prizeTableData: [TeamRankTopThreeModel] = [TeamRankTopThreeModel(rankNumber: .first, userInformation: <#T##TeamRankModel#>)]
-    private lazy var orderedTableData: [TeamRankModel] = rankTableData.sorted {
-        ($1.pieces, $0.userName) < ($0.pieces, $1.userName)
-    }
+    private var projectService = ProjectService()
+    private lazy var prizeTableData: [TeamRankTopThreeModel] = projectService.getTopThreeData()
+    private lazy var orderedTableData: [TeamRankModel] = projectService.getSortedData()
     
     private let rankViewHeight: CGFloat = UIScreen.main.bounds.height/5.2
     
@@ -50,8 +48,7 @@ extension TeamDashboardRankView {
         }
         
         rankView.do {
-            $0.setRank(firstRank: <#T##TeamRankModel#>, secondRank: <#T##TeamRankModel#>, thirdRank: <#T##TeamRankModel#>)
-//            $0.setRank(firstRank: .init(rankNumber: .first, userName: "킹민주", role: "iOS 냥이", pieces: 15), secondRank: .init(rankNumber: .second, userName: "홍정준", role: "아빠", pieces: 11), thirdRank: .init(rankNumber: .third, userName: "정권", role: "이상해씨", pieces: 5))
+            $0.setRank(ranks: prizeTableData)
         }
         
         rankTableView.do {
@@ -104,9 +101,5 @@ extension TeamDashboardRankView {
     func passProjectName(projectName: String) {
         let titleLabel = "\(projectName)의 랭킹"
         projectTitleLabel.text = titleLabel
-    }
-    
-    func passRankTableData(teamRankData: [TeamRankModel]) {
-        self.rankTableData = teamRankData
     }
 }
