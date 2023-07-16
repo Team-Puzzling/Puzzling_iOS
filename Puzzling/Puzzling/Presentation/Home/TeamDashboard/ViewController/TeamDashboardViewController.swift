@@ -13,11 +13,10 @@ final class TeamDashboardViewController: UIViewController {
     private let contentView = UIView()
     
     private let mainView: DashboardMainBoxView = DashboardMainBoxView(frame: .zero, type: .team)
-    private let teamRankView = TeamDashboardRankView()
+    private var teamRankView = TeamDashboardRankView()
     
     private var tabBarHeight: CGFloat {
         guard let height = self.tabBarController?.tabBar.frame.size.height else {
-            print("fffffff")
             return 0.0
         }
         return height
@@ -28,13 +27,14 @@ final class TeamDashboardViewController: UIViewController {
         return height
     }
     
+    private let projectService = ProjectService()
+    private lazy var sortedData: [TeamRankModel] = projectService.getSortedData()
+    
     private var scrollViewHeight: CGFloat {
         let height:CGFloat = view.frame.size.height/4.06
-        let totalHeight: CGFloat = height + CGFloat(dummyData.count - 3) * 52 + 10
+        let totalHeight: CGFloat = height + CGFloat(sortedData.count - 3) * 52 + 10
         return totalHeight
     }
-    
-    private var dummyData: [TeamRankModel] = [TeamRankModel(userName: "aa", role: "iOS Dev", pieces: 17), TeamRankModel(userName: "bb", role: "PM", pieces: 12), TeamRankModel(userName: "cc", role: "AOS Dev", pieces: 14), TeamRankModel(userName: "dd", role: "Server-T", pieces: 9), TeamRankModel(userName: "ee", role: "AOS Dev", pieces: 40), TeamRankModel(userName: "ff", role: "iOS Dev", pieces: 22), TeamRankModel(userName: "gg", role: "UXUI Designer", pieces: 14)]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,7 +69,6 @@ extension TeamDashboardViewController {
         
         teamRankView.do {
             $0.passProjectName(projectName: "더퍼즐링s")
-            $0.passRankTableData(teamRankData: dummyData)
         }
     }
     

@@ -17,7 +17,7 @@ final class ActionPlanView: UIView {
     
     private var actionPlanData: [ActionPlan] = [ActionPlan(actionPlanContent: "여기에는 글이 계속 작성되다가 작성되다가 작성되다가 작성되다가 이쯤 되면 끊기게 돼되면 끊기게 돼되면 끊기게 돼되면 끊기게 돼", actionPlanDate: "2023-06-19"), ActionPlan(actionPlanContent: "여기에는 글이 계속 작성되다가 작성되다가 작성되다가 작성되다가 이쯤 되면 끊기게 돼되면 끊기게 돼되면 끊기게 돼되면 끊기게 돼", actionPlanDate: "2023-04-29"), ActionPlan(actionPlanContent: "여기에는 글이 계속 작성되다가 작성되다가 작성되다가 작성되다가 이쯤 되면 끊기게 돼되면 끊기게 돼되면 끊기게 돼되면 끊기게 돼", actionPlanDate: "2023-02-05"), ActionPlan(actionPlanContent: "여기에는 글이 계속 작성되다가 작성되다가 작성되다가 작성되다가 이쯤 되면 끊기게 돼되면 끊기게 돼되면 끊기게 돼되면 끊기게 돼", actionPlanDate: "2023-04-19")]
     
-    private var collectionViewHeight: CGFloat = UIScreen.main.bounds.height / 5.8
+    private var collectionViewHeight: CGFloat = UIScreen.main.bounds.height / 5.6
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -72,16 +72,13 @@ extension ActionPlanView {
     // Change the layout setting to Compositional Layout later.
     private func setFlowLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
-        let width: CGFloat = UIScreen.main.bounds.width / 2.4
-        let height: CGFloat = UIScreen.main.bounds.height / 5.8
-        layout.itemSize = CGSize(width: width, height: height)
         layout.minimumInteritemSpacing = 8
         layout.scrollDirection = .horizontal
         return layout
     }
 }
 
-extension ActionPlanView: UICollectionViewDelegate, UICollectionViewDataSource {
+extension ActionPlanView: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if actionPlanData.isEmpty {
             return 1
@@ -101,5 +98,12 @@ extension ActionPlanView: UICollectionViewDelegate, UICollectionViewDataSource {
         let dataHead = actionPlanData[indexPath.item]
         cell.setDataBind(dateString: dataHead.actionPlanDate, content: dataHead.actionPlanContent)
         return cell
+    }
+    
+    // 이게 필요하려나?
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width: CGFloat = UIScreen.main.bounds.width / 2.4
+        let height: CGFloat = UIScreen.main.bounds.height / 5.8
+        return CGSize(width: width, height: height)
     }
 }
