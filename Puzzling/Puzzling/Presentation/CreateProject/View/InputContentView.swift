@@ -34,6 +34,11 @@ final class InputContentView: UIView {
     // MARK: - Properties
     
     var activeTextField: InputContentType?
+    private enum WarningMessage: CaseIterable {
+        case emoji
+        case invitationCode
+        case duplicateNickname
+    }
     
     // MARK: - Initializer
     
@@ -92,7 +97,7 @@ extension InputContentView {
         }
         
         warningLabel.do {
-            $0.text = "특수문자, 이모지를 사용할 수 없어요."
+//            $0.text = "특수문자, 이모지를 사용할 수 없어요."
             $0.font = .fontGuide(.detail1_regular_kor)
             $0.textColor = .red400
             $0.isHidden = true
@@ -194,7 +199,15 @@ extension InputContentView {
         warningLabel.isHidden = true
     }
     
-    private func emojiLimitTextFieldBorderSetting(textField: UITextField) {
+    private func warningTextFieldBorderSetting(textField: UITextField, type: WarningMessage) {
+        switch type {
+        case .emoji:
+            warningLabel.text = "특수문자, 이모지를 사용할 수 없어요."
+        case .invitationCode:
+            warningLabel.text = "유효하지 않은 초대코드에요. 코드를 확인해 주세요."
+        case .duplicateNickname:
+            warningLabel.text = "이미 사용 중인 닉네임이에요."
+        }
         textField.layer.borderColor = UIColor.red200.cgColor
         textFieldButton.isHidden = false
         textFieldButton.setImage(Image.warning, for: .normal)
@@ -214,7 +227,7 @@ extension InputContentView {
             if text.isOnlyKorEng() {
                 activeTextFieldBorderSetting(textField: textField)
             } else {
-                emojiLimitTextFieldBorderSetting(textField: textField)
+                warningTextFieldBorderSetting(textField: textField, type: .emoji)
             }
         }
     }
@@ -274,7 +287,7 @@ extension InputContentView: UITextFieldDelegate {
                 activeTextFieldBorderSetting(textField: textField)
                 textFieldNotification(textField: textField, contentType: activeTextField ?? .name)
             } else {
-                emojiLimitTextFieldBorderSetting(textField: textField)
+                warningTextFieldBorderSetting(textField: textField, type: .emoji)
                 textFieldButton.isHidden = false
             }
             textFieldButton.isHidden = !text.isEmpty ? false : true
@@ -288,7 +301,7 @@ extension InputContentView: UITextFieldDelegate {
                 defaultTextFieldBorderSetting(textField: textField)
                 textFieldNotification(textField: textField, contentType: activeTextField ?? .name)
             } else {
-                emojiLimitTextFieldBorderSetting(textField: textField)
+                warningTextFieldBorderSetting(textField: textField, type: .emoji)
                 textFieldButton.isHidden = false
             }
             
