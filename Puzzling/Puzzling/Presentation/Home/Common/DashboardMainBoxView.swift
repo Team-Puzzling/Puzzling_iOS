@@ -10,21 +10,21 @@ import UIKit
 import SnapKit
 import Then
 
-final class DashboardMainBoxView: UIView {
+enum DashboardType {
+    case indivisual
+    case team
     
-    enum DashboardType {
-        case indivisual
-        case team
-        
-        var cardButtonTitle: String {
-            switch self {
-            case .indivisual:
-                return "퍼즐판 보러가기"
-            case .team:
-                return "팀 퍼즐판 보러가기"
-            }
+    var cardButtonTitle: String {
+        switch self {
+        case .indivisual:
+            return "퍼즐판 보러가기"
+        case .team:
+            return "팀 퍼즐판 보러가기"
         }
     }
+}
+
+final class DashboardMainBoxView: UIView {
     
     private var userName: String = "User" {
         didSet {
