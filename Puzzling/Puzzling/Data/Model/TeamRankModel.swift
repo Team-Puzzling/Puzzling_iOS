@@ -14,6 +14,6 @@ struct TeamRankModel {
 }
 
 struct TeamRankTopThreeModel {
-    var rankNumber: RankNumber?
+    var rankNumber: Int?
     var userInformation: TeamRankModel?
 }
