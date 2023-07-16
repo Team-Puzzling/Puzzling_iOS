@@ -41,23 +41,13 @@ final class ProjectCalendarView: UIView {
 extension ProjectCalendarView {
     private func setUI() {
         calendarView.do {
-            $0.backgroundColor = .systemBlue
             $0.select(Date())
             
             $0.locale = Locale(identifier: "ko_KR")
             $0.scope = .week
-            $0.calendarWeekdayView.backgroundColor = .systemCyan
-            $0.calculator.calendar.backgroundColor = .systemYellow
             
-//            $0.appearance.headerTitleColor = .systemIndigo
-//            $0.appearance.headerMinimumDissolvedAlpha = 0.0
             
             $0.appearance.selectionColor = .blue400
-            
-//            let offset: Double = (self.frame.width - ("YYYY년 M월" as NSString)
-//                .size(withAttributes: [NSAttributedString.Key.font: UIFont.fontGuide(.heading2_kor)])
-//                .width - 16.0 ) / 2.0
-//            $0.appearance.headerTitleOffset = CGPoint(x: -offset, y: 0)
             
             $0.weekdayHeight = 20
             $0.headerHeight = 62
@@ -65,7 +55,6 @@ extension ProjectCalendarView {
             $0.appearance.weekdayFont = .fontGuide(.detail1_regular_kor)
             $0.appearance.titleFont = .fontGuide(.body2_bold_kor)
             
-//            $0.appearance.titleTodayColor = .gray400
             $0.appearance.titleDefaultColor = .gray400
             
             $0.appearance.todayColor = .clear
@@ -73,18 +62,14 @@ extension ProjectCalendarView {
             
             $0.calendarHeaderView.isHidden = true
             
-//            $0.placeholderType = .none
-            
             $0.scrollEnabled = true
             $0.scrollDirection = .horizontal
         }
         
-        headerLabel.do { [weak self] in
-            guard let self = self else { return }
+        headerLabel.do {
             $0.font = .fontGuide(.heading2_kor)
             $0.textColor = .black000
             $0.text = self.headerDateFormatter.string(from: Date())
-            $0.backgroundColor = .systemMint
         }
     }
     

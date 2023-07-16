@@ -10,11 +10,34 @@ import UIKit
 import SnapKit
 import Then
 
+extension ReviewDetailViewController {
+    @frozen
+    enum reviewDetail: CaseIterable {
+        case review, empty
+        
+        var reviewDetailViewss: UIView {
+            switch self {
+            case .review:
+                return ReviewDetailView()
+            case .empty:
+                return ReviewDetailEmptyView()
+            }
+        }
+    }
+}
+
+
 final class ReviewDetailViewController: UIViewController {
     
     private let projectCalenderView = ProjectCalendarView()
-    private let reviewDetailView = ReviewDetailView()
-    private let reviewDetailEmptyView = ReviewDetailEmptyView()
+    
+    func reviewDetailStatus(status: reviewDetail) {
+        print(#function)
+//        reviewDetailView = status.reviewDetailViewss
+    }
+    
+    private var reviewDetailView = ReviewDetailView()
+//    private let reviewDetailEmptyView = ReviewDetailEmptyView()
     
     private let teamMemberData = TeamMemberDataModel.dummy()
     
@@ -26,6 +49,7 @@ final class ReviewDetailViewController: UIViewController {
         setUI()
         setLayout()
         setRegister()
+        reviewDetailStatus(status: .review)
         
     }
     
@@ -36,7 +60,6 @@ final class ReviewDetailViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         setCalendarViewLayout()
     }
     
@@ -57,15 +80,15 @@ extension ReviewDetailViewController {
     }
     
     private func setLayout() {
-        view.addSubviews(projectCalenderView, reviewDetailEmptyView)
+        view.addSubviews(projectCalenderView, reviewDetailView)
         
         projectCalenderView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.trailing.leading.equalToSuperview().inset(16)
-            $0.height.equalTo(300)
+            $0.height.equalTo(projectCalenderView.getCalendarViewHeight())
         }
         
-        reviewDetailEmptyView.snp.makeConstraints {
+        reviewDetailView.snp.makeConstraints {
             $0.top.equalTo(projectCalenderView.snp.bottom).offset(12)
             $0.trailing.leading.equalToSuperview().inset(16)
             $0.bottom.equalToSuperview()
@@ -107,11 +130,11 @@ extension ReviewDetailViewController {
             $0.height.equalTo(projectCalenderView.getCalendarViewHeight())
         }
         
-        reviewDetailEmptyView.snp.remakeConstraints {
-            $0.top.equalTo(projectCalenderView.snp.bottom).offset(12)
-            $0.trailing.leading.equalToSuperview().inset(16)
-            $0.bottom.equalToSuperview()
-        }
+//        reviewDetailView.snp.remakeConstraints {
+//            $0.top.equalTo(projectCalenderView.snp.bottom).offset(12)
+//            $0.trailing.leading.equalToSuperview().inset(16)
+//            $0.bottom.equalToSuperview()
+//        }
     }
 }
 

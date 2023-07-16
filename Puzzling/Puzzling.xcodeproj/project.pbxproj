@@ -84,6 +84,7 @@
 		583117AA2A5BE2D90099B517 /* HomeSegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583117A92A5BE2D90099B517 /* HomeSegmentedView.swift */; };
 		9B1CA9782A62ADFD00CB81AC /* ReviewDetailEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1CA9772A62ADFD00CB81AC /* ReviewDetailEmptyView.swift */; };
 		9B1CA97C2A62E12000CB81AC /* ReviewDetailDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1CA97B2A62E12000CB81AC /* ReviewDetailDataModel.swift */; };
+		9B1CA97E2A634C7900CB81AC /* ReviewDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1CA97D2A634C7900CB81AC /* ReviewDetailCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -159,6 +160,7 @@
 		583117A92A5BE2D90099B517 /* HomeSegmentedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSegmentedView.swift; sourceTree = "<group>"; };
 		9B1CA9772A62ADFD00CB81AC /* ReviewDetailEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailEmptyView.swift; sourceTree = "<group>"; };
 		9B1CA97B2A62E12000CB81AC /* ReviewDetailDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailDataModel.swift; sourceTree = "<group>"; };
+		9B1CA97D2A634C7900CB81AC /* ReviewDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -536,6 +538,7 @@
 			children = (
 				0967560C2A61E08C00A1E691 /* ProjectCalendarView.swift */,
 				0967560E2A61E73700A1E691 /* ReviewDetailView.swift */,
+				9B1CA97D2A634C7900CB81AC /* ReviewDetailCollectionViewCell.swift */,
 				9B1CA9772A62ADFD00CB81AC /* ReviewDetailEmptyView.swift */,
 			);
 			path = View;
@@ -727,6 +730,7 @@
 				583117AA2A5BE2D90099B517 /* HomeSegmentedView.swift in Sources */,
 				096755FA2A607A7D00A1E691 /* MyReviewListDataModel.swift in Sources */,
 				03E6D25C2A5331FF00F4453C /* GeneralResponse.swift in Sources */,
+				9B1CA97E2A634C7900CB81AC /* ReviewDetailCollectionViewCell.swift in Sources */,
 				03E6D1E52A53219600F4453C /* AppDelegate.swift in Sources */,
 				03E6D2602A53322300F4453C /* URLConst.swift in Sources */,
 				096756092A61DB5700A1E691 /* ReviewDetailViewController.swift in Sources */,
