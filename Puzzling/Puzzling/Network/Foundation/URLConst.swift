@@ -20,7 +20,7 @@ public enum URLConst {
     
     static let getReviewTemplateURL = "/api/v1/review/template"
     static let postMemeberURL = "/api/v1/member"
-    static let postProjectURL = "/project"
+    static let projectURL = "/project"
     static let postReviewTILURL = "/review/TIL"
     static let postReivew5FURL = "/review/5F"
     static let postReviewAAR = "/review/ARR"
@@ -40,4 +40,7 @@ public enum URLConst {
     static let getRankURL = "/rank"
     static let startDate = "startDate"
     static let endDate = "endDate"
+    
+    static let reviewsURL = "/reviews"
+    static let reviewURL = "/review"
 }
