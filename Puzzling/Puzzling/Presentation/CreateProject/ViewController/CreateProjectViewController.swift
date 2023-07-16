@@ -199,6 +199,18 @@ extension CreateProjectViewController {
         return modifiedString
     }
     
+    func setupKeyboardEvent() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillShow),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillHide),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
+
+    }
+    
     // MARK: - @objc Methods
     
     @objc
@@ -218,6 +230,8 @@ extension CreateProjectViewController {
                 projectRole = updateTextInfo.text
             case .nickname:
                 projectNickname = updateTextInfo.text
+            case .invitationCode:
+                return
             }
             buttonStateSetting()
         }
@@ -237,18 +251,6 @@ extension CreateProjectViewController {
             projectCycle = getSelectedProjectCycle(list: cycleInfo)
             buttonStateSetting()
         }
-    }
-    
-    func setupKeyboardEvent() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(keyboardWillShow),
-                                               name: UIResponder.keyboardWillShowNotification,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(keyboardWillHide),
-                                               name: UIResponder.keyboardWillHideNotification,
-                                               object: nil)
-
     }
     
     @objc

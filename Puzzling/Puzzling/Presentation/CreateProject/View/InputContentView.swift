@@ -15,6 +15,7 @@ enum InputContentType: CaseIterable {
     case description
     case role
     case nickname
+    case invitationCode
 }
 
 final class InputContentView: UIView {
@@ -157,6 +158,8 @@ extension InputContentView {
             return "역할을 입력해 주세요. (ex. iOS 개발자)"
         case .nickname:
             return "닉네임을 입력해 주세요."
+        case .invitationCode:
+            return "초대코드를 입력해 주세요."
         }
     }
     
@@ -173,7 +176,10 @@ extension InputContentView {
             countLabel.text = "0/20"
         case .nickname:
             titleLabel.text = "닉네임"
-            countLabel.text = "0/50"
+            countLabel.text = "0/10"
+        case .invitationCode:
+            titleLabel.text = "초대코드"
+            countLabel.text = "0/13"
         }
         inputTextField.placeholder = textFieldPlaceholder(type: type)
     }
@@ -322,8 +328,13 @@ extension InputContentView: UITextFieldDelegate {
                 return true
             }
         case .nickname:
-            if (textCount <= 50) {
-                countLabel.text = "\(changedText.count)/50"
+            if (textCount <= 10) {
+                countLabel.text = "\(changedText.count)/10"
+                return true
+            }
+        case .invitationCode:
+            if (textCount <= 13) {
+                countLabel.text = "\(changedText.count)/13"
                 return true
             }
         default:
