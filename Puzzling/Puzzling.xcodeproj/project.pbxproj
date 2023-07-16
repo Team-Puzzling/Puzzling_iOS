@@ -10,6 +10,7 @@
 		0351AB3C2A605A7D006B0F4C /* ProjectStartTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB3B2A605A7D006B0F4C /* ProjectStartTimeViewController.swift */; };
 		0351AB3E2A619F04006B0F4C /* textFieldNotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB3D2A619F04006B0F4C /* textFieldNotificationModel.swift */; };
 		0351AB402A630EE6006B0F4C /* UIResponder+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB3F2A630EE6006B0F4C /* UIResponder+.swift */; };
+		0351AB422A6323A8006B0F4C /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB412A6323A8006B0F4C /* CustomAlertView.swift */; };
 		03734EB52A599FDB00B401D6 /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03734EB42A599FDB00B401D6 /* Image.xcassets */; };
 		03734EB82A59A0BD00B401D6 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03734EB72A59A0BD00B401D6 /* TabBarController.swift */; };
 		03734EBD2A59A1F800B401D6 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03734EBC2A59A1F800B401D6 /* TabBarItem.swift */; };
@@ -89,6 +90,7 @@
 		0351AB3B2A605A7D006B0F4C /* ProjectStartTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectStartTimeViewController.swift; sourceTree = "<group>"; };
 		0351AB3D2A619F04006B0F4C /* textFieldNotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = textFieldNotificationModel.swift; sourceTree = "<group>"; };
 		0351AB3F2A630EE6006B0F4C /* UIResponder+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+.swift"; sourceTree = "<group>"; };
+		0351AB412A6323A8006B0F4C /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		03734EB42A599FDB00B401D6 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = "<group>"; };
 		03734EB72A59A0BD00B401D6 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		03734EBC2A59A1F800B401D6 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
@@ -492,6 +494,7 @@
 				03ADF38C2A5E8A5F002CEDDC /* CreateProjectView.swift */,
 				03ADF3882A5E7322002CEDDC /* StartDayView.swift */,
 				03ADF3862A5D9F91002CEDDC /* InputContentView.swift */,
+				0351AB412A6323A8006B0F4C /* CustomAlertView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -746,6 +749,7 @@
 				03734EBF2A59A26800B401D6 /* MyPageViewController.swift in Sources */,
 				583117A82A5BE1490099B517 /* HomeTitleBarView.swift in Sources */,
 				03ADF3922A5E9534002CEDDC /* ProjectCycleModel.swift in Sources */,
+				0351AB422A6323A8006B0F4C /* CustomAlertView.swift in Sources */,
 				03ADF3872A5D9F91002CEDDC /* InputContentView.swift in Sources */,
 				03E6D27C2A5333E400F4453C /* UIViewController+.swift in Sources */,
 				03734EBD2A59A1F800B401D6 /* TabBarItem.swift in Sources */,

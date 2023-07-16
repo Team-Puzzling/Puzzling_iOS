@@ -160,6 +160,13 @@ extension CreateProjectViewController {
         print(projectRole)
         print(projectNickname)
         print(projectCycle)
+        let alert = CustomAlertView(frame: CGRect(x: 0, y: 0, width: 290, height: 373), alertType: .createProject)
+        alert.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(alert)
+        alert.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        alert.isUserInteractionEnabled = true
     }
     
     private func getSelectedProjectCycle(list: [Int]) -> [String] {

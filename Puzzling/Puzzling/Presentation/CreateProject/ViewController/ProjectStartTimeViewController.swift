@@ -18,10 +18,6 @@ final class ProjectStartTimeViewController: UIViewController {
     private let datePicker = UIDatePicker()
     private let saveButton = CheckButton()
     
-    // MARK: - Properties
-    
-    // MARK: - Initializer
-    
     // MARK: - View Life Cycle
     
     override func viewDidLoad() {
