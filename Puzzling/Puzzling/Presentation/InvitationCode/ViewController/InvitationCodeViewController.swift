@@ -37,6 +37,7 @@ final class InvitationCodeViewController: UIViewController {
         setUI()
         setLayout()
         setupKeyboardEvent()
+        setTapScreen()
     }
 }
 
@@ -68,7 +69,7 @@ extension InvitationCodeViewController {
         
         inputCompletionButton.do {
             $0.setTitle("입력 완료", for: .normal)
-            $0.setState(.notAllow)
+            $0.setState(.allow)
         }
     }
     
@@ -116,7 +117,7 @@ extension InvitationCodeViewController {
     
     // MARK: - Methods
     
-    func setupKeyboardEvent() {
+    private func setupKeyboardEvent() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardWillShow),
                                                name: UIResponder.keyboardWillShowNotification,
@@ -128,24 +129,33 @@ extension InvitationCodeViewController {
 
     }
     
+    private func setTapScreen() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapScreen))
+        tapGestureRecognizer.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
     // MARK: - @objc Methods
     
     @objc
-    func keyboardWillShow(_ sender: Notification) {
+    private func didTapScreen(_ gesture: UITapGestureRecognizer) {
+        gesture.location(in: self.view)
+        self.view.endEditing(true)
+    }
+    
+    @objc
+    private func keyboardWillShow(_ sender: Notification) {
         guard let keyboardFrame = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue,
               let currentTextField = UIResponder.currentResponder as? UITextField else { return }
         let keyboardTopY = keyboardFrame.cgRectValue.origin.y
         let convertedTextFieldFrame = view.convert(currentTextField.frame, from: currentTextField.superview)
         let textFieldBottomY = convertedTextFieldFrame.origin.y + convertedTextFieldFrame.size.height
-        
-//        if textFieldBottomY > keyboardTopY {
-            let keyboardOverlap = textFieldBottomY - keyboardTopY
-            view.frame.origin.y = -keyboardOverlap - 40
-//        }
+        let keyboardOverlap = textFieldBottomY - keyboardTopY
+        view.frame.origin.y = -keyboardOverlap - 40
     }
     
     @objc
-    func keyboardWillHide(_ sender: Notification) {
+    private func keyboardWillHide(_ sender: Notification) {
         if view.frame.origin.y != 0 {
             view.frame.origin.y = 0
         }

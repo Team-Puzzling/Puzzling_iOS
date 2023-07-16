@@ -199,7 +199,7 @@ extension CreateProjectViewController {
         return modifiedString
     }
     
-    func setupKeyboardEvent() {
+    private func setupKeyboardEvent() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardWillShow),
                                                name: UIResponder.keyboardWillShowNotification,
@@ -254,7 +254,7 @@ extension CreateProjectViewController {
     }
     
     @objc
-    func keyboardWillShow(_ sender: Notification) {
+    private func keyboardWillShow(_ sender: Notification) {
         guard let keyboardFrame = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue,
               let currentTextField = UIResponder.currentResponder as? UITextField else { return }
         let keyboardTopY = keyboardFrame.cgRectValue.origin.y
@@ -268,7 +268,7 @@ extension CreateProjectViewController {
     }
     
     @objc
-    func keyboardWillHide(_ sender: Notification) {
+    private func keyboardWillHide(_ sender: Notification) {
         if view.frame.origin.y != 0 {
             view.frame.origin.y = 0
         }
