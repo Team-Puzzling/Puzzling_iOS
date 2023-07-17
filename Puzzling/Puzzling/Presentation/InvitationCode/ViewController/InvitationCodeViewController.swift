@@ -26,6 +26,7 @@ final class InvitationCodeViewController: UIViewController {
     // MARK: - Properties
     
     private var invitationCode: String = ""
+    private var projectList: ProjectModel?
     
     // MARK: - Initializer
     
@@ -229,14 +230,19 @@ extension InvitationCodeViewController {
                 let status = result.statusCode
                 if status >= 200 && status < 300 {
                     do {
+                        guard let data = try result.map(GeneralResponse<ProjectResponse>.self).data else { return }
+                        self.projectList = data.convertToProjectModel()
                         print("♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️")
                         let createProfileVC = CreateProfileViewController()
                         createProfileVC.modalPresentationStyle = .fullScreen
-                        self.present(createProfileVC, animated: true)
-                        guard let data = try result.map(GeneralResponse<PostProjectRequest>.self).data else {
-                            return
+                        if let projectID = self.projectList?.projectId {
+                            createProfileVC.projectID = projectID
                         }
-//                        self.invitationCode = data
+                        if let projectName = self.projectList?.projectName {
+                            createProfileVC.projectName = projectName
+                            print(projectName)
+                        }
+                        self.present(createProfileVC, animated: true)
                     } catch(let error) {
                         print(error.localizedDescription)
                     }

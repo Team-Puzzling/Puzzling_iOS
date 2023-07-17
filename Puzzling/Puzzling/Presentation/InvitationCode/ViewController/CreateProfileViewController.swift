@@ -26,6 +26,8 @@ final class CreateProfileViewController: UIViewController {
     
     // MARK: - Properties
     
+    var projectName: String?
+    var projectID: Int?
     private var nickname: String = ""
     private var myRole: String = ""
     
@@ -46,6 +48,7 @@ final class CreateProfileViewController: UIViewController {
         setAddTarget()
         setTapScreen()
         setNotification()
+        setProjectNameLabel()
     }
 }
 
@@ -173,6 +176,12 @@ extension CreateProfileViewController {
     private func participateProject() {
         print("participateProject")
         self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+    }
+    
+    private func setProjectNameLabel() {
+        if let projectName = self.projectName {
+            projectNameLabel.text = "프로젝트: \(projectName)"
+        }
     }
     
     // MARK: - @objc Methods

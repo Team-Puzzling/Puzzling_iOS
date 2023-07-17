@@ -48,7 +48,6 @@ extension ProjectService: TargetType {
         case .joinProject:
             return .requestPlain
         case .invitationCode(_, let invitaionCode):
-            print(invitaionCode + "🍄")
             let param: [String: Any] = [
                 URLConst.invitationCode : invitaionCode
             ]
