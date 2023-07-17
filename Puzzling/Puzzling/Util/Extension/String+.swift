@@ -20,11 +20,23 @@ extension String {
            guard self.range(of: pattern, options: .regularExpression) != nil else { return false }
            return true
     }
+
+    func isOnlyKorEngSpe() -> Bool {
+        let pattern = "^[0-9a-zA-Z가-힣ㄱ-ㅎㅏ-ㅣ\\s~`!@#$%^&*()-_=+\\\\\\|\\[{\\]};:'\",<.>/?]{0,}$"
+        guard self.range(of: pattern, options: .regularExpression) != nil else { return false }
+        return true
+    }
     
     func size(OfFont font: UIFont) -> CGSize {
         let size = (self as NSString).size(withAttributes: [.font: font])
         let buffer = 0.2
         return CGSize(width: size.width + buffer, height: size.height)
+    }
+    
+    func isOnlyKorEng() -> Bool {
+        let pattern = "^[0-9a-zA-Z가-힣ㄱ-ㅎㅏ-ㅣ\\s]{0,}$"
+        guard self.range(of: pattern, options: .regularExpression) != nil else { return false }
+        return true
     }
     
     /// "yyyy-MM-dd" 형식의 String을 Date 형식으로 리턴합니다.
