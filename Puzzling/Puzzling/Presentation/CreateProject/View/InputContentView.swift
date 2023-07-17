@@ -10,14 +10,6 @@ import UIKit
 import SnapKit
 import Then
 
-enum InputContentType: CaseIterable {
-    case name
-    case description
-    case role
-    case nickname
-    case invitationCode
-}
-
 final class InputContentView: UIView {
     
     // MARK: - UI Components
@@ -34,11 +26,6 @@ final class InputContentView: UIView {
     // MARK: - Properties
     
     var activeTextField: InputContentType?
-    private enum WarningMessage: CaseIterable {
-        case emoji
-        case invitationCode
-        case duplicateNickname
-    }
     
     // MARK: - Initializer
     
@@ -51,6 +38,7 @@ final class InputContentView: UIView {
         setAddTarget()
         activeTextField = type
         setTapScreen()
+        setNotification()
     }
     
     required init?(coder: NSCoder) {
@@ -153,6 +141,10 @@ extension InputContentView {
         textFieldButton.addTarget(self, action: #selector(removeTextButtonDidTap), for: .touchUpInside)
     }
     
+    private func setNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(setTextFieldWarningStatus(_:)), name: Notification.Name("textFieldWarningNotification"), object: nil)
+    }
+    
     private func textFieldPlaceholder(type: InputContentType) -> String {
         switch type {
         case .name:
@@ -209,6 +201,7 @@ extension InputContentView {
             warningLabel.text = "이미 사용 중인 닉네임이에요."
         }
         textField.layer.borderColor = UIColor.red200.cgColor
+        textField.layer.borderWidth = 2
         textFieldButton.isHidden = false
         textFieldButton.setImage(Image.warning, for: .normal)
         textFieldButton.isEnabled = false
@@ -274,6 +267,14 @@ extension InputContentView {
         let touchLocation = gesture.location(in: self)
         if !inputTextField.frame.contains(touchLocation) {
             self.endEditing(true)
+        }
+    }
+    
+    @objc
+    private func setTextFieldWarningStatus(_ notification: Notification) {
+        
+        if let type = notification.userInfo?["userInfo"] as? WarningMessage {
+            warningTextFieldBorderSetting(textField: inputTextField, type: type)
         }
     }
 }

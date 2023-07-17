@@ -148,6 +148,15 @@ extension InvitationCodeViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(getTextFieldInfo(_:)), name: Notification.Name("textFieldNotification"), object: nil)
     }
     
+    private func textFieldWarningNotification(type: WarningMessage) {
+        let userInfo = type
+        NotificationCenter.default.post(
+            name: Notification.Name("textFieldWarningNotification"),
+            object: nil,
+            userInfo: ["userInfo": userInfo]
+        )
+    }
+    
     private func buttonStateSetting() {
         !invitationCode.isEmpty ? inputCompletionButton.setState(.allow) : inputCompletionButton.setState(.notAllow)
     }
@@ -231,6 +240,7 @@ extension InvitationCodeViewController {
                     }
                 } else if status == 404 {
                     print("💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭")
+                    self.textFieldWarningNotification(type: .invitationCode)
 //                    self.inputCompletionButton.setState(.notAllow)
                 }
             case .failure(let error):

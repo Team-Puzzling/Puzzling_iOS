@@ -17,6 +17,7 @@
 		0351AB542A656DEB006B0F4C /* ProjectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB532A656DEB006B0F4C /* ProjectService.swift */; };
 		0351AB572A65799F006B0F4C /* PostProjectRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB562A65799F006B0F4C /* PostProjectRequest.swift */; };
 		0351AB5A2A657BCF006B0F4C /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB592A657BCF006B0F4C /* Project.swift */; };
+		0351AB5C2A65A06D006B0F4C /* InputContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB5B2A65A06D006B0F4C /* InputContentType.swift */; };
 		03734EB52A599FDB00B401D6 /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03734EB42A599FDB00B401D6 /* Image.xcassets */; };
 		03734EB82A59A0BD00B401D6 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03734EB72A59A0BD00B401D6 /* TabBarController.swift */; };
 		03734EBD2A59A1F800B401D6 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03734EBC2A59A1F800B401D6 /* TabBarItem.swift */; };
@@ -117,6 +118,7 @@
 		0351AB532A656DEB006B0F4C /* ProjectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectService.swift; sourceTree = "<group>"; };
 		0351AB562A65799F006B0F4C /* PostProjectRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostProjectRequest.swift; sourceTree = "<group>"; };
 		0351AB592A657BCF006B0F4C /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		0351AB5B2A65A06D006B0F4C /* InputContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputContentType.swift; sourceTree = "<group>"; };
 		03734EB42A599FDB00B401D6 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = "<group>"; };
 		03734EB72A59A0BD00B401D6 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		03734EBC2A59A1F800B401D6 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				0351AB592A657BCF006B0F4C /* Project.swift */,
+				0351AB5B2A65A06D006B0F4C /* InputContentType.swift */,
 			);
 			path = Project;
 			sourceTree = "<group>";
@@ -938,6 +941,7 @@
 				251C00D52A5D205300F6838C /* CustomRadioButton.swift in Sources */,
 				0351AB4A2A652F0B006B0F4C /* InvitationCodeTestViewController.swift in Sources */,
 				096755E62A60700E00A1E691 /* MyProjectTableHeaderView.swift in Sources */,
+				0351AB5C2A65A06D006B0F4C /* InputContentType.swift in Sources */,
 				25F972642A61A839001CE10C /* CustomAlert.swift in Sources */,
 				03E6D26C2A53336900F4453C /* UITableView+.swift in Sources */,
 			);

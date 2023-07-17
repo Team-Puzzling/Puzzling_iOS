@@ -311,7 +311,6 @@ class CustomAlertView: UIView {
             invitationCode = code
             if !invitationCode.isEmpty {
                 subtitleLabel.text = invitationCode
-                print("🍎")
             }
         }
     }
