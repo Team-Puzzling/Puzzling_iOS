@@ -81,21 +81,21 @@ extension BottomSheetViewController {
         }
         
         optionTILSubtitle.do {
-            $0.text = "학습과 자기 반성을 통해 향후 더 나은 결정을 내릴 \n수 있게 해 주는 회고 방식이에요!"
+            $0.text = "학습과 자기 반성을 통해 향후 더 나은 결정을\n내릴 수 있게 해 주는 회고 방식이에요!"
             $0.numberOfLines = 2
             $0.textColor = .gray600
             $0.font = .fontGuide(.detail1_regular_kor)
         }
         
         optionFiveFSubtitle.do {
-            $0.text = "다양한 측면을 고려하여 개인과 프로젝트 전체적인 \n관점을 보여주는 회고 방식이에요!"
+            $0.text = "다양한 측면을 고려하여 개인과 프로젝트\n전체적인 관점을 보여주는 회고 방식이에요!"
             $0.numberOfLines = 2
             $0.textColor = .gray600
             $0.font = .fontGuide(.detail1_regular_kor)
         }
         
         optionAARSubtitle.do {
-            $0.text = "목표 달성에 대한 책임감과 함께, 개선에 중점을 두\n는 회고 방식이에요!"
+            $0.text = "목표 달성에 대한 책임감과 함께, 개선에\n중점을 두는 회고 방식이에요!"
             $0.numberOfLines = 2
             $0.textColor = .gray600
             $0.font = .fontGuide(.detail1_regular_kor)
