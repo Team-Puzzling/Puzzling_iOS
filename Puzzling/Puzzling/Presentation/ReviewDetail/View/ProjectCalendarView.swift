@@ -1,8 +1,8 @@
 //
-//  TeamMemberView.swift
+//  ProjectCalendarView.swift
 //  Puzzling
 //
-//  Created by Minjoo Kim on 2023/07/17.
+//  Created by Minjoo Kim on 2023/07/15.
 //
 
 import UIKit
@@ -11,9 +11,10 @@ import FSCalendar
 import SnapKit
 import Then
 
-final class TeamMemberCalendarView: UIView {
+final class ProjectCalendarView: UIView {
     
-    lazy var calendarView = FSCalendar(frame: .zero)
+    private lazy var calendarView = FSCalendar(frame: .zero)
+    private var calendarViewHeight = NSLayoutConstraint()
     private lazy var headerLabel = UILabel()
     private lazy var testLabel = UILabel()
     
@@ -29,6 +30,7 @@ final class TeamMemberCalendarView: UIView {
         setUI()
         setLayout()
         setDelegate()
+        calendarViewHeight.constant = 350
     }
     
     required init?(coder: NSCoder) {
@@ -36,7 +38,7 @@ final class TeamMemberCalendarView: UIView {
     }
 }
 
-extension TeamMemberCalendarView {
+extension ProjectCalendarView {
     private func setUI() {
         calendarView.do {
             $0.select(Date())
@@ -44,38 +46,29 @@ extension TeamMemberCalendarView {
             $0.locale = Locale(identifier: "ko_KR")
             $0.scope = .week
             
-            $0.appearance.headerTitleColor = .clear
-            $0.appearance.headerMinimumDissolvedAlpha = 0.0
-            
             $0.appearance.selectionColor = .blue400
             
-            let offset: Double = (self.frame.width - ("YYYY년 M월" as NSString)
-                .size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 22.0)])
-                .width - 16.0 ) / 2.0
-            $0.appearance.headerTitleOffset = CGPoint(x: -offset, y: 0)
-            
-            $0.weekdayHeight = 22
-            $0.headerHeight = 54
+            $0.weekdayHeight = 20
+            $0.headerHeight = 62
             
             $0.appearance.weekdayFont = .fontGuide(.detail1_regular_kor)
             $0.appearance.titleFont = .fontGuide(.body2_bold_kor)
             
-            $0.appearance.titleTodayColor = .gray400
-            $0.appearance.titleDefaultColor = .secondaryLabel
+            $0.appearance.titleDefaultColor = .gray400
             
             $0.appearance.todayColor = .clear
+            $0.appearance.titleTodayColor = .gray400
             $0.appearance.weekdayTextColor = .gray400
             
-            $0.placeholderType = .none
+            $0.calendarHeaderView.isHidden = true
             
             $0.scrollEnabled = true
             $0.scrollDirection = .horizontal
         }
         
-        headerLabel.do { [weak self] in
-            guard let self = self else { return }
-            $0.font = .systemFont(ofSize: 22.0, weight: .bold)
-            $0.textColor = .label
+        headerLabel.do {
+            $0.font = .fontGuide(.heading2_kor)
+            $0.textColor = .black000
             $0.text = self.headerDateFormatter.string(from: Date())
         }
     }
@@ -84,12 +77,11 @@ extension TeamMemberCalendarView {
         self.addSubviews(calendarView, headerLabel)
         
         calendarView.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-            $0.height.equalTo(300)
+            $0.edges.equalToSuperview()
         }
         
         headerLabel.snp.makeConstraints {
-            $0.top.equalToSuperview()
+            $0.top.equalToSuperview().inset(14)
             $0.leading.equalToSuperview().inset(8)
         }
     }
@@ -100,17 +92,27 @@ extension TeamMemberCalendarView {
     }
 }
 
-extension TeamMemberCalendarView: FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
+extension ProjectCalendarView: FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
         let currentPage = calendarView.currentPage
         headerLabel.text = headerDateFormatter.string(from: currentPage)
     }
+    
+    func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
+        calendar.frame = CGRect(origin: calendar.frame.origin , size: bounds.size)
+        self.calendarViewHeight.constant = bounds.height
+    }
 }
 
-extension TeamMemberCalendarView {
+extension ProjectCalendarView {
     func setDataBind() {
         calendarView.setScope(.month, animated: true)
         headerDateFormatter.dateFormat = "YYYY년 M월"
         headerLabel.text = headerDateFormatter.string(from: calendarView.currentPage)
+    }
+    
+    func getCalendarViewHeight() -> CGFloat{
+        print(self.calendarViewHeight.constant , #function)
+        return self.calendarViewHeight.constant
     }
 }
