@@ -33,6 +33,7 @@ public enum Image {
         .withTintColor(.label, renderingMode: .alwaysOriginal)
     static let rightIcon = UIImage(systemName: "chevron.right")?
         .withTintColor(.label, renderingMode: .alwaysOriginal)
+    static let elementPuzzle = UIImage(named: "puzzle_element")!
     
     // MARK: - Rank
     
