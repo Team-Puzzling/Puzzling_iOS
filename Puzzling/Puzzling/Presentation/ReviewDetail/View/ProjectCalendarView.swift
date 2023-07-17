@@ -46,7 +46,6 @@ extension ProjectCalendarView {
             $0.locale = Locale(identifier: "ko_KR")
             $0.scope = .week
             
-            
             $0.appearance.selectionColor = .blue400
             
             $0.weekdayHeight = 20
@@ -58,6 +57,7 @@ extension ProjectCalendarView {
             $0.appearance.titleDefaultColor = .gray400
             
             $0.appearance.todayColor = .clear
+            $0.appearance.titleTodayColor = .gray400
             $0.appearance.weekdayTextColor = .gray400
             
             $0.calendarHeaderView.isHidden = true

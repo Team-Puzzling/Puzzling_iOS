@@ -1,25 +1,37 @@
 //
-//  ReviewDetailCollectionViewCell.swift
+//  ReviewDetailCustomView.swift
 //  Puzzling
 //
-//  Created by Kim Min Joo on 2023/07/16.
+//  Created by Minjoo Kim on 2023/07/17.
 //
-
 
 import UIKit
 
 import SnapKit
 import Then
 
-final class ReviewDetailCollectionViewCell: UICollectionViewCell {
-    
-    static var isFromNib: Bool = false
-    
-    // MARK: - UI Components
-    
+extension ReviewDetailCustomView {
+    @frozen
+    enum reviewTemplate: CaseIterable {
+        case firstTemplate, secondTemplate, thirdTemplate
+        
+        var viewCount: Int {
+            switch self {
+            case .firstTemplate:
+                return 3
+            case .secondTemplate:
+                return 3
+            case .thirdTemplate:
+                return 5
+            }
+        }
+    }
+}
+
+final class ReviewDetailCustomView: UIView {
+
     private let titleLabel = UILabel()
     private let descriptionLabel = UILabel()
-    private let divisionLabel = UILabel()
     
     // MARK: - Life Cycles
     
@@ -37,7 +49,7 @@ final class ReviewDetailCollectionViewCell: UICollectionViewCell {
 
 // MARK: - Extensions
 
-extension ReviewDetailCollectionViewCell {
+extension ReviewDetailCustomView {
     
     private func setUI() {
         titleLabel.do {
@@ -51,52 +63,37 @@ extension ReviewDetailCollectionViewCell {
             $0.numberOfLines = 0
             $0.lineBreakMode = .byCharWrapping
         }
-        
-        divisionLabel.do {
-            $0.backgroundColor = .gray300
-        }
     }
     
     private func setLayout() {
-        contentView.addSubviews(titleLabel, descriptionLabel, divisionLabel)
+        self.addSubviews(titleLabel, descriptionLabel)
         titleLabel.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(16)
-            $0.horizontalEdges.equalToSuperview().inset(32)
+            $0.top.horizontalEdges.equalToSuperview().inset(16)
             $0.height.equalTo(24)
         }
         
         descriptionLabel.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom)
-            $0.horizontalEdges.equalToSuperview().inset(32)
-            $0.bottom.equalToSuperview().inset(16)
-        }
-        
-        divisionLabel.snp.makeConstraints {
-            $0.bottom.equalToSuperview()
-            $0.horizontalEdges.equalToSuperview().inset(32)
-            $0.height.equalTo(0.5)
+            $0.horizontalEdges.bottom.equalToSuperview().inset(16)
         }
     }
 }
 
-extension ReviewDetailCollectionViewCell {
+extension ReviewDetailCustomView {
     
     func setDataBind(title: String, description: String) {
         titleLabel.text = title
         descriptionLabel.text = description
 //        sendLabelHeight()
-        
-        
     }
+    
 //    func sendLabelHeight() {
 //        let labelHeight = descriptionLabel.textHeight(withWidth: UIScreen.main.bounds.width)
 //        print(labelHeight)
 //        print(descriptionLabel.textHeight(withWidth: UIScreen.main.bounds.width), "pppppp")
 //        NotificationCenter.default.post(name: NSNotification.Name("LabelHeightNotification"), object: labelHeight)
 //    }
-    func divisionHidden() {
-        divisionLabel.isHidden = true
-    }
+    
 }
 
 //extension UILabel {
@@ -107,12 +104,17 @@ extension ReviewDetailCollectionViewCell {
 //        return text.height(withWidth: UIScreen.main.bounds.width, font: UIFont.fontGuide(.body2_regular_kor))
 //    }
 //}
-//
-//extension String {
-//    func height(withWidth width: CGFloat, font: UIFont) -> CGFloat {
-//        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
-//        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
-//        return ceil(boundingBox.height)
-//    }
-//
-//}
+
+extension String {
+    
+    func textHeight(withWidth width: CGFloat) -> CGFloat {
+        let text = self
+         return text.height(withWidth:width, font: UIFont.fontGuide(.body2_regular_kor))
+     }
+    
+    func height(withWidth width: CGFloat, font: UIFont) -> CGFloat {
+        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
+        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
+        return ceil(boundingBox.height)
+    }
+}

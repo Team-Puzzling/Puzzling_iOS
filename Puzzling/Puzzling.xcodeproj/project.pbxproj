@@ -78,6 +78,8 @@
 		0967560F2A61E73700A1E691 /* ReviewDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0967560E2A61E73700A1E691 /* ReviewDetailView.swift */; };
 		09C0A4F32A5BEC1600691FFD /* TeamMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C0A4F22A5BEC1600691FFD /* TeamMemberViewController.swift */; };
 		09C0A4F52A5BEE4C00691FFD /* TeamMemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C0A4F42A5BEE4C00691FFD /* TeamMemberView.swift */; };
+		09C3AD4B2A64AA0600CDE00F /* ReviewDetailScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C3AD4A2A64AA0600CDE00F /* ReviewDetailScrollView.swift */; };
+		09C3AD4D2A64AF8300CDE00F /* ReviewDetailCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C3AD4C2A64AF8300CDE00F /* ReviewDetailCustomView.swift */; };
 		583117A12A5B71920099B517 /* TeamDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583117A02A5B71920099B517 /* TeamDashboardViewController.swift */; };
 		583117A32A5B71A00099B517 /* IndivisualDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583117A22A5B71A00099B517 /* IndivisualDashboardViewController.swift */; };
 		583117A82A5BE1490099B517 /* HomeTitleBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583117A72A5BE1490099B517 /* HomeTitleBarView.swift */; };
@@ -154,6 +156,8 @@
 		0967560E2A61E73700A1E691 /* ReviewDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailView.swift; sourceTree = "<group>"; };
 		09C0A4F22A5BEC1600691FFD /* TeamMemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberViewController.swift; sourceTree = "<group>"; };
 		09C0A4F42A5BEE4C00691FFD /* TeamMemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberView.swift; sourceTree = "<group>"; };
+		09C3AD4A2A64AA0600CDE00F /* ReviewDetailScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailScrollView.swift; sourceTree = "<group>"; };
+		09C3AD4C2A64AF8300CDE00F /* ReviewDetailCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailCustomView.swift; sourceTree = "<group>"; };
 		583117A02A5B71920099B517 /* TeamDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDashboardViewController.swift; sourceTree = "<group>"; };
 		583117A22A5B71A00099B517 /* IndivisualDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndivisualDashboardViewController.swift; sourceTree = "<group>"; };
 		583117A72A5BE1490099B517 /* HomeTitleBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTitleBarView.swift; sourceTree = "<group>"; };
@@ -540,6 +544,8 @@
 				0967560E2A61E73700A1E691 /* ReviewDetailView.swift */,
 				9B1CA97D2A634C7900CB81AC /* ReviewDetailCollectionViewCell.swift */,
 				9B1CA9772A62ADFD00CB81AC /* ReviewDetailEmptyView.swift */,
+				09C3AD4A2A64AA0600CDE00F /* ReviewDetailScrollView.swift */,
+				09C3AD4C2A64AF8300CDE00F /* ReviewDetailCustomView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -719,6 +725,7 @@
 				096755F82A607A5400A1E691 /* ProjectNameCollectionReusableView.swift in Sources */,
 				03E6D2002A5325F200F4453C /* Model.swift in Sources */,
 				096755BB2A5C61BE00A1E691 /* TeamMemberTableViewCell.swift in Sources */,
+				09C3AD4B2A64AA0600CDE00F /* ReviewDetailScrollView.swift in Sources */,
 				9B1CA97C2A62E12000CB81AC /* ReviewDetailDataModel.swift in Sources */,
 				03E6D2422A532C3300F4453C /* Image.swift in Sources */,
 				03E6D2782A5333BF00F4453C /* UITabBar+.swift in Sources */,
@@ -738,6 +745,7 @@
 				03B004A92A556C7400E71CA7 /* UIWindow+.swift in Sources */,
 				03E6D2442A532C6300F4453C /* Literals.swift in Sources */,
 				03E6D2682A53334A00F4453C /* UITextField+.swift in Sources */,
+				09C3AD4D2A64AF8300CDE00F /* ReviewDetailCustomView.swift in Sources */,
 				03E6D26E2A53337600F4453C /* UICollectionView+.swift in Sources */,
 				096756062A61610300A1E691 /* ProjectNameTableViewCell.swift in Sources */,
 				0967560D2A61E08C00A1E691 /* ProjectCalendarView.swift in Sources */,
