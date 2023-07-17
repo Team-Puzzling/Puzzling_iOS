@@ -88,13 +88,9 @@
 		09C3AD5C2A65717500CDE00F /* TeamMemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C3AD5B2A65717500CDE00F /* TeamMemberView.swift */; };
 		09C3AD5E2A65719100CDE00F /* TeamMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C3AD5D2A65719100CDE00F /* TeamMemberViewController.swift */; };
 		251C00D52A5D205300F6838C /* CustomRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251C00D42A5D205300F6838C /* CustomRadioButton.swift */; };
-		251C00D72A5D309300F6838C /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251C00D62A5D309300F6838C /* BottomSheetViewController.swift */; };
-		251C00DD2A5F114800F6838C /* FiveFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251C00DC2A5F114800F6838C /* FiveFView.swift */; };
-		251C00E92A60343900F6838C /* testViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251C00E82A60343900F6838C /* testViewController.swift */; };
 		255026DF2A656D8100531543 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255026DE2A656D8100531543 /* OnBoardingViewController.swift */; };
 		255026E32A656EF100531543 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255026E22A656EF100531543 /* OnBoardingView.swift */; };
 		255026E52A657FB000531543 /* EnterProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255026E42A657FB000531543 /* EnterProjectView.swift */; };
-		25F972642A61A839001CE10C /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F972632A61A839001CE10C /* CustomAlert.swift */; };
 		583117A12A5B71920099B517 /* TeamDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583117A02A5B71920099B517 /* TeamDashboardViewController.swift */; };
 		583117A32A5B71A00099B517 /* IndivisualDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583117A22A5B71A00099B517 /* IndivisualDashboardViewController.swift */; };
 		583117A82A5BE1490099B517 /* HomeTitleBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583117A72A5BE1490099B517 /* HomeTitleBarView.swift */; };
@@ -132,7 +128,7 @@
 		03ADF3912A5E9534002CEDDC /* ProjectCycleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCycleModel.swift; sourceTree = "<group>"; };
 		03ADF3932A5EA4DB002CEDDC /* CheckButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckButton.swift; sourceTree = "<group>"; };
 		03B004A82A556C7400E71CA7 /* UIWindow+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+.swift"; sourceTree = "<group>"; };
-		03E6D1E12A53219600F4453C /* Puzzling.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Puzzling.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		03E6D1E12A53219600F4453C /* Puzzling.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = Puzzling.app; path = "/Users/kyuboa.shim/Desktop/ThePuzzlings/ProjectFile/Puzzling_iOS/Puzzling/build/Debug-iphoneos/Puzzling.app"; sourceTree = "<absolute>"; };
 		03E6D1E42A53219600F4453C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		03E6D1E62A53219600F4453C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		03E6D1E82A53219600F4453C /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -176,8 +172,6 @@
 		03FFD2D02A5B21D600A3B70D /* AppleSDGothicNeoH.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AppleSDGothicNeoH.ttf; sourceTree = "<group>"; };
 		03FFD2D22A5B250800A3B70D /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
 		03FFD2D82A5D968200A3B70D /* CreateProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectViewController.swift; sourceTree = "<group>"; };
-		096755BA2A5C61BE00A1E691 /* TeamMemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberTableViewCell.swift; sourceTree = "<group>"; };
-		096755BE2A5D9E1A00A1E691 /* TeamMemberCustomHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberCustomHeaderView.swift; sourceTree = "<group>"; };
 		096755C52A5E970500A1E691 /* MyProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProjectViewController.swift; sourceTree = "<group>"; };
 		096755CA2A5E9AF500A1E691 /* MyProjectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProjectTableViewCell.swift; sourceTree = "<group>"; };
 		096755E52A60700E00A1E691 /* MyProjectTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProjectTableHeaderView.swift; sourceTree = "<group>"; };
@@ -187,23 +181,14 @@
 		096756082A61DB5700A1E691 /* ReviewDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailViewController.swift; sourceTree = "<group>"; };
 		0967560C2A61E08C00A1E691 /* ProjectCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCalendarView.swift; sourceTree = "<group>"; };
 		0967560E2A61E73700A1E691 /* ReviewDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailView.swift; sourceTree = "<group>"; };
-		09C0A4F22A5BEC1600691FFD /* TeamMemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberViewController.swift; sourceTree = "<group>"; };
-		09C0A4F42A5BEE4C00691FFD /* TeamMemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberView.swift; sourceTree = "<group>"; };
 		09C3AD572A65714800CDE00F /* TeamMemberCustomHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberCustomHeaderView.swift; sourceTree = "<group>"; };
 		09C3AD592A65715C00CDE00F /* TeamMemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberTableViewCell.swift; sourceTree = "<group>"; };
 		09C3AD5B2A65717500CDE00F /* TeamMemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberView.swift; sourceTree = "<group>"; };
 		09C3AD5D2A65719100CDE00F /* TeamMemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberViewController.swift; sourceTree = "<group>"; };
-		251C00C82A5BE62400F6838C /* CreateRetrospectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRetrospectViewController.swift; sourceTree = "<group>"; };
-		251C00CA2A5BEB6600F6838C /* TILView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TILView.swift; sourceTree = "<group>"; };
-		251C00CE2A5BEB7600F6838C /* AARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AARView.swift; sourceTree = "<group>"; };
 		251C00D42A5D205300F6838C /* CustomRadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRadioButton.swift; sourceTree = "<group>"; };
-		251C00D62A5D309300F6838C /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
-		251C00DC2A5F114800F6838C /* FiveFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveFView.swift; sourceTree = "<group>"; };
-		251C00E82A60343900F6838C /* testViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testViewController.swift; sourceTree = "<group>"; };
 		255026DE2A656D8100531543 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
 		255026E22A656EF100531543 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
 		255026E42A657FB000531543 /* EnterProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterProjectView.swift; sourceTree = "<group>"; };
-		25F972632A61A839001CE10C /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
 		583117A02A5B71920099B517 /* TeamDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDashboardViewController.swift; sourceTree = "<group>"; };
 		583117A22A5B71A00099B517 /* IndivisualDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndivisualDashboardViewController.swift; sourceTree = "<group>"; };
 		583117A72A5BE1490099B517 /* HomeTitleBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTitleBarView.swift; sourceTree = "<group>"; };
@@ -304,17 +289,7 @@
 			isa = PBXGroup;
 			children = (
 				03E6D1E32A53219600F4453C /* Puzzling */,
-				03E6D1E22A53219600F4453C /* Products */,
-				255026DA2A653C9000531543 /* Recovered References */,
 			);
-			sourceTree = "<group>";
-		};
-		03E6D1E22A53219600F4453C /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				03E6D1E12A53219600F4453C /* Puzzling.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		03E6D1E32A53219600F4453C /* Puzzling */ = {
@@ -405,7 +380,6 @@
 			isa = PBXGroup;
 			children = (
 				255026DB2A656D1500531543 /* OnBoarding */,
-				251C00C52A5BE57C00F6838C /* CreateRetrospect */,
 				096756072A61DB3800A1E691 /* ReviewDetail */,
 				096755EC2A6078AD00A1E691 /* TeamMember */,
 				096755C22A5E96DC00A1E691 /* MyProject */,
@@ -670,24 +644,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		255026DA2A653C9000531543 /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				096755BA2A5C61BE00A1E691 /* TeamMemberTableViewCell.swift */,
-				251C00C82A5BE62400F6838C /* CreateRetrospectViewController.swift */,
-				251C00D62A5D309300F6838C /* BottomSheetViewController.swift */,
-				251C00E82A60343900F6838C /* testViewController.swift */,
-				09C0A4F22A5BEC1600691FFD /* TeamMemberViewController.swift */,
-				251C00DC2A5F114800F6838C /* FiveFView.swift */,
-				096755BE2A5D9E1A00A1E691 /* TeamMemberCustomHeaderView.swift */,
-				251C00CE2A5BEB7600F6838C /* AARView.swift */,
-				09C0A4F42A5BEE4C00691FFD /* TeamMemberView.swift */,
-				251C00CA2A5BEB6600F6838C /* TILView.swift */,
-				25F972632A61A839001CE10C /* CustomAlert.swift */,
-			);
-			name = "Recovered References";
-			sourceTree = "<group>";
-		};
 		255026DB2A656D1500531543 /* OnBoarding */ = {
 			isa = PBXGroup;
 			children = (
@@ -862,7 +818,7 @@
 				03E6D2512A532FD300F4453C /* XCRemoteSwiftPackageReference "realm-swift" */,
 				03E6D2562A53303700F4453C /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 			);
-			productRefGroup = 03E6D1E22A53219600F4453C /* Products */;
+			productRefGroup = 03E6D1D82A53219600F4453C;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
