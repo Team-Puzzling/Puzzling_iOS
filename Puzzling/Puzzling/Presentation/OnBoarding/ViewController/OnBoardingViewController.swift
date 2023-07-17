@@ -47,9 +47,9 @@ extension OnBoardingViewContoller {
     
     private func setLayout() {
         
-        view.addSubviews(OnBoardingView)
+        view.addSubviews(onBoardingView)
         
-        OnBoardingView.snp.makeConstraints {
+        onBoardingView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
         
