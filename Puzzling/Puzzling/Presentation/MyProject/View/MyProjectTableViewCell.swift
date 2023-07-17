@@ -113,6 +113,7 @@ extension MyProjectTableViewCell {
         dateFormatter.locale = Locale(identifier: "ko_kr")
         dateFormatter.timeZone = TimeZone(identifier: "KST")
         guard let startDate = dateFormatter.date(from: date) else { return 0 }
+//        print(startDate)
         daysCount = days(from: startDate)
         return daysCount
     }
@@ -120,8 +121,14 @@ extension MyProjectTableViewCell {
     private func days(from date: Date) -> Int {
         let calendar = Calendar.current
         let currentDate = Date()
-        print(Date())
-        return (calendar.dateComponents([.day], from: date, to: currentDate).day ?? 0) + 1
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.locale = Locale(identifier: "ko_kr")
+        dateFormatter.timeZone = TimeZone(identifier: "KST")
+        let returnData = dateFormatter.string(from: currentDate)
+        guard let returnDate = dateFormatter.date(from: returnData) else { return 0 }
+        print(returnData)
+        return (calendar.dateComponents([.day], from: date, to: returnDate).day ?? 0) + 1
     }
 }
 
@@ -130,7 +137,10 @@ extension MyProjectTableViewCell {
         projectNameLabel.text  = data.projectName
         let duration:Int = calculateDays(date: data.startDate)
         if (duration < 0) {
-            durationLabel.text = "D - \(duration * (-1))"
+            durationLabel.text = "D - \((duration - 1) * (-1))"
+        }
+        else if (duration == 0) {
+            durationLabel.text = "D - 1"
         }
         else {
             durationLabel.text = "D + \(duration)"
