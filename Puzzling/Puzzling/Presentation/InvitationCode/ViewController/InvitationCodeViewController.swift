@@ -122,6 +122,7 @@ extension InvitationCodeViewController {
     // MARK: - Methods
     
     private func setAddTarget() {
+        closeButton.addTarget(self, action: #selector(closeButtonDidTap), for: .touchUpInside)
         inputCompletionButton.addTarget(self, action: #selector(inputCompletionButtonDidTap), for: .touchUpInside)
     }
     
@@ -150,16 +151,25 @@ extension InvitationCodeViewController {
         !invitationCode.isEmpty ? inputCompletionButton.setState(.allow) : inputCompletionButton.setState(.notAllow)
     }
     
-    private func pushToCreateProfile() {
+    private func presentToCreateProfile() {
         let createProfileVC = CreateProfileViewController()
-        navigationController?.pushViewController(createProfileVC, animated: true)
+        createProfileVC.modalPresentationStyle = .fullScreen
+        self.present(createProfileVC, animated: true)
+    }
+    
+    private func dismissToMain() {
+        dismiss(animated: true)
     }
     
     // MARK: - @objc Methods
     
     @objc
     private func inputCompletionButtonDidTap() {
-        pushToCreateProfile()
+        presentToCreateProfile()
+    }
+    
+    @objc func closeButtonDidTap() {
+        dismissToMain()
     }
     
     @objc

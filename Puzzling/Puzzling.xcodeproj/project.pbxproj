@@ -13,6 +13,7 @@
 		0351AB422A6323A8006B0F4C /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB412A6323A8006B0F4C /* CustomAlertView.swift */; };
 		0351AB462A645BBF006B0F4C /* InvitationCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB452A645BBF006B0F4C /* InvitationCodeViewController.swift */; };
 		0351AB482A6497C3006B0F4C /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB472A6497C3006B0F4C /* CreateProfileViewController.swift */; };
+		0351AB4A2A652F0B006B0F4C /* InvitationCodeTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB492A652F0B006B0F4C /* InvitationCodeTestViewController.swift */; };
 		03734EB52A599FDB00B401D6 /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03734EB42A599FDB00B401D6 /* Image.xcassets */; };
 		03734EB82A59A0BD00B401D6 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03734EB72A59A0BD00B401D6 /* TabBarController.swift */; };
 		03734EBD2A59A1F800B401D6 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03734EBC2A59A1F800B401D6 /* TabBarItem.swift */; };
@@ -95,6 +96,7 @@
 		0351AB412A6323A8006B0F4C /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		0351AB452A645BBF006B0F4C /* InvitationCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationCodeViewController.swift; sourceTree = "<group>"; };
 		0351AB472A6497C3006B0F4C /* CreateProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileViewController.swift; sourceTree = "<group>"; };
+		0351AB492A652F0B006B0F4C /* InvitationCodeTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationCodeTestViewController.swift; sourceTree = "<group>"; };
 		03734EB42A599FDB00B401D6 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = "<group>"; };
 		03734EB72A59A0BD00B401D6 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		03734EBC2A59A1F800B401D6 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 			children = (
 				0351AB452A645BBF006B0F4C /* InvitationCodeViewController.swift */,
 				0351AB472A6497C3006B0F4C /* CreateProfileViewController.swift */,
+				0351AB492A652F0B006B0F4C /* InvitationCodeTestViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -778,6 +781,7 @@
 				03E6D27C2A5333E400F4453C /* UIViewController+.swift in Sources */,
 				03734EBD2A59A1F800B401D6 /* TabBarItem.swift in Sources */,
 				03E6D2052A5326D400F4453C /* DTO.swift in Sources */,
+				0351AB4A2A652F0B006B0F4C /* InvitationCodeTestViewController.swift in Sources */,
 				096755E62A60700E00A1E691 /* MyProjectTableHeaderView.swift in Sources */,
 				03E6D26C2A53336900F4453C /* UITableView+.swift in Sources */,
 			);

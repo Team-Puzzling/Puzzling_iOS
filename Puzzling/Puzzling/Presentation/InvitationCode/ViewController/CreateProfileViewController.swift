@@ -35,12 +35,15 @@ final class CreateProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
+        let vc = InvitationCodeViewController()
+        vc.dismiss(animated: true)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
         setLayout()
+        setAddTarget()
         setTapScreen()
         setNotification()
     }
@@ -139,6 +142,11 @@ extension CreateProfileViewController {
     }
     
     // MARK: - Methods
+    
+    private func setAddTarget() {
+        closeButton.addTarget(self, action: #selector(closeButotnDidTap), for: .touchUpInside)
+        participateProjectButton.addTarget(self, action: #selector(participateProjectButtonDidTap), for: .touchUpInside)
+    }
 
     private func setTapScreen() {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapScreen))
@@ -158,7 +166,26 @@ extension CreateProfileViewController {
         }
     }
     
+    private func dismissToMain() {
+        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+    }
+    
+    private func participateProject() {
+        print("participateProject")
+        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+    }
+    
     // MARK: - @objc Methods
+    
+    @objc
+    private func closeButotnDidTap() {
+        dismissToMain()
+    }
+    
+    @objc
+    private func participateProjectButtonDidTap() {
+        participateProject()
+    }
     
     @objc
     private func didTapScreen(_ gesture: UITapGestureRecognizer) {
