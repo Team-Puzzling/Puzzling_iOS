@@ -43,6 +43,7 @@ final class TeamMemberViewController: UIViewController {
         setUI()
         setLayout()
         setRegister()
+        setNotificationCenter()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,7 +54,6 @@ final class TeamMemberViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setCalendarViewLayout()
-        setNotificationCenter()
     }
     
     deinit {
