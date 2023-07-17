@@ -72,8 +72,6 @@ extension ProjectCalendarView {
             
             $0.scrollEnabled = true
             $0.scrollDirection = .horizontal
-//            ($0.weekdays[0] as! UILabel).textColor = UIColor.red
-//            ($0.weekdays[6] as! UILabel).textColor = UIColor.red
         }
         
         
@@ -100,6 +98,24 @@ extension ProjectCalendarView {
     private func setDelegate() {
         calendarView.delegate = self
         calendarView.dataSource = self
+    }
+    
+    private func sendDateBoolNotification(bool: Bool) {
+        let userInfo = bool
+        NotificationCenter.default.post(
+            name: Notification.Name("dateBoolNotification"),
+            object: nil,
+            userInfo: ["userInfo": userInfo]
+        )
+    }
+    
+    private func sendDateNotification(string: String) {
+        let userInfo = string
+        NotificationCenter.default.post(
+            name: Notification.Name("dateNotification"),
+            object: nil,
+            userInfo: ["userInfo": userInfo]
+        )
     }
 }
 
@@ -147,6 +163,17 @@ extension ProjectCalendarView: FSCalendarDelegate, FSCalendarDataSource, FSCalen
     
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleSelectionColorFor date: Date) -> UIColor? {
         return .white000
+    }
+    
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        sendDateBoolNotification(bool: true)
+        sendDateNotification(string: dateFormatter.string(from: date))
+        reviewDetailDataModel.forEach {
+            let modelDate = dateFormatter.date(from: $0.reviewDate)
+            if(date == modelDate && $0.reviewId == nil) {
+                sendDateBoolNotification(bool: false)
+            }
+        }
     }
 }
 

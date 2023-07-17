@@ -15,7 +15,7 @@ extension ReviewDetailViewController {
     enum reviewDetail: CaseIterable {
         case review, empty
         
-        var reviewDetailView: UIView {
+        var reviewDetailViewss: UIView {
             switch self {
             case .review:
                 return ReviewDetailView()
@@ -28,13 +28,18 @@ extension ReviewDetailViewController {
 
 final class ReviewDetailViewController: UIViewController {
     
+    private let reviewDetailData = ReviewDetailDataModel.dummy()
+    
     private let projectCalenderView = ProjectCalendarView()
     
-    func reviewDetailStatus(status: reviewDetail) {
-        print(#function)
+    func setReviewDetailView(status: reviewDetail) {
+        print(#function, status)
+//        reviewDetailView = nil
+        reviewDetailView = status.reviewDetailViewss
+        
     }
     
-    private var reviewDetailView = ReviewDetailView()
+    private var reviewDetailView = UIView()
     
     private let teamMemberData = TeamMemberDataModel.dummy()
     
@@ -45,7 +50,7 @@ final class ReviewDetailViewController: UIViewController {
         setDelegate()
         setUI()
         setLayout()
-        reviewDetailStatus(status: .review)
+        setNotificationCenter()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,7 +80,7 @@ extension ReviewDetailViewController {
     }
     
     private func setLayout() {
-        view.addSubviews(projectCalenderView, reviewDetailView)
+        view.addSubviews(projectCalenderView)
         
         projectCalenderView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
@@ -83,11 +88,7 @@ extension ReviewDetailViewController {
             $0.height.equalTo(projectCalenderView.getCalendarViewHeight())
         }
         
-        reviewDetailView.snp.makeConstraints {
-            $0.top.equalTo(projectCalenderView.snp.bottom).offset(12)
-            $0.horizontalEdges.equalToSuperview()
-            $0.bottom.equalToSuperview()
-        }
+        
     }
 
     private func setNavigationBar() {
@@ -122,11 +123,38 @@ extension ReviewDetailViewController {
             $0.height.equalTo(projectCalenderView.getCalendarViewHeight())
         }
     }
+    
+    private func layout() {
+        view.addSubviews(reviewDetailView)
+        reviewDetailView.snp.makeConstraints {
+            $0.top.equalTo(projectCalenderView.snp.bottom).offset(12)
+            $0.horizontalEdges.equalToSuperview()
+            $0.bottom.equalToSuperview()
+        }
+    }
+    
+    private func setNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(getDateBoolNotification(_:)), name: Notification.Name("dateBoolNotification"), object: nil)
+    }
+ 
 }
 
 extension ReviewDetailViewController {
     @objc
     private func backButtonTapped() {
         
+    }
+    
+    @objc
+    private func getDateBoolNotification(_ notification: Notification) {
+        if let dateNotification = notification.userInfo?["userInfo"] as? Bool {
+            print(dateNotification,"???????")
+            if (dateNotification == true) {
+                setReviewDetailView(status: .review)
+            }
+            else { setReviewDetailView(status: .empty) }
+        }
+//        reviewDetailView.backgroundColor = .white00
+        layout()
     }
 }
