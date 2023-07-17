@@ -7,12 +7,16 @@
 
 import UIKit
 
+import Moya
 import Then
 import SnapKit
 
 class testViewController: UIViewController {
     
     private let pushButton = UIButton()
+    
+    let previousTemplateProvider = MoyaProvider<CreateRetrospectService>(plugins: [NetworkLoggerPlugin(verbose: true)])
+    private var previousTemplateId: PreviousTemplateModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,9 +56,34 @@ class testViewController: UIViewController {
         self.navigationController?.pushViewController(VC, animated: true)
     }
     
+    func fetchPreviousTemplate() {
+        previousTemplateProvider.request(.previousTemplate(memberID: "1", projectID: "1")) { result in
+            switch result {
+            case .success(let result):
+                let status = result.statusCode
+                if status >= 200 && status < 300 {
+                    do {
+                        guard let data = try? JSONDecoder().decode(PreviousTemplateResponce.self, from: result.data) else { return }
+                        let test = data
+                        print(test)
+                    }
+                    catch (let error) {
+                        print("ㅋㅋㅋ 에러 ㅋ ㅋㅋ ㅋ ㅋ ㅋ")
+                    }
+                }
+                else if status >= 400 {
+                    print("400 이상 에러 ㅋ ㅋ ㅋ ㅋ ㅋ ㅋ ㅋ")
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
     @objc
     func pushButtonTapped() {
         let option = "5F"
         pushToCreateRetrospectViewController(option: option)
+        fetchPreviousTemplate()
     }
 }
