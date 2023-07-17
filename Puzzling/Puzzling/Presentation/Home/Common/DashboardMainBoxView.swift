@@ -47,6 +47,8 @@ final class DashboardMainBoxView: UIView {
         }
     }
     
+    private let puzzleViewHeight = UIScreen.main.bounds.height / 7.12
+    
     private lazy var projectServiceData = ProjectService().getPuzzleData(type: puzzleBoardType)
     
     private let userNameLabel = UILabel()
@@ -57,13 +59,11 @@ final class DashboardMainBoxView: UIView {
     
     private var boxType: DashboardType!
     private var puzzleBoardType: DashboardType!
-    private var identifierString: String = "\()"
     
     init(frame: CGRect, type: DashboardType) {
         self.boxType = type
         self.puzzleBoardType = type
         super.init(frame: frame)
-        print("ppppppp")
         setDelegate()
         setUI()
         setLayout()
@@ -130,13 +130,13 @@ extension DashboardMainBoxView {
         
         puzzleCollectionView.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(90)
+            $0.height.equalTo(puzzleViewHeight)
             $0.top.equalTo(userNameLabel.snp.bottom).offset(10)
         }
         
         cardButtonView.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview().inset(16)
-            $0.bottom.equalToSuperview().inset(24)
+            $0.bottom.equalToSuperview().inset(18)
             $0.height.equalToSuperview().dividedBy(3.78)
         }
     }
