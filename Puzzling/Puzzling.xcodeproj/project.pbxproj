@@ -14,6 +14,7 @@
 		0351AB462A645BBF006B0F4C /* InvitationCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB452A645BBF006B0F4C /* InvitationCodeViewController.swift */; };
 		0351AB482A6497C3006B0F4C /* CreateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB472A6497C3006B0F4C /* CreateProfileViewController.swift */; };
 		0351AB4A2A652F0B006B0F4C /* InvitationCodeTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB492A652F0B006B0F4C /* InvitationCodeTestViewController.swift */; };
+		0351AB542A656DEB006B0F4C /* ProjectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB532A656DEB006B0F4C /* ProjectService.swift */; };
 		03734EB52A599FDB00B401D6 /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03734EB42A599FDB00B401D6 /* Image.xcassets */; };
 		03734EB82A59A0BD00B401D6 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03734EB72A59A0BD00B401D6 /* TabBarController.swift */; };
 		03734EBD2A59A1F800B401D6 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03734EBC2A59A1F800B401D6 /* TabBarItem.swift */; };
@@ -32,7 +33,6 @@
 		03E6D1F12A53219800F4453C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03E6D1EF2A53219800F4453C /* LaunchScreen.storyboard */; };
 		03E6D2002A5325F200F4453C /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E6D1FF2A5325F100F4453C /* Model.swift */; };
 		03E6D2052A5326D400F4453C /* DTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E6D2042A5326D400F4453C /* DTO.swift */; };
-		03E6D2072A5326DD00F4453C /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E6D2062A5326DD00F4453C /* APIService.swift */; };
 		03E6D2262A532AAC00F4453C /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E6D2252A532AAC00F4453C /* BaseView.swift */; };
 		03E6D2282A532AB900F4453C /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E6D2272A532AB900F4453C /* BaseViewController.swift */; };
 		03E6D2332A532B9400F4453C /* SF-Pro-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 03E6D22A2A532B9300F4453C /* SF-Pro-Text-Regular.otf */; };
@@ -105,6 +105,7 @@
 		0351AB452A645BBF006B0F4C /* InvitationCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationCodeViewController.swift; sourceTree = "<group>"; };
 		0351AB472A6497C3006B0F4C /* CreateProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProfileViewController.swift; sourceTree = "<group>"; };
 		0351AB492A652F0B006B0F4C /* InvitationCodeTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationCodeTestViewController.swift; sourceTree = "<group>"; };
+		0351AB532A656DEB006B0F4C /* ProjectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectService.swift; sourceTree = "<group>"; };
 		03734EB42A599FDB00B401D6 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = "<group>"; };
 		03734EB72A59A0BD00B401D6 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		03734EBC2A59A1F800B401D6 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
@@ -125,7 +126,6 @@
 		03E6D1F22A53219800F4453C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03E6D1FF2A5325F100F4453C /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		03E6D2042A5326D400F4453C /* DTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTO.swift; sourceTree = "<group>"; };
-		03E6D2062A5326DD00F4453C /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		03E6D2252A532AAC00F4453C /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		03E6D2272A532AB900F4453C /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		03E6D22A2A532B9300F4453C /* SF-Pro-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Regular.otf"; sourceTree = "<group>"; };
@@ -217,6 +217,14 @@
 				0351AB492A652F0B006B0F4C /* InvitationCodeTestViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		0351AB502A656C77006B0F4C /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				0351AB532A656DEB006B0F4C /* ProjectService.swift */,
+			);
+			path = Project;
 			sourceTree = "<group>";
 		};
 		03734EB62A59A08E00B401D6 /* TabBar */ = {
@@ -342,7 +350,7 @@
 		03E6D2022A53263600F4453C /* APIService */ = {
 			isa = PBXGroup;
 			children = (
-				03E6D2062A5326DD00F4453C /* APIService.swift */,
+				0351AB502A656C77006B0F4C /* Project */,
 			);
 			path = APIService;
 			sourceTree = "<group>";
@@ -828,12 +836,12 @@
 				09C0A4F52A5BEE4C00691FFD /* TeamMemberView.swift in Sources */,
 				03E6D25E2A53321000F4453C /* NetworkLoggerPlugin.swift in Sources */,
 				03E6D2622A5332F700F4453C /* Encodable+.swift in Sources */,
+				0351AB542A656DEB006B0F4C /* ProjectService.swift in Sources */,
 				03E6D26A2A53335700F4453C /* UIStackView+.swift in Sources */,
 				096755C62A5E970500A1E691 /* MyProjectViewController.swift in Sources */,
 				0351AB402A630EE6006B0F4C /* UIResponder+.swift in Sources */,
 				03FFD2CA2A5B15BA00A3B70D /* UIFont+.swift in Sources */,
 				251C00CB2A5BEB6600F6838C /* TILView.swift in Sources */,
-				03E6D2072A5326DD00F4453C /* APIService.swift in Sources */,
 				03E6D27A2A5333C900F4453C /* UIImage+.swift in Sources */,
 				03734EBF2A59A26800B401D6 /* MyPageViewController.swift in Sources */,
 				583117A82A5BE1490099B517 /* HomeTitleBarView.swift in Sources */,
