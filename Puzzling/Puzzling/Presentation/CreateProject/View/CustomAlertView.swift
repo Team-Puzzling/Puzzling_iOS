@@ -16,13 +16,13 @@ enum CustomAlertType {
 }
 
 class CustomAlertView: UIView {
-    
+
     // MARK: - Properties
-    
+
     private let alertType: CustomAlertType
-    
+
     // MARK: - UI Components
-    
+
     private let containerView = UIView()
     private let contentView = UIView()
     private let logoImage = UIImageView()
@@ -33,10 +33,10 @@ class CustomAlertView: UIView {
     private let copyButton = UIButton()
     private let kakaoShareButton = UIButton()
     private let closeButton = UIButton()
-    
-    
+
+
     // MARK: - Initializer
-    
+
     init(frame: CGRect, alertType: CustomAlertType) {
         self.alertType = alertType
         super.init(frame: frame)
@@ -44,30 +44,30 @@ class CustomAlertView: UIView {
         setLayout()
         setAddTarget()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     // MARK: - UI Components Property
-    
+
     private func setUI(){
-        
+
         self.backgroundColor = .background500
-        
+
         containerView.do {
             $0.backgroundColor = .clear
         }
-        
+
         contentView.do {
             $0.backgroundColor = .white000
             $0.layer.cornerRadius = 16
         }
-        
+
         logoImage.do {
             $0.image = Image.elementPuzzle1
         }
-        
+
         switch alertType {
         case .createRetrospect:
             titleLabel.do {
@@ -75,7 +75,7 @@ class CustomAlertView: UIView {
                 $0.font = .fontGuide(.heading4_kor)
                 $0.textColor = .black000
             }
-            
+
             subtitleLabel.do {
                 $0.text = "수정이 어려우니\n신중하게 작성해 주세요!"
                 $0.numberOfLines = 2
@@ -83,7 +83,7 @@ class CustomAlertView: UIView {
                 $0.textColor = .gray600
                 $0.textAlignment = .center
             }
-            
+
             saveButton.do {
                 $0.setTitle("저장하기", for: .normal)
                 $0.setTitleColor(UIColor.white000, for: .normal)
@@ -91,7 +91,7 @@ class CustomAlertView: UIView {
                 $0.backgroundColor = .blue400
                 $0.layer.cornerRadius = 16
             }
-            
+
             cancelButton.do {
                 $0.setTitle("취소", for: .normal)
                 $0.setTitleColor(UIColor.gray700, for: .normal)
@@ -99,14 +99,14 @@ class CustomAlertView: UIView {
                 $0.backgroundColor = .background050
                 $0.layer.cornerRadius = 16
             }
-            
+
         case .createProject:
             titleLabel.do {
                 $0.text = "초대코드가 생성되었어요!"
                 $0.font = .fontGuide(.heading4_kor)
                 $0.textColor = .black000
             }
-            
+
             subtitleLabel.do {
                 $0.text = "ABCDEFG"
                 $0.numberOfLines = 2
@@ -114,7 +114,7 @@ class CustomAlertView: UIView {
                 $0.textColor = .gray600
                 $0.textAlignment = .center
             }
-            
+
             copyButton.do {
                 $0.setTitle("초대코드 복사하기", for: .normal)
                 $0.setTitleColor(UIColor.white000, for: .normal)
@@ -122,7 +122,7 @@ class CustomAlertView: UIView {
                 $0.backgroundColor = .blue400
                 $0.layer.cornerRadius = 16
             }
-            
+
             kakaoShareButton.do {
                 $0.setTitle("카카오톡으로 공유하기", for: .normal)
                 $0.setTitleColor(UIColor.black000, for: .normal)
@@ -130,7 +130,7 @@ class CustomAlertView: UIView {
                 $0.backgroundColor = .background050
                 $0.layer.cornerRadius = 16
             }
-            
+
             closeButton.do {
                 $0.setTitle("닫기", for: .normal)
                 $0.setTitleColor(UIColor.gray500, for: .normal)
@@ -140,26 +140,26 @@ class CustomAlertView: UIView {
             }
         }
     }
-    
-    
+
+
     // MARK: - Layout Helper
 
     private func setLayout() {
-        
+
         switch alertType {
         case .createRetrospect:
-            
+
             addSubviews(containerView)
             containerView.addSubviews(contentView, logoImage, titleLabel,
                                       subtitleLabel, saveButton, cancelButton)
-            
+
             containerView.snp.makeConstraints {
                 $0.leading.equalToSuperview().inset(42)
                 $0.trailing.equalToSuperview().inset(43)
                 $0.centerY.equalToSuperview()
                 $0.height.equalTo(340)
             }
-            
+
             contentView.snp.makeConstraints {
                 $0.top.equalTo(containerView.snp.top).inset(32)
                 $0.bottom.equalTo(containerView.snp.bottom)
@@ -172,7 +172,7 @@ class CustomAlertView: UIView {
                 $0.width.equalTo(78)
                 $0.height.equalTo(77)
             }
-            
+
             titleLabel.snp.makeConstraints {
                 $0.top.equalTo(contentView.snp.top).inset(70)
                 $0.centerX.equalTo(containerView)
@@ -195,19 +195,19 @@ class CustomAlertView: UIView {
                 $0.height.equalTo(50)
             }
         case .createProject:
-            
+
             addSubviews(containerView)
             containerView.addSubviews(contentView, logoImage, titleLabel,
                                       subtitleLabel, copyButton, kakaoShareButton,
                                       closeButton)
-            
+
             containerView.snp.makeConstraints {
                 $0.leading.equalToSuperview().inset(42)
                 $0.trailing.equalToSuperview().inset(43)
                 $0.centerY.equalToSuperview()
                 $0.height.equalTo(373)
             }
-            
+
             contentView.snp.makeConstraints {
                 $0.top.equalTo(containerView.snp.top).inset(32)
                 $0.bottom.equalTo(containerView.snp.bottom)
@@ -220,7 +220,7 @@ class CustomAlertView: UIView {
                 $0.width.equalTo(78)
                 $0.height.equalTo(77)
             }
-            
+
             titleLabel.snp.makeConstraints {
                 $0.top.equalTo(contentView.snp.top).inset(70)
                 $0.centerX.equalTo(containerView)
@@ -230,19 +230,19 @@ class CustomAlertView: UIView {
                 $0.top.equalTo(titleLabel.snp.bottom).offset(12)
                 $0.centerX.equalTo(containerView)
             }
-            
+
             copyButton.snp.makeConstraints {
                 $0.top.equalTo(subtitleLabel.snp.bottom).offset(30)
                 $0.leading.trailing.equalToSuperview().inset(24)
                 $0.height.equalTo(50)
             }
-            
+
             kakaoShareButton.snp.makeConstraints {
                 $0.top.equalTo(copyButton.snp.bottom).offset(10)
                 $0.leading.trailing.equalTo(copyButton)
                 $0.height.equalTo(50)
             }
-            
+
             closeButton.snp.makeConstraints {
                 $0.top.equalTo(kakaoShareButton.snp.bottom).offset(10)
                 $0.leading.trailing.equalTo(copyButton)
@@ -250,7 +250,7 @@ class CustomAlertView: UIView {
             }
         }
     }
-    
+
     // MARK: - Methods
 
     private func setAddTarget() {
@@ -262,7 +262,7 @@ class CustomAlertView: UIView {
             closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
         }
     }
-    
+
     private func closeAlertView() {
         removeFromSuperview()
         if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
@@ -270,24 +270,24 @@ class CustomAlertView: UIView {
             navigationController.navigationBar.isUserInteractionEnabled = true
         }
     }
-    
+
     // MARK: - @objc Methods
-    
+
     @objc
     private func cancelButtonTapped() {
         closeAlertView()
     }
-    
+
     @objc
     private func kakaoShareButtonTapped() {
         print("kakaoShareButtonTapped")
     }
-    
+
     @objc
     private func closeButtonTapped() {
         closeAlertView()
     }
-    
+
     @objc
     private func copyButtonTapped() {
         let text = subtitleLabel.text

@@ -271,7 +271,7 @@ extension CreateRetrospectViewController {
         
         if textViewBottomY > keyboardTopY {
             let keyboardOverlap = textViewBottomY - keyboardTopY
-            view.frame.origin.y = -keyboardOverlap
+            view.frame.origin.y = -keyboardOverlap - 40
         }
     }
     
@@ -309,7 +309,7 @@ extension CreateRetrospectViewController {
     private func saveButtonTapped() {
         navigationController?.navigationBar.isUserInteractionEnabled = false
 
-        let alert = CustomAlert(frame: CGRect(x: 0, y: 0, width: 300, height: 400), alertType: .createRetrospect)
+        let alert = CustomAlertView(frame: CGRect(x: 0, y: 0, width: 300, height: 400), alertType: .createRetrospect)
         alert.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(alert)
 

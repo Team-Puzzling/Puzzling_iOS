@@ -87,7 +87,6 @@
 		251C00D72A5D309300F6838C /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251C00D62A5D309300F6838C /* BottomSheetViewController.swift */; };
 		251C00DD2A5F114800F6838C /* FiveFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251C00DC2A5F114800F6838C /* FiveFView.swift */; };
 		251C00E92A60343900F6838C /* testViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251C00E82A60343900F6838C /* testViewController.swift */; };
-		25A48C992A6302B400D7D1FF /* UIResponder+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A48C982A6302B400D7D1FF /* UIResponder+.swift */; };
 		25F972642A61A839001CE10C /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F972632A61A839001CE10C /* CustomAlert.swift */; };
 		583117A12A5B71920099B517 /* TeamDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583117A02A5B71920099B517 /* TeamDashboardViewController.swift */; };
 		583117A32A5B71A00099B517 /* IndivisualDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583117A22A5B71A00099B517 /* IndivisualDashboardViewController.swift */; };
@@ -171,7 +170,6 @@
 		251C00D62A5D309300F6838C /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		251C00DC2A5F114800F6838C /* FiveFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveFView.swift; sourceTree = "<group>"; };
 		251C00E82A60343900F6838C /* testViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testViewController.swift; sourceTree = "<group>"; };
-		25A48C982A6302B400D7D1FF /* UIResponder+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+.swift"; sourceTree = "<group>"; };
 		25F972632A61A839001CE10C /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
 		583117A02A5B71920099B517 /* TeamDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDashboardViewController.swift; sourceTree = "<group>"; };
 		583117A22A5B71A00099B517 /* IndivisualDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndivisualDashboardViewController.swift; sourceTree = "<group>"; };
@@ -244,6 +242,7 @@
 			children = (
 				03E6D1E32A53219600F4453C /* Puzzling */,
 				03E6D1E22A53219600F4453C /* Products */,
+				255026DA2A653C9000531543 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -339,7 +338,6 @@
 			isa = PBXGroup;
 			children = (
 				251C00C52A5BE57C00F6838C /* CreateRetrospect */,
-				096755CC2A5FDC3700A1E691 /* MyReview */,
 				096755C22A5E96DC00A1E691 /* MyProject */,
 				09C0A4EF2A5BEBB800691FFD /* TeamMember */,
 				03E6D20E2A5327D300F4453C /* Common */,
@@ -603,6 +601,13 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
+		255026DA2A653C9000531543 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		5831179C2A5B71280099B517 /* TeamDashboard */ = {
 			isa = PBXGroup;
 			children = (
@@ -745,7 +750,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				25A48C992A6302B400D7D1FF /* UIResponder+.swift in Sources */,
 				03E6D2742A5333A500F4453C /* UILabel+.swift in Sources */,
 				583117A32A5B71A00099B517 /* IndivisualDashboardViewController.swift in Sources */,
 				03E6D2722A53339000F4453C /* UIImageView+.swift in Sources */,
