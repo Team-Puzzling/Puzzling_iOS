@@ -32,6 +32,21 @@ class AARView: UIView {
     let continuouslyTextView = UITextView()
     let purposeTextView = UITextView()
     
+    private let errorTargetLabel = UILabel()
+    private let errorResultLabel = UILabel()
+    private let errorDifferenceLabel = UILabel()
+    private let errorContinuouslyLabel = UILabel()
+    private let errorPurposeLabel = UILabel()
+    
+    // MARK: - Properties
+
+    private let targetPlaceholder: String = "\"오늘 무슨 일이 있었는지\" 작성해 보세요."
+    private let resultPlaceholder: String = "\"그 과정에서 무슨 느낌이 들었는지\" 작성해 보세요."
+    private let differencePlaceholder: String = "\"오늘 어떤 인사이트를 얻었는지\" 작성해 보세요."
+    private let continuouslyPlaceholder: String = "\"앞으로 무엇을 해야 할지, 어떤 액션을 취해야 할지\" 작성해 보세요."
+    private let purposePlaceholder: String = "\"앞서 정한 향후 행동을 실천해본 뒤, 이에 대해 어떤 피드백을 받았는지\" 작성해 보세요."
+    
+    var onCompletionAAR: ((Bool) -> Void)?
     
     // MARK: - Initializer
     
@@ -40,7 +55,6 @@ class AARView: UIView {
         setLayout()
         setUI()
         setDelegate()
-        setTapScreen()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -56,33 +70,33 @@ extension AARView {
     private func setUI() {
         
         self.backgroundColor = .white000
-
+        
         targetLabel.do {
-            $0.text = "초기 목표"
+            $0.text = "초기의 목표는 무엇이었나요?"
             $0.textColor = .black000
             $0.font = .fontGuide(.body1_bold_kor)
         }
         
         resultLabel.do {
-            $0.text = "결과"
+            $0.text = "결과는 어땠나요?"
             $0.textColor = .black000
             $0.font = .fontGuide(.body1_bold_kor)
         }
         
         differenceLabel.do {
-            $0.text = "차이"
+            $0.text = "차이가 왜 발생했을까요?"
             $0.textColor = .black000
             $0.font = .fontGuide(.body1_bold_kor)
         }
         
         continuouslyLabel.do {
-            $0.text = "지속"
+            $0.text = "어떤 점을 지속하고 싶나요?"
             $0.textColor = .black000
             $0.font = .fontGuide(.body1_bold_kor)
         }
         
         purposeLabel.do {
-            $0.text = "목적"
+            $0.text = "앞으로의 목적은 무엇인가요?"
             $0.textColor = .black000
             $0.font = .fontGuide(.body1_bold_kor)
         }
@@ -123,7 +137,7 @@ extension AARView {
         }
         
         targetTextView.do {
-            $0.text = "\"업무 전에 의도한 혹은 얻고자 한 결과는 무엇이었는지\" 작성해 보세요"
+            $0.text = targetPlaceholder
             $0.textColor = .gray400
             $0.backgroundColor = UIColor.background050
             $0.textContainerInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
@@ -132,7 +146,7 @@ extension AARView {
         }
         
         resultTextView.do {
-            $0.text = "\"실제로 오늘 하루 어떤 일이 있었는지\" 작성해 보세요"
+            $0.text = resultPlaceholder
             $0.textColor = .gray400
             $0.backgroundColor = UIColor.background050
             $0.textContainerInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
@@ -141,7 +155,7 @@ extension AARView {
         }
         
         differenceTextView.do {
-            $0.text = "\"목표와 실제 결과 사이의 차이는 왜 발생했을지\" 작성해 보세요"
+            $0.text = differencePlaceholder
             $0.textColor = .gray400
             $0.backgroundColor = UIColor.background050
             $0.textContainerInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
@@ -150,7 +164,7 @@ extension AARView {
         }
         
         continuouslyTextView.do {
-            $0.text = "\"지속하고 싶은 부분은 무엇인지\" 작성해 보세요"
+            $0.text = continuouslyPlaceholder
             $0.textColor = .gray400
             $0.backgroundColor = UIColor.background050
             $0.textContainerInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
@@ -159,24 +173,62 @@ extension AARView {
         }
         
         purposeTextView.do {
-            $0.text = "\"개선하거나 포기해야 할 부분은 무엇인지\" 작성해 보세요"
+            $0.text = purposePlaceholder
             $0.textColor = .gray400
             $0.backgroundColor = UIColor.background050
             $0.textContainerInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
             $0.layer.cornerRadius = 16
             $0.font = .fontGuide(.body2_regular_kor)
         }
+        
+        errorTargetLabel.do {
+            $0.text = "이모지를 사용할 수 없어요."
+            $0.textColor = .red400
+            $0.font = .fontGuide(.detail1_regular_kor)
+            $0.isHidden = true
+        }
+        
+        errorResultLabel.do {
+            $0.text = "이모지를 사용할 수 없어요."
+            $0.textColor = .red400
+            $0.font = .fontGuide(.detail1_regular_kor)
+            $0.isHidden = true
+        }
+        
+        errorDifferenceLabel.do {
+            $0.text = "이모지를 사용할 수 없어요."
+            $0.textColor = .red400
+            $0.font = .fontGuide(.detail1_regular_kor)
+            $0.isHidden = true
+        }
+        
+        errorContinuouslyLabel.do {
+            $0.text = "이모지를 사용할 수 없어요."
+            $0.textColor = .red400
+            $0.font = .fontGuide(.detail1_regular_kor)
+            $0.isHidden = true
+        }
+        
+        errorPurposeLabel.do {
+            $0.text = "이모지를 사용할 수 없어요."
+            $0.textColor = .red400
+            $0.font = .fontGuide(.detail1_regular_kor)
+            $0.isHidden = true
+        }
+        
     }
     
     // MARK: - Layout Helper
-
+    
     private func setLayout() {
         
         addSubviews(targetLabel, resultLabel, differenceLabel,
                     continuouslyLabel, purposeLabel, targetTextView,
                     resultTextView, differenceTextView, continuouslyTextView,
                     purposeTextView, targetNumLabel, resultNumLabel,
-                    differenceNumLabel, continuouslyNumLabel, purposeNumLabel)
+                    differenceNumLabel, continuouslyNumLabel, purposeNumLabel,
+                    errorTargetLabel, errorResultLabel, errorDifferenceLabel,
+                    errorContinuouslyLabel, errorPurposeLabel)
         
         targetLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(16)
@@ -214,7 +266,7 @@ extension AARView {
             $0.top.equalTo(resultTextView.snp.bottom).offset(45)
             $0.leading.equalToSuperview().offset(24)
         }
-     
+        
         differenceTextView.snp.makeConstraints {
             $0.top.equalTo(differenceLabel.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview().inset(16)
@@ -230,7 +282,7 @@ extension AARView {
             $0.top.equalTo(differenceTextView.snp.bottom).offset(45)
             $0.leading.equalToSuperview().offset(24)
         }
-     
+        
         continuouslyTextView.snp.makeConstraints {
             $0.top.equalTo(continuouslyLabel.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview().inset(16)
@@ -246,7 +298,7 @@ extension AARView {
             $0.top.equalTo(continuouslyTextView.snp.bottom).offset(45)
             $0.leading.equalToSuperview().offset(24)
         }
-     
+        
         purposeTextView.snp.makeConstraints {
             $0.top.equalTo(purposeLabel.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview().inset(16)
@@ -256,6 +308,31 @@ extension AARView {
         purposeNumLabel.snp.makeConstraints {
             $0.top.equalTo(purposeTextView.snp.bottom).inset(-4)
             $0.trailing.equalTo(continuouslyTextView.snp.trailing).inset(16)
+        }
+        
+        errorTargetLabel.snp.makeConstraints {
+            $0.top.equalTo(targetTextView.snp.bottom).inset(-4)
+            $0.leading.equalToSuperview().inset(24)
+        }
+        
+        errorResultLabel.snp.makeConstraints {
+            $0.top.equalTo(resultTextView.snp.bottom).inset(-4)
+            $0.leading.equalToSuperview().inset(24)
+        }
+        
+        errorDifferenceLabel.snp.makeConstraints {
+            $0.top.equalTo(differenceTextView.snp.bottom).inset(-4)
+            $0.leading.equalToSuperview().inset(24)
+        }
+        
+        errorContinuouslyLabel.snp.makeConstraints {
+            $0.top.equalTo(continuouslyTextView.snp.bottom).inset(-4)
+            $0.leading.equalToSuperview().inset(24)
+        }
+        
+        errorPurposeLabel.snp.makeConstraints {
+            $0.top.equalTo(purposeTextView.snp.bottom).inset(-4)
+            $0.leading.equalToSuperview().inset(24)
         }
     }
     
@@ -269,57 +346,87 @@ extension AARView {
         purposeTextView.delegate = self
     }
     
-    private func setTapScreen() {
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapScreen))
-        self.addGestureRecognizer(tapGestureRecognizer)
-    }
-    
-    // MARK: - @objc Methods
-    
-    @objc private func didTapScreen() {
-          self.endEditing(true)
+    private func setErrorHidden(for textView: UITextView, isHidden: Bool) {
+        switch textView {
+        case targetTextView:
+            errorTargetLabel.isHidden = isHidden
+        case resultTextView:
+            errorResultLabel.isHidden = isHidden
+        case differenceTextView:
+            errorDifferenceLabel.isHidden = isHidden
+        case continuouslyTextView:
+            errorContinuouslyLabel.isHidden = isHidden
+        case purposeTextView:
+            errorPurposeLabel.isHidden = isHidden
+        default:
+            break
+        }
     }
 }
 
 extension AARView: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
-           if textView == targetTextView {
-               let textCount = textView.text.count
-               targetNumLabel.text = "\(textCount)/200"
-               if textCount > 200 {
-                   textView.deleteBackward()
-               }
-           } else if textView == resultTextView {
-               let textCount = textView.text.count
-               resultNumLabel.text = "\(textCount)/200"
-               if textCount > 200 {
-                   textView.deleteBackward()
-               }
-           } else if textView == differenceTextView {
-               let textCount = textView.text.count
-               differenceNumLabel.text = "\(textCount)/200"
-               if textCount > 200 {
-                   textView.deleteBackward()
-               }
-           } else if textView == continuouslyTextView {
-               let textCount = textView.text.count
-               continuouslyNumLabel.text = "\(textCount)/200"
-               if textCount > 200 {
-                   textView.deleteBackward()
-               }
-           } else if textView == purposeTextView {
-               let textCount = textView.text.count
-               purposeNumLabel.text = "\(textCount)/200"
-               if textCount > 200 {
-                   textView.deleteBackward()
-               }
-           }
-       }
+        
+        if textView == targetTextView || textView == resultTextView || textView == differenceTextView || textView == continuouslyTextView || textView == purposeTextView {
+            let isValid = textView.text.isOnlyKorEngSpe()
+            if isValid {
+                textView.layer.borderColor = UIColor.blue200.cgColor
+                setErrorHidden(for: textView, isHidden: true)
+            } else {
+                textView.layer.borderColor = UIColor.red200.cgColor
+                setErrorHidden(for: textView, isHidden: false)
+                onCompletionAAR?(false)
+            }
+        }
+        
+        if textView == targetTextView {
+            let textCount = textView.text.count
+            targetNumLabel.text = "\(textCount)/200"
+            if textCount > 200 {
+                textView.deleteBackward()
+            }
+        } else if textView == resultTextView {
+            let textCount = textView.text.count
+            resultNumLabel.text = "\(textCount)/200"
+            if textCount > 200 {
+                textView.deleteBackward()
+            }
+        } else if textView == differenceTextView {
+            let textCount = textView.text.count
+            differenceNumLabel.text = "\(textCount)/200"
+            if textCount > 200 {
+                textView.deleteBackward()
+            }
+        } else if textView == continuouslyTextView {
+            let textCount = textView.text.count
+            continuouslyNumLabel.text = "\(textCount)/200"
+            if textCount > 200 {
+                textView.deleteBackward()
+            }
+        } else if textView == purposeTextView {
+            let textCount = textView.text.count
+            purposeNumLabel.text = "\(textCount)/200"
+            if textCount > 200 {
+                textView.deleteBackward()
+            }
+        }
+    }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         
-        textView.layer.borderColor = UIColor.blue200.cgColor
+        if textView == targetTextView || textView == resultTextView || textView == differenceTextView || textView == continuouslyTextView || textView == purposeTextView
+        {
+            let isValid = textView.text.isOnlyKorEngSpe()
+            if isValid {
+                textView.layer.borderColor = UIColor.blue200.cgColor
+                setErrorHidden(for: textView, isHidden: true)
+            } else {
+                textView.layer.borderColor = UIColor.red200.cgColor
+                setErrorHidden(for: textView, isHidden: false)
+                onCompletionAAR?(false)
+            }
+        }
         textView.layer.borderWidth = 2.0
         
         if textView == targetTextView {
@@ -357,37 +464,60 @@ extension AARView: UITextViewDelegate {
             }
         }
     }
-
+    
     func textViewDidEndEditing(_ textView: UITextView) {
         
-        textView.layer.borderColor = UIColor.clear.cgColor
-        textView.layer.borderWidth = 0.0
+        if textView == targetTextView || textView == resultTextView || textView == differenceTextView || textView == continuouslyTextView || textView == purposeTextView {
+            let isValid = textView.text.isOnlyKorEngSpe()
+            if isValid {
+                textView.layer.borderColor = UIColor.clear.cgColor
+                setErrorHidden(for: textView, isHidden: true)
+                textView.layer.borderWidth = 0.0
                 
+            } else {
+                textView.layer.borderColor = UIColor.red200.cgColor
+                textView.layer.borderWidth = 2.0
+                setErrorHidden(for: textView, isHidden: false)
+                onCompletionAAR?(false)
+            }
+        }
+        
         if textView == targetTextView {
             if textView.text.isEmpty {
-                textView.text = "\"업무 전에 의도한 혹은 얻고자 한 결과는 무엇이었는지\" 작성해 보세요"
+                textView.text = targetPlaceholder
                 textView.textColor = .gray400
             }
         } else if textView == resultTextView {
             if textView.text.isEmpty {
-                textView.text = "\"실제로 오늘 하루 어떤 일이 있었는지\" 작성해 보세요"
+                textView.text = resultPlaceholder
                 textView.textColor = .gray400
             }
         } else if textView == differenceTextView {
             if textView.text.isEmpty {
-                textView.text = "\"목표와 실제 결과 사이의 차이는 왜 발생했을지\" 작성해 보세요"
+                textView.text = differencePlaceholder
                 textView.textColor = .gray400
             }
         } else if textView == continuouslyTextView {
             if textView.text.isEmpty {
-                textView.text = "\"지속하고 싶은 부분은 무엇인지\" 작성해 보세요"
+                textView.text = continuouslyPlaceholder
                 textView.textColor = .gray400
             }
         } else if textView == purposeTextView {
             if textView.text.isEmpty {
-                textView.text = "\"개선하거나 포기해야 할 부분은 무엇인지\" 작성해 보세요"
+                textView.text = purposePlaceholder
                 textView.textColor = .gray400
             }
         }
+        
+        if targetTextView.text.isOnlyKorEngSpe() && resultTextView.text.isOnlyKorEngSpe() && differenceTextView.text.isOnlyKorEngSpe() && continuouslyTextView.text.isOnlyKorEngSpe() && purposeTextView.text.isOnlyKorEngSpe() {
+            if targetTextView.text != targetPlaceholder && resultTextView.text != resultPlaceholder && differenceTextView.text != differencePlaceholder && continuouslyTextView.text != continuouslyPlaceholder && purposeTextView.text != purposePlaceholder {
+                onCompletionAAR?(true)
+            } else {
+                onCompletionAAR?(false)
+            } 
+        } else {
+            onCompletionAAR?(false)
+        }
+
     }
 }

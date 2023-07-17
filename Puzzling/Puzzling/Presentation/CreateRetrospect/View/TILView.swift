@@ -11,7 +11,7 @@ import Then
 import SnapKit
 
 class TILView: UIView {
-    
+        
     // MARK: - UI Components
     
     private let wellLabel = UILabel()
@@ -26,6 +26,19 @@ class TILView: UIView {
     let regretTextView = UITextView()
     let learnTextView = UITextView()
     
+    private let errorWellLabel = UILabel()
+    private let errorRegertLabel = UILabel()
+    private let errorLearnLabel = UILabel()
+    
+    
+    // MARK: - Properties
+    
+    private let wellPlaceholder: String = "\"오늘의 나는 무엇을 잘했는지\" 작성해 보세요"
+    private let regretPlaceholder: String = "\"어떤 문제/어려움을 겪었는지, 향후 어떤 액션으로 이를 해결해볼 것인지\" 작성해 보세요"
+    private let learnPlaceholder: String = "\"오늘은 일에서 어떤 것을 배웠는지\" 작성해 보세요"
+    
+    var onCompletionTIL: ((Bool) -> Void)?
+    
     // MARK: - Initializer
 
     override init(frame: CGRect) {
@@ -33,7 +46,6 @@ class TILView: UIView {
         setLayout()
         setUI()
         setDelegate()
-        setTapScreen()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -49,7 +61,7 @@ extension TILView {
     private func setUI() {
         
         self.backgroundColor = .white000
-
+        
         wellLabel.do {
             $0.text = "잘한 점은 무엇인가요?"
             $0.textColor = .black000
@@ -90,7 +102,7 @@ extension TILView {
         }
         
         wellTextView.do {
-            $0.text = "\"오늘의 나는 무엇을 잘했는지\" 작성해 보세요"
+            $0.text = wellPlaceholder
             $0.textColor = .gray400
             $0.backgroundColor = UIColor.background050
             $0.textContainerInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
@@ -99,7 +111,7 @@ extension TILView {
         }
         
         regretTextView.do {
-            $0.text = "\"어떤 문제/어려움을 겪었는지, 향후 어떤 액션으로 이를 해결해볼 것인지\" 작성해 보세요"
+            $0.text = regretPlaceholder
             $0.textColor = .gray400
             $0.backgroundColor = UIColor.background050
             $0.textContainerInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
@@ -108,22 +120,45 @@ extension TILView {
         }
         
         learnTextView.do {
-            $0.text = "\"오늘은 일에서 어떤 것을 배웠는지\" 작성해 보세요"
+            $0.text = learnPlaceholder
             $0.textColor = .gray400
             $0.backgroundColor = UIColor.background050
             $0.textContainerInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
             $0.layer.cornerRadius = 16
             $0.font = .fontGuide(.body2_regular_kor)
         }
+        
+        errorWellLabel.do {
+            $0.text = "이모지를 사용할 수 없어요."
+            $0.textColor = .red400
+            $0.font = .fontGuide(.detail1_regular_kor)
+            $0.isHidden = true
+        }
+        
+        errorRegertLabel.do {
+            $0.text = "이모지를 사용할 수 없어요."
+            $0.textColor = .red400
+            $0.font = .fontGuide(.detail1_regular_kor)
+            $0.isHidden = true
+        }
+        
+        errorLearnLabel.do {
+            $0.text = "이모지를 사용할 수 없어요."
+            $0.textColor = .red400
+            $0.font = .fontGuide(.detail1_regular_kor)
+            $0.isHidden = true
+        }
+        
     }
     
     // MARK: - Layout Helper
-
+    
     private func setLayout() {
-                
+        
         addSubviews( wellLabel, regretLabel, learnLabel,
                      wellTextView, regretTextView, learnTextView,
-                     wellNumLabel, regretNumLabel, learnNumLabel)
+                     wellNumLabel, regretNumLabel, learnNumLabel,
+                     errorWellLabel, errorRegertLabel, errorLearnLabel)
         
         wellLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(16)
@@ -175,56 +210,94 @@ extension TILView {
             $0.top.equalTo(learnTextView.snp.bottom).inset(-4)
             $0.trailing.equalTo(learnTextView.snp.trailing).inset(16)
         }
+        
+        errorWellLabel.snp.makeConstraints {
+            $0.top.equalTo(wellTextView.snp.bottom).inset(-4)
+            $0.leading.equalToSuperview().inset(24)
+        }
+        
+        errorRegertLabel.snp.makeConstraints {
+            $0.top.equalTo(regretTextView.snp.bottom).inset(-4)
+            $0.leading.equalToSuperview().inset(24)
+        }
+        
+        errorLearnLabel.snp.makeConstraints {
+            $0.top.equalTo(learnTextView.snp.bottom).inset(-4)
+            $0.leading.equalToSuperview().inset(24)
+        }
     }
     
     // MARK: - Methods
-
+    
     private func setDelegate() {
         wellTextView.delegate = self
         regretTextView.delegate = self
         learnTextView.delegate = self
     }
     
-    private func setTapScreen() {
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapScreen))
-        self.addGestureRecognizer(tapGestureRecognizer)
-    }
-    
-    // MARK: - @objc Methods
-    
-    @objc private func didTapScreen() {
-          self.endEditing(true)
+    private func setErrorHidden(for textView: UITextView, isHidden: Bool) {
+        switch textView {
+        case wellTextView:
+            errorWellLabel.isHidden = isHidden
+        case regretTextView:
+            errorRegertLabel.isHidden = isHidden
+        case learnTextView:
+            errorLearnLabel.isHidden = isHidden
+        default:
+            break
+        }
     }
 }
 
 extension TILView: UITextViewDelegate {
     
     func textViewDidChange(_ textView: UITextView) {
+        if textView == wellTextView || textView == regretTextView || textView == learnTextView {
+            let isValid = textView.text.isOnlyKorEngSpe()
+            if isValid {
+                textView.layer.borderColor = UIColor.blue200.cgColor
+                setErrorHidden(for: textView, isHidden: true)
+            } else {
+                textView.layer.borderColor = UIColor.red200.cgColor
+                setErrorHidden(for: textView, isHidden: false)
+                onCompletionTIL?(false)
+            }
+        }
         
-           if textView == wellTextView {
-               let textCount = textView.text.count
-               wellNumLabel.text = "\(textCount)/200"
-               if textCount > 200 {
-                   textView.deleteBackward()
-               }
-           } else if textView == regretTextView {
-               let textCount = textView.text.count
-               regretNumLabel.text = "\(textCount)/200"
-               if textCount > 200 {
-                   textView.deleteBackward()
-               }
-           } else if textView == learnTextView {
-               let textCount = textView.text.count
-               learnNumLabel.text = "\(textCount)/200"
-               if textCount > 200 {
-                   textView.deleteBackward()
-               }
-           }
-       }
+        if textView == wellTextView {
+            let textCount = textView.text.count
+            wellNumLabel.text = "\(textCount)/200"
+            if textCount > 200 {
+                textView.deleteBackward()
+            }
+        } else if textView == regretTextView {
+            let textCount = textView.text.count
+            regretNumLabel.text = "\(textCount)/200"
+            if textCount > 200 {
+                textView.deleteBackward()
+            }
+        } else if textView == learnTextView {
+            let textCount = textView.text.count
+            learnNumLabel.text = "\(textCount)/200"
+            if textCount > 200 {
+                textView.deleteBackward()
+            }
+        }
+    }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         
-        textView.layer.borderColor = UIColor.blue200.cgColor
+        if textView == wellTextView || textView == regretTextView || textView == learnTextView {
+            let isValid = textView.text.isOnlyKorEngSpe()
+            if isValid {
+                textView.layer.borderColor = UIColor.blue200.cgColor
+                setErrorHidden(for: textView, isHidden: true)
+            } else {
+                textView.layer.borderColor = UIColor.red200.cgColor
+                setErrorHidden(for: textView, isHidden: false)
+                onCompletionTIL?(false)
+            }
+        }
         textView.layer.borderWidth = 2.0
         
         if textView == wellTextView {
@@ -248,27 +321,50 @@ extension TILView: UITextViewDelegate {
             }
         }
     }
-
+    
     func textViewDidEndEditing(_ textView: UITextView) {
         
-        textView.layer.borderColor = UIColor.clear.cgColor
-        textView.layer.borderWidth = 0.0
+        if textView == wellTextView || textView == regretTextView || textView == learnTextView {
+            let isValid = textView.text.isOnlyKorEngSpe()
+            if isValid {
+                textView.layer.borderColor = UIColor.clear.cgColor
+                setErrorHidden(for: textView, isHidden: true)
+                textView.layer.borderWidth = 0.0
                 
+            } else {
+                textView.layer.borderColor = UIColor.red200.cgColor
+                textView.layer.borderWidth = 2.0
+                setErrorHidden(for: textView, isHidden: false)
+                onCompletionTIL?(false)
+            }
+        }
+        
         if textView == wellTextView {
             if textView.text.isEmpty {
-                textView.text = "\"오늘의 나는 무엇을 잘했는지\" 작성해 보세요"
+                textView.text = wellPlaceholder
                 textView.textColor = .gray400
             }
         } else if textView == regretTextView {
             if textView.text.isEmpty {
-                textView.text = "\"어떤 문제/어려움을 겪었는지, 향후 어떤 액션으로 이를 해결해볼 것인지\" 작성해 보세요"
+                textView.text = regretPlaceholder
                 textView.textColor = .gray400
             }
         } else if textView == learnTextView {
             if textView.text.isEmpty {
-                textView.text = "\"오늘은 일에서 어떤 것을 배웠는지\" 작성해 보세요"
+                textView.text = learnPlaceholder
                 textView.textColor = .gray400
             }
         }
+        
+        if wellTextView.text.isOnlyKorEngSpe() && regretTextView.text.isOnlyKorEngSpe() && learnTextView.text.isOnlyKorEngSpe() {
+            if wellTextView.text != wellPlaceholder && regretTextView.text != regretPlaceholder && learnTextView.text != learnPlaceholder {
+                onCompletionTIL?(true)
+            } else {
+                onCompletionTIL?(false)
+            }
+        } else {
+            onCompletionTIL?(false)
+        }
+        
     }
 }
