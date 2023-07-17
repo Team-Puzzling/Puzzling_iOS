@@ -11,7 +11,6 @@ final class IndivisualDashboardViewController: UIViewController {
 
     private var tabBarHeight: CGFloat {
         guard let height = self.tabBarController?.tabBar.frame.size.height else {
-            print("fffffff")
             return 0.0
         }
         return height
