@@ -15,6 +15,7 @@ enum InputContentType: CaseIterable {
     case description
     case role
     case nickname
+    case invitationCode
 }
 
 final class InputContentView: UIView {
@@ -33,6 +34,11 @@ final class InputContentView: UIView {
     // MARK: - Properties
     
     var activeTextField: InputContentType?
+    private enum WarningMessage: CaseIterable {
+        case emoji
+        case invitationCode
+        case duplicateNickname
+    }
     
     // MARK: - Initializer
     
@@ -91,7 +97,7 @@ extension InputContentView {
         }
         
         warningLabel.do {
-            $0.text = "특수문자, 이모지를 사용할 수 없어요."
+//            $0.text = "특수문자, 이모지를 사용할 수 없어요."
             $0.font = .fontGuide(.detail1_regular_kor)
             $0.textColor = .red400
             $0.isHidden = true
@@ -157,6 +163,8 @@ extension InputContentView {
             return "역할을 입력해 주세요. (ex. iOS 개발자)"
         case .nickname:
             return "닉네임을 입력해 주세요."
+        case .invitationCode:
+            return "초대코드를 입력해 주세요."
         }
     }
     
@@ -173,7 +181,10 @@ extension InputContentView {
             countLabel.text = "0/20"
         case .nickname:
             titleLabel.text = "닉네임"
-            countLabel.text = "0/50"
+            countLabel.text = "0/10"
+        case .invitationCode:
+            titleLabel.text = "초대코드"
+            countLabel.text = "0/13"
         }
         inputTextField.placeholder = textFieldPlaceholder(type: type)
     }
@@ -188,7 +199,15 @@ extension InputContentView {
         warningLabel.isHidden = true
     }
     
-    private func emojiLimitTextFieldBorderSetting(textField: UITextField) {
+    private func warningTextFieldBorderSetting(textField: UITextField, type: WarningMessage) {
+        switch type {
+        case .emoji:
+            warningLabel.text = "특수문자, 이모지를 사용할 수 없어요."
+        case .invitationCode:
+            warningLabel.text = "유효하지 않은 초대코드에요. 코드를 확인해 주세요."
+        case .duplicateNickname:
+            warningLabel.text = "이미 사용 중인 닉네임이에요."
+        }
         textField.layer.borderColor = UIColor.red200.cgColor
         textFieldButton.isHidden = false
         textFieldButton.setImage(Image.warning, for: .normal)
@@ -208,7 +227,7 @@ extension InputContentView {
             if text.isOnlyKorEng() {
                 activeTextFieldBorderSetting(textField: textField)
             } else {
-                emojiLimitTextFieldBorderSetting(textField: textField)
+                warningTextFieldBorderSetting(textField: textField, type: .emoji)
             }
         }
     }
@@ -268,7 +287,7 @@ extension InputContentView: UITextFieldDelegate {
                 activeTextFieldBorderSetting(textField: textField)
                 textFieldNotification(textField: textField, contentType: activeTextField ?? .name)
             } else {
-                emojiLimitTextFieldBorderSetting(textField: textField)
+                warningTextFieldBorderSetting(textField: textField, type: .emoji)
                 textFieldButton.isHidden = false
             }
             textFieldButton.isHidden = !text.isEmpty ? false : true
@@ -282,7 +301,7 @@ extension InputContentView: UITextFieldDelegate {
                 defaultTextFieldBorderSetting(textField: textField)
                 textFieldNotification(textField: textField, contentType: activeTextField ?? .name)
             } else {
-                emojiLimitTextFieldBorderSetting(textField: textField)
+                warningTextFieldBorderSetting(textField: textField, type: .emoji)
                 textFieldButton.isHidden = false
             }
             
@@ -322,8 +341,13 @@ extension InputContentView: UITextFieldDelegate {
                 return true
             }
         case .nickname:
-            if (textCount <= 50) {
-                countLabel.text = "\(changedText.count)/50"
+            if (textCount <= 10) {
+                countLabel.text = "\(changedText.count)/10"
+                return true
+            }
+        case .invitationCode:
+            if (textCount <= 13) {
+                countLabel.text = "\(changedText.count)/13"
                 return true
             }
         default:
