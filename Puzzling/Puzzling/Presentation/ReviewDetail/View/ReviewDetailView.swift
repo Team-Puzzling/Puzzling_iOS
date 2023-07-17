@@ -14,7 +14,6 @@ final class ReviewDetailView: UIView {
     
     private let reviewDetailData = ReviewDetailDataModel.dummy()
     private let reviewCollectionview = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-    private var layout = UICollectionViewFlowLayout()
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUI()
@@ -30,10 +29,8 @@ final class ReviewDetailView: UIView {
 
 extension ReviewDetailView {
     private func setUI() {
-        backgroundColor = .systemBlue
         reviewCollectionview.do {
             $0.contentInsetAdjustmentBehavior = .never
-            $0.collectionViewLayout = layout
             $0.showsVerticalScrollIndicator = false
         }
     }
@@ -60,7 +57,8 @@ extension ReviewDetailView: UICollectionViewDelegate { }
 
 extension ReviewDetailView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return reviewDetailData[1].contents?.count ?? 0
+        guard let count = reviewDetailData[1].contents?.count else { return 0 }
+        return count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
