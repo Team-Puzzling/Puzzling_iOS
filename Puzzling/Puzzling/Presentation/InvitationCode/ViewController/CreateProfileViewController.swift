@@ -247,13 +247,13 @@ extension CreateProfileViewController {
         profile.memberProjectNickname = nickname
         profile.memberProjectRole = myRole
         
-        profileProvider.request(.joinProject(param: profile.makePostProfileRequest(), memberID:"1")) { result in
+        profileProvider.request(.joinProject(param: profile.makePostProfileRequest(), memberID:"2")) { result in
             switch result {
             case .success(let result):
                 let status = result.statusCode
                 if status >= 200 && status < 300 {
                     do {
-                        guard let data = try result.map(GeneralResponse<PostProfileRequest>.self).data else { return }
+                        print("♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️")
                         self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
                     } catch(let error) {
                         print(error.localizedDescription)

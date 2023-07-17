@@ -22,6 +22,8 @@
 		0351AB602A65CCB6006B0F4C /* ProjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB5F2A65CCB6006B0F4C /* ProjectModel.swift */; };
 		0351AB622A65D71F006B0F4C /* PostProfileRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB612A65D71F006B0F4C /* PostProfileRequest.swift */; };
 		0351AB642A65D78E006B0F4C /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB632A65D78E006B0F4C /* Profile.swift */; };
+		0351AB662A65EDD9006B0F4C /* InvitationCodeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB652A65EDD9006B0F4C /* InvitationCodeResponse.swift */; };
+		0351AB682A65EE17006B0F4C /* InvitationCodeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB672A65EE17006B0F4C /* InvitationCodeModel.swift */; };
 		03734EB52A599FDB00B401D6 /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03734EB42A599FDB00B401D6 /* Image.xcassets */; };
 		03734EB82A59A0BD00B401D6 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03734EB72A59A0BD00B401D6 /* TabBarController.swift */; };
 		03734EBD2A59A1F800B401D6 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03734EBC2A59A1F800B401D6 /* TabBarItem.swift */; };
@@ -130,6 +132,8 @@
 		0351AB5F2A65CCB6006B0F4C /* ProjectModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectModel.swift; sourceTree = "<group>"; };
 		0351AB612A65D71F006B0F4C /* PostProfileRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostProfileRequest.swift; sourceTree = "<group>"; };
 		0351AB632A65D78E006B0F4C /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		0351AB652A65EDD9006B0F4C /* InvitationCodeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationCodeResponse.swift; sourceTree = "<group>"; };
+		0351AB672A65EE17006B0F4C /* InvitationCodeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationCodeModel.swift; sourceTree = "<group>"; };
 		03734EB42A599FDB00B401D6 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = "<group>"; };
 		03734EB72A59A0BD00B401D6 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		03734EBC2A59A1F800B401D6 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
@@ -267,6 +271,7 @@
 				0351AB562A65799F006B0F4C /* PostProjectRequest.swift */,
 				0351AB5D2A65CC56006B0F4C /* ProjectResponse.swift */,
 				0351AB612A65D71F006B0F4C /* PostProfileRequest.swift */,
+				0351AB652A65EDD9006B0F4C /* InvitationCodeResponse.swift */,
 			);
 			path = Project;
 			sourceTree = "<group>";
@@ -278,6 +283,7 @@
 				0351AB592A657BCF006B0F4C /* Project.swift */,
 				0351AB5F2A65CCB6006B0F4C /* ProjectModel.swift */,
 				0351AB632A65D78E006B0F4C /* Profile.swift */,
+				0351AB672A65EE17006B0F4C /* InvitationCodeModel.swift */,
 			);
 			path = Project;
 			sourceTree = "<group>";
@@ -947,6 +953,7 @@
 				03E6D23C2A532BC600F4453C /* CustomClass.swift in Sources */,
 				03E6D2702A53338200F4453C /* String+.swift in Sources */,
 				255026DF2A656D8100531543 /* OnBoardingViewController.swift in Sources */,
+				0351AB682A65EE17006B0F4C /* InvitationCodeModel.swift in Sources */,
 				255026E52A657FB000531543 /* EnterProjectView.swift in Sources */,
 				03E6D2762A5333B100F4453C /* UIButton+.swift in Sources */,
 				096755BF2A5D9E1A00A1E691 /* TeamMemberCustomHeaderView.swift in Sources */,
@@ -958,6 +965,7 @@
 				096755EA2A60710100A1E691 /* MyProjectDataModel.swift in Sources */,
 				096755CB2A5E9AF500A1E691 /* MyProjectTableViewCell.swift in Sources */,
 				03E6D25A2A5331ED00F4453C /* APIConst.swift in Sources */,
+				0351AB662A65EDD9006B0F4C /* InvitationCodeResponse.swift in Sources */,
 				03ADF3892A5E7322002CEDDC /* StartDayView.swift in Sources */,
 				03ADF38D2A5E8A5F002CEDDC /* CreateProjectView.swift in Sources */,
 				251C00CF2A5BEB7600F6838C /* AARView.swift in Sources */,

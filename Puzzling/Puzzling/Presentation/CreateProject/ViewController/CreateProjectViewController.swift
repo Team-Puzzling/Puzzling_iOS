@@ -32,6 +32,7 @@ final class CreateProjectViewController: UIViewController {
     private var projectCycle: [String] = []
     private var viewHeight: String = ""
     private let projectProvider = MoyaProvider<ProjectService>(plugins:[NetworkLoggerPlugin()])
+    private var invitationCodeModel: InvitationCodeModel?
     
     // MARK: - Initializer
     
@@ -327,12 +328,13 @@ extension CreateProjectViewController {
                 let status = result.statusCode
                 if status >= 200 && status < 300 {
                     do {
-                        print("♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️")
-                        self.invitationCodeNotification(code: "2150811453")
-                        guard let data = try result.map(GeneralResponse<PostProjectRequest>.self).data else {
-                            return
+//                        self.invitationCodeNotification(code: "2150811453")
+                        guard let data = try result.map(GeneralResponse<InvitationCodeResponse>.self).data else { return }
+                        self.invitationCodeModel = data.convertToInvitationCode()
+                        if let code = self.invitationCodeModel?.projectCode {
+                            self.invitationCodeNotification(code: code)
                         }
-//                        self.invitationCode = data
+//                        self.invitationCodeNotification(code: invitationCodeModel?.projectCode)
                     } catch(let error) {
                         print(error.localizedDescription)
                     }
