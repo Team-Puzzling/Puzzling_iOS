@@ -14,7 +14,6 @@ final class ReviewDetailView: UIView {
     
     private let reviewDetailData = ReviewDetailDataModel.dummy()
     private let reviewCollectionview = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-//    private var reviewLabelHeight: CGFloat = 0
     private var layout = UICollectionViewFlowLayout()
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -55,25 +54,7 @@ extension ReviewDetailView {
     private func setRegister() {
         reviewCollectionview.registerCell(ReviewDetailCollectionViewCell.self)
     }
-    
-//    private func setLabelHeight() {
-//        print(#function)
-//        NotificationCenter.default.addObserver(self, selector: #selector(labelHeightChanged(_:)), name: NSNotification.Name("LabelHeightNotification"), object: nil)
-//    }
-//
-//    func setLayoutPLZ() {
-//        reviewCollectionview.reloadData()
-//    }
 }
-
-//extension ReviewDetailView {
-//    @objc func labelHeightChanged(_ notification: Notification) {
-//            if let labelHeight = notification.object as? CGFloat {
-//                print("Received label height: \(labelHeight)")
-//                reviewLabelHeight = labelHeight
-//            }
-//        }
-//}
 
 extension ReviewDetailView: UICollectionViewDelegate { }
 
@@ -98,11 +79,7 @@ extension ReviewDetailView: UICollectionViewDataSource {
 extension ReviewDetailView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         guard let height = reviewDetailData[1].contents?[indexPath.row].content.textHeight(withWidth: UIScreen.main.bounds.width - 64) else { return CGSize(width: 0, height: 0) }
-//        guard let count = reviewDetailData[1].contents?.count else { return CGSize(width: 0, height: 0) }
-//        if (indexPath.row == count - 1) {
-//            return CGSize(width: UIScreen.main.bounds.width, height: height+160)
-//        }
-        return CGSize(width: UIScreen.main.bounds.width, height: height+56)
+        return CGSize(width: UIScreen.main.bounds.width, height: height + 56)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -112,5 +89,4 @@ extension ReviewDetailView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         return CGSize(width: UIScreen.main.bounds.width, height: 120)
     }
-    
 }

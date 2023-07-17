@@ -15,7 +15,7 @@ extension ReviewDetailViewController {
     enum reviewDetail: CaseIterable {
         case review, empty
         
-        var reviewDetailViewss: UIView {
+        var reviewDetailView: UIView {
             switch self {
             case .review:
                 return ReviewDetailView()
@@ -32,11 +32,9 @@ final class ReviewDetailViewController: UIViewController {
     
     func reviewDetailStatus(status: reviewDetail) {
         print(#function)
-//        reviewDetailView = status.reviewDetailViewss
     }
     
     private var reviewDetailView = ReviewDetailView()
-//    private let reviewDetailEmptyView = ReviewDetailEmptyView()
     
     private let teamMemberData = TeamMemberDataModel.dummy()
     
@@ -47,7 +45,6 @@ final class ReviewDetailViewController: UIViewController {
         setDelegate()
         setUI()
         setLayout()
-        setRegister()
         reviewDetailStatus(status: .review)
     }
     
@@ -59,7 +56,6 @@ final class ReviewDetailViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setCalendarViewLayout()
-//        reviewDetailView.setLayoutPLZ()
     }
     
     deinit {
@@ -93,10 +89,7 @@ extension ReviewDetailViewController {
             $0.bottom.equalToSuperview()
         }
     }
-    
-    private func setRegister() {
-    }
-    
+
     private func setNavigationBar() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: Image.chevronBackIcon,
@@ -128,12 +121,6 @@ extension ReviewDetailViewController {
             $0.trailing.leading.equalToSuperview().inset(16)
             $0.height.equalTo(projectCalenderView.getCalendarViewHeight())
         }
-        
-//        reviewDetailView.snp.remakeConstraints {
-//            $0.top.equalTo(projectCalenderView.snp.bottom).offset(12)
-//            $0.trailing.leading.equalToSuperview().inset(16)
-//            $0.bottom.equalToSuperview()
-//        }
     }
 }
 

@@ -100,9 +100,6 @@ extension ProjectCalendarView: FSCalendarDelegate, FSCalendarDataSource, FSCalen
     
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
         calendar.frame = CGRect(origin: calendar.frame.origin , size: bounds.size)
-        // Do other updates here
-//        calendarView.snp.makeConstraints
-        print(bounds.height)
         self.calendarViewHeight.constant = bounds.height
     }
 }

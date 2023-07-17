@@ -84,35 +84,23 @@ extension ReviewDetailCollectionViewCell {
     func setDataBind(title: String, description: String) {
         titleLabel.text = title
         descriptionLabel.text = description
-//        sendLabelHeight()
-        
-        
     }
-//    func sendLabelHeight() {
-//        let labelHeight = descriptionLabel.textHeight(withWidth: UIScreen.main.bounds.width)
-//        print(labelHeight)
-//        print(descriptionLabel.textHeight(withWidth: UIScreen.main.bounds.width), "pppppp")
-//        NotificationCenter.default.post(name: NSNotification.Name("LabelHeightNotification"), object: labelHeight)
-//    }
+    
     func divisionHidden() {
         divisionLabel.isHidden = true
     }
 }
 
-//extension UILabel {
-//    func textHeight(withWidth width: CGFloat) -> CGFloat {
-//       guard let text = text else {
-//          return 0
-//       }
-//        return text.height(withWidth: UIScreen.main.bounds.width, font: UIFont.fontGuide(.body2_regular_kor))
-//    }
-//}
-//
-//extension String {
-//    func height(withWidth width: CGFloat, font: UIFont) -> CGFloat {
-//        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
-//        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
-//        return ceil(boundingBox.height)
-//    }
-//
-//}
+extension String {
+    
+    func textHeight(withWidth width: CGFloat) -> CGFloat {
+        let text = self
+         return text.height(withWidth:width, font: UIFont.fontGuide(.body2_regular_kor))
+     }
+    
+    func height(withWidth width: CGFloat, font: UIFont) -> CGFloat {
+        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
+        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
+        return ceil(boundingBox.height)
+    }
+}
