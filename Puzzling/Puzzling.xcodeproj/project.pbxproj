@@ -91,6 +91,9 @@
 		251C00D72A5D309300F6838C /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251C00D62A5D309300F6838C /* BottomSheetViewController.swift */; };
 		251C00DD2A5F114800F6838C /* FiveFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251C00DC2A5F114800F6838C /* FiveFView.swift */; };
 		251C00E92A60343900F6838C /* testViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251C00E82A60343900F6838C /* testViewController.swift */; };
+		255026DF2A656D8100531543 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255026DE2A656D8100531543 /* OnBoardingViewController.swift */; };
+		255026E32A656EF100531543 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255026E22A656EF100531543 /* OnBoardingView.swift */; };
+		255026E52A657FB000531543 /* EnterProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255026E42A657FB000531543 /* EnterProjectView.swift */; };
 		25F972642A61A839001CE10C /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F972632A61A839001CE10C /* CustomAlert.swift */; };
 		583117A12A5B71920099B517 /* TeamDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583117A02A5B71920099B517 /* TeamDashboardViewController.swift */; };
 		583117A32A5B71A00099B517 /* IndivisualDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583117A22A5B71A00099B517 /* IndivisualDashboardViewController.swift */; };
@@ -187,6 +190,9 @@
 		251C00D62A5D309300F6838C /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		251C00DC2A5F114800F6838C /* FiveFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveFView.swift; sourceTree = "<group>"; };
 		251C00E82A60343900F6838C /* testViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testViewController.swift; sourceTree = "<group>"; };
+		255026DE2A656D8100531543 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
+		255026E22A656EF100531543 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
+		255026E42A657FB000531543 /* EnterProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterProjectView.swift; sourceTree = "<group>"; };
 		25F972632A61A839001CE10C /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
 		583117A02A5B71920099B517 /* TeamDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDashboardViewController.swift; sourceTree = "<group>"; };
 		583117A22A5B71A00099B517 /* IndivisualDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndivisualDashboardViewController.swift; sourceTree = "<group>"; };
@@ -408,6 +414,7 @@
 		03E6D20D2A5327BA00F4453C /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				255026DB2A656D1500531543 /* OnBoarding */,
 				251C00C52A5BE57C00F6838C /* CreateRetrospect */,
 				096755C22A5E96DC00A1E691 /* MyProject */,
 				09C0A4EF2A5BEBB800691FFD /* TeamMember */,
@@ -681,6 +688,32 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
+		255026DB2A656D1500531543 /* OnBoarding */ = {
+			isa = PBXGroup;
+			children = (
+				255026DC2A656D3200531543 /* View */,
+				255026DD2A656D3600531543 /* ViewController */,
+			);
+			path = OnBoarding;
+			sourceTree = "<group>";
+		};
+		255026DC2A656D3200531543 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				255026E22A656EF100531543 /* OnBoardingView.swift */,
+				255026E42A657FB000531543 /* EnterProjectView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		255026DD2A656D3600531543 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				255026DE2A656D8100531543 /* OnBoardingViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		5831179C2A5B71280099B517 /* TeamDashboard */ = {
 			isa = PBXGroup;
 			children = (
@@ -864,6 +897,8 @@
 				03E6D2742A5333A500F4453C /* UILabel+.swift in Sources */,
 				583117A32A5B71A00099B517 /* IndivisualDashboardViewController.swift in Sources */,
 				03E6D2722A53339000F4453C /* UIImageView+.swift in Sources */,
+				255026E32A656EF100531543 /* OnBoardingView.swift in Sources */,
+				03E6D2002A5325F200F4453C /* Model.swift in Sources */,
 				58DC6A6B2A616A2E0039242C /* TeamDashboardRankView.swift in Sources */,
 				096755BB2A5C61BE00A1E691 /* TeamMemberTableViewCell.swift in Sources */,
 				03E6D2422A532C3300F4453C /* Image.swift in Sources */,
@@ -898,6 +933,8 @@
 				58EDAF952A5DDA04004EF5D3 /* IndivisualCardButtonView.swift in Sources */,
 				03E6D23C2A532BC600F4453C /* CustomClass.swift in Sources */,
 				03E6D2702A53338200F4453C /* String+.swift in Sources */,
+				255026DF2A656D8100531543 /* OnBoardingViewController.swift in Sources */,
+				255026E52A657FB000531543 /* EnterProjectView.swift in Sources */,
 				03E6D2762A5333B100F4453C /* UIButton+.swift in Sources */,
 				096755BF2A5D9E1A00A1E691 /* TeamMemberCustomHeaderView.swift in Sources */,
 				03E6D1E72A53219600F4453C /* SceneDelegate.swift in Sources */,

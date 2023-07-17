@@ -36,6 +36,11 @@ public enum Image {
         .withTintColor(.label, renderingMode: .alwaysOriginal)
     static let elementPuzzle1 = UIImage(named: "puzzle_element")!
     static let elementPuzzle = UIImage(named: "puzzle_element")!
+    static let puzzlingTitle = UIImage(named: "puzzling_title")!
+    static let joinPuzzle = UIImage(named: "join_puzzle")!
+    static let newPuzzle = UIImage(named: "new_puzzle")!
+    static let kakaoLogin = UIImage(named: "KakaoLogin")!
+    
     
     // MARK: - Logo
     
