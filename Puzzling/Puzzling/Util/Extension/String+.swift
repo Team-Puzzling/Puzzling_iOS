@@ -20,6 +20,12 @@ extension String {
            guard self.range(of: pattern, options: .regularExpression) != nil else { return false }
            return true
     }
+
+    func isOnlyKorEngSpe() -> Bool {
+        let pattern = "^[0-9a-zA-Z가-힣ㄱ-ㅎㅏ-ㅣ\\s~`!@#$%^&*()-_=+\\\\\\|\\[{\\]};:'\",<.>/?]{0,}$"
+        guard self.range(of: pattern, options: .regularExpression) != nil else { return false }
+        return true
+    }
     
     func size(OfFont font: UIFont) -> CGSize {
         let size = (self as NSString).size(withAttributes: [.font: font])
