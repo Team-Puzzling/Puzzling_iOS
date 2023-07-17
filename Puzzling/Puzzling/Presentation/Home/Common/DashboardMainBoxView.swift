@@ -22,6 +22,15 @@ enum DashboardType {
             return "팀 퍼즐판 보러가기"
         }
     }
+    
+    var identifier: String {
+        switch self {
+        case .indivisual:
+            return "indivisual"
+        case .team:
+            return "team"
+        }
+    }
 }
 
 final class DashboardMainBoxView: UIView {
@@ -38,17 +47,23 @@ final class DashboardMainBoxView: UIView {
         }
     }
     
+    private lazy var projectServiceData = ProjectService().getPuzzleData(type: puzzleBoardType)
+    
     private let userNameLabel = UILabel()
     private let piecesCountLabel = UILabel()
     private let maxCountLabel = UILabel()
-    private let ToBeCollectionView = UIView()
+    private lazy var puzzleCollectionView = MainPuzzleCollectionView(frame: .zero, dashboardType: puzzleBoardType)
     private lazy var cardButtonView = IndivisualCardButtonView(frame: .zero, cardTitle: boxType.cardButtonTitle)
     
     private var boxType: DashboardType!
+    private var puzzleBoardType: DashboardType!
+    private var identifierString: String = "\()"
     
     init(frame: CGRect, type: DashboardType) {
         self.boxType = type
+        self.puzzleBoardType = type
         super.init(frame: frame)
+        print("ppppppp")
         setDelegate()
         setUI()
         setLayout()
@@ -90,13 +105,13 @@ extension DashboardMainBoxView {
             $0.textColor = .gray500
         }
         
-        ToBeCollectionView.do {
-            $0.backgroundColor = .blue100
+        puzzleCollectionView.do {
+            $0.passPuzzleData(data: projectServiceData)
         }
     }
     
     private func setLayout() {
-        self.addSubviews(userNameLabel, maxCountLabel, piecesCountLabel, ToBeCollectionView, cardButtonView)
+        self.addSubviews(userNameLabel, maxCountLabel, piecesCountLabel, puzzleCollectionView, cardButtonView)
         
         userNameLabel.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(20)
@@ -113,7 +128,7 @@ extension DashboardMainBoxView {
             $0.trailing.equalTo(maxCountLabel.snp.leading).offset(-6)
         }
         
-        ToBeCollectionView.snp.makeConstraints {
+        puzzleCollectionView.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(90)
             $0.top.equalTo(userNameLabel.snp.bottom).offset(10)

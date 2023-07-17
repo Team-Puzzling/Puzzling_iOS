@@ -74,11 +74,16 @@
 		583117A82A5BE1490099B517 /* HomeTitleBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583117A72A5BE1490099B517 /* HomeTitleBarView.swift */; };
 		583117AA2A5BE2D90099B517 /* HomeSegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583117A92A5BE2D90099B517 /* HomeSegmentedView.swift */; };
 		583BA7C52A62A7220030CF14 /* TeamRankTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583BA7C42A62A7220030CF14 /* TeamRankTableViewCell.swift */; };
+		583BA7C72A62FFB00030CF14 /* ProjectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583BA7C62A62FFB00030CF14 /* ProjectService.swift */; };
 		588AA06C2A5E77EF0017CB1E /* ActionPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588AA06B2A5E77EF0017CB1E /* ActionPlanView.swift */; };
 		588AA06F2A5E7F820017CB1E /* ActionPlanCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588AA06E2A5E7F820017CB1E /* ActionPlanCollectionViewCell.swift */; };
 		588AA0732A5ECDE70017CB1E /* IndivisualDashboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588AA0722A5ECDE70017CB1E /* IndivisualDashboardModel.swift */; };
 		588AA0752A5ECDF10017CB1E /* TeamDashboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588AA0742A5ECDF10017CB1E /* TeamDashboardModel.swift */; };
 		588AA0792A5EF4930017CB1E /* HomeMainButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588AA0782A5EF4930017CB1E /* HomeMainButton.swift */; };
+		58B6C9442A63A25600C5549F /* MainPuzzleCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B6C9432A63A25600C5549F /* MainPuzzleCollectionView.swift */; };
+		58B6C9472A63A8BB00C5549F /* MainPuzzleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B6C9462A63A8BB00C5549F /* MainPuzzleCollectionViewCell.swift */; };
+		58B6C94B2A63AE6C00C5549F /* TeamPuzzleStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B6C94A2A63AE6C00C5549F /* TeamPuzzleStatusModel.swift */; };
+		58B6C94D2A63AE7D00C5549F /* IndivisualPuzzleStatusModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B6C94C2A63AE7D00C5549F /* IndivisualPuzzleStatusModel.swift */; };
 		58DC6A6B2A616A2E0039242C /* TeamDashboardRankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DC6A6A2A616A2E0039242C /* TeamDashboardRankView.swift */; };
 		58DC6A6D2A61708D0039242C /* TeamRankPodiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DC6A6C2A61708D0039242C /* TeamRankPodiumView.swift */; };
 		58DC6A702A617A5C0039242C /* TeamRankPodiumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DC6A6F2A617A5C0039242C /* TeamRankPodiumCell.swift */; };
@@ -150,11 +155,16 @@
 		583117A72A5BE1490099B517 /* HomeTitleBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTitleBarView.swift; sourceTree = "<group>"; };
 		583117A92A5BE2D90099B517 /* HomeSegmentedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSegmentedView.swift; sourceTree = "<group>"; };
 		583BA7C42A62A7220030CF14 /* TeamRankTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRankTableViewCell.swift; sourceTree = "<group>"; };
+		583BA7C62A62FFB00030CF14 /* ProjectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectService.swift; sourceTree = "<group>"; };
 		588AA06B2A5E77EF0017CB1E /* ActionPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionPlanView.swift; sourceTree = "<group>"; };
 		588AA06E2A5E7F820017CB1E /* ActionPlanCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionPlanCollectionViewCell.swift; sourceTree = "<group>"; };
 		588AA0722A5ECDE70017CB1E /* IndivisualDashboardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndivisualDashboardModel.swift; sourceTree = "<group>"; };
 		588AA0742A5ECDF10017CB1E /* TeamDashboardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDashboardModel.swift; sourceTree = "<group>"; };
 		588AA0782A5EF4930017CB1E /* HomeMainButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMainButton.swift; sourceTree = "<group>"; };
+		58B6C9432A63A25600C5549F /* MainPuzzleCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPuzzleCollectionView.swift; sourceTree = "<group>"; };
+		58B6C9462A63A8BB00C5549F /* MainPuzzleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPuzzleCollectionViewCell.swift; sourceTree = "<group>"; };
+		58B6C94A2A63AE6C00C5549F /* TeamPuzzleStatusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamPuzzleStatusModel.swift; sourceTree = "<group>"; };
+		58B6C94C2A63AE7D00C5549F /* IndivisualPuzzleStatusModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndivisualPuzzleStatusModel.swift; sourceTree = "<group>"; };
 		58DC6A6A2A616A2E0039242C /* TeamDashboardRankView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDashboardRankView.swift; sourceTree = "<group>"; };
 		58DC6A6C2A61708D0039242C /* TeamRankPodiumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRankPodiumView.swift; sourceTree = "<group>"; };
 		58DC6A6F2A617A5C0039242C /* TeamRankPodiumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRankPodiumCell.swift; sourceTree = "<group>"; };
@@ -280,6 +290,8 @@
 			children = (
 				03E6D1FF2A5325F100F4453C /* Model.swift */,
 				58DC6A712A61B4940039242C /* TeamRankModel.swift */,
+				58B6C94A2A63AE6C00C5549F /* TeamPuzzleStatusModel.swift */,
+				58B6C94C2A63AE7D00C5549F /* IndivisualPuzzleStatusModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -297,6 +309,7 @@
 			isa = PBXGroup;
 			children = (
 				03E6D2062A5326DD00F4453C /* APIService.swift */,
+				583BA7C62A62FFB00030CF14 /* ProjectService.swift */,
 			);
 			path = APIService;
 			sourceTree = "<group>";
@@ -561,6 +574,14 @@
 			path = Component;
 			sourceTree = "<group>";
 		};
+		58B6C9452A63A86000C5549F /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				58B6C9462A63A8BB00C5549F /* MainPuzzleCollectionViewCell.swift */,
+			);
+			path = Component;
+			sourceTree = "<group>";
+		};
 		58DC6A652A6152DE0039242C /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -582,6 +603,8 @@
 			isa = PBXGroup;
 			children = (
 				58EDAF922A5DD25D004EF5D3 /* DashboardMainBoxView.swift */,
+				58B6C9432A63A25600C5549F /* MainPuzzleCollectionView.swift */,
+				58B6C9452A63A86000C5549F /* Component */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -589,8 +612,8 @@
 		58DC6A6E2A617A3C0039242C /* Component */ = {
 			isa = PBXGroup;
 			children = (
-				58DC6A6F2A617A5C0039242C /* TeamRankPodiumCell.swift */,
 				583BA7C42A62A7220030CF14 /* TeamRankTableViewCell.swift */,
+				58DC6A6F2A617A5C0039242C /* TeamRankPodiumCell.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -728,13 +751,16 @@
 				03B004A92A556C7400E71CA7 /* UIWindow+.swift in Sources */,
 				03E6D2442A532C6300F4453C /* Literals.swift in Sources */,
 				03E6D2682A53334A00F4453C /* UITextField+.swift in Sources */,
+				583BA7C72A62FFB00030CF14 /* ProjectService.swift in Sources */,
 				03E6D26E2A53337600F4453C /* UICollectionView+.swift in Sources */,
 				03FFD2CE2A5B1A8B00A3B70D /* AppleSDGothicNeoType.swift in Sources */,
 				583117A12A5B71920099B517 /* TeamDashboardViewController.swift in Sources */,
+				58B6C94B2A63AE6C00C5549F /* TeamPuzzleStatusModel.swift in Sources */,
 				58EDAF952A5DDA04004EF5D3 /* IndivisualCardButtonView.swift in Sources */,
 				03E6D23C2A532BC600F4453C /* CustomClass.swift in Sources */,
 				03E6D2702A53338200F4453C /* String+.swift in Sources */,
 				03E6D2762A5333B100F4453C /* UIButton+.swift in Sources */,
+				58B6C9472A63A8BB00C5549F /* MainPuzzleCollectionViewCell.swift in Sources */,
 				096755BF2A5D9E1A00A1E691 /* TeamMemberCustomHeaderView.swift in Sources */,
 				03E6D1E72A53219600F4453C /* SceneDelegate.swift in Sources */,
 				03E6D2262A532AAC00F4453C /* BaseView.swift in Sources */,
@@ -745,12 +771,14 @@
 				03E6D2642A53330E00F4453C /* NSObject+.swift in Sources */,
 				588AA06C2A5E77EF0017CB1E /* ActionPlanView.swift in Sources */,
 				03E6D23E2A532C1800F4453C /* FontLevel.swift in Sources */,
+				58B6C9442A63A25600C5549F /* MainPuzzleCollectionView.swift in Sources */,
 				03734EB82A59A0BD00B401D6 /* TabBarController.swift in Sources */,
 				09C0A4F52A5BEE4C00691FFD /* TeamMemberView.swift in Sources */,
 				03E6D25E2A53321000F4453C /* NetworkLoggerPlugin.swift in Sources */,
 				03E6D2622A5332F700F4453C /* Encodable+.swift in Sources */,
 				588AA0752A5ECDF10017CB1E /* TeamDashboardModel.swift in Sources */,
 				58DC6A702A617A5C0039242C /* TeamRankPodiumCell.swift in Sources */,
+				58B6C94D2A63AE7D00C5549F /* IndivisualPuzzleStatusModel.swift in Sources */,
 				03E6D26A2A53335700F4453C /* UIStackView+.swift in Sources */,
 				588AA06F2A5E7F820017CB1E /* ActionPlanCollectionViewCell.swift in Sources */,
 				096755C62A5E970500A1E691 /* MyProjectViewController.swift in Sources */,
