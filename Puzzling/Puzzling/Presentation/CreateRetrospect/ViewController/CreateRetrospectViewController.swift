@@ -13,15 +13,17 @@ import SnapKit
 final class CreateRetrospectViewController: UIViewController {
     
     // MARK: - UI Components
-        
+    
     private let templatesButton = UIButton()
     
     private let scrollView = UIScrollView()
     private let contentView = UIView()
     
-    private let tilView: TILView! = TILView()
-    private let fiveFView = FiveFView()
-    private let arrView = AARView()
+    private var tilView: TILView! = TILView()
+    private var fiveFView: FiveFView! = FiveFView()
+    private var arrView: AARView! = AARView()
+    
+    private let option: String
     
     // MARK: - View Life Cycle
     
@@ -30,11 +32,23 @@ final class CreateRetrospectViewController: UIViewController {
         setNavigation()
         setLayout()
         setUI()
+        setupKeyboardEvent()
         setAddTarget()
+        setTapScreen()
+        updateContentView(option: option)
+    }
+    
+    init(option: String) {
+        self.option = option
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - deinit
-
+    
     deinit {
         print("CreateRetrospectViewController deinit")
     }
@@ -49,7 +63,6 @@ extension CreateRetrospectViewController {
         
         templatesButton.do {
             $0.backgroundColor = .background050
-            $0.setTitle("TIL", for: .normal)
             $0.setTitleColor(UIColor.gray700, for: .normal)
             $0.titleLabel?.font = .fontGuide(.body1_bold_kor)
             $0.setImage(Image.chevronDown, for: .normal)
@@ -102,17 +115,61 @@ extension CreateRetrospectViewController {
         navigationItem.title = "프로젝트 이름"
         let backButton = UIBarButtonItem(image: Image.chevronBack, style: .plain, target: self, action: #selector(backButtonTapped))
         backButton.imageInsets = UIEdgeInsets(top: 0, left: -8, bottom: 0, right: 0)
-         navigationItem.leftBarButtonItem = backButton
+        navigationItem.leftBarButtonItem = backButton
         let saveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonTapped))
         saveButton.tintColor = .gray400
         navigationItem.rightBarButtonItem = saveButton
+        navigationItem.rightBarButtonItem?.isEnabled = false
+        
+        tilView.onCompletionTIL = { [weak self] shouldPrint in
+            if shouldPrint {
+                print("나와랑")
+                // Enable the save button
+                self?.navigationItem.rightBarButtonItem?.isEnabled = true
+                self?.navigationItem.rightBarButtonItem?.tintColor = .blue400
+            } else {
+                // Disable the save button
+                self?.navigationItem.rightBarButtonItem?.isEnabled = false
+                self?.navigationItem.rightBarButtonItem?.tintColor = .gray400
+            }
+        }
+        
+        fiveFView.onCompletionFiveF = { [weak self] shouldPrint in
+            if shouldPrint {
+                print("나와랑")
+                // Enable the save button
+                self?.navigationItem.rightBarButtonItem?.isEnabled = true
+                self?.navigationItem.rightBarButtonItem?.tintColor = .blue400
+            } else {
+                // Disable the save button
+                self?.navigationItem.rightBarButtonItem?.isEnabled = false
+                self?.navigationItem.rightBarButtonItem?.tintColor = .gray400
+            }
+        }
+        
+        arrView.onCompletionAAR = { [weak self] shouldPrint in
+            if shouldPrint {
+                print("나와랑")
+                // Enable the save button
+                self?.navigationItem.rightBarButtonItem?.isEnabled = true
+                self?.navigationItem.rightBarButtonItem?.tintColor = .blue400
+            } else {
+                // Disable the save button
+                self?.navigationItem.rightBarButtonItem?.isEnabled = false
+                self?.navigationItem.rightBarButtonItem?.tintColor = .gray400
+            }
+        }
     }
-
+    
     private func updateContentView(option: String) {
         print(option)
+        templatesButton.setTitle(option, for: .normal)
+
+        contentView.subviews.forEach { $0.removeFromSuperview() } // 기존의 모든 서브뷰를 제거합니다.
+
         switch option {
         case "TIL":
-            contentView.subviews.forEach { $0.removeFromSuperview() }
+            setNavigation()
             contentView.addSubviews(templatesButton, tilView)
             
             contentView.snp.updateConstraints {
@@ -133,7 +190,7 @@ extension CreateRetrospectViewController {
             }
             
         case "5F":
-            contentView.subviews.forEach { $0.removeFromSuperview() }
+            setNavigation()
             contentView.addSubviews(templatesButton, fiveFView)
             
             contentView.snp.updateConstraints {
@@ -154,9 +211,9 @@ extension CreateRetrospectViewController {
             }
             
         case "AAR":
-            contentView.subviews.forEach { $0.removeFromSuperview() }
+            setNavigation()
             contentView.addSubviews(templatesButton, arrView)
-
+            
             contentView.snp.updateConstraints {
                 $0.edges.equalToSuperview()
                 $0.width.equalToSuperview()
@@ -177,14 +234,57 @@ extension CreateRetrospectViewController {
         default:
             break
         }
+        
+        tilView = nil
+        fiveFView = nil
+        arrView = nil
     }
     
     private func setAddTarget() {
         templatesButton.addTarget(self, action: #selector(presnetToBottomSheetViewController), for: .touchUpInside)
     }
     
+    private func setTapScreen() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapScreen))
+        view.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    func setupKeyboardEvent() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillShow),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillHide),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
+    }
+    
     // MARK: - @objc Methods
-
+    
+    @objc func keyboardWillShow(_ sender: Notification) {
+        guard let keyboardFrame = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue,
+              let currentTextView = UIResponder.currentResponder as? UITextView else { return }
+        let keyboardTopY = keyboardFrame.cgRectValue.origin.y
+        let convertedTextViewFrame = view.convert(currentTextView.frame, from: currentTextView.superview)
+        let textViewBottomY = convertedTextViewFrame.origin.y + convertedTextViewFrame.size.height
+        
+        if textViewBottomY > keyboardTopY {
+            let keyboardOverlap = textViewBottomY - keyboardTopY
+            view.frame.origin.y = -keyboardOverlap
+        }
+    }
+    
+    @objc func keyboardWillHide(_ sender: Notification) {
+        if view.frame.origin.y != 0 {
+            view.frame.origin.y = 0
+        }
+    }
+    
+    @objc private func didTapScreen() {
+        view.endEditing(true)
+    }
+    
     @objc func presnetToBottomSheetViewController() {
         let bottomSheetVC = BottomSheetViewController()
         bottomSheetVC.selectedOption = templatesButton.title(for: .normal)
@@ -193,8 +293,12 @@ extension CreateRetrospectViewController {
             self?.updateContentView(option: option)
         }
         present(bottomSheetVC, animated: true, completion: nil)
+        
+        tilView = TILView()
+        fiveFView = FiveFView()
+        arrView = AARView()
     }
-
+    
     
     @objc
     private func backButtonTapped() {
@@ -203,6 +307,16 @@ extension CreateRetrospectViewController {
     
     @objc
     private func saveButtonTapped() {
+        navigationController?.navigationBar.isUserInteractionEnabled = false
 
+        let alert = CustomAlert(frame: CGRect(x: 0, y: 0, width: 300, height: 400), alertType: .createRetrospect)
+        alert.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(alert)
+
+        alert.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+
+        alert.isUserInteractionEnabled = true
     }
 }
