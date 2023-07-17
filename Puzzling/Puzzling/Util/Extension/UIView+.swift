@@ -34,11 +34,12 @@ extension UIView {
         layer.borderColor = color.cgColor
     }
     
-    // UIView 원하는 부분에 cornerRadius 추가
-    func roundCorners(cornerRadius: CGFloat, maskedCorners: CACornerMask) {
-        clipsToBounds = true
-        layer.cornerRadius = cornerRadius
-        layer.maskedCorners = CACornerMask(arrayLiteral: maskedCorners)
+    /// UIView 원하는 부분에 [UIRectCorner] 를 넣어 사용
+    func roundCorners(corners: UIRectCorner, radius: CGFloat) {
+        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        layer.mask = mask
     }
     
     func makeRounded(radius: CGFloat) {

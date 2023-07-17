@@ -51,4 +51,7 @@ public enum Image {
     static let rank1st = UIImage(named: "rank1st")!
     static let rank2nd = UIImage(named: "rank2nd")!
     static let rank3rd = UIImage(named: "rank3rd")!
+    // MARK: - Dashboard
+    
+    static let indivisualCardBackground = UIImage(named: "puzzleBannerBox")!
 }
