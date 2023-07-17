@@ -47,7 +47,7 @@ extension MyProjectViewController {
 
         myProjectTableView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
-            $0.leading.trailing.equalToSuperview().inset(16)
+            $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
     }
@@ -71,6 +71,9 @@ extension MyProjectViewController {
         )
         
         navigationItem.rightBarButtonItem?.tintColor = .gray500
+        
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
         
         let title = "내 프로젝트"
         let attributes: [NSAttributedString.Key: Any] = [
