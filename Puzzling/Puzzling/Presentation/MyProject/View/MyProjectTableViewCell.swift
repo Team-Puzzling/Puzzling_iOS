@@ -15,8 +15,8 @@ final class MyProjectTableViewCell: UITableViewCell {
     private let view = UIView()
     private let projectNameLabel = UILabel()
     private let durationLabel = UILabel()
-    private let dashboardLabel = UIButton()
-    private let myReviewLabel = UIButton()
+    private let dashboardButton = UIButton()
+    private let myReviewButton = UIButton()
     
     private let dateFormatter = DateFormatter().then {
         $0.dateFormat = "yyyy-MM-dd"
@@ -58,7 +58,7 @@ extension MyProjectTableViewCell {
             $0.font = .fontGuide(.detail1_regular_kor)
         }
         
-        dashboardLabel.do {
+        dashboardButton.do {
             $0.setTitle("대시보드 보기", for: .normal)
             $0.setTitleColor(.black000, for: .normal)
             $0.titleLabel?.font = .fontGuide(.body3_bold_kor)
@@ -66,7 +66,7 @@ extension MyProjectTableViewCell {
             $0.backgroundColor = .white000
         }
         
-        myReviewLabel.do {
+        myReviewButton.do {
             $0.setTitle("내 회고 모음", for: .normal)
             $0.setTitleColor(.black000, for: .normal)
             $0.titleLabel?.font = .fontGuide(.body3_bold_kor)
@@ -77,10 +77,11 @@ extension MyProjectTableViewCell {
     
     private func setLayout() {
         contentView.addSubview(view)
-        view.addSubviews(projectNameLabel, durationLabel, dashboardLabel, myReviewLabel)
+        view.addSubviews(projectNameLabel, durationLabel, dashboardButton, myReviewButton)
         
         view.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
+            $0.top.equalToSuperview()
+            $0.horizontalEdges.equalToSuperview().inset(16)
             $0.bottom.equalToSuperview().inset(12)
         }
         
@@ -95,14 +96,14 @@ extension MyProjectTableViewCell {
             $0.top.equalToSuperview().inset(18)
         }
         
-        dashboardLabel.snp.makeConstraints {
+        dashboardButton.snp.makeConstraints {
             $0.top.equalTo(projectNameLabel.snp.bottom).offset(16)
             $0.bottom.equalToSuperview().inset(12)
             $0.leading.equalToSuperview().inset(12)
             $0.width.equalToSuperview().dividedBy(2).inset(9)
         }
         
-        myReviewLabel.snp.makeConstraints {
+        myReviewButton.snp.makeConstraints {
             $0.top.equalTo(projectNameLabel.snp.bottom).offset(16)
             $0.width.equalToSuperview().dividedBy(2).inset(9)
             $0.trailing.equalToSuperview().inset(12)
