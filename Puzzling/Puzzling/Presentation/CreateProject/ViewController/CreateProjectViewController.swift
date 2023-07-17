@@ -225,6 +225,15 @@ extension CreateProjectViewController {
 
     }
     
+    private func invitationCodeNotification(code: String) {
+        let userInfo = code
+        NotificationCenter.default.post(
+            name: Notification.Name("invitationCodeNotification"),
+            object: nil,
+            userInfo: ["userInfo": userInfo]
+        )
+    }
+    
     // MARK: - @objc Methods
     
     @objc
@@ -317,11 +326,13 @@ extension CreateProjectViewController {
             case .success(let result):
                 let status = result.statusCode
                 if status >= 200 && status < 300 {
-                    do{
+                    do {
+                        print("♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️")
+                        self.invitationCodeNotification(code: "2150811453")
                         guard let data = try result.map(GeneralResponse<PostProjectRequest>.self).data else {
                             return
                         }
-                        print("♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️")
+//                        self.invitationCode = data
                     } catch(let error) {
                         print(error.localizedDescription)
                     }

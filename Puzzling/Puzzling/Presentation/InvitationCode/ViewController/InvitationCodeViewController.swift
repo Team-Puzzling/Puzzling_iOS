@@ -21,10 +21,11 @@ final class InvitationCodeViewController: UIViewController {
     private let logoImageView = UIImageView()
     private let invitationCodeInputView = InputContentView(type: .invitationCode)
     private let inputCompletionButton = CheckButton()
+    private let projectProvider = MoyaProvider<ProjectService>(plugins:[NetworkLoggerPlugin()])
     
     // MARK: - Properties
     
-    var invitationCode: String = ""
+    private var invitationCode: String = ""
     
     // MARK: - Initializer
     
@@ -152,9 +153,7 @@ extension InvitationCodeViewController {
     }
     
     private func presentToCreateProfile() {
-        let createProfileVC = CreateProfileViewController()
-        createProfileVC.modalPresentationStyle = .fullScreen
-        self.present(createProfileVC, animated: true)
+        fetchInvitationCode()
     }
     
     private func dismissToMain() {
@@ -203,6 +202,40 @@ extension InvitationCodeViewController {
                 invitationCode = updateTextInfo.text
             }
             buttonStateSetting()
+        }
+    }
+}
+
+extension InvitationCodeViewController {
+    
+    // MARK: - Network
+    
+    private func fetchInvitationCode() {
+        print(invitationCode)
+        projectProvider.request(.invitationCode(memberID: "1", invitationCode: invitationCode)) { result in
+            switch result {
+            case .success(let result):
+                let status = result.statusCode
+                if status >= 200 && status < 300 {
+                    do {
+                        print("♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️")
+                        let createProfileVC = CreateProfileViewController()
+                        createProfileVC.modalPresentationStyle = .fullScreen
+                        self.present(createProfileVC, animated: true)
+                        guard let data = try result.map(GeneralResponse<PostProjectRequest>.self).data else {
+                            return
+                        }
+//                        self.invitationCode = data
+                    } catch(let error) {
+                        print(error.localizedDescription)
+                    }
+                } else if status == 404 {
+                    print("💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭")
+//                    self.inputCompletionButton.setState(.notAllow)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
         }
     }
 }
