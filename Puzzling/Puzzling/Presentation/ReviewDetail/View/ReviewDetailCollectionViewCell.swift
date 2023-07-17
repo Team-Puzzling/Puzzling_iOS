@@ -90,17 +90,3 @@ extension ReviewDetailCollectionViewCell {
         divisionLabel.isHidden = true
     }
 }
-
-extension String {
-    
-    func textHeight(withWidth width: CGFloat) -> CGFloat {
-        let text = self
-         return text.height(withWidth:width, font: UIFont.fontGuide(.body2_regular_kor))
-     }
-    
-    func height(withWidth width: CGFloat, font: UIFont) -> CGFloat {
-        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
-        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
-        return ceil(boundingBox.height)
-    }
-}

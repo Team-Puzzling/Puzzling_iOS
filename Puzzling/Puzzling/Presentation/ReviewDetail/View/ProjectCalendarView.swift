@@ -13,8 +13,8 @@ import Then
 
 final class ProjectCalendarView: UIView {
     
-    lazy var calendarView = FSCalendar(frame: .zero)
-    var calendarViewHeight = NSLayoutConstraint()
+    private lazy var calendarView = FSCalendar(frame: .zero)
+    private var calendarViewHeight = NSLayoutConstraint()
     private lazy var headerLabel = UILabel()
     private lazy var testLabel = UILabel()
     
