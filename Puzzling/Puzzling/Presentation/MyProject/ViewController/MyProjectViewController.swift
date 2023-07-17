@@ -72,6 +72,9 @@ extension MyProjectViewController {
         
         navigationItem.rightBarButtonItem?.tintColor = .gray500
         
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        
         let title = "내 프로젝트"
         let attributes: [NSAttributedString.Key: Any] = [
             NSAttributedString.Key.foregroundColor: UIColor.black000,
