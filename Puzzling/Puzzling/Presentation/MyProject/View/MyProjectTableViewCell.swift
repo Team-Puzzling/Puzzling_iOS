@@ -18,6 +18,12 @@ final class MyProjectTableViewCell: UITableViewCell {
     private let dashboardLabel = UIButton()
     private let myReviewLabel = UIButton()
     
+    private let dateFormatter = DateFormatter().then {
+        $0.dateFormat = "yyyy-MM-dd"
+        $0.locale = Locale(identifier: "ko_kr")
+        $0.timeZone = TimeZone(identifier: "KST")
+    }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -107,27 +113,16 @@ extension MyProjectTableViewCell {
 
 extension MyProjectTableViewCell {
     private func calculateDays(date: String) -> Int {
-        let dateFormatter = DateFormatter()
-        var daysCount:Int = 0
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        dateFormatter.locale = Locale(identifier: "ko_kr")
-        dateFormatter.timeZone = TimeZone(identifier: "KST")
+        var daysCount: Int = 0
         guard let startDate = dateFormatter.date(from: date) else { return 0 }
-//        print(startDate)
         daysCount = days(from: startDate)
         return daysCount
     }
     
     private func days(from date: Date) -> Int {
         let calendar = Calendar.current
-        let currentDate = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        dateFormatter.locale = Locale(identifier: "ko_kr")
-        dateFormatter.timeZone = TimeZone(identifier: "KST")
-        let returnData = dateFormatter.string(from: currentDate)
-        guard let returnDate = dateFormatter.date(from: returnData) else { return 0 }
-        print(returnData)
+        let currentDate = dateFormatter.string(from: Date())
+        guard let returnDate = dateFormatter.date(from: currentDate) else { return 0 }
         return (calendar.dateComponents([.day], from: date, to: returnDate).day ?? 0) + 1
     }
 }
@@ -135,13 +130,16 @@ extension MyProjectTableViewCell {
 extension MyProjectTableViewCell {
     func setDataBind(_ data: MyProjectDataModel) {
         projectNameLabel.text  = data.projectName
-        let duration:Int = calculateDays(date: data.startDate)
+        let duration: Int = calculateDays(date: data.startDate)
+
         if (duration < 0) {
             durationLabel.text = "D - \((duration - 1) * (-1))"
         }
+        
         else if (duration == 0) {
             durationLabel.text = "D - 1"
         }
+        
         else {
             durationLabel.text = "D + \(duration)"
         }
