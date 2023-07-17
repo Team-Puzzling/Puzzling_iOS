@@ -55,6 +55,11 @@ extension String {
         return modifiedDateString
     }
     
+    /// text의 높이 값을 리턴합니다. Font는 body2_regular_kor로 지정되어 있습니다.
+    func textHeight(withWidth width: CGFloat) -> CGFloat {
+        let text = self
+         return text.height(withWidth:width, font: UIFont.fontGuide(.body2_regular_kor))
+     }
     /// "yyyy-MM-dd" 형식의 String 을 "M/d" 형식으로 리턴합니다.
     func convertDateToSlashFormat() -> String {
         let dateFormatter = DateFormatter()
@@ -67,6 +72,12 @@ extension String {
         
         let modifiedDateString = myDateFormatter.string(from: convertedDate)
         return modifiedDateString
+    }
+    
+    func height(withWidth width: CGFloat, font: UIFont) -> CGFloat {
+        let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
+        let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
+        return ceil(boundingBox.height)
     }
     
     /// "yyyy-MM-dd" 형식의 String 을 Date 형식으로 리턴합니다.
