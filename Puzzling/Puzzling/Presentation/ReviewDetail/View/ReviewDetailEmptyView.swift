@@ -29,7 +29,7 @@ final class ReviewDetailEmptyView: UIView {
 extension ReviewDetailEmptyView {
     private func setUI() {
         puzzleImageView.do {
-            $0.image = Image.puzzle_element
+            $0.image = Image.elementPuzzle
         }
         
         label.do {
