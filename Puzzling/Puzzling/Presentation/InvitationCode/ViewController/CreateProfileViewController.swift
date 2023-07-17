@@ -26,12 +26,23 @@ final class CreateProfileViewController: UIViewController {
     
     // MARK: - Properties
     
+    private var profile: ProfileModel
     var projectName: String?
     var projectID: Int?
     private var nickname: String = ""
     private var myRole: String = ""
+    private let profileProvider = MoyaProvider<ProjectService>(plugins:[NetworkLoggerPlugin()])
     
     // MARK: - Initializer
+    
+    init() {
+        profile = ProfileModel(projectId: 0, memberProjectNickname: "", memberProjectRole: "")
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - View Life Cycle
     
@@ -174,14 +185,23 @@ extension CreateProfileViewController {
     }
     
     private func participateProject() {
-        print("participateProject")
-        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+//        print("participateProject")
+//        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
     
     private func setProjectNameLabel() {
         if let projectName = self.projectName {
             projectNameLabel.text = "프로젝트: \(projectName)"
         }
+    }
+    
+    private func textFieldWarningNotification(type: WarningMessage) {
+        let userInfo = type
+        NotificationCenter.default.post(
+            name: Notification.Name("textFieldWarningNotification"),
+            object: nil,
+            userInfo: ["userInfo": userInfo]
+        )
     }
     
     // MARK: - @objc Methods
@@ -193,6 +213,7 @@ extension CreateProfileViewController {
     
     @objc
     private func participateProjectButtonDidTap() {
+        postProfileInfo()
         participateProject()
     }
     
@@ -211,6 +232,51 @@ extension CreateProfileViewController {
                 myRole = updateTextInfo.text
             }
             buttonStateSetting()
+        }
+    }
+}
+
+extension CreateProfileViewController {
+    
+    // MARK: - Network
+    
+    private func postProfileInfo() {
+        if let id = projectID {
+            profile.projectId = id
+        }
+        profile.memberProjectNickname = nickname
+        profile.memberProjectRole = myRole
+        
+        profileProvider.request(.joinProject(param: profile.makePostProfileRequest(), memberID:"1")) { result in
+            switch result {
+            case .success(let result):
+                let status = result.statusCode
+                if status >= 200 && status < 300 {
+                    do {
+                        guard let data = try result.map(GeneralResponse<PostProfileRequest>.self).data else { return }
+                        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+                    } catch(let error) {
+                        print(error.localizedDescription)
+                        self.participateProjectButton.setState(.notAllow)
+                    }
+                }
+                else if status == 400 {
+                    print("⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️")
+                    do {
+                        let generalResponse = try result.map(GeneralResponse<PostProfileRequest>.self)
+                        guard let message = generalResponse.message else { return }
+                        if message == "이미 프로젝트에 있는 닉네임입니다." {
+                            self.textFieldWarningNotification(type: .duplicateNickname)
+                        } else if message == "이미 프로젝트에 참여한 팀원입니다." {
+                            print("🌧️🌧️🌧️🌧️🌧️🌧️🌧️🌧️🌧️🌧️🌧️🌧️🌧️🌧️🌧️🌧️🌧️🌧️🌧️🌧️")
+                        } else { print("에러 잼") }
+                    } catch(let error) {
+                        print(error.localizedDescription)
+                    }
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
         }
     }
 }

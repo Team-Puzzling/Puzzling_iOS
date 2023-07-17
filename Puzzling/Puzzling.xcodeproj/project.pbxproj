@@ -20,6 +20,8 @@
 		0351AB5C2A65A06D006B0F4C /* InputContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB5B2A65A06D006B0F4C /* InputContentType.swift */; };
 		0351AB5E2A65CC56006B0F4C /* ProjectResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB5D2A65CC56006B0F4C /* ProjectResponse.swift */; };
 		0351AB602A65CCB6006B0F4C /* ProjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB5F2A65CCB6006B0F4C /* ProjectModel.swift */; };
+		0351AB622A65D71F006B0F4C /* PostProfileRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB612A65D71F006B0F4C /* PostProfileRequest.swift */; };
+		0351AB642A65D78E006B0F4C /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB632A65D78E006B0F4C /* Profile.swift */; };
 		03734EB52A599FDB00B401D6 /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03734EB42A599FDB00B401D6 /* Image.xcassets */; };
 		03734EB82A59A0BD00B401D6 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03734EB72A59A0BD00B401D6 /* TabBarController.swift */; };
 		03734EBD2A59A1F800B401D6 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03734EBC2A59A1F800B401D6 /* TabBarItem.swift */; };
@@ -126,6 +128,8 @@
 		0351AB5B2A65A06D006B0F4C /* InputContentType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputContentType.swift; sourceTree = "<group>"; };
 		0351AB5D2A65CC56006B0F4C /* ProjectResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectResponse.swift; sourceTree = "<group>"; };
 		0351AB5F2A65CCB6006B0F4C /* ProjectModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectModel.swift; sourceTree = "<group>"; };
+		0351AB612A65D71F006B0F4C /* PostProfileRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostProfileRequest.swift; sourceTree = "<group>"; };
+		0351AB632A65D78E006B0F4C /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		03734EB42A599FDB00B401D6 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = "<group>"; };
 		03734EB72A59A0BD00B401D6 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		03734EBC2A59A1F800B401D6 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
@@ -262,6 +266,7 @@
 			children = (
 				0351AB562A65799F006B0F4C /* PostProjectRequest.swift */,
 				0351AB5D2A65CC56006B0F4C /* ProjectResponse.swift */,
+				0351AB612A65D71F006B0F4C /* PostProfileRequest.swift */,
 			);
 			path = Project;
 			sourceTree = "<group>";
@@ -269,9 +274,10 @@
 		0351AB582A657BC3006B0F4C /* Project */ = {
 			isa = PBXGroup;
 			children = (
-				0351AB592A657BCF006B0F4C /* Project.swift */,
 				0351AB5B2A65A06D006B0F4C /* InputContentType.swift */,
+				0351AB592A657BCF006B0F4C /* Project.swift */,
 				0351AB5F2A65CCB6006B0F4C /* ProjectModel.swift */,
+				0351AB632A65D78E006B0F4C /* Profile.swift */,
 			);
 			path = Project;
 			sourceTree = "<group>";
@@ -961,6 +967,7 @@
 				03E6D23E2A532C1800F4453C /* FontLevel.swift in Sources */,
 				03734EB82A59A0BD00B401D6 /* TabBarController.swift in Sources */,
 				09C0A4F52A5BEE4C00691FFD /* TeamMemberView.swift in Sources */,
+				0351AB642A65D78E006B0F4C /* Profile.swift in Sources */,
 				03E6D25E2A53321000F4453C /* NetworkLoggerPlugin.swift in Sources */,
 				03E6D2622A5332F700F4453C /* Encodable+.swift in Sources */,
 				0351AB542A656DEB006B0F4C /* ProjectService.swift in Sources */,
@@ -971,6 +978,7 @@
 				0351AB402A630EE6006B0F4C /* UIResponder+.swift in Sources */,
 				03FFD2CA2A5B15BA00A3B70D /* UIFont+.swift in Sources */,
 				58EDAF932A5DD25D004EF5D3 /* DashboardMainBoxView.swift in Sources */,
+				0351AB622A65D71F006B0F4C /* PostProfileRequest.swift in Sources */,
 				251C00CB2A5BEB6600F6838C /* TILView.swift in Sources */,
 				03E6D27A2A5333C900F4453C /* UIImage+.swift in Sources */,
 				03734EBF2A59A26800B401D6 /* MyPageViewController.swift in Sources */,

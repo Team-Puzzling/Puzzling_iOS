@@ -7,8 +7,6 @@
 
 import Foundation
 
-// MARK: - ContentResponse
-
 struct PostProjectRequest: Codable {
     let projectName: String
     let projectIntro: String

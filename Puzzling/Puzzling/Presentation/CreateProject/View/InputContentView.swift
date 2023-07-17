@@ -195,17 +195,33 @@ extension InputContentView {
         switch type {
         case .emoji:
             warningLabel.text = "특수문자, 이모지를 사용할 수 없어요."
+            textField.layer.borderColor = UIColor.red200.cgColor
+            textField.layer.borderWidth = 2
+            textFieldButton.isHidden = false
+            textFieldButton.setImage(Image.warning, for: .normal)
+            textFieldButton.isEnabled = false
+            warningLabel.isHidden = false
         case .invitationCode:
             warningLabel.text = "유효하지 않은 초대코드에요. 코드를 확인해 주세요."
+            if activeTextField == .invitationCode {
+                textField.layer.borderColor = UIColor.red200.cgColor
+                textField.layer.borderWidth = 2
+                textFieldButton.isHidden = false
+                textFieldButton.setImage(Image.warning, for: .normal)
+                textFieldButton.isEnabled = false
+                warningLabel.isHidden = false
+            }
         case .duplicateNickname:
             warningLabel.text = "이미 사용 중인 닉네임이에요."
+            if activeTextField == .nickname {
+                textField.layer.borderColor = UIColor.red200.cgColor
+                textField.layer.borderWidth = 2
+                textFieldButton.isHidden = false
+                textFieldButton.setImage(Image.warning, for: .normal)
+                textFieldButton.isEnabled = false
+                warningLabel.isHidden = false
+            }
         }
-        textField.layer.borderColor = UIColor.red200.cgColor
-        textField.layer.borderWidth = 2
-        textFieldButton.isHidden = false
-        textFieldButton.setImage(Image.warning, for: .normal)
-        textFieldButton.isEnabled = false
-        warningLabel.isHidden = false
     }
     
     private func defaultTextFieldBorderSetting(textField: UITextField) {

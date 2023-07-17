@@ -10,7 +10,7 @@ import Moya
 
 enum ProjectService {
     case postProject(param: PostProjectRequest, memberID: String)
-    case joinProject(memberID: String)
+    case joinProject(param: PostProfileRequest, memberID: String)
     case invitationCode(memberID: String, invitationCode: String)
 }
 
@@ -23,7 +23,7 @@ extension ProjectService: TargetType {
         switch self {
         case .postProject(_, let memberID):
             return URLConst.postProjectURL.replacingOccurrences(of: "{memberId}", with: "\(memberID)")
-        case .joinProject(let memberID):
+        case .joinProject(_, let memberID):
             return URLConst.postProjectJoinURL.replacingOccurrences(of: "{memberId}", with: "\(memberID)")
         case .invitationCode(_, let memberID):
             return URLConst.getInvitationCodeURL.replacingOccurrences(of: "{memberId}", with: "\(memberID)")
@@ -45,8 +45,8 @@ extension ProjectService: TargetType {
         switch self {
         case .postProject(let param, _):
             return .requestParameters(parameters: try! param.asParameter(), encoding: JSONEncoding.default)
-        case .joinProject:
-            return .requestPlain
+        case .joinProject(let param, _):
+            return .requestParameters(parameters: try! param.asParameter(), encoding: JSONEncoding.default)
         case .invitationCode(_, let invitaionCode):
             let param: [String: Any] = [
                 URLConst.invitationCode : invitaionCode
