@@ -38,7 +38,7 @@ enum APIConstants {
     static var headerWithAuthorization: [String: String] {
         [
             NetworkHeaderKey.contentType.rawValue: APIConstants.applicationJSON,
-            URLConst.bearer + NetworkHeaderKey.authorization.rawValue: APIConstants.accessToken
+            NetworkHeaderKey.authorization.rawValue: URLConst.bearer + APIConstants.accessToken
         ]
     }
 }

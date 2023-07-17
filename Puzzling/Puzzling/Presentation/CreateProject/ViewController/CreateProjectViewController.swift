@@ -20,6 +20,10 @@ final class CreateProjectViewController: UIViewController {
     private let closeButton = UIButton()
     private let createProjectView = CreateProjectView()
     private let registerProjectButton = CheckButton()
+    
+    // MARK: - Properties
+    
+    private var project: Project
     private var projectName: String = ""
     private var projectDescription: String = ""
     private var projectStartDate: String = ""
@@ -27,8 +31,18 @@ final class CreateProjectViewController: UIViewController {
     private var projectNickname: String = ""
     private var projectCycle: [String] = []
     private var viewHeight: String = ""
+    private let projectProvider = MoyaProvider<ProjectService>(plugins:[NetworkLoggerPlugin()])
     
-    // MARK: - Properties
+    // MARK: - Initializer
+    
+    init() {
+        project = Project(projectName: "", projectIntro: "", projectStartDate: "", memberProjectRole: "", memberProjectNickname: "", reviewCycle: [])
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - View Life Cycle
     
@@ -216,6 +230,7 @@ extension CreateProjectViewController {
     @objc
     private func registerProjectButtonDidTap() {
         projectRegister()
+        postProjectInfo()
     }
     
     @objc
@@ -282,5 +297,41 @@ extension CreateProjectViewController: UISheetPresentationControllerDelegate { }
 extension CreateProjectViewController: ProjectStartProtocol {
     func presentToStartTimeVC() {
         presentToHalfModalViewController()
+    }
+}
+
+extension CreateProjectViewController {
+    
+    // MARK: - Network
+    
+    private func postProjectInfo() {
+        project.projectName = projectName
+        project.projectIntro = projectDescription
+        project.projectStartDate = replaceDate(date: projectStartDate)
+        project.memberProjectRole = projectRole
+        project.memberProjectNickname = projectNickname
+        project.reviewCycle = projectCycle
+        
+        projectProvider.request(.postProject(param: project.makePostProjectRequest(), memberID: "1")) { result in
+            switch result {
+            case .success(let result):
+                let status = result.statusCode
+                if status >= 200 && status < 300 {
+                    do{
+                        guard let data = try result.map(GeneralResponse<PostProjectRequest>.self).data else {
+                            return
+                        }
+                        print("♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️")
+                    } catch(let error) {
+                        print(error.localizedDescription)
+                    }
+                }
+                else if status >= 400 {
+                    print("⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️")
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }
