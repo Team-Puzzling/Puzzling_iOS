@@ -1,8 +1,8 @@
 //
-//  UIResponder+.swift
+//  UIResponder.swift
 //  Puzzling
 //
-//  Created by 천성우 on 2023/07/16.
+//  Created by KJ on 2023/07/16.
 //
 
 import UIKit
@@ -23,3 +23,4 @@ extension UIResponder {
         Static.responder = self
     }
 }
+

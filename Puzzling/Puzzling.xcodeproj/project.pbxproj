@@ -7,10 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0351AB3C2A605A7D006B0F4C /* ProjectStartTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB3B2A605A7D006B0F4C /* ProjectStartTimeViewController.swift */; };
+		0351AB3E2A619F04006B0F4C /* textFieldNotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB3D2A619F04006B0F4C /* textFieldNotificationModel.swift */; };
+		0351AB402A630EE6006B0F4C /* UIResponder+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB3F2A630EE6006B0F4C /* UIResponder+.swift */; };
+		0351AB422A6323A8006B0F4C /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB412A6323A8006B0F4C /* CustomAlertView.swift */; };
 		03734EB52A599FDB00B401D6 /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03734EB42A599FDB00B401D6 /* Image.xcassets */; };
 		03734EB82A59A0BD00B401D6 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03734EB72A59A0BD00B401D6 /* TabBarController.swift */; };
 		03734EBD2A59A1F800B401D6 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03734EBC2A59A1F800B401D6 /* TabBarItem.swift */; };
 		03734EBF2A59A26800B401D6 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03734EBE2A59A26800B401D6 /* MyPageViewController.swift */; };
+		03ADF3872A5D9F91002CEDDC /* InputContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ADF3862A5D9F91002CEDDC /* InputContentView.swift */; };
+		03ADF3892A5E7322002CEDDC /* StartDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ADF3882A5E7322002CEDDC /* StartDayView.swift */; };
+		03ADF38D2A5E8A5F002CEDDC /* CreateProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ADF38C2A5E8A5F002CEDDC /* CreateProjectView.swift */; };
+		03ADF38F2A5E932A002CEDDC /* ProjectCycleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ADF38E2A5E932A002CEDDC /* ProjectCycleCollectionViewCell.swift */; };
+		03ADF3922A5E9534002CEDDC /* ProjectCycleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ADF3912A5E9534002CEDDC /* ProjectCycleModel.swift */; };
+		03ADF3942A5EA4DB002CEDDC /* CheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ADF3932A5EA4DB002CEDDC /* CheckButton.swift */; };
 		03B004A92A556C7400E71CA7 /* UIWindow+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B004A82A556C7400E71CA7 /* UIWindow+.swift */; };
 		03E6D1E52A53219600F4453C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E6D1E42A53219600F4453C /* AppDelegate.swift */; };
 		03E6D1E72A53219600F4453C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E6D1E62A53219600F4453C /* SceneDelegate.swift */; };
@@ -60,6 +70,7 @@
 		03FFD2CE2A5B1A8B00A3B70D /* AppleSDGothicNeoType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FFD2CD2A5B1A8B00A3B70D /* AppleSDGothicNeoType.swift */; };
 		03FFD2D12A5B21D600A3B70D /* AppleSDGothicNeoH.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03FFD2D02A5B21D600A3B70D /* AppleSDGothicNeoH.ttf */; };
 		03FFD2D32A5B250800A3B70D /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03FFD2D22A5B250800A3B70D /* Color.xcassets */; };
+		03FFD2D92A5D968200A3B70D /* CreateProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FFD2D82A5D968200A3B70D /* CreateProjectViewController.swift */; };
 		096755BB2A5C61BE00A1E691 /* TeamMemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755BA2A5C61BE00A1E691 /* TeamMemberTableViewCell.swift */; };
 		096755BF2A5D9E1A00A1E691 /* TeamMemberCustomHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755BE2A5D9E1A00A1E691 /* TeamMemberCustomHeaderView.swift */; };
 		096755C62A5E970500A1E691 /* MyProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755C52A5E970500A1E691 /* MyProjectViewController.swift */; };
@@ -85,10 +96,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0351AB3B2A605A7D006B0F4C /* ProjectStartTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectStartTimeViewController.swift; sourceTree = "<group>"; };
+		0351AB3D2A619F04006B0F4C /* textFieldNotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = textFieldNotificationModel.swift; sourceTree = "<group>"; };
+		0351AB3F2A630EE6006B0F4C /* UIResponder+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+.swift"; sourceTree = "<group>"; };
+		0351AB412A6323A8006B0F4C /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		03734EB42A599FDB00B401D6 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = "<group>"; };
 		03734EB72A59A0BD00B401D6 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		03734EBC2A59A1F800B401D6 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
 		03734EBE2A59A26800B401D6 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		03ADF3862A5D9F91002CEDDC /* InputContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputContentView.swift; sourceTree = "<group>"; };
+		03ADF3882A5E7322002CEDDC /* StartDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDayView.swift; sourceTree = "<group>"; };
+		03ADF38C2A5E8A5F002CEDDC /* CreateProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectView.swift; sourceTree = "<group>"; };
+		03ADF38E2A5E932A002CEDDC /* ProjectCycleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCycleCollectionViewCell.swift; sourceTree = "<group>"; };
+		03ADF3912A5E9534002CEDDC /* ProjectCycleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCycleModel.swift; sourceTree = "<group>"; };
+		03ADF3932A5EA4DB002CEDDC /* CheckButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckButton.swift; sourceTree = "<group>"; };
 		03B004A82A556C7400E71CA7 /* UIWindow+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+.swift"; sourceTree = "<group>"; };
 		03E6D1E12A53219600F4453C /* Puzzling.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Puzzling.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03E6D1E42A53219600F4453C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -133,6 +154,7 @@
 		03FFD2CD2A5B1A8B00A3B70D /* AppleSDGothicNeoType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSDGothicNeoType.swift; sourceTree = "<group>"; };
 		03FFD2D02A5B21D600A3B70D /* AppleSDGothicNeoH.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = AppleSDGothicNeoH.ttf; sourceTree = "<group>"; };
 		03FFD2D22A5B250800A3B70D /* Color.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Color.xcassets; sourceTree = "<group>"; };
+		03FFD2D82A5D968200A3B70D /* CreateProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectViewController.swift; sourceTree = "<group>"; };
 		096755BA2A5C61BE00A1E691 /* TeamMemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberTableViewCell.swift; sourceTree = "<group>"; };
 		096755BE2A5D9E1A00A1E691 /* TeamMemberCustomHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberCustomHeaderView.swift; sourceTree = "<group>"; };
 		096755C52A5E970500A1E691 /* MyProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProjectViewController.swift; sourceTree = "<group>"; };
@@ -209,6 +231,14 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
+		03ADF3902A5E932F002CEDDC /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				03ADF38E2A5E932A002CEDDC /* ProjectCycleCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		03E6D1D82A53219600F4453C = {
 			isa = PBXGroup;
 			children = (
@@ -271,6 +301,8 @@
 			isa = PBXGroup;
 			children = (
 				03E6D1FF2A5325F100F4453C /* Model.swift */,
+				03ADF3912A5E9534002CEDDC /* ProjectCycleModel.swift */,
+				0351AB3D2A619F04006B0F4C /* textFieldNotificationModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -313,6 +345,7 @@
 				03E6D20E2A5327D300F4453C /* Common */,
 				03E6D20F2A5327E600F4453C /* Home */,
 				03734EB92A59A1A600B401D6 /* MyPage */,
+				03FFD2D52A5D92CE00A3B70D /* CreateProject */,
 				03734EB62A59A08E00B401D6 /* TabBar */,
 			);
 			path = Presentation;
@@ -329,9 +362,9 @@
 		03E6D20F2A5327E600F4453C /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				03734EC02A59AB5E00B401D6 /* Main */,
 				5831179D2A5B713D0099B517 /* IndivisualDashboard */,
 				5831179C2A5B71280099B517 /* TeamDashboard */,
-				03734EC02A59AB5E00B401D6 /* Main */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -408,6 +441,7 @@
 			children = (
 				03E6D23B2A532BC600F4453C /* CustomClass.swift */,
 				251C00D42A5D205300F6838C /* CustomRadioButton.swift */,
+				03ADF3932A5EA4DB002CEDDC /* CheckButton.swift */,
 			);
 			path = CustomClass;
 			sourceTree = "<group>";
@@ -431,7 +465,7 @@
 				03E6D27B2A5333E400F4453C /* UIViewController+.swift */,
 				03B004A82A556C7400E71CA7 /* UIWindow+.swift */,
 				03FFD2C92A5B15BA00A3B70D /* UIFont+.swift */,
-				25A48C982A6302B400D7D1FF /* UIResponder+.swift */,
+				0351AB3F2A630EE6006B0F4C /* UIResponder+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -454,6 +488,36 @@
 				03E6D23D2A532C1800F4453C /* FontLevel.swift */,
 			);
 			path = StyleGuide;
+			sourceTree = "<group>";
+		};
+		03FFD2D52A5D92CE00A3B70D /* CreateProject */ = {
+			isa = PBXGroup;
+			children = (
+				03FFD2D72A5D931200A3B70D /* View */,
+				03FFD2D62A5D92FB00A3B70D /* ViewController */,
+				03ADF3902A5E932F002CEDDC /* Cell */,
+			);
+			path = CreateProject;
+			sourceTree = "<group>";
+		};
+		03FFD2D62A5D92FB00A3B70D /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				03FFD2D82A5D968200A3B70D /* CreateProjectViewController.swift */,
+				0351AB3B2A605A7D006B0F4C /* ProjectStartTimeViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		03FFD2D72A5D931200A3B70D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				03ADF38C2A5E8A5F002CEDDC /* CreateProjectView.swift */,
+				03ADF3882A5E7322002CEDDC /* StartDayView.swift */,
+				03ADF3862A5D9F91002CEDDC /* InputContentView.swift */,
+				0351AB412A6323A8006B0F4C /* CustomAlertView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		096755C22A5E96DC00A1E691 /* MyProject */ = {
@@ -480,37 +544,6 @@
 				096755E52A60700E00A1E691 /* MyProjectTableHeaderView.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		096755CC2A5FDC3700A1E691 /* MyReview */ = {
-			isa = PBXGroup;
-			children = (
-				096755CF2A5FDC5C00A1E691 /* DataModel */,
-				096755CE2A5FDC5200A1E691 /* ViewController */,
-				096755CD2A5FDC4E00A1E691 /* View */,
-			);
-			path = MyReview;
-			sourceTree = "<group>";
-		};
-		096755CD2A5FDC4E00A1E691 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		096755CE2A5FDC5200A1E691 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
-		096755CF2A5FDC5C00A1E691 /* DataModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = DataModel;
 			sourceTree = "<group>";
 		};
 		09C0A4EF2A5BEBB800691FFD /* TeamMember */ = {
@@ -724,12 +757,16 @@
 				251C00D72A5D309300F6838C /* BottomSheetViewController.swift in Sources */,
 				251C00E92A60343900F6838C /* testViewController.swift in Sources */,
 				03FFD2CC2A5B175C00A3B70D /* SFProType.swift in Sources */,
+				0351AB3C2A605A7D006B0F4C /* ProjectStartTimeViewController.swift in Sources */,
 				09C0A4F32A5BEC1600691FFD /* TeamMemberViewController.swift in Sources */,
+				03FFD2D92A5D968200A3B70D /* CreateProjectViewController.swift in Sources */,
 				03E6D1E92A53219600F4453C /* HomeViewController.swift in Sources */,
 				03E6D2402A532C2500F4453C /* Color.swift in Sources */,
 				03E6D2662A53333500F4453C /* UIView+.swift in Sources */,
 				583117AA2A5BE2D90099B517 /* HomeSegmentedView.swift in Sources */,
+				0351AB3E2A619F04006B0F4C /* textFieldNotificationModel.swift in Sources */,
 				03E6D25C2A5331FF00F4453C /* GeneralResponse.swift in Sources */,
+				03ADF3942A5EA4DB002CEDDC /* CheckButton.swift in Sources */,
 				03E6D1E52A53219600F4453C /* AppDelegate.swift in Sources */,
 				03E6D2602A53322300F4453C /* URLConst.swift in Sources */,
 				096755E82A6070DC00A1E691 /* TeamMemberDataModel.swift in Sources */,
@@ -746,10 +783,13 @@
 				096755BF2A5D9E1A00A1E691 /* TeamMemberCustomHeaderView.swift in Sources */,
 				03E6D1E72A53219600F4453C /* SceneDelegate.swift in Sources */,
 				03E6D2262A532AAC00F4453C /* BaseView.swift in Sources */,
+				03ADF38F2A5E932A002CEDDC /* ProjectCycleCollectionViewCell.swift in Sources */,
 				03E6D2282A532AB900F4453C /* BaseViewController.swift in Sources */,
 				096755EA2A60710100A1E691 /* MyProjectDataModel.swift in Sources */,
 				096755CB2A5E9AF500A1E691 /* MyProjectTableViewCell.swift in Sources */,
 				03E6D25A2A5331ED00F4453C /* APIConst.swift in Sources */,
+				03ADF3892A5E7322002CEDDC /* StartDayView.swift in Sources */,
+				03ADF38D2A5E8A5F002CEDDC /* CreateProjectView.swift in Sources */,
 				251C00CF2A5BEB7600F6838C /* AARView.swift in Sources */,
 				03E6D2642A53330E00F4453C /* NSObject+.swift in Sources */,
 				03E6D23E2A532C1800F4453C /* FontLevel.swift in Sources */,
@@ -759,12 +799,16 @@
 				03E6D2622A5332F700F4453C /* Encodable+.swift in Sources */,
 				03E6D26A2A53335700F4453C /* UIStackView+.swift in Sources */,
 				096755C62A5E970500A1E691 /* MyProjectViewController.swift in Sources */,
+				0351AB402A630EE6006B0F4C /* UIResponder+.swift in Sources */,
 				03FFD2CA2A5B15BA00A3B70D /* UIFont+.swift in Sources */,
 				251C00CB2A5BEB6600F6838C /* TILView.swift in Sources */,
 				03E6D2072A5326DD00F4453C /* APIService.swift in Sources */,
 				03E6D27A2A5333C900F4453C /* UIImage+.swift in Sources */,
 				03734EBF2A59A26800B401D6 /* MyPageViewController.swift in Sources */,
 				583117A82A5BE1490099B517 /* HomeTitleBarView.swift in Sources */,
+				03ADF3922A5E9534002CEDDC /* ProjectCycleModel.swift in Sources */,
+				0351AB422A6323A8006B0F4C /* CustomAlertView.swift in Sources */,
+				03ADF3872A5D9F91002CEDDC /* InputContentView.swift in Sources */,
 				03E6D27C2A5333E400F4453C /* UIViewController+.swift in Sources */,
 				03734EBD2A59A1F800B401D6 /* TabBarItem.swift in Sources */,
 				251C00D52A5D205300F6838C /* CustomRadioButton.swift in Sources */,

@@ -19,6 +19,7 @@ public enum Image {
     // MARK: - Icon
     
     static let xMark = UIImage(named: "xMark")!
+    static let textFieldXMark = UIImage(named: "textFieldXMark")!
     static let chevronDown = UIImage(named: "chevronDown")!
     static let chevronBack = UIImage(named: "chevronBack")!
     static let defaultPuzzle = UIImage(named: "defaultPuzzle")!
@@ -33,6 +34,7 @@ public enum Image {
         .withTintColor(.label, renderingMode: .alwaysOriginal)
     static let rightIcon = UIImage(systemName: "chevron.right")?
         .withTintColor(.label, renderingMode: .alwaysOriginal)
+    static let elementPuzzle1 = UIImage(named: "puzzle_element")!
     static let elementPuzzle = UIImage(named: "puzzle_element")!
     
     // MARK: - Rank

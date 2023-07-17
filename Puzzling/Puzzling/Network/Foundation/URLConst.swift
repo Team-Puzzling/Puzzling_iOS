@@ -11,17 +11,36 @@ public enum URLConst {
     
     //MARK: - Base URL
     
-    public static let baseURL = ""
+    public static let baseURL = "http://3.39.174.107"
     
     //MARK: - URL Path
     
-//    public static let checkUserURL = "/auth/login"
-//    public static let postUserURL = "/auth"
-//    public static let getTodayWeatherURL = "/weather/today"
-//    public static let getTodayWeatherQuestionURL = "/weather/today/question"
-//    public static let getDetailTodayWeatherURL = "/weather/today/detail"
-//    public static let getDetailTempTodayWeatherURL = "/weather/today/detail/temp"
-//    public static let getDetailRainTodayWeatherURL = "/weather/today/detail/rain"
-//    public static let postSetWakeupURL = "/setting/wakeup"
-//    public static let postSetCommuteURL = "/setting/commute"
+    static let postUserURL = "/api/v1/auth"
+    static let getUserTokenURL = "/api/v1/auth/token"
+    
+    static let getReviewTemplateURL = "/api/v1/review/template"
+    static let postMemeberURL = "/api/v1/member"
+    static let projectURL = "/project"
+    static let postReviewTILURL = "/review/TIL"
+    static let postReivew5FURL = "/review/5F"
+    static let postReviewAAR = "/review/ARR"
+    static let getReviewPreviousTemplateURL = "/review/previous-template"
+    
+    static let postJoinURL = "/project/join"
+    static let getInvitationCodeURL = "/api/v1/project/verify"
+    static let invitationCode = "invitationCode"
+    static let getCycleURL = "/cycle"
+    
+    static let getPuzzleURL = "/puzzle"
+    static let today = "today"
+    static let getActionPlanURL = "/actionplan"
+    static let getProjectAllURL = "/project/all"
+    
+    static let getTeamPuzzleURL = "/team/puzzle"
+    static let getRankURL = "/rank"
+    static let startDate = "startDate"
+    static let endDate = "endDate"
+    
+    static let reviewsURL = "/reviews"
+    static let reviewURL = "/review"
 }
