@@ -18,6 +18,14 @@ final class ProjectCalendarView: UIView {
     private lazy var headerLabel = UILabel()
     private lazy var testLabel = UILabel()
     
+    private let dateFormatter = DateFormatter().then {
+        $0.dateFormat = "yyyy-MM-dd"
+        $0.locale = Locale(identifier: "ko_kr")
+        $0.timeZone = TimeZone(identifier: "KST")
+    }
+    
+    private let reviewDetailDataModel = ReviewDetailDataModel.dummy()
+    
     private let headerDateFormatter = DateFormatter().then {
         $0.dateFormat = "YYYY년 M월"
         $0.locale = Locale(identifier: "ko_kr")
@@ -64,7 +72,10 @@ extension ProjectCalendarView {
             
             $0.scrollEnabled = true
             $0.scrollDirection = .horizontal
+//            ($0.weekdays[0] as! UILabel).textColor = UIColor.red
+//            ($0.weekdays[6] as! UILabel).textColor = UIColor.red
         }
+        
         
         headerLabel.do {
             $0.font = .fontGuide(.heading2_kor)
@@ -101,6 +112,41 @@ extension ProjectCalendarView: FSCalendarDelegate, FSCalendarDataSource, FSCalen
     func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
         calendar.frame = CGRect(origin: calendar.frame.origin , size: bounds.size)
         self.calendarViewHeight.constant = bounds.height
+    }
+    
+    func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool
+    {
+        var boolData: Bool = false
+        reviewDetailDataModel.forEach {
+            if(date == dateFormatter.date(from: $0.reviewDate)) {
+                boolData = true
+            }
+        }
+        return boolData
+    }
+    
+    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillDefaultColorFor date: Date) -> UIColor? {
+        var colorData: UIColor = .clear
+        reviewDetailDataModel.forEach {
+            if(date == dateFormatter.date(from: $0.reviewDate) && $0.reviewId != nil) {
+                colorData = .blue100
+            }
+        }
+        return colorData
+    }
+    
+    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
+        var colorData: UIColor = .gray400
+        reviewDetailDataModel.forEach {
+            if(date == dateFormatter.date(from: $0.reviewDate)) {
+                colorData = .black000
+            }
+        }
+        return colorData
+    }
+    
+    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleSelectionColorFor date: Date) -> UIColor? {
+        return .white000
     }
 }
 
