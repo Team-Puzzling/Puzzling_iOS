@@ -47,13 +47,14 @@ class testViewController: UIViewController {
         
     }
     
-    func pushToCreateRetrospectViewController() {
-        let VC = CreateRetrospectViewController()
+    func pushToCreateRetrospectViewController(option: String) {
+        let VC = CreateRetrospectViewController(option: option)
         self.navigationController?.pushViewController(VC, animated: true)
     }
     
     @objc
     func pushButtonTapped() {
-        pushToCreateRetrospectViewController()
+        let option = "5F"
+        pushToCreateRetrospectViewController(option: option)
     }
 }

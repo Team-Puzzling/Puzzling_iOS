@@ -60,13 +60,6 @@
 		03FFD2CE2A5B1A8B00A3B70D /* AppleSDGothicNeoType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FFD2CD2A5B1A8B00A3B70D /* AppleSDGothicNeoType.swift */; };
 		03FFD2D12A5B21D600A3B70D /* AppleSDGothicNeoH.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 03FFD2D02A5B21D600A3B70D /* AppleSDGothicNeoH.ttf */; };
 		03FFD2D32A5B250800A3B70D /* Color.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03FFD2D22A5B250800A3B70D /* Color.xcassets */; };
-		251C00C92A5BE62400F6838C /* CreateRetrospectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251C00C82A5BE62400F6838C /* CreateRetrospectViewController.swift */; };
-		251C00CB2A5BEB6600F6838C /* TILView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251C00CA2A5BEB6600F6838C /* TILView.swift */; };
-		251C00CF2A5BEB7600F6838C /* AARView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251C00CE2A5BEB7600F6838C /* AARView.swift */; };
-		251C00D52A5D205300F6838C /* CustomRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251C00D42A5D205300F6838C /* CustomRadioButton.swift */; };
-		251C00D72A5D309300F6838C /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251C00D62A5D309300F6838C /* BottomSheetViewController.swift */; };
-		251C00DD2A5F114800F6838C /* FiveFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251C00DC2A5F114800F6838C /* FiveFView.swift */; };
-		251C00E92A60343900F6838C /* testViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251C00E82A60343900F6838C /* testViewController.swift */; };
 		096755BB2A5C61BE00A1E691 /* TeamMemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755BA2A5C61BE00A1E691 /* TeamMemberTableViewCell.swift */; };
 		096755BF2A5D9E1A00A1E691 /* TeamMemberCustomHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755BE2A5D9E1A00A1E691 /* TeamMemberCustomHeaderView.swift */; };
 		096755C62A5E970500A1E691 /* MyProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755C52A5E970500A1E691 /* MyProjectViewController.swift */; };
@@ -83,6 +76,8 @@
 		251C00D72A5D309300F6838C /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251C00D62A5D309300F6838C /* BottomSheetViewController.swift */; };
 		251C00DD2A5F114800F6838C /* FiveFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251C00DC2A5F114800F6838C /* FiveFView.swift */; };
 		251C00E92A60343900F6838C /* testViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251C00E82A60343900F6838C /* testViewController.swift */; };
+		25A48C992A6302B400D7D1FF /* UIResponder+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A48C982A6302B400D7D1FF /* UIResponder+.swift */; };
+		25F972642A61A839001CE10C /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F972632A61A839001CE10C /* CustomAlert.swift */; };
 		583117A12A5B71920099B517 /* TeamDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583117A02A5B71920099B517 /* TeamDashboardViewController.swift */; };
 		583117A32A5B71A00099B517 /* IndivisualDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583117A22A5B71A00099B517 /* IndivisualDashboardViewController.swift */; };
 		583117A82A5BE1490099B517 /* HomeTitleBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583117A72A5BE1490099B517 /* HomeTitleBarView.swift */; };
@@ -154,6 +149,8 @@
 		251C00D62A5D309300F6838C /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		251C00DC2A5F114800F6838C /* FiveFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveFView.swift; sourceTree = "<group>"; };
 		251C00E82A60343900F6838C /* testViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testViewController.swift; sourceTree = "<group>"; };
+		25A48C982A6302B400D7D1FF /* UIResponder+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+.swift"; sourceTree = "<group>"; };
+		25F972632A61A839001CE10C /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
 		583117A02A5B71920099B517 /* TeamDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDashboardViewController.swift; sourceTree = "<group>"; };
 		583117A22A5B71A00099B517 /* IndivisualDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndivisualDashboardViewController.swift; sourceTree = "<group>"; };
 		583117A72A5BE1490099B517 /* HomeTitleBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTitleBarView.swift; sourceTree = "<group>"; };
@@ -434,6 +431,7 @@
 				03E6D27B2A5333E400F4453C /* UIViewController+.swift */,
 				03B004A82A556C7400E71CA7 /* UIWindow+.swift */,
 				03FFD2C92A5B15BA00A3B70D /* UIFont+.swift */,
+				25A48C982A6302B400D7D1FF /* UIResponder+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -557,6 +555,7 @@
 				251C00CA2A5BEB6600F6838C /* TILView.swift */,
 				251C00DC2A5F114800F6838C /* FiveFView.swift */,
 				251C00CE2A5BEB7600F6838C /* AARView.swift */,
+				25F972632A61A839001CE10C /* CustomAlert.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -713,6 +712,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25A48C992A6302B400D7D1FF /* UIResponder+.swift in Sources */,
 				03E6D2742A5333A500F4453C /* UILabel+.swift in Sources */,
 				583117A32A5B71A00099B517 /* IndivisualDashboardViewController.swift in Sources */,
 				03E6D2722A53339000F4453C /* UIImageView+.swift in Sources */,
@@ -770,6 +770,7 @@
 				251C00D52A5D205300F6838C /* CustomRadioButton.swift in Sources */,
 				03E6D2052A5326D400F4453C /* DTO.swift in Sources */,
 				096755E62A60700E00A1E691 /* MyProjectTableHeaderView.swift in Sources */,
+				25F972642A61A839001CE10C /* CustomAlert.swift in Sources */,
 				03E6D26C2A53336900F4453C /* UITableView+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -907,9 +908,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = DGT9BQA4KH;
+				DEVELOPMENT_TEAM = X96X8FG389;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Puzzling/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -923,8 +925,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = kwonjeong.Puzzling;
+				PRODUCT_BUNDLE_IDENTIFIER = Puzzling;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -939,9 +942,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = DGT9BQA4KH;
+				DEVELOPMENT_TEAM = X96X8FG389;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Puzzling/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -955,8 +959,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = kwonjeong.Puzzling;
+				PRODUCT_BUNDLE_IDENTIFIER = Puzzling;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
