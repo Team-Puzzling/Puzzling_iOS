@@ -37,6 +37,10 @@ public enum Image {
     static let elementPuzzle1 = UIImage(named: "puzzle_element")!
     static let elementPuzzle = UIImage(named: "puzzle_element")!
     
+    // MARK: - Logo
+    
+    static let invitationCodeLogo = UIImage(named: "invitationCodeLogo")!
+    
     // MARK: - Rank
     
     static let rank1st = UIImage(named: "rank1st")!

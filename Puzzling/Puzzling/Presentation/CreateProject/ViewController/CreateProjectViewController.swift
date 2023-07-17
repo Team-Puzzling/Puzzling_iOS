@@ -199,6 +199,18 @@ extension CreateProjectViewController {
         return modifiedString
     }
     
+    private func setupKeyboardEvent() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillShow),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillHide),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
+
+    }
+    
     // MARK: - @objc Methods
     
     @objc
@@ -218,6 +230,8 @@ extension CreateProjectViewController {
                 projectRole = updateTextInfo.text
             case .nickname:
                 projectNickname = updateTextInfo.text
+            case .invitationCode:
+                return
             }
             buttonStateSetting()
         }
@@ -239,20 +253,8 @@ extension CreateProjectViewController {
         }
     }
     
-    func setupKeyboardEvent() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(keyboardWillShow),
-                                               name: UIResponder.keyboardWillShowNotification,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(keyboardWillHide),
-                                               name: UIResponder.keyboardWillHideNotification,
-                                               object: nil)
-
-    }
-    
     @objc
-    func keyboardWillShow(_ sender: Notification) {
+    private func keyboardWillShow(_ sender: Notification) {
         guard let keyboardFrame = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue,
               let currentTextField = UIResponder.currentResponder as? UITextField else { return }
         let keyboardTopY = keyboardFrame.cgRectValue.origin.y
@@ -266,7 +268,7 @@ extension CreateProjectViewController {
     }
     
     @objc
-    func keyboardWillHide(_ sender: Notification) {
+    private func keyboardWillHide(_ sender: Notification) {
         if view.frame.origin.y != 0 {
             view.frame.origin.y = 0
         }
