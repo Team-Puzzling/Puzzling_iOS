@@ -44,7 +44,6 @@ public enum Image {
     static let kakaoLogin = UIImage(named: "KakaoLogin")!
     static let point = UIImage(named: "point")!
     
-    
     // MARK: - Logo
     
     static let invitationCodeLogo = UIImage(named: "invitationCodeLogo")!
@@ -57,4 +56,6 @@ public enum Image {
     // MARK: - Dashboard
     
     static let indivisualCardBackground = UIImage(named: "puzzleBannerBox")!
+    static let rank1Podium = UIImage(named: "rank1Podium")!
+    static let rankElsePodium = UIImage(named: "rankElsePodium")!
 }

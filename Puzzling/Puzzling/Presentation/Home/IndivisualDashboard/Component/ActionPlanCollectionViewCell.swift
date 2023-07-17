@@ -42,12 +42,16 @@ extension ActionPlanCollectionViewCell {
         self.backgroundColor = .background050
         
         actionTextView.do {
-            $0.textContainerInset = UIEdgeInsets(top: 12, left: 12, bottom: 20, right: 12)
-            $0.font = .fontGuide(.body3_regular_kor)
-            $0.textColor = .gray600
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineSpacing = 6.5
+            let attributes = [NSAttributedString.Key.paragraphStyle: paragraphStyle, NSAttributedString.Key.foregroundColor: UIColor.gray600, NSAttributedString.Key.font: UIFont.fontGuide(.body3_regular_kor)]
+            
+            $0.textContainerInset = UIEdgeInsets(top: 12, left: 8, bottom: 20, right: 8)
             $0.isEditable = false
             $0.isScrollEnabled = false
             $0.backgroundColor = .clear
+            $0.textContainer.maximumNumberOfLines = 4
+            $0.typingAttributes = attributes
         }
         
         dateLabel.do {
