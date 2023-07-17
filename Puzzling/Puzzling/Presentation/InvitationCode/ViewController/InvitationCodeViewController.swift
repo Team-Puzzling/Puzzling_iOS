@@ -105,6 +105,8 @@ extension InvitationCodeViewController {
         logoImageView.snp.makeConstraints {
             $0.top.equalTo(navigationView.snp.bottom).offset(88)
             $0.centerX.equalToSuperview()
+            $0.width.equalTo(100)
+            $0.height.equalTo(124)
         }
         
         invitationCodeInputView.snp.makeConstraints {
