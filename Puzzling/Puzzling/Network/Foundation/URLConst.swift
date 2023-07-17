@@ -11,7 +11,7 @@ public enum URLConst {
     
     //MARK: - Base URL
     
-    public static let baseURL = "http://3.39.174.107"
+    static let baseURL = "http://3.39.174.107"
     
     //MARK: - URL Path
     
@@ -57,4 +57,5 @@ public enum URLConst {
     static let endDate = "endDate"
     static let today = "today"
     static let invitationCode = "invitationCode"
+    static let bearer = "Bearer "
 }
