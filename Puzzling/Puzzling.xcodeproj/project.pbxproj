@@ -88,13 +88,9 @@
 		09C3AD5C2A65717500CDE00F /* TeamMemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C3AD5B2A65717500CDE00F /* TeamMemberView.swift */; };
 		09C3AD5E2A65719100CDE00F /* TeamMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C3AD5D2A65719100CDE00F /* TeamMemberViewController.swift */; };
 		251C00D52A5D205300F6838C /* CustomRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251C00D42A5D205300F6838C /* CustomRadioButton.swift */; };
-		251C00D72A5D309300F6838C /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251C00D62A5D309300F6838C /* BottomSheetViewController.swift */; };
-		251C00DD2A5F114800F6838C /* FiveFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251C00DC2A5F114800F6838C /* FiveFView.swift */; };
-		251C00E92A60343900F6838C /* testViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251C00E82A60343900F6838C /* testViewController.swift */; };
 		255026DF2A656D8100531543 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255026DE2A656D8100531543 /* OnBoardingViewController.swift */; };
 		255026E32A656EF100531543 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255026E22A656EF100531543 /* OnBoardingView.swift */; };
 		255026E52A657FB000531543 /* EnterProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255026E42A657FB000531543 /* EnterProjectView.swift */; };
-		25F972642A61A839001CE10C /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F972632A61A839001CE10C /* CustomAlert.swift */; };
 		583117A12A5B71920099B517 /* TeamDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583117A02A5B71920099B517 /* TeamDashboardViewController.swift */; };
 		583117A32A5B71A00099B517 /* IndivisualDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583117A22A5B71A00099B517 /* IndivisualDashboardViewController.swift */; };
 		583117A82A5BE1490099B517 /* HomeTitleBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583117A72A5BE1490099B517 /* HomeTitleBarView.swift */; };
@@ -405,7 +401,6 @@
 			isa = PBXGroup;
 			children = (
 				255026DB2A656D1500531543 /* OnBoarding */,
-				251C00C52A5BE57C00F6838C /* CreateRetrospect */,
 				096756072A61DB3800A1E691 /* ReviewDetail */,
 				096755EC2A6078AD00A1E691 /* TeamMember */,
 				096755C22A5E96DC00A1E691 /* MyProject */,
@@ -1132,7 +1127,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Puzzling;
+				PRODUCT_BUNDLE_IDENTIFIER = Puzzling.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1166,7 +1161,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Puzzling;
+				PRODUCT_BUNDLE_IDENTIFIER = Puzzling.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
