@@ -16,12 +16,11 @@ final class TeamMemberViewController: UIViewController {
     
     private var index: Int = 0
     
-    private var selectedDate: String = ""
-    private var startDate: String = "2023-07-10"
-    private var endDate: String = "2023-07-25"
+    private var selectedDate: String = "2023-07-21"
+    private var startDate: String = "2023-04-01"
+    private var endDate: String = "2023-12-13"
     
     private var specificData = TeamMemberModel(reviewDay: "", reviewDate: "", reviewWriters: nil, nonReviewWriters: nil)
-//    private var dataList = []
     private var dataList: [TeamMemberModel] = []
     
     private func findData(date: String) -> TeamMemberModel? {
@@ -50,6 +49,7 @@ final class TeamMemberViewController: UIViewController {
         setRegister()
         setNotificationCenter()
         fetchTeamMember()
+        sendNotification(string: selectedDate)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -141,13 +141,21 @@ extension TeamMemberViewController {
     
     private func setNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(getDateNotification(_:)), name: Notification.Name("dateNotification"), object: nil)
-        
     }
     
     private func sendDateNotification(model: [TeamMemberModel]) {
         let userInfo = model
         NotificationCenter.default.post(
             name: Notification.Name("listNotification"),
+            object: nil,
+            userInfo: ["userInfo": userInfo]
+        )
+    }
+    
+    private func sendNotification(string: String) {
+        let userInfo = string
+        NotificationCenter.default.post(
+            name: Notification.Name("dateNotification"),
             object: nil,
             userInfo: ["userInfo": userInfo]
         )
@@ -168,11 +176,6 @@ extension TeamMemberViewController {
         view.window?.layer.add(transition, forKey: kCATransition)
         dismiss(animated: false)
         self.navigationController?.popViewController(animated: false)
-    }
-    
-    @objc
-    private func tapToggleButton() {
-        teamMemberCalenderView.setDataBind()
     }
     
     @objc
@@ -258,7 +261,7 @@ extension TeamMemberViewController {
     
     private func fetchTeamMember() {
         print(startDate, endDate)
-        projectTeamProvider.request(.teamMember(projectId: "2", startDate: startDate, endDate: endDate)) { result in
+        projectTeamProvider.request(.teamMember(projectId: "1", startDate: startDate, endDate: endDate)) { result in
             switch result {
             case .success(let result):
                 let status = result.statusCode
@@ -272,6 +275,8 @@ extension TeamMemberViewController {
                         }
                         
                         self.sendDateNotification(model: self.dataList)
+                        self.specificData = self.findData(date: self.selectedDate) ?? TeamMemberModel(reviewDay: "", reviewDate: "", reviewWriters: nil, nonReviewWriters: nil)
+                        self.teamMemberTableView.reloadData()
                         print("♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️")
                         
                         

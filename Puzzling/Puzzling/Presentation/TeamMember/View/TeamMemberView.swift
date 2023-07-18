@@ -14,6 +14,7 @@ import Moya
 
 final class TeamMemberCalendarView: UIView {
     
+    private var selectedDate: String = ""
     private lazy var calendarView = FSCalendar(frame: .zero)
     private var calendarViewHeight = NSLayoutConstraint()
     private lazy var headerLabel = UILabel()
@@ -50,7 +51,6 @@ final class TeamMemberCalendarView: UIView {
 extension TeamMemberCalendarView {
     private func setUI() {
         calendarView.do {
-            $0.select(Date())
             
             $0.locale = Locale(identifier: "ko_KR")
             $0.scope = .week
@@ -73,6 +73,7 @@ extension TeamMemberCalendarView {
             
             $0.scrollEnabled = true
             $0.scrollDirection = .horizontal
+            $0.today = nil
         }
         
         headerLabel.do {
@@ -120,6 +121,7 @@ extension TeamMemberCalendarView {
     
     private func setNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(getListNotification(_:)), name: Notification.Name("listNotification"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(getDateNotification(_:)), name: Notification.Name("dateNotification"), object: nil)
     }
 }
 
@@ -128,6 +130,14 @@ extension TeamMemberCalendarView {
     private func getListNotification(_ notification: Notification) {
         let listNotification = notification.userInfo?["userInfo"]
         teamMemberList = listNotification as! [TeamMemberModel]
+        calendarView.reloadData()
+    }
+    
+    @objc
+    private func getDateNotification(_ notification: Notification) {
+        let dateNotification = notification.userInfo?["userInfo"]
+        selectedDate = dateNotification as! String
+        calendarView.select(dateFormatter.date(from: selectedDate))
     }
 }
 
@@ -182,11 +192,6 @@ extension TeamMemberCalendarView: FSCalendarDelegate, FSCalendarDataSource, FSCa
 }
 
 extension TeamMemberCalendarView {
-    func setDataBind() {
-        calendarView.setScope(.month, animated: true)
-        headerDateFormatter.dateFormat = "YYYY년 M월"
-        headerLabel.text = headerDateFormatter.string(from: calendarView.currentPage)
-    }
     
     func getCalendarViewHeight() -> CGFloat{
         print(self.calendarViewHeight.constant , #function)
