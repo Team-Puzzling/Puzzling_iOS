@@ -1,8 +1,8 @@
 //
-//  TeamMemberCalendarView.swift
+//  TeamMemberView.swift
 //  Puzzling
 //
-//  Created by Minjoo Kim on 2023/07/10.
+//  Created by Minjoo Kim on 2023/07/17.
 //
 
 import UIKit
@@ -10,13 +10,23 @@ import UIKit
 import FSCalendar
 import SnapKit
 import Then
+import Moya
 
 final class TeamMemberCalendarView: UIView {
     
-    lazy var calendarView = FSCalendar(frame: .zero)
+    private var selectedDate: String = ""
+    private lazy var calendarView = FSCalendar(frame: .zero)
+    private var calendarViewHeight = NSLayoutConstraint()
     private lazy var headerLabel = UILabel()
     private lazy var testLabel = UILabel()
     
+    private let dateFormatter = DateFormatter().then {
+        $0.dateFormat = "yyyy-MM-dd"
+        $0.locale = Locale(identifier: "ko_kr")
+        $0.timeZone = TimeZone(identifier: "KST")
+    }
+    private var teamMemberList: [TeamMemberModel] = [TeamMemberModel(reviewDay: "", reviewDate: "", reviewWriters: nil, nonReviewWriters: nil)]
+
     private let headerDateFormatter = DateFormatter().then {
         $0.dateFormat = "YYYY년 M월"
         $0.locale = Locale(identifier: "ko_kr")
@@ -29,6 +39,8 @@ final class TeamMemberCalendarView: UIView {
         setUI()
         setLayout()
         setDelegate()
+        calendarViewHeight.constant = 350
+        setNotificationCenter()
     }
     
     required init?(coder: NSCoder) {
@@ -39,43 +51,34 @@ final class TeamMemberCalendarView: UIView {
 extension TeamMemberCalendarView {
     private func setUI() {
         calendarView.do {
-            $0.select(Date())
             
             $0.locale = Locale(identifier: "ko_KR")
             $0.scope = .week
             
-            $0.appearance.headerTitleColor = .clear
-            $0.appearance.headerMinimumDissolvedAlpha = 0.0
-            
             $0.appearance.selectionColor = .blue400
             
-            let offset: Double = (self.frame.width - ("YYYY년 M월" as NSString)
-                .size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 22.0)])
-                .width - 16.0 ) / 2.0
-            $0.appearance.headerTitleOffset = CGPoint(x: -offset, y: 0)
-            
-            $0.weekdayHeight = 22
-            $0.headerHeight = 54
+            $0.weekdayHeight = 20
+            $0.headerHeight = 62
             
             $0.appearance.weekdayFont = .fontGuide(.detail1_regular_kor)
             $0.appearance.titleFont = .fontGuide(.body2_bold_kor)
             
-            $0.appearance.titleTodayColor = .gray400
-            $0.appearance.titleDefaultColor = .secondaryLabel
+            $0.appearance.titleDefaultColor = .gray400
             
             $0.appearance.todayColor = .clear
+            $0.appearance.titleTodayColor = .gray400
             $0.appearance.weekdayTextColor = .gray400
             
-            $0.placeholderType = .none
+            $0.calendarHeaderView.isHidden = true
             
             $0.scrollEnabled = true
             $0.scrollDirection = .horizontal
+            $0.today = nil
         }
         
-        headerLabel.do { [weak self] in
-            guard let self = self else { return }
-            $0.font = .systemFont(ofSize: 22.0, weight: .bold)
-            $0.textColor = .label
+        headerLabel.do {
+            $0.font = .fontGuide(.heading2_kor)
+            $0.textColor = .black000
             $0.text = self.headerDateFormatter.string(from: Date())
         }
     }
@@ -84,12 +87,11 @@ extension TeamMemberCalendarView {
         self.addSubviews(calendarView, headerLabel)
         
         calendarView.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-            $0.height.equalTo(300)
+            $0.edges.equalToSuperview()
         }
         
         headerLabel.snp.makeConstraints {
-            $0.top.equalToSuperview()
+            $0.top.equalToSuperview().inset(14)
             $0.leading.equalToSuperview().inset(8)
         }
     }
@@ -98,6 +100,45 @@ extension TeamMemberCalendarView {
         calendarView.delegate = self
         calendarView.dataSource = self
     }
+    
+    private func sendDateBoolNotification(bool: Bool) {
+        let userInfo = bool
+        NotificationCenter.default.post(
+            name: Notification.Name("dateBoolNotification"),
+            object: nil,
+            userInfo: ["userInfo": userInfo]
+        )
+    }
+    
+    private func sendDateNotification(string: String) {
+        let userInfo = string
+        NotificationCenter.default.post(
+            name: Notification.Name("dateNotification"),
+            object: nil,
+            userInfo: ["userInfo": userInfo]
+        )
+    }
+    
+    private func setNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(getListNotification(_:)), name: Notification.Name("listNotification"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(getDateNotification(_:)), name: Notification.Name("dateNotification"), object: nil)
+    }
+}
+
+extension TeamMemberCalendarView {
+    @objc
+    private func getListNotification(_ notification: Notification) {
+        let listNotification = notification.userInfo?["userInfo"]
+        teamMemberList = listNotification as! [TeamMemberModel]
+        calendarView.reloadData()
+    }
+    
+    @objc
+    private func getDateNotification(_ notification: Notification) {
+        let dateNotification = notification.userInfo?["userInfo"]
+        selectedDate = dateNotification as! String
+        calendarView.select(dateFormatter.date(from: selectedDate))
+    }
 }
 
 extension TeamMemberCalendarView: FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
@@ -105,12 +146,55 @@ extension TeamMemberCalendarView: FSCalendarDelegate, FSCalendarDataSource, FSCa
         let currentPage = calendarView.currentPage
         headerLabel.text = headerDateFormatter.string(from: currentPage)
     }
+    
+    func calendar(_ calendar: FSCalendar, boundingRectWillChange bounds: CGRect, animated: Bool) {
+        calendar.frame = CGRect(origin: calendar.frame.origin , size: bounds.size)
+        self.calendarViewHeight.constant = bounds.height
+    }
+    
+    func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
+        var boolData: Bool = false
+        teamMemberList.forEach {
+            if(date == dateFormatter.date(from: $0.reviewDate)) {
+                boolData = true
+            }
+        }
+        return boolData
+    }
+    
+    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillDefaultColorFor date: Date) -> UIColor? {
+        var colorData: UIColor = .clear
+        teamMemberList.forEach {
+            if(date == dateFormatter.date(from: $0.reviewDate) && $0.reviewWriters != nil) {
+                colorData = .blue100
+            }
+        }
+        return colorData
+    }
+    
+    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
+        var colorData: UIColor = .gray400
+        teamMemberList.forEach {
+            if(date == dateFormatter.date(from: $0.reviewDate)) {
+                colorData = .black000
+            }
+        }
+        return colorData
+    }
+    
+    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleSelectionColorFor date: Date) -> UIColor? {
+        return .white000
+    }
+    
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        sendDateNotification(string: dateFormatter.string(from: date))
+    }
 }
 
 extension TeamMemberCalendarView {
-    func setDataBind() {
-        calendarView.setScope(.month, animated: true)
-        headerDateFormatter.dateFormat = "YYYY년 M월"
-        headerLabel.text = headerDateFormatter.string(from: calendarView.currentPage)
+    
+    func getCalendarViewHeight() -> CGFloat{
+        print(self.calendarViewHeight.constant , #function)
+        return self.calendarViewHeight.constant
     }
 }

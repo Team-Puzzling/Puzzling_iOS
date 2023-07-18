@@ -2,7 +2,7 @@
 //  TeamMemberTableViewCell.swift
 //  Puzzling
 //
-//  Created by Minjoo Kim on 2023/07/11.
+//  Created by Minjoo Kim on 2023/07/17.
 //
 
 import UIKit
@@ -61,7 +61,6 @@ final class TeamMemberTableViewCell: UITableViewCell {
             $0.width.equalTo(122)
             $0.trailing.equalToSuperview().inset(32)
             $0.top.bottom.equalToSuperview()
-            $0.height.equalTo(30)
         }
         
         divisionLabel.snp.makeConstraints {
