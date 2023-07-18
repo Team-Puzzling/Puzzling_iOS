@@ -10,6 +10,7 @@ import UIKit
 import FSCalendar
 import SnapKit
 import Then
+import Moya
 
 final class TeamMemberCalendarView: UIView {
     
@@ -23,9 +24,8 @@ final class TeamMemberCalendarView: UIView {
         $0.locale = Locale(identifier: "ko_kr")
         $0.timeZone = TimeZone(identifier: "KST")
     }
-    
-    private let teamMemberData = TeamMemberDataModel.dummy()
-    
+    private var teamMemberList: [TeamMemberModel] = [TeamMemberModel(reviewDay: "", reviewDate: "", reviewWriters: nil, nonReviewWriters: nil)]
+
     private let headerDateFormatter = DateFormatter().then {
         $0.dateFormat = "YYYY년 M월"
         $0.locale = Locale(identifier: "ko_kr")
@@ -39,6 +39,7 @@ final class TeamMemberCalendarView: UIView {
         setLayout()
         setDelegate()
         calendarViewHeight.constant = 350
+        setNotificationCenter()
     }
     
     required init?(coder: NSCoder) {
@@ -117,6 +118,20 @@ extension TeamMemberCalendarView {
             userInfo: ["userInfo": userInfo]
         )
     }
+    
+    private func setNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(getListNotification(_:)), name: Notification.Name("listNotification"), object: nil)
+        
+    }
+}
+
+extension TeamMemberCalendarView {
+    @objc
+    private func getListNotification(_ notification: Notification) {
+        let listNotification = notification.userInfo?["userInfo"]
+        teamMemberList = listNotification as! [TeamMemberModel]
+//        teamMemberTableView.reloadData()
+    }
 }
 
 extension TeamMemberCalendarView: FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
@@ -132,7 +147,7 @@ extension TeamMemberCalendarView: FSCalendarDelegate, FSCalendarDataSource, FSCa
     
     func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
         var boolData: Bool = false
-        teamMemberData.forEach {
+        teamMemberList.forEach {
             if(date == dateFormatter.date(from: $0.reviewDate)) {
                 boolData = true
             }
@@ -142,7 +157,7 @@ extension TeamMemberCalendarView: FSCalendarDelegate, FSCalendarDataSource, FSCa
     
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillDefaultColorFor date: Date) -> UIColor? {
         var colorData: UIColor = .clear
-        teamMemberData.forEach {
+        teamMemberList.forEach {
             if(date == dateFormatter.date(from: $0.reviewDate) && $0.reviewWriters != nil) {
                 colorData = .blue100
             }
@@ -152,7 +167,7 @@ extension TeamMemberCalendarView: FSCalendarDelegate, FSCalendarDataSource, FSCa
     
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
         var colorData: UIColor = .gray400
-        teamMemberData.forEach {
+        teamMemberList.forEach {
             if(date == dateFormatter.date(from: $0.reviewDate)) {
                 colorData = .black000
             }
