@@ -69,6 +69,11 @@
 		0935C7FF2A6664CA00790A1B /* TeamMemberModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0935C7FE2A6664CA00790A1B /* TeamMemberModel.swift */; };
 		0935C8012A66727200790A1B /* ProjectTeamService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0935C8002A66727200790A1B /* ProjectTeamService.swift */; };
 		0935C8032A66854800790A1B /* ProjectTeamResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0935C8022A66854800790A1B /* ProjectTeamResponse.swift */; };
+		0935C8202A675BFD00790A1B /* MyReviewListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0935C81F2A675BFD00790A1B /* MyReviewListCollectionViewCell.swift */; };
+		0935C8222A675C1B00790A1B /* ProjectNameCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0935C8212A675C1B00790A1B /* ProjectNameCollectionReusableView.swift */; };
+		0935C8242A675C3000790A1B /* ProjectNameTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0935C8232A675C3000790A1B /* ProjectNameTableViewCell.swift */; };
+		0935C8272A675C4900790A1B /* MyReviewListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0935C8262A675C4900790A1B /* MyReviewListViewController.swift */; };
+		0935C8292A675C5E00790A1B /* ProjectListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0935C8282A675C5E00790A1B /* ProjectListViewController.swift */; };
 		096755C62A5E970500A1E691 /* MyProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755C52A5E970500A1E691 /* MyProjectViewController.swift */; };
 		096755CB2A5E9AF500A1E691 /* MyProjectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755CA2A5E9AF500A1E691 /* MyProjectTableViewCell.swift */; };
 		096755E62A60700E00A1E691 /* MyProjectTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755E52A60700E00A1E691 /* MyProjectTableHeaderView.swift */; };
@@ -178,6 +183,11 @@
 		0935C7FE2A6664CA00790A1B /* TeamMemberModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberModel.swift; sourceTree = "<group>"; };
 		0935C8002A66727200790A1B /* ProjectTeamService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTeamService.swift; sourceTree = "<group>"; };
 		0935C8022A66854800790A1B /* ProjectTeamResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTeamResponse.swift; sourceTree = "<group>"; };
+		0935C81F2A675BFD00790A1B /* MyReviewListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReviewListCollectionViewCell.swift; sourceTree = "<group>"; };
+		0935C8212A675C1B00790A1B /* ProjectNameCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectNameCollectionReusableView.swift; sourceTree = "<group>"; };
+		0935C8232A675C3000790A1B /* ProjectNameTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectNameTableViewCell.swift; sourceTree = "<group>"; };
+		0935C8262A675C4900790A1B /* MyReviewListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReviewListViewController.swift; sourceTree = "<group>"; };
+		0935C8282A675C5E00790A1B /* ProjectListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListViewController.swift; sourceTree = "<group>"; };
 		096755BA2A5C61BE00A1E691 /* TeamMemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberTableViewCell.swift; sourceTree = "<group>"; };
 		096755BE2A5D9E1A00A1E691 /* TeamMemberCustomHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberCustomHeaderView.swift; sourceTree = "<group>"; };
 		096755C52A5E970500A1E691 /* MyProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProjectViewController.swift; sourceTree = "<group>"; };
@@ -409,6 +419,7 @@
 		03E6D20D2A5327BA00F4453C /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				0935C81D2A675BE600790A1B /* MyReview */,
 				255026DB2A656D1500531543 /* OnBoarding */,
 				096756072A61DB3800A1E691 /* ReviewDetail */,
 				096755EC2A6078AD00A1E691 /* TeamMember */,
@@ -599,6 +610,34 @@
 				0935C8022A66854800790A1B /* ProjectTeamResponse.swift */,
 			);
 			path = Team;
+			sourceTree = "<group>";
+		};
+		0935C81D2A675BE600790A1B /* MyReview */ = {
+			isa = PBXGroup;
+			children = (
+				0935C8252A675C4000790A1B /* ViewController */,
+				0935C81E2A675BF800790A1B /* View */,
+			);
+			path = MyReview;
+			sourceTree = "<group>";
+		};
+		0935C81E2A675BF800790A1B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0935C81F2A675BFD00790A1B /* MyReviewListCollectionViewCell.swift */,
+				0935C8212A675C1B00790A1B /* ProjectNameCollectionReusableView.swift */,
+				0935C8232A675C3000790A1B /* ProjectNameTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0935C8252A675C4000790A1B /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0935C8262A675C4900790A1B /* MyReviewListViewController.swift */,
+				0935C8282A675C5E00790A1B /* ProjectListViewController.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		096755C22A5E96DC00A1E691 /* MyProject */ = {
@@ -910,6 +949,7 @@
 				583117A32A5B71A00099B517 /* IndivisualDashboardViewController.swift in Sources */,
 				03E6D2722A53339000F4453C /* UIImageView+.swift in Sources */,
 				255026E32A656EF100531543 /* OnBoardingView.swift in Sources */,
+				0935C8222A675C1B00790A1B /* ProjectNameCollectionReusableView.swift in Sources */,
 				03E6D2002A5325F200F4453C /* Model.swift in Sources */,
 				58DC6A6B2A616A2E0039242C /* TeamDashboardRankView.swift in Sources */,
 				9B1CA97C2A62E12000CB81AC /* ReviewDetailDataModel.swift in Sources */,
@@ -953,6 +993,7 @@
 				0351AB482A6497C3006B0F4C /* CreateProfileViewController.swift in Sources */,
 				03E6D2262A532AAC00F4453C /* BaseView.swift in Sources */,
 				03ADF38F2A5E932A002CEDDC /* ProjectCycleCollectionViewCell.swift in Sources */,
+				0935C8272A675C4900790A1B /* MyReviewListViewController.swift in Sources */,
 				03E6D2282A532AB900F4453C /* BaseViewController.swift in Sources */,
 				096755EA2A60710100A1E691 /* MyProjectDataModel.swift in Sources */,
 				9B1CA9782A62ADFD00CB81AC /* ReviewDetailEmptyView.swift in Sources */,
@@ -960,6 +1001,7 @@
 				0967560F2A61E73700A1E691 /* ReviewDetailView.swift in Sources */,
 				096755CB2A5E9AF500A1E691 /* MyProjectTableViewCell.swift in Sources */,
 				03E6D25A2A5331ED00F4453C /* APIConst.swift in Sources */,
+				0935C8242A675C3000790A1B /* ProjectNameTableViewCell.swift in Sources */,
 				03ADF3892A5E7322002CEDDC /* StartDayView.swift in Sources */,
 				03ADF38D2A5E8A5F002CEDDC /* CreateProjectView.swift in Sources */,
 				09C3AD5C2A65717500CDE00F /* TeamMemberView.swift in Sources */,
@@ -968,6 +1010,7 @@
 				0351AB462A645BBF006B0F4C /* InvitationCodeViewController.swift in Sources */,
 				03E6D23E2A532C1800F4453C /* FontLevel.swift in Sources */,
 				03734EB82A59A0BD00B401D6 /* TabBarController.swift in Sources */,
+				0935C8292A675C5E00790A1B /* ProjectListViewController.swift in Sources */,
 				03E6D25E2A53321000F4453C /* NetworkLoggerPlugin.swift in Sources */,
 				03E6D2622A5332F700F4453C /* Encodable+.swift in Sources */,
 				588AA0752A5ECDF10017CB1E /* TeamDashboardModel.swift in Sources */,
@@ -980,6 +1023,7 @@
 				03E6D2072A5326DD00F4453C /* APIService.swift in Sources */,
 				03E6D27A2A5333C900F4453C /* UIImage+.swift in Sources */,
 				03734EBF2A59A26800B401D6 /* MyPageViewController.swift in Sources */,
+				0935C8202A675BFD00790A1B /* MyReviewListCollectionViewCell.swift in Sources */,
 				583117A82A5BE1490099B517 /* HomeTitleBarView.swift in Sources */,
 				03ADF3922A5E9534002CEDDC /* ProjectCycleModel.swift in Sources */,
 				0351AB422A6323A8006B0F4C /* CustomAlertView.swift in Sources */,
