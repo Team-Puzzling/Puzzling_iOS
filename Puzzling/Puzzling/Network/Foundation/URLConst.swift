@@ -57,4 +57,5 @@ public enum URLConst {
     static let endDate = "endDate"
     static let today = "today"
     static let invitationCode = "invitationCode"
+    static let bearer = "Bearer "
 }
