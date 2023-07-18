@@ -26,23 +26,20 @@ final class TeamMemberViewController: UIViewController {
     
     private func findData(date: String) -> TeamMemberModel? {
         var data = TeamMemberModel(reviewDay: "", reviewDate: "", reviewWriters: nil, nonReviewWriters: nil)
-//        temMemberList?.forEach {
-//            if($0.reviewDate == date){
-//                data = $0
-//            }
-//        }
+        dataList.forEach {
+            if($0.reviewDate == date){
+                data = $0
+            }
+        }
         return data
     }
     
     private let teamMemberCalenderView = TeamMemberCalendarView()
     private let teamMemberTableView = UITableView(frame: .zero, style: .grouped)
     
-//    private let teamMemberData = TeamMemberDataModel.dummy()
-    
     private let projectTeamProvider = MoyaProvider<ProjectTeamService>(plugins:[NetworkLoggerPlugin()])
     private var teamMemberList: [TeamMemberModel] = []
     
-//        private var invitationCodeModel: InvitationCodeModel?
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -52,7 +49,6 @@ final class TeamMemberViewController: UIViewController {
         setLayout()
         setRegister()
         setNotificationCenter()
-//        fetchTeamMember()
         fetchTeamMember()
     }
     
@@ -186,7 +182,6 @@ extension TeamMemberViewController {
         specificData = findData(date: selectedDate) ?? TeamMemberModel(reviewDay: "", reviewDate: "", reviewWriters: nil, nonReviewWriters: nil)
         teamMemberTableView.reloadData()
     }
-    
 }
 
 extension TeamMemberViewController: UITableViewDelegate {}
@@ -267,54 +262,24 @@ extension TeamMemberViewController {
             switch result {
             case .success(let result):
                 let status = result.statusCode
-                print(status, "😏😏😏😏😏")
+                print(status)
                 if status >= 200 && status < 300 {
                     do {
                         guard let data = try result.map(GeneralResponse<[ProjectTeamResponse]>.self).data else { return }
                         
-//                        let teamMemberCalendarView = TeamMemberCalendarView()
-//                        var dataList: [TeamMemberModel] = []
                         data.forEach {
                             self.dataList.append($0.convertToTeamMemberModel())
                         }
-                        print(self.dataList)
-//                        self.setNotificationCenter()
                         
                         self.sendDateNotification(model: self.dataList)
-//                        print(teamMemberCalendarView.teamMemberList)
-//                        self.teamMemberCalenderView.teamMemberList = data.
                         print("♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️")
                         
-//                        dataList.calendarView.reloadData()
                         
-//                        teamMemberView.modalPresentationStyle = .fullScreen
-                        
-//                        if let reviewDay = self.teamMemberList?.reviewDay {
-////                            createProfileVC.projectID = projectID
-//                            teamMemberCalendarView.reviewDay = reviewDay
-//                            print(reviewDay)
-//                        }
-//                        if let reviewDate = self.teamMemberList?.reviewDate {
-////                            createProfileVC.projectName = projectName
-//                            teamMemberCalendarView.reviewDate = reviewDate
-//                            print(reviewDate)
-//                        }
-//                        if let reviewWriters = self.teamMemberList?.reviewWriters{
-//                            teamMemberCalendarView.reviewWriters = reviewWriters
-//                            print(reviewWriters)
-//                        }
-//                        if let nonReviewWriters = self.teamMemberList?.nonReviewWriters{
-//                            teamMemberCalendarView.nonReviewWriters = nonReviewWriters
-//                            print(nonReviewWriters)
-//                        }
-//                        self.present(createProfileVC, animated: true)
                     } catch(let error) {
                         print(error.localizedDescription)
                     }
                 } else if status == 404 {
                     print("💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭")
-//                    self.textFieldWarningNotification(type: .invitationCode)
-                    //                    self.inputCompletionButton.setState(.notAllow)
                 }
             case .failure(let error):
                 print(error.localizedDescription)

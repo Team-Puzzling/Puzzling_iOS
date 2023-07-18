@@ -75,7 +75,6 @@ extension TeamMemberCalendarView {
             $0.scrollDirection = .horizontal
         }
         
-        
         headerLabel.do {
             $0.font = .fontGuide(.heading2_kor)
             $0.textColor = .black000
@@ -112,6 +111,7 @@ extension TeamMemberCalendarView {
     
     private func sendDateNotification(string: String) {
         let userInfo = string
+        print(userInfo, "이건 노티입니당")
         NotificationCenter.default.post(
             name: Notification.Name("dateNotification"),
             object: nil,
@@ -121,7 +121,6 @@ extension TeamMemberCalendarView {
     
     private func setNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(getListNotification(_:)), name: Notification.Name("listNotification"), object: nil)
-        
     }
 }
 
@@ -130,7 +129,6 @@ extension TeamMemberCalendarView {
     private func getListNotification(_ notification: Notification) {
         let listNotification = notification.userInfo?["userInfo"]
         teamMemberList = listNotification as! [TeamMemberModel]
-//        teamMemberTableView.reloadData()
     }
 }
 
@@ -180,14 +178,7 @@ extension TeamMemberCalendarView: FSCalendarDelegate, FSCalendarDataSource, FSCa
     }
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-//        sendDateBoolNotification(bool: true)
         sendDateNotification(string: dateFormatter.string(from: date))
-//        teamMemberData.forEach {
-//            let modelDate = dateFormatter.date(from: $0.reviewDate)
-//            if(date == modelDate && $0.reviewWriters == nil) {
-//                sendDateBoolNotification(bool: false)
-//            }
-//        }
     }
 }
 
