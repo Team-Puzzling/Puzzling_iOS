@@ -111,7 +111,6 @@ extension TeamMemberCalendarView {
     
     private func sendDateNotification(string: String) {
         let userInfo = string
-        print(userInfo, "이건 노티입니당")
         NotificationCenter.default.post(
             name: Notification.Name("dateNotification"),
             object: nil,
