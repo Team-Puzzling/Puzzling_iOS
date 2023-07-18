@@ -13,7 +13,8 @@ import Then
 class OnBoardingView: UIView {
 
     // MARK: - Properties
-    
+    weak var delegate: TappedDelegate?
+        
 
     // MARK: - UI Components
 
@@ -28,6 +29,7 @@ class OnBoardingView: UIView {
         super.init(frame: frame)
         setUI()
         setLayout()
+        setAddTarget()
     }
 
     required init?(coder: NSCoder) {
@@ -105,8 +107,19 @@ class OnBoardingView: UIView {
 
     // MARK: - Methods
 
-    private func setAddTarget() {}
-
+    private func setAddTarget() {
+        kakaoLogin.addTarget(self, action: #selector(kakaoLoginButtonTapped), for: .touchUpInside)
+    }
+    
+    func btnAction() {
+            print("SecondViewController btn Action")
+            
+            // 첫 번째 뷰에서 선언한 함수를 통해 데이터 전달
+            delegate?.tapAction(value: "delegate practice")
+        }
+    
     // MARK: - @objc Methods
-
+    @objc func kakaoLoginButtonTapped() {
+        btnAction()
+    }
 }

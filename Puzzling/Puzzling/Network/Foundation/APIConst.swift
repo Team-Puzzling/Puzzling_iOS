@@ -32,7 +32,7 @@ enum APIConstants {
     static var headerWithDeviceToken: [String: String] {
         [
             NetworkHeaderKey.contentType.rawValue: APIConstants.applicationJSON,
-            NetworkHeaderKey.deviceToken.rawValue: APIConstants.deviceToken
+            NetworkHeaderKey.authorization.rawValue: URLConst.bearer + APIConstants.accessToken
         ]
     }
     
