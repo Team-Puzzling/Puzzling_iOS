@@ -39,6 +39,12 @@ final class ReviewDetailView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func removeFromSuperview() {
+        super.removeFromSuperview()
+        print(className)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("dateNotification"), object: nil)
+    }
+    
     deinit {
         print(className)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name("dateNotification"), object: nil)
