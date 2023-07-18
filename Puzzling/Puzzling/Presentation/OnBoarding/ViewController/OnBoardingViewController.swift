@@ -18,12 +18,11 @@ import KakaoSDKUser
 import Security
 
 protocol TappedDelegate: AnyObject {
-    func tapAction(value: String)
+    func tapAction()
 }
 
 extension OnBoardingViewContoller: TappedDelegate {
-    func tapAction(value: String) {
-        print("receive data \(value)")
+    func tapAction() {
         kakaoLogin()
     }
 }
@@ -145,7 +144,9 @@ extension OnBoardingViewContoller {
                 let status = result.statusCode
                 if status >= 200 && status < 300 {
                     do {
-                        print("?????????\(result.data)")
+                        print("💙💙💙💙💙💙💙💙💙💙")
+                        print("?????????\(result)")
+                        print("?????????\(try result.map(GeneralResponse<UserResponse>.self))")
                         guard let data = try result.map(GeneralResponse<UserResponse>.self).data else { return }
                         self.userModel = data.convertoToUserModel()
                         print("🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰\(self.userModel)🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰")

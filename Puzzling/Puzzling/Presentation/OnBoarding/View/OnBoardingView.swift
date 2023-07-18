@@ -2,72 +2,70 @@
 //  OnBoardingView.swift
 //  Puzzling
 //
-//  Created by 천성우 on 2023/07/17.
+//  Created by Minjoo Kim on 2023/07/19.
 //
 
 import UIKit
 
 import SnapKit
 import Then
+import AuthenticationServices
 
 class OnBoardingView: UIView {
-
-    // MARK: - Properties
+    
     weak var delegate: TappedDelegate?
-        
-
+    
     // MARK: - UI Components
-
-    private let titleImage = UIImageView()
-    private let titleLogo = UIImageView()
-    private let subtitleLabel = UILabel()
-    private let kakaoLogin = UIButton()
+    
+    private let puzzlingImageView = UIImageView()
+    private let logoImageView = UIImageView()
+    private let descriptionLabel = UILabel()
+    private let appleLoginButton = ASAuthorizationAppleIDButton()
+    private let kakaoLoginButton = UIButton()
     
     // MARK: - Initializer
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUI()
         setLayout()
         setAddTarget()
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
 
-    // MARK: - UI Components Property
+extension OnBoardingView {
 
     private func setUI(){
         
         self.backgroundColor = .white000
 
-        titleImage.do {
+        puzzlingImageView.do {
             $0.image = Image.puzzlingTitle
         }
         
-        titleLogo.do {
+        logoImageView.do {
             $0.image = Image.invitationCodeLogo
         }
         
-        subtitleLabel.do {
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.lineSpacing = 10  // 원하는 행간격을 설정합니다.
-            paragraphStyle.alignment = .center  // 텍스트를 중앙 정렬합니다.
-            
-            let attributedText = NSAttributedString(string: "꾸준한 회고를 통해\n나만의 퍼즐을 완성하고\n팀과 함께 성장해보세요!",
-                                                     attributes: [.font: UIFont.boldSystemFont(ofSize: 20),
-                                                                  .foregroundColor: UIColor.gray500,
-                                                                  .paragraphStyle: paragraphStyle])
-            
-            $0.attributedText = attributedText
+        descriptionLabel.do {
+            $0.text = "꾸준한 회고를 통해\n나만의 퍼즐을 완성하고\n팀과 함께 성장해보세요!"
+            $0.font = .fontGuide(.heading3_kor)
+            $0.textColor = .gray500
             $0.numberOfLines = 3
+            $0.lineHeightMultiple(spacing: 1.25)
         }
-
-
         
-        kakaoLogin.do {
+        appleLoginButton.do {
+            $0.cornerRadius = 4
+        }
+        
+        kakaoLoginButton.do {
             $0.setImage(Image.kakaoLogin, for: .normal)
+            $0.imageView?.contentMode = .scaleAspectFill
         }
     }
 
@@ -76,31 +74,38 @@ class OnBoardingView: UIView {
 
     private func setLayout() {
         
-        addSubviews(titleImage, titleLogo, subtitleLabel, kakaoLogin)
+        addSubviews(puzzlingImageView, logoImageView, descriptionLabel, appleLoginButton, kakaoLoginButton)
         
-        titleImage.snp.makeConstraints {
+        puzzlingImageView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(76)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(85)
         }
         
-        titleLogo.snp.makeConstraints {
-            $0.top.equalTo(titleImage.snp.bottom).inset(-110)
+        logoImageView.snp.makeConstraints {
+            $0.top.equalTo(puzzlingImageView.snp.bottom).offset(110)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(120)
             $0.height.equalTo(148)
         }
         
-        subtitleLabel.snp.makeConstraints {
-            $0.top.equalTo(titleLogo.snp.bottom).inset(-56)
+        descriptionLabel.snp.makeConstraints {
+            $0.top.equalTo(logoImageView.snp.bottom).offset(56)
             $0.centerX.equalToSuperview()
         }
         
-        kakaoLogin.snp.makeConstraints {
-            $0.top.equalTo(subtitleLabel.snp.bottom).inset(-84)
+        appleLoginButton.snp.makeConstraints {
+            $0.top.equalTo(descriptionLabel.snp.bottom).offset(84)
             $0.centerX.equalToSuperview()
             $0.leading.trailing.equalToSuperview().inset(16)
-            $0.height.equalTo(55)
+            $0.height.equalTo(50)
+        }
+        
+        kakaoLoginButton.snp.makeConstraints {
+            $0.top.equalTo(appleLoginButton.snp.bottom).offset(10)
+            $0.centerX.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(16)
+            $0.height.equalTo(50)
         }
         
     }
@@ -108,18 +113,15 @@ class OnBoardingView: UIView {
     // MARK: - Methods
 
     private func setAddTarget() {
-        kakaoLogin.addTarget(self, action: #selector(kakaoLoginButtonTapped), for: .touchUpInside)
+        kakaoLoginButton.addTarget(self, action: #selector(kakaoLoginButtonTapped), for: .touchUpInside)
     }
     
-    func btnAction() {
-            print("SecondViewController btn Action")
-            
-            // 첫 번째 뷰에서 선언한 함수를 통해 데이터 전달
-            delegate?.tapAction(value: "delegate practice")
+    func buttonAction() {
+            delegate?.tapAction()
         }
     
     // MARK: - @objc Methods
     @objc func kakaoLoginButtonTapped() {
-        btnAction()
+        buttonAction()
     }
 }

@@ -78,6 +78,7 @@
 		0935C8162A67059E00790A1B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0935C8152A67059E00790A1B /* User.swift */; };
 		0935C8182A6705D100790A1B /* PostUserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0935C8172A6705D100790A1B /* PostUserResponse.swift */; };
 		0935C81A2A6706CD00790A1B /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0935C8192A6706CD00790A1B /* Auth.swift */; };
+		0935C81C2A67451300790A1B /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0935C81B2A67451300790A1B /* OnBoardingView.swift */; };
 		096755C62A5E970500A1E691 /* MyProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755C52A5E970500A1E691 /* MyProjectViewController.swift */; };
 		096755CB2A5E9AF500A1E691 /* MyProjectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755CA2A5E9AF500A1E691 /* MyProjectTableViewCell.swift */; };
 		096755E62A60700E00A1E691 /* MyProjectTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755E52A60700E00A1E691 /* MyProjectTableHeaderView.swift */; };
@@ -100,7 +101,6 @@
 		09C3AD5E2A65719100CDE00F /* TeamMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C3AD5D2A65719100CDE00F /* TeamMemberViewController.swift */; };
 		251C00D52A5D205300F6838C /* CustomRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251C00D42A5D205300F6838C /* CustomRadioButton.swift */; };
 		255026DF2A656D8100531543 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255026DE2A656D8100531543 /* OnBoardingViewController.swift */; };
-		255026E32A656EF100531543 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255026E22A656EF100531543 /* OnBoardingView.swift */; };
 		255026E52A657FB000531543 /* EnterProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255026E42A657FB000531543 /* EnterProjectView.swift */; };
 		583117A12A5B71920099B517 /* TeamDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583117A02A5B71920099B517 /* TeamDashboardViewController.swift */; };
 		583117A32A5B71A00099B517 /* IndivisualDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583117A22A5B71A00099B517 /* IndivisualDashboardViewController.swift */; };
@@ -195,6 +195,7 @@
 		0935C8152A67059E00790A1B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0935C8172A6705D100790A1B /* PostUserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostUserResponse.swift; sourceTree = "<group>"; };
 		0935C8192A6706CD00790A1B /* Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Auth.swift; sourceTree = "<group>"; };
+		0935C81B2A67451300790A1B /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
 		096755BA2A5C61BE00A1E691 /* TeamMemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberTableViewCell.swift; sourceTree = "<group>"; };
 		096755BE2A5D9E1A00A1E691 /* TeamMemberCustomHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberCustomHeaderView.swift; sourceTree = "<group>"; };
 		096755C52A5E970500A1E691 /* MyProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProjectViewController.swift; sourceTree = "<group>"; };
@@ -219,7 +220,6 @@
 		251C00DC2A5F114800F6838C /* FiveFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveFView.swift; sourceTree = "<group>"; };
 		251C00E82A60343900F6838C /* testViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testViewController.swift; sourceTree = "<group>"; };
 		255026DE2A656D8100531543 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
-		255026E22A656EF100531543 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
 		255026E42A657FB000531543 /* EnterProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterProjectView.swift; sourceTree = "<group>"; };
 		25F972632A61A839001CE10C /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
 		583117A02A5B71920099B517 /* TeamDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDashboardViewController.swift; sourceTree = "<group>"; };
@@ -759,8 +759,8 @@
 		255026DC2A656D3200531543 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				255026E22A656EF100531543 /* OnBoardingView.swift */,
 				255026E42A657FB000531543 /* EnterProjectView.swift */,
+				0935C81B2A67451300790A1B /* OnBoardingView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -957,7 +957,6 @@
 				03E6D2742A5333A500F4453C /* UILabel+.swift in Sources */,
 				583117A32A5B71A00099B517 /* IndivisualDashboardViewController.swift in Sources */,
 				03E6D2722A53339000F4453C /* UIImageView+.swift in Sources */,
-				255026E32A656EF100531543 /* OnBoardingView.swift in Sources */,
 				03E6D2002A5325F200F4453C /* Model.swift in Sources */,
 				58DC6A6B2A616A2E0039242C /* TeamDashboardRankView.swift in Sources */,
 				9B1CA97C2A62E12000CB81AC /* ReviewDetailDataModel.swift in Sources */,
@@ -1000,6 +999,7 @@
 				255026E52A657FB000531543 /* EnterProjectView.swift in Sources */,
 				03E6D2762A5333B100F4453C /* UIButton+.swift in Sources */,
 				03E6D1E72A53219600F4453C /* SceneDelegate.swift in Sources */,
+				0935C81C2A67451300790A1B /* OnBoardingView.swift in Sources */,
 				0935C80A2A66F97F00790A1B /* PostAuthRequest.swift in Sources */,
 				0935C80C2A66FA8F00790A1B /* UserResponse.swift in Sources */,
 				0351AB482A6497C3006B0F4C /* CreateProfileViewController.swift in Sources */,
