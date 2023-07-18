@@ -11,7 +11,7 @@ protocol ProjectNetworkingProtocol: AnyObject {
     func NOTNAMEDPROPERLY()
 }
 
-final class ProjectService: ProjectNetworkingProtocol {
+final class ProjectServiceTemporary: ProjectNetworkingProtocol {
     
     private var dummyData: [TeamRankModel] = [TeamRankModel(userName: "aa", role: "iOS Dev", pieces: 17), TeamRankModel(userName: "bb", role: "PM", pieces: 12), TeamRankModel(userName: "cc", role: "AOS Dev", pieces: 14), TeamRankModel(userName: "dd", role: "Server-T", pieces: 9), TeamRankModel(userName: "ee", role: "AOS Dev", pieces: 40), TeamRankModel(userName: "ff", role: "iOS Dev", pieces: 22), TeamRankModel(userName: "gg", role: "UXUI Designer", pieces: 14)]
     
@@ -24,7 +24,7 @@ final class ProjectService: ProjectNetworkingProtocol {
     }
 }
 
-extension ProjectService {
+extension ProjectServiceTemporary {
     func getSortedData() -> [TeamRankModel] {
         let sortedArray = self.dummyData.sorted {
             ($1.pieces, $0.userName) < ($0.pieces, $1.userName)
@@ -54,7 +54,7 @@ extension ProjectService {
     }
 }
 
-extension ProjectService {
+extension ProjectServiceTemporary {
     func getPuzzleData(type: DashboardType) -> [ModelProtocol] {
         switch type {
         case .indivisual:

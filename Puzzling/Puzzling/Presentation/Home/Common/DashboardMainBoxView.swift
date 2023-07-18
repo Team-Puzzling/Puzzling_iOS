@@ -49,7 +49,7 @@ final class DashboardMainBoxView: UIView {
     
     private let puzzleViewHeight = UIScreen.main.bounds.height / 7.12
     
-    private lazy var projectServiceData = ProjectService().getPuzzleData(type: puzzleBoardType)
+    private lazy var projectServiceData = ProjectServiceTemporary().getPuzzleData(type: puzzleBoardType)
     
     private let userNameLabel = UILabel()
     private let piecesCountLabel = UILabel()

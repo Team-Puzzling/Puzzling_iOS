@@ -27,7 +27,7 @@ final class TeamDashboardViewController: UIViewController {
         return height
     }
     
-    private let projectService = ProjectService()
+    private let projectService = ProjectServiceTemporary()
     private lazy var sortedData: [TeamRankModel] = projectService.getSortedData()
     
     private var scrollViewHeight: CGFloat {

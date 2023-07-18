@@ -96,7 +96,7 @@
 		583117A82A5BE1490099B517 /* HomeTitleBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583117A72A5BE1490099B517 /* HomeTitleBarView.swift */; };
 		583117AA2A5BE2D90099B517 /* HomeSegmentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583117A92A5BE2D90099B517 /* HomeSegmentedView.swift */; };
 		583BA7C52A62A7220030CF14 /* TeamRankTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583BA7C42A62A7220030CF14 /* TeamRankTableViewCell.swift */; };
-		583BA7C72A62FFB00030CF14 /* ProjectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583BA7C62A62FFB00030CF14 /* ProjectService.swift */; };
+		583BA7C72A62FFB00030CF14 /* ProjectServiceTemporary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583BA7C62A62FFB00030CF14 /* ProjectServiceTemporary.swift */; };
 		588AA06C2A5E77EF0017CB1E /* ActionPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588AA06B2A5E77EF0017CB1E /* ActionPlanView.swift */; };
 		588AA06F2A5E7F820017CB1E /* ActionPlanCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588AA06E2A5E7F820017CB1E /* ActionPlanCollectionViewCell.swift */; };
 		588AA0732A5ECDE70017CB1E /* IndivisualDashboardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588AA0722A5ECDE70017CB1E /* IndivisualDashboardModel.swift */; };
@@ -136,7 +136,6 @@
 		03ADF3912A5E9534002CEDDC /* ProjectCycleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCycleModel.swift; sourceTree = "<group>"; };
 		03ADF3932A5EA4DB002CEDDC /* CheckButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckButton.swift; sourceTree = "<group>"; };
 		03B004A82A556C7400E71CA7 /* UIWindow+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+.swift"; sourceTree = "<group>"; };
-		03E6D1E12A53219600F4453C /* Puzzling.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = Puzzling.app; path = "/Users/kyuboa.shim/Desktop/ThePuzzlings/ProjectFile/Puzzling_iOS/Puzzling/build/Debug-iphoneos/Puzzling.app"; sourceTree = "<absolute>"; };
 		03E6D1E42A53219600F4453C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		03E6D1E62A53219600F4453C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		03E6D1E82A53219600F4453C /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -197,12 +196,13 @@
 		255026DE2A656D8100531543 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
 		255026E22A656EF100531543 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
 		255026E42A657FB000531543 /* EnterProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterProjectView.swift; sourceTree = "<group>"; };
+		580B537E2A665B2A009B31B0 /* Puzzling.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Puzzling.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		583117A02A5B71920099B517 /* TeamDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDashboardViewController.swift; sourceTree = "<group>"; };
 		583117A22A5B71A00099B517 /* IndivisualDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndivisualDashboardViewController.swift; sourceTree = "<group>"; };
 		583117A72A5BE1490099B517 /* HomeTitleBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTitleBarView.swift; sourceTree = "<group>"; };
 		583117A92A5BE2D90099B517 /* HomeSegmentedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSegmentedView.swift; sourceTree = "<group>"; };
 		583BA7C42A62A7220030CF14 /* TeamRankTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamRankTableViewCell.swift; sourceTree = "<group>"; };
-		583BA7C62A62FFB00030CF14 /* ProjectService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectService.swift; sourceTree = "<group>"; };
+		583BA7C62A62FFB00030CF14 /* ProjectServiceTemporary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectServiceTemporary.swift; sourceTree = "<group>"; };
 		588AA06B2A5E77EF0017CB1E /* ActionPlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionPlanView.swift; sourceTree = "<group>"; };
 		588AA06E2A5E7F820017CB1E /* ActionPlanCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionPlanCollectionViewCell.swift; sourceTree = "<group>"; };
 		588AA0722A5ECDE70017CB1E /* IndivisualDashboardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndivisualDashboardModel.swift; sourceTree = "<group>"; };
@@ -305,6 +305,7 @@
 			isa = PBXGroup;
 			children = (
 				03E6D1E32A53219600F4453C /* Puzzling */,
+				580B537E2A665B2A009B31B0 /* Puzzling.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -380,7 +381,7 @@
 			isa = PBXGroup;
 			children = (
 				03E6D2062A5326DD00F4453C /* APIService.swift */,
-				583BA7C62A62FFB00030CF14 /* ProjectService.swift */,
+				583BA7C62A62FFB00030CF14 /* ProjectServiceTemporary.swift */,
 			);
 			path = APIService;
 			sourceTree = "<group>";
@@ -823,7 +824,7 @@
 				03E6D2572A53303800F4453C /* KakaoSDK */,
 			);
 			productName = "Puzzling-iOS";
-			productReference = 03E6D1E12A53219600F4453C /* Puzzling.app */;
+			productReference = 580B537E2A665B2A009B31B0 /* Puzzling.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -922,7 +923,7 @@
 				03B004A92A556C7400E71CA7 /* UIWindow+.swift in Sources */,
 				03E6D2442A532C6300F4453C /* Literals.swift in Sources */,
 				03E6D2682A53334A00F4453C /* UITextField+.swift in Sources */,
-				583BA7C72A62FFB00030CF14 /* ProjectService.swift in Sources */,
+				583BA7C72A62FFB00030CF14 /* ProjectServiceTemporary.swift in Sources */,
 				03E6D26E2A53337600F4453C /* UICollectionView+.swift in Sources */,
 				0967560D2A61E08C00A1E691 /* ProjectCalendarView.swift in Sources */,
 				03FFD2CE2A5B1A8B00A3B70D /* AppleSDGothicNeoType.swift in Sources */,

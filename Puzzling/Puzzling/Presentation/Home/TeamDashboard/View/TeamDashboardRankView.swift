@@ -16,7 +16,7 @@ final class TeamDashboardRankView: UIView {
     private var rankView = TeamRankPodiumView()
     private let rankTableView = UITableView()
     
-    private var projectService = ProjectService()
+    private var projectService = ProjectServiceTemporary()
     private lazy var prizeTableData: [TeamRankTopThreeModel] = projectService.getTopThreeData()
     private lazy var orderedTableData: [TeamRankModel] = projectService.getSortedData()
     
