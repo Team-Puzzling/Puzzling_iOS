@@ -63,6 +63,8 @@ final class TeamMemberViewController: UIViewController {
     }
     
     deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("dateNotification"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("listNotification"), object: nil)
         print(className)
     }
 }

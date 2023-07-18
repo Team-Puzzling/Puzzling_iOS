@@ -81,7 +81,6 @@
 		096755C62A5E970500A1E691 /* MyProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755C52A5E970500A1E691 /* MyProjectViewController.swift */; };
 		096755CB2A5E9AF500A1E691 /* MyProjectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755CA2A5E9AF500A1E691 /* MyProjectTableViewCell.swift */; };
 		096755E62A60700E00A1E691 /* MyProjectTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755E52A60700E00A1E691 /* MyProjectTableHeaderView.swift */; };
-		096755E82A6070DC00A1E691 /* TeamMemberDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755E72A6070DC00A1E691 /* TeamMemberDataModel.swift */; };
 		096755EA2A60710100A1E691 /* MyProjectDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755E92A60710100A1E691 /* MyProjectDataModel.swift */; };
 		096755FA2A607A7D00A1E691 /* MyReviewListDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755F92A607A7D00A1E691 /* MyReviewListDataModel.swift */; };
 		096755FB2A607C5300A1E691 /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03734EB42A599FDB00B401D6 /* Image.xcassets */; };
@@ -201,7 +200,6 @@
 		096755C52A5E970500A1E691 /* MyProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProjectViewController.swift; sourceTree = "<group>"; };
 		096755CA2A5E9AF500A1E691 /* MyProjectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProjectTableViewCell.swift; sourceTree = "<group>"; };
 		096755E52A60700E00A1E691 /* MyProjectTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProjectTableHeaderView.swift; sourceTree = "<group>"; };
-		096755E72A6070DC00A1E691 /* TeamMemberDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberDataModel.swift; sourceTree = "<group>"; };
 		096755E92A60710100A1E691 /* MyProjectDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProjectDataModel.swift; sourceTree = "<group>"; };
 		096755F92A607A7D00A1E691 /* MyReviewListDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReviewListDataModel.swift; sourceTree = "<group>"; };
 		096756082A61DB5700A1E691 /* ReviewDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailViewController.swift; sourceTree = "<group>"; };
@@ -378,7 +376,6 @@
 				588AA0722A5ECDE70017CB1E /* IndivisualDashboardModel.swift */,
 				588AA0742A5ECDF10017CB1E /* TeamDashboardModel.swift */,
 				9B1CA97B2A62E12000CB81AC /* ReviewDetailDataModel.swift */,
-				096755E72A6070DC00A1E691 /* TeamMemberDataModel.swift */,
 				096755E92A60710100A1E691 /* MyProjectDataModel.swift */,
 				096755F92A607A7D00A1E691 /* MyReviewListDataModel.swift */,
 			);
@@ -986,7 +983,6 @@
 				03E6D1E52A53219600F4453C /* AppDelegate.swift in Sources */,
 				03E6D2602A53322300F4453C /* URLConst.swift in Sources */,
 				096756092A61DB5700A1E691 /* ReviewDetailViewController.swift in Sources */,
-				096755E82A6070DC00A1E691 /* TeamMemberDataModel.swift in Sources */,
 				03B004A92A556C7400E71CA7 /* UIWindow+.swift in Sources */,
 				03E6D2442A532C6300F4453C /* Literals.swift in Sources */,
 				03E6D2682A53334A00F4453C /* UITextField+.swift in Sources */,

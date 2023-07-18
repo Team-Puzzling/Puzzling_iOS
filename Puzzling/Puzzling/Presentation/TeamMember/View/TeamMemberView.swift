@@ -20,11 +20,7 @@ final class TeamMemberCalendarView: UIView {
     private lazy var headerLabel = UILabel()
     private lazy var testLabel = UILabel()
     
-    private let dateFormatter = DateFormatter().then {
-        $0.dateFormat = "yyyy-MM-dd"
-        $0.locale = Locale(identifier: "ko_kr")
-        $0.timeZone = TimeZone(identifier: "KST")
-    }
+    private let dateFormatter = DateFormatter()
     private var teamMemberList: [TeamMemberModel] = [TeamMemberModel(reviewDay: "", reviewDate: "", reviewWriters: nil, nonReviewWriters: nil)]
 
     private let headerDateFormatter = DateFormatter().then {
@@ -39,12 +35,18 @@ final class TeamMemberCalendarView: UIView {
         setUI()
         setLayout()
         setDelegate()
-        calendarViewHeight.constant = 350
+        setDateFormatter()
         setNotificationCenter()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("listNotification"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("dateNotification"), object: nil)
+        print(className)
     }
 }
 
@@ -81,6 +83,8 @@ extension TeamMemberCalendarView {
             $0.textColor = .black000
             $0.text = self.headerDateFormatter.string(from: Date())
         }
+        
+        calendarViewHeight.constant = 350
     }
     
     private func setLayout() {
@@ -122,6 +126,14 @@ extension TeamMemberCalendarView {
     private func setNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(getListNotification(_:)), name: Notification.Name("listNotification"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(getDateNotification(_:)), name: Notification.Name("dateNotification"), object: nil)
+    }
+    
+    private func setDateFormatter(){
+        dateFormatter.do {
+            $0.dateFormat = "yyyy-MM-dd"
+            $0.locale = Locale(identifier: "ko_kr")
+            $0.timeZone = TimeZone(identifier: "KST")
+        }
     }
 }
 

@@ -7,19 +7,9 @@
 
 import Foundation
 
-struct TeamMemberModel: Codable, TeamResponseProtocol {
+struct TeamMemberModel: Codable {
     let reviewDay: String
     let reviewDate: String
     let reviewWriters: [ReviewWriters]?
     let nonReviewWriters: [NonReviewWriters]?
 }
-//
-//struct ReviewWriters {
-//    let memberNickname: String
-//    let memberRole: String
-//}
-//
-//struct NonReviewWriters {
-//    let memberNickname: String
-//    let memberRole: String
-//}
