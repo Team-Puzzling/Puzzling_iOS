@@ -330,10 +330,10 @@ extension CreateProjectViewController {
                 let status = result.statusCode
                 if status >= 200 && status < 300 {
                     do {
-                        self.projectRegister()
                         guard let data = try result.map(GeneralResponse<CreateProjectResponse>.self).data else { return }
                         self.createProjectModel = data.convertToCreateProjectModel()
-                        let userInfo = data.projectCode
+                        self.projectRegister()
+                        let userInfo = self.createProjectModel?.projectCode ?? ""
                         NotificationCenter.default.post(
                             name: Notification.Name("invitationCodeNotification"),
                             object: nil,
