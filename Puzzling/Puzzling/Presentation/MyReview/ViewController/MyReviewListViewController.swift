@@ -96,7 +96,12 @@ extension MyReviewListViewController {
     
     private func reloadHeaderView(text: String) {
         guard let headerView = myReviewListCollectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: IndexPath(item: 0, section: 0)) as? ProjectNameCollecionReusableView else { return }
+        print(#function, text)
         headerView.setDataBind(projectName: text)
+    }
+    
+    private func setNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(getProjectNotification(_:)), name: Notification.Name("projectNotification"), object: nil)
     }
 }
 
@@ -104,6 +109,14 @@ extension MyReviewListViewController {
     @objc
     private func backButtonTapped() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc
+    private func getProjectNotification(_ notification: Notification) {
+        if let notification = notification.userInfo?["userInfo"] as? String {
+            currentProject = notification
+            reloadHeaderView(text: currentProject)
+        }
     }
 }
 

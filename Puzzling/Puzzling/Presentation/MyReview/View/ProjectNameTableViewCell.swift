@@ -17,6 +17,8 @@ final class ProjectNameTableViewCell: UITableViewCell {
             nameLabel.text = name
         }
     }
+    private var id: Int = 0
+    
     private let nameLabel = UILabel()
     private let divisionLabel = UILabel()
     private let pointImageView = UIImageView()
@@ -29,6 +31,12 @@ final class ProjectNameTableViewCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    override func prepareForReuse() {
+        nameLabel.text = ""
+        contentView.backgroundColor = .background050
+        pointImageView.isHidden = true
     }
 }
 
@@ -78,7 +86,8 @@ extension ProjectNameTableViewCell {
 }
 
 extension ProjectNameTableViewCell {
-    func setDataBind(name: String) {
+    func setDataBind(id: Int, name: String) {
+        self.id = id
         self.name = name
     }
     
