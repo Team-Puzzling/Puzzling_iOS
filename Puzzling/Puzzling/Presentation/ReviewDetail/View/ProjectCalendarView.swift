@@ -18,19 +18,11 @@ final class ProjectCalendarView: UIView {
     private lazy var headerLabel = UILabel()
     private lazy var testLabel = UILabel()
     
-    private let dateFormatter = DateFormatter().then {
-        $0.dateFormat = "yyyy-MM-dd"
-        $0.locale = Locale(identifier: "ko_kr")
-        $0.timeZone = TimeZone(identifier: "KST")
-    }
+    private let dateFormatter = DateFormatter()
     
     private let reviewDetailDataModel = ReviewDetailDataModel.dummy()
     
-    private let headerDateFormatter = DateFormatter().then {
-        $0.dateFormat = "YYYY년 M월"
-        $0.locale = Locale(identifier: "ko_kr")
-        $0.timeZone = TimeZone(identifier: "KST")
-    }
+    private let headerDateFormatter = DateFormatter()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,7 +30,7 @@ final class ProjectCalendarView: UIView {
         setUI()
         setLayout()
         setDelegate()
-        calendarViewHeight.constant = 350
+        setDateFormatter()
     }
     
     required init?(coder: NSCoder) {
@@ -50,10 +42,13 @@ extension ProjectCalendarView {
     private func setUI() {
         calendarView.do {
             $0.select(Date())
+            print($0.formatter.dateFormat)
+//            $0.formatter.timeZone = TimeZone(identifier: "KST")
+            $0.formatter.locale = Locale(identifier: "ko_KR")
             
             $0.locale = Locale(identifier: "ko_KR")
             $0.scope = .week
-            
+            $0.firstWeekday = 2
             $0.appearance.selectionColor = .blue400
             
             $0.weekdayHeight = 20
@@ -74,12 +69,12 @@ extension ProjectCalendarView {
             $0.scrollDirection = .horizontal
         }
         
-        
         headerLabel.do {
             $0.font = .fontGuide(.heading2_kor)
             $0.textColor = .black000
             $0.text = self.headerDateFormatter.string(from: Date())
         }
+        calendarViewHeight.constant = 350
     }
     
     private func setLayout() {
@@ -116,6 +111,20 @@ extension ProjectCalendarView {
             object: nil,
             userInfo: ["userInfo": userInfo]
         )
+    }
+    
+    private func setDateFormatter() {
+        headerDateFormatter.do {
+            $0.dateFormat = "YYYY년 M월"
+            $0.locale = Locale(identifier: "ko_KR")
+            $0.timeZone = TimeZone(identifier: "KST")
+        }
+        
+        dateFormatter.do {
+            $0.dateFormat = "yyyy-MM-dd"
+            $0.locale = Locale(identifier: "ko_KR")
+            $0.timeZone = TimeZone(identifier: "KST")
+        }
     }
 }
 
@@ -166,26 +175,26 @@ extension ProjectCalendarView: FSCalendarDelegate, FSCalendarDataSource, FSCalen
     }
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        sendDateBoolNotification(bool: true)
         sendDateNotification(string: dateFormatter.string(from: date))
+        var boolData: Bool = true
         reviewDetailDataModel.forEach {
+            print($0.reviewDate)
             let modelDate = dateFormatter.date(from: $0.reviewDate)
+            print(modelDate)
+            print("\(String(describing: modelDate))??qqqq????")
             if(date == modelDate && $0.reviewId == nil) {
-                sendDateBoolNotification(bool: false)
+                boolData = false
+                return
             }
         }
+        print("dpdpdpdp")
+        sendDateBoolNotification(bool: boolData)
     }
 }
 
 extension ProjectCalendarView {
-    func setDataBind() {
-        calendarView.setScope(.month, animated: true)
-        headerDateFormatter.dateFormat = "YYYY년 M월"
-        headerLabel.text = headerDateFormatter.string(from: calendarView.currentPage)
-    }
     
     func getCalendarViewHeight() -> CGFloat{
-        print(self.calendarViewHeight.constant , #function)
         return self.calendarViewHeight.constant
     }
 }

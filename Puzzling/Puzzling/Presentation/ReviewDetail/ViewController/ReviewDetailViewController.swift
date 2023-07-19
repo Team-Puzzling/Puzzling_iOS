@@ -16,7 +16,7 @@ extension ReviewDetailViewController {
     enum reviewDetail: CaseIterable {
         case review, empty
         
-        var reviewDetailViewss: UIView {
+        var reviewDetailViewStatus: UIView {
             switch self {
             case .review:
                 return ReviewDetailView()
@@ -35,8 +35,7 @@ final class ReviewDetailViewController: UIViewController {
     
     func setReviewDetailView(status: reviewDetail) {
         print(#function, status)
-//        reviewDetailView = nil
-        reviewDetailView = status.reviewDetailViewss
+        reviewDetailView = status.reviewDetailViewStatus
         
     }
     
@@ -86,8 +85,6 @@ extension ReviewDetailViewController {
             $0.horizontalEdges.equalToSuperview().inset(16)
             $0.height.equalTo(projectCalenderView.getCalendarViewHeight())
         }
-        
-        
     }
 
     private func setNavigationBar() {
@@ -153,7 +150,6 @@ extension ReviewDetailViewController {
             }
             else { setReviewDetailView(status: .empty) }
         }
-//        reviewDetailView.backgroundColor = .white00
         layout()
     }
 }

@@ -11,19 +11,18 @@ import SnapKit
 import Then
 
 final class ReviewDetailView: UIView {
-    var ddddd = 0
     private let reviewDetailData = ReviewDetailDataModel.dummy()
     private var selectedDate: String = ""
     
-//    func findMyData() -> ReviewDetailDataModel {
-//        var data: ReviewDetailDataModel
-//        reviewDetailData.forEach {
-//            if($0.reviewDate == selectedDate) {
-//                data = $0
-//            }
-//        }
-//        return data
-//    }
+    private func findMyData() -> ReviewDetailDataModel {
+        var data: ReviewDetailDataModel = ReviewDetailDataModel(reviewId: nil, reviewDay: "", reviewDate: "", contents: nil)
+        reviewDetailData.forEach {
+            if($0.reviewDate == selectedDate) {
+                data = $0
+            }
+        }
+        return data
+    }
     
     private let reviewCollectionview = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     override init(frame: CGRect) {
@@ -79,8 +78,6 @@ extension ReviewDetailView {
     private func setNotificationCenter() {
         print("plz")
         NotificationCenter.default.addObserver(self, selector: #selector(getDateNotification(_:)), name: Notification.Name("dateNotification"), object: nil)
-        ddddd += 1
-        print(ddddd)
     }
 }
 
