@@ -514,10 +514,11 @@ extension AARView: UITextViewDelegate {
                 onCompletionAAR?(true)
             } else {
                 onCompletionAAR?(false)
-            } 
+            }
         } else {
             onCompletionAAR?(false)
         }
 
     }
 }
+

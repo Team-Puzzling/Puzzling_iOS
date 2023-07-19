@@ -11,7 +11,7 @@ import Moya
 import Then
 import SnapKit
 
-class testViewController: UIViewController {
+class ReviewTestViewController: UIViewController {
     
     private let pushButton = UIButton()
     
