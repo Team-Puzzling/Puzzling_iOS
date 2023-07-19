@@ -7,12 +7,17 @@
 
 import UIKit
 
+import Moya
 import Then
 import SnapKit
 
 class testViewController: UIViewController {
     
     private let pushButton = UIButton()
+    
+    let previousTemplateProvider = MoyaProvider<CreateRetrospectService>(plugins: [NetworkLoggerPlugin(verbose: true)])
+    private var previousTemplateId: PreviousTemplateModel?
+    private var templateNum: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,14 +52,52 @@ class testViewController: UIViewController {
         
     }
     
-    func pushToCreateRetrospectViewController(option: String) {
-        let VC = CreateRetrospectViewController(option: option)
+    func pushToCreateRetrospectViewController(option: Int) {
+        let VC = CreateRetrospectViewController(option: option, templateID: option )
         self.navigationController?.pushViewController(VC, animated: true)
+    }
+    
+    func fetchPreviousTemplate() {
+        previousTemplateProvider.request(.previousTemplate(memberID: "1", projectID: "1")) { result in
+            switch result {
+            case .success(let result):
+                let status = result.statusCode
+                if status >= 200 && status < 300 {
+                    do {
+                        guard let data = try result.map(GeneralResponse<PreviousTemplateResponce>.self).data else {
+                            return
+                        }
+                        
+                        self.previousTemplateId = data.convertToPreviousTemplate()
+                        let template = data
+                        print(template)
+                        print("♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️")
+                        print(self.previousTemplateId)
+                        if let templateNum = self.previousTemplateId?.previousTemplateId {
+                            print("이전에 작성한 회고 Option은~")
+                            print("♥️♥️♥️♥️ \(templateNum) 입니다♥️♥️♥️♥️")
+                            let crVC = CreateRetrospectViewController(option: templateNum, templateID: templateNum)
+                            self.navigationController?.pushViewController(crVC, animated: true)
+                            
+                        }
+                    }
+                    catch (let error) {
+                        print(error.localizedDescription)
+                    }
+                }
+                else if status >= 400 {
+                    print("💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭")
+                    print("400 이상에러")
+                    print("💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭")
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
     
     @objc
     func pushButtonTapped() {
-        let option = "5F"
-        pushToCreateRetrospectViewController(option: option)
+        fetchPreviousTemplate()
     }
 }
