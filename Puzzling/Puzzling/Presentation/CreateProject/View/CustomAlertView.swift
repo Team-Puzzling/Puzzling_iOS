@@ -20,6 +20,7 @@ class CustomAlertView: UIView {
     // MARK: - Properties
 
     private let alertType: CustomAlertType
+    var onSaveButtonTapped: (() -> Void)?
 
     // MARK: - UI Components
 
@@ -256,6 +257,7 @@ class CustomAlertView: UIView {
     private func setAddTarget() {
         switch alertType {
         case .createRetrospect:
+            saveButton.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
             cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
         case .createProject:
             copyButton.addTarget(self, action: #selector(copyButtonTapped), for: .touchUpInside)
@@ -286,6 +288,11 @@ class CustomAlertView: UIView {
     @objc
     private func closeButtonTapped() {
         closeAlertView()
+    }
+    
+    @objc
+    private func saveButtonTapped() {
+        onSaveButtonTapped?()
     }
 
     @objc
