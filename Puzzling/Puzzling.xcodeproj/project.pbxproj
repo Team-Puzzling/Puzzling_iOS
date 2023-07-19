@@ -105,7 +105,6 @@
 		25642BD92A67DB500041200D /* ReviewAARRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25642BD82A67DB500041200D /* ReviewAARRequest.swift */; };
 		25642BDB2A67DB7E0041200D /* ReviewFiveFModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25642BDA2A67DB7E0041200D /* ReviewFiveFModel.swift */; };
 		25642BDD2A67DB830041200D /* ReviewAARModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25642BDC2A67DB830041200D /* ReviewAARModel.swift */; };
-		25F972642A61A839001CE10C /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F972632A61A839001CE10C /* CustomAlert.swift */; };
 		583117A12A5B71920099B517 /* TeamDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583117A02A5B71920099B517 /* TeamDashboardViewController.swift */; };
 		583117A32A5B71A00099B517 /* IndivisualDashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583117A22A5B71A00099B517 /* IndivisualDashboardViewController.swift */; };
 		583117A82A5BE1490099B517 /* HomeTitleBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 583117A72A5BE1490099B517 /* HomeTitleBarView.swift */; };
@@ -190,8 +189,6 @@
 		0935C7FE2A6664CA00790A1B /* TeamMemberModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberModel.swift; sourceTree = "<group>"; };
 		0935C8002A66727200790A1B /* ProjectTeamService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTeamService.swift; sourceTree = "<group>"; };
 		0935C8022A66854800790A1B /* ProjectTeamResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectTeamResponse.swift; sourceTree = "<group>"; };
-		096755BA2A5C61BE00A1E691 /* TeamMemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberTableViewCell.swift; sourceTree = "<group>"; };
-		096755BE2A5D9E1A00A1E691 /* TeamMemberCustomHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberCustomHeaderView.swift; sourceTree = "<group>"; };
 		096755C52A5E970500A1E691 /* MyProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProjectViewController.swift; sourceTree = "<group>"; };
 		096755CA2A5E9AF500A1E691 /* MyProjectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProjectTableViewCell.swift; sourceTree = "<group>"; };
 		096755E52A60700E00A1E691 /* MyProjectTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProjectTableHeaderView.swift; sourceTree = "<group>"; };
@@ -201,19 +198,11 @@
 		096756082A61DB5700A1E691 /* ReviewDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailViewController.swift; sourceTree = "<group>"; };
 		0967560C2A61E08C00A1E691 /* ProjectCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCalendarView.swift; sourceTree = "<group>"; };
 		0967560E2A61E73700A1E691 /* ReviewDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailView.swift; sourceTree = "<group>"; };
-		09C0A4F22A5BEC1600691FFD /* TeamMemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberViewController.swift; sourceTree = "<group>"; };
-		09C0A4F42A5BEE4C00691FFD /* TeamMemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberView.swift; sourceTree = "<group>"; };
 		09C3AD572A65714800CDE00F /* TeamMemberCustomHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberCustomHeaderView.swift; sourceTree = "<group>"; };
 		09C3AD592A65715C00CDE00F /* TeamMemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberTableViewCell.swift; sourceTree = "<group>"; };
 		09C3AD5B2A65717500CDE00F /* TeamMemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberView.swift; sourceTree = "<group>"; };
 		09C3AD5D2A65719100CDE00F /* TeamMemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberViewController.swift; sourceTree = "<group>"; };
-		251C00C82A5BE62400F6838C /* CreateRetrospectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRetrospectViewController.swift; sourceTree = "<group>"; };
-		251C00CA2A5BEB6600F6838C /* TILView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TILView.swift; sourceTree = "<group>"; };
-		251C00CE2A5BEB7600F6838C /* AARView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AARView.swift; sourceTree = "<group>"; };
 		251C00D42A5D205300F6838C /* CustomRadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRadioButton.swift; sourceTree = "<group>"; };
-		251C00D62A5D309300F6838C /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
-		251C00DC2A5F114800F6838C /* FiveFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveFView.swift; sourceTree = "<group>"; };
-		251C00E82A60343900F6838C /* testViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testViewController.swift; sourceTree = "<group>"; };
 		255026DE2A656D8100531543 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
 		255026E22A656EF100531543 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
 		255026E42A657FB000531543 /* EnterProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterProjectView.swift; sourceTree = "<group>"; };
@@ -228,7 +217,6 @@
 		25642BD82A67DB500041200D /* ReviewAARRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewAARRequest.swift; sourceTree = "<group>"; };
 		25642BDA2A67DB7E0041200D /* ReviewFiveFModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewFiveFModel.swift; sourceTree = "<group>"; };
 		25642BDC2A67DB830041200D /* ReviewAARModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewAARModel.swift; sourceTree = "<group>"; };
-		25F972632A61A839001CE10C /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
 		583117A02A5B71920099B517 /* TeamDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDashboardViewController.swift; sourceTree = "<group>"; };
 		583117A22A5B71A00099B517 /* IndivisualDashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndivisualDashboardViewController.swift; sourceTree = "<group>"; };
 		583117A72A5BE1490099B517 /* HomeTitleBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTitleBarView.swift; sourceTree = "<group>"; };
@@ -711,17 +699,6 @@
 		255026DA2A653C9000531543 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
-				096755BA2A5C61BE00A1E691 /* TeamMemberTableViewCell.swift */,
-				251C00C82A5BE62400F6838C /* CreateRetrospectViewController.swift */,
-				251C00D62A5D309300F6838C /* BottomSheetViewController.swift */,
-				251C00E82A60343900F6838C /* testViewController.swift */,
-				09C0A4F22A5BEC1600691FFD /* TeamMemberViewController.swift */,
-				251C00DC2A5F114800F6838C /* FiveFView.swift */,
-				096755BE2A5D9E1A00A1E691 /* TeamMemberCustomHeaderView.swift */,
-				251C00CE2A5BEB7600F6838C /* AARView.swift */,
-				09C0A4F42A5BEE4C00691FFD /* TeamMemberView.swift */,
-				251C00CA2A5BEB6600F6838C /* TILView.swift */,
-				25F972632A61A839001CE10C /* CustomAlert.swift */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -978,7 +955,6 @@
 				09C3AD5E2A65719100CDE00F /* TeamMemberViewController.swift in Sources */,
 				25642BDB2A67DB7E0041200D /* ReviewFiveFModel.swift in Sources */,
 				25642BCD2A66CCC90041200D /* TemplateCaseModel.swift in Sources */,
-				251C00C92A5BE62400F6838C /* CreateRetrospectViewController.swift in Sources */,
 				03E6D2782A5333BF00F4453C /* UITabBar+.swift in Sources */,
 				09C3AD582A65714800CDE00F /* TeamMemberCustomHeaderView.swift in Sources */,
 				03FFD2CC2A5B175C00A3B70D /* SFProType.swift in Sources */,
