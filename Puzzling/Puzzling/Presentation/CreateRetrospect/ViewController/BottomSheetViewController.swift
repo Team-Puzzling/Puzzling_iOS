@@ -8,27 +8,30 @@
 
 import UIKit
 
+import Moya
 import Then
+import SnapKit
 
 final class BottomSheetViewController: UIViewController {
     
     // MARK: - Properties
-    
     var selectedOption: String?
+    var onOptionSelected: ((Int) -> Void)?
     
-    var onOptionSelected: ((String) -> Void)?
+    let optionFirstButton = CustomRadioButton(frame: CGRect(x: 0, y: 0, width: 16, height: 16))
+    let optionSecondButton = CustomRadioButton(frame: CGRect(x: 0, y: 0, width: 16, height: 16))
+    let optionThirdButton = CustomRadioButton(frame: CGRect(x: 0, y: 0, width: 16, height: 16))
     
-    let optionTILButton = CustomRadioButton(frame: CGRect(x: 0, y: 0, width: 16, height: 16))
-    let optionFiveFButton = CustomRadioButton(frame: CGRect(x: 0, y: 0, width: 16, height: 16))
-    let optionAARButton = CustomRadioButton(frame: CGRect(x: 0, y: 0, width: 16, height: 16))
+    private let optionFirstTitle = UILabel()
+    private let optionSecondTitle = UILabel()
+    private let optionThirdTitle = UILabel()
     
-    private let optionTILTitle = UILabel()
-    private let optionFiveFTitle = UILabel()
-    private let optionAARTitle = UILabel()
+    private let optionFirstSubtitle = UILabel()
+    private let optionSecondSubtitle = UILabel()
+    private let optionThirdSubtitle = UILabel()
     
-    private let optionTILSubtitle = UILabel()
-    private let optionFiveFSubtitle = UILabel()
-    private let optionAARSubtitle = UILabel()
+    let templatecaseProvider = MoyaProvider<CreateRetrospectService>(plugins: [NetworkLoggerPlugin()])
+    private var templateList: [TemplateCaseModel] = []
     
     // MARK: - View Life Cycle
     
@@ -37,6 +40,7 @@ final class BottomSheetViewController: UIViewController {
         setUI()
         setLayout()
         setAddTarget()
+        fetchTemplateCase()
     }
     
     // MARK: - deinit
@@ -62,40 +66,34 @@ extension BottomSheetViewController {
             }]
         }
         
-        optionTILTitle.do {
-            $0.text = "TIL"
+        optionFirstTitle.do {
             $0.textColor = .gray700
             $0.font = .fontGuide(.body1_bold_kor)
         }
         
-        optionFiveFTitle.do {
-            $0.text = "5F"
+        optionSecondTitle.do {
             $0.textColor = .gray700
             $0.font = .fontGuide(.body1_bold_kor)
         }
         
-        optionAARTitle.do {
-            $0.text = "AAR"
+        optionThirdTitle.do {
             $0.textColor = .gray700
             $0.font = .fontGuide(.body1_bold_kor)
         }
         
-        optionTILSubtitle.do {
-            $0.text = "학습과 자기 반성을 통해 향후 더 나은 결정을\n내릴 수 있게 해 주는 회고 방식이에요!"
+        optionFirstSubtitle.do {
             $0.numberOfLines = 2
             $0.textColor = .gray600
             $0.font = .fontGuide(.detail1_regular_kor)
         }
         
-        optionFiveFSubtitle.do {
-            $0.text = "다양한 측면을 고려하여 개인과 프로젝트\n전체적인 관점을 보여주는 회고 방식이에요!"
+        optionSecondSubtitle.do {
             $0.numberOfLines = 2
             $0.textColor = .gray600
             $0.font = .fontGuide(.detail1_regular_kor)
         }
         
-        optionAARSubtitle.do {
-            $0.text = "목표 달성에 대한 책임감과 함께, 개선에\n중점을 두는 회고 방식이에요!"
+        optionThirdSubtitle.do {
             $0.numberOfLines = 2
             $0.textColor = .gray600
             $0.font = .fontGuide(.detail1_regular_kor)
@@ -106,79 +104,79 @@ extension BottomSheetViewController {
 
     private func setLayout() {
         
-        view.addSubviews(optionTILButton, optionTILTitle, optionTILSubtitle,
-                         optionFiveFButton, optionFiveFTitle, optionFiveFSubtitle,
-                         optionAARButton, optionAARTitle, optionAARSubtitle)
+        view.addSubviews(optionFirstButton, optionFirstTitle, optionFirstSubtitle,
+                         optionSecondButton, optionSecondTitle, optionSecondSubtitle,
+                         optionThirdButton, optionThirdTitle, optionThirdSubtitle)
         
-        optionTILButton.snp.makeConstraints {
+        optionFirstButton.snp.makeConstraints {
             $0.top.equalToSuperview().offset(57)
             $0.leading.equalToSuperview().inset(16)
             $0.width.equalTo(16)
             $0.height.equalTo(16)
         }
         
-        optionTILTitle.snp.makeConstraints {
-            $0.top.equalTo(optionTILButton.snp.top)
-            $0.leading.equalTo(optionTILButton.snp.trailing).inset(-20)
+        optionFirstTitle.snp.makeConstraints {
+            $0.top.equalTo(optionFirstButton.snp.top)
+            $0.leading.equalTo(optionFirstButton.snp.trailing).inset(-20)
         }
         
-        optionTILSubtitle.snp.makeConstraints {
-            $0.top.equalTo(optionTILTitle.snp.top)
-            $0.leading.equalTo(optionTILTitle.snp.trailing).inset(-30)
+        optionFirstSubtitle.snp.makeConstraints {
+            $0.top.equalTo(optionFirstTitle.snp.top)
+            $0.leading.equalTo(optionFirstTitle.snp.trailing).inset(-30)
         }
         
-        optionFiveFButton.snp.makeConstraints {
-            $0.top.equalTo(optionTILButton.snp.bottom).offset(40)
+        optionSecondButton.snp.makeConstraints {
+            $0.top.equalTo(optionFirstButton.snp.bottom).offset(40)
             $0.leading.equalToSuperview().inset(16)
             $0.width.equalTo(16)
             $0.height.equalTo(16)
         }
         
-        optionFiveFTitle.snp.makeConstraints {
-            $0.top.equalTo(optionFiveFButton.snp.top)
-            $0.leading.equalTo(optionFiveFButton.snp.trailing).inset(-20)
+        optionSecondTitle.snp.makeConstraints {
+            $0.top.equalTo(optionSecondButton.snp.top)
+            $0.leading.equalTo(optionSecondButton.snp.trailing).inset(-20)
         }
         
-        optionFiveFSubtitle.snp.makeConstraints {
-            $0.top.equalTo(optionFiveFTitle.snp.top)
-            $0.leading.equalTo(optionFiveFTitle.snp.trailing).inset(-36)
+        optionSecondSubtitle.snp.makeConstraints {
+            $0.top.equalTo(optionSecondTitle.snp.top)
+            $0.leading.equalTo(optionSecondTitle.snp.trailing).inset(-36)
         }
         
-        optionAARButton.snp.makeConstraints {
-            $0.top.equalTo(optionFiveFButton.snp.bottom).offset(40)
+        optionThirdButton.snp.makeConstraints {
+            $0.top.equalTo(optionSecondButton.snp.bottom).offset(40)
             $0.leading.equalToSuperview().inset(16)
             $0.width.equalTo(16)
             $0.height.equalTo(16)
         }
         
-        optionAARTitle.snp.makeConstraints {
-            $0.top.equalTo(optionAARButton.snp.top)
-            $0.leading.equalTo(optionAARButton.snp.trailing).inset(-20)
+        optionThirdTitle.snp.makeConstraints {
+            $0.top.equalTo(optionThirdButton.snp.top)
+            $0.leading.equalTo(optionThirdButton.snp.trailing).inset(-20)
         }
         
-        optionAARSubtitle.snp.makeConstraints {
-            $0.top.equalTo(optionAARTitle.snp.top)
-            $0.leading.equalTo(optionAARTitle.snp.trailing).inset(-22)
+        optionThirdSubtitle.snp.makeConstraints {
+            $0.top.equalTo(optionThirdTitle.snp.top)
+            $0.leading.equalTo(optionThirdTitle.snp.trailing).inset(-22)
         }
         
         if selectedOption == "TIL" {
-            optionTILButton.btnSelected = true
-            optionTILButton.innerCircle.isHidden = false
+            optionFirstButton.btnSelected = true
+            optionFirstButton.innerCircle.isHidden = false
         } else if selectedOption == "5F" {
-            optionFiveFButton.btnSelected = true
-            optionFiveFButton.innerCircle.isHidden = false
+            optionSecondButton.btnSelected = true
+            optionSecondButton.innerCircle.isHidden = false
         } else if selectedOption == "AAR" {
-            optionAARButton.btnSelected = true
-            optionAARButton.innerCircle.isHidden = false
+            optionThirdButton.btnSelected = true
+            optionThirdButton.innerCircle.isHidden = false
         }
     }
     
     // MARK: - Methods
     
     private func setAddTarget() {
-        optionTILButton.addTarget(self, action: #selector(optionTILSelected), for: .touchUpInside)
-        optionFiveFButton.addTarget(self, action: #selector(optionFiveFSelected), for: .touchUpInside)
-        optionAARButton.addTarget(self, action: #selector(optionAARSelected), for: .touchUpInside)
+        optionFirstButton.addTarget(self, action: #selector(optionFirstSelected), for: .touchUpInside)
+        optionSecondButton.addTarget(self, action: #selector(optionSecondSelected), for: .touchUpInside)
+        optionThirdButton.addTarget(self, action: #selector(optionThirdSelected), for: .touchUpInside)
     }
     
     func dismissBottomSheet() {
@@ -187,24 +185,71 @@ extension BottomSheetViewController {
     
     // MARK: - @objc Methods
 
-    @objc func optionTILSelected() {
-        onOptionSelected?("TIL")
-        optionFiveFButton.innerCircle.isHidden = true
-        optionAARButton.innerCircle.isHidden = true
+    @objc func optionFirstSelected() {
+        onOptionSelected?(optionFirstButton.tag)
+        optionSecondButton.innerCircle.isHidden = true
+        optionThirdButton.innerCircle.isHidden = true
         dismiss(animated: true, completion: nil)
     }
     
-    @objc func optionFiveFSelected() {
-        onOptionSelected?("5F")
-        optionTILButton.innerCircle.isHidden = true
-        optionAARButton.innerCircle.isHidden = true
+    @objc func optionSecondSelected() {
+        onOptionSelected?(optionSecondButton.tag)
+        optionFirstButton.innerCircle.isHidden = true
+        optionThirdButton.innerCircle.isHidden = true
         dismiss(animated: true, completion: nil)
     }
     
-    @objc func optionAARSelected() {
-        onOptionSelected?("AAR")
-        optionTILButton.innerCircle.isHidden = true
-        optionFiveFButton.innerCircle.isHidden = true
+    @objc func optionThirdSelected() {
+        onOptionSelected?(optionThirdButton.tag)
+        optionFirstButton.innerCircle.isHidden = true
+        optionSecondButton.innerCircle.isHidden = true
         dismiss(animated: true, completion: nil)
+    }
+}
+
+extension BottomSheetViewController {
+    
+    // MARK: - Network
+
+    private func fetchTemplateCase() {
+        templatecaseProvider.request(.reviewTemplate) { result in
+            switch result {
+            case .success(let result):
+                do {
+                    let status = result.statusCode
+                    if status >= 200 && status < 300 {
+                        let responseData = try result.map(GeneralResponse<[TemplateCaseResponce]>.self)
+                        guard let data = responseData.data else {
+                            return
+                        }
+                        self.templateList = data.map { $0.converToTemplateCase() }
+                        print("❤️❤️❤️❤️❤️")
+                        print(self.templateList)
+                        print("❤️❤️❤️❤️❤️")
+                        self.setUINetwork()
+                    } else {
+                        print("Request failed with status code: \(status)")
+                    }
+                } catch (let error) {
+                    print(error.localizedDescription)
+                }
+            case .failure(let error):
+                print("Request failed with error: \(error)")
+            }
+        }
+    }
+    
+    private func setUINetwork() {
+        optionFirstTitle.text = self.templateList[0].reviewTemplateName
+        optionFirstSubtitle.text = self.templateList[0].reviewTemplateMeaning
+        optionFirstButton.tag = self.templateList[0].reviewTemplateId
+        
+        optionSecondTitle.text = self.templateList[1].reviewTemplateName
+        optionSecondSubtitle.text = self.templateList[1].reviewTemplateMeaning
+        optionSecondButton.tag = self.templateList[1].reviewTemplateId
+        
+        optionThirdTitle.text = self.templateList[2].reviewTemplateName
+        optionThirdSubtitle.text = self.templateList[2].reviewTemplateMeaning
+        optionThirdButton.tag = self.templateList[2].reviewTemplateId
     }
 }
