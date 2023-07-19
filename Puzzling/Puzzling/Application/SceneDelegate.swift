@@ -7,6 +7,8 @@
 
 import UIKit
 
+import KakaoSDKAuth
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
@@ -22,12 +24,27 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
             let window = UIWindow(windowScene: windowScene)
             window.overrideUserInterfaceStyle = UIUserInterfaceStyle.light
-            
-            let vc = MyProjectViewController()
+            let vc = OnBoardingViewContoller()
+//            let onBoardingVC = OnBoardingViewContoller()
+//            let enterProjectVC = EnterProjectViewController()
+//            let tabBar = TabBarController()
+//            var vc = UIViewController()
+//            guard let project = UserDefaults.standard.object(forKey: "projectId") else { vc = enterProjectVC }
+//            guard let login = UserDefaults.standard.object(forKey: "Login") else { vc = onBoardingVC }
+//
+//            print(vc)
             let rootVC = UINavigationController(rootViewController: vc)
             window.rootViewController = rootVC
             window.makeKeyAndVisible()
             self.window = window
+        }
+    }
+    
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        if let url = URLContexts.first?.url {
+            if (AuthApi.isKakaoTalkLoginUrl(url)) {
+                _ = AuthController.handleOpenUrl(url: url)
+            }
         }
     }
 

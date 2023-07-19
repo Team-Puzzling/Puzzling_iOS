@@ -43,7 +43,7 @@ public enum Image {
     static let puzzlingTitle = UIImage(named: "puzzling_title")!
     static let joinPuzzle = UIImage(named: "join_puzzle")!
     static let newPuzzle = UIImage(named: "new_puzzle")!
-    static let kakaoLogin = UIImage(named: "KakaoLogin")!
+    static let kakaoLogin = UIImage(named: "kakao_login_large_wide")!
     static let point = UIImage(named: "point")!
     
     
