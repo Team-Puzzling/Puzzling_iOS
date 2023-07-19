@@ -31,7 +31,6 @@ final class OnBoardingViewContoller: UIViewController {
     
     private let authProvider = MoyaProvider<AuthService>(plugins:[NetworkLoggerPlugin()])
     private var authModel: AuthModel = AuthModel(socialPlatform: "")
-//    private var user: User = User(name: "", memberId: 0, projectId: nil, accessToken: "", refreshToken: "", isNewUser: false)
     private var userModel: UserModel = UserModel(name: "", memberId: 0, projectId: nil, accessToken: "", refreshToken: "", isNewUser: false)
     private var socialPlatform: String = ""
     private var token: String = ""
@@ -47,9 +46,13 @@ final class OnBoardingViewContoller: UIViewController {
     
     
     // MARK: - View Life Cycle
+    override func loadView() {
+        super.loadView()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        firstFunction()
         setUI()
         setLayout()
         onBoardingView.delegate = self
@@ -85,6 +88,37 @@ extension OnBoardingViewContoller {
 
 private extension OnBoardingViewContoller {
     
+    func firstFunction() {
+        let enterProjectVC = EnterProjectViewController()
+        let tabBar = TabBarController()
+        
+        if let login = UserDefaults.standard.object(forKey: "Login")
+        {
+            if(login as! Bool == false) {
+                print("로그인해라")
+                return
+            }
+            else {
+                if let project = UserDefaults.standard.object(forKey: "projectId") {
+                    print("메인페이지로 가라")
+                    self.gotoMainPage()
+                }
+                else {
+                    print("\(UserDefaults.standard.string(forKey: "memberId"))")
+                    self.gotoMainEnterProjectView() }
+            }
+        }
+        else {
+            print("로그인해라")
+            return
+        }
+        
+        
+        
+//            if let project = UserDefaults.standard.object(forKey: "projectId") { self.gotoMainPage() }
+//            self.gotoMainEnterProjectView()
+    }
+    
     func kakaoLogin() {
         authModel.socialPlatform = "KAKAO"
         print(socialPlatform,"????")
@@ -113,7 +147,6 @@ private extension OnBoardingViewContoller {
                     _ = oauthToken
                     // 관련 메소드 추가
                     self.postAuth()
-                        UserDefaults.standard.set(true, forKey: "Login")
                 }
             }
         }
@@ -156,16 +189,22 @@ extension OnBoardingViewContoller {
                         self.userModel = data.convertoToUserModel()
                         print("🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰\(self.userModel)🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰")
                         UserDefaults.standard.set(self.userModel.name, forKey: "name")
+                        UserDefaults.standard.set(self.userModel.projectId, forKey: "projectId")
+                        UserDefaults.standard.set(self.userModel.memberId, forKey: "memberId")
+                        KeyChain.create(key: "accessToken", token: self.userModel.accessToken)
+                        KeyChain.create(key: "refreshToken", token: self.userModel.refreshToken)
+                        
                         if(self.userModel.isNewUser == true) {
                             self.gotoMainEnterProjectView()
                         }
-                        else if(self.userModel.isNewUser == false && self.userModel.projectId == nil) {
+                        else if(self.userModel.projectId == nil) {
                             self.gotoMainEnterProjectView()
                         }
                         else {
                             self.gotoMainPage()
                         }
                         
+                        UserDefaults.standard.set(true, forKey: "Login")
                     } catch(let error) {
                         print(error.localizedDescription)
                     }
