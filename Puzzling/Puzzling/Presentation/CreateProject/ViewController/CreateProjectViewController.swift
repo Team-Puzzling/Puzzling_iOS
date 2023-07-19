@@ -235,6 +235,15 @@ extension CreateProjectViewController {
         )
     }
     
+    private func textFieldWarningNotification(type: WarningMessage) {
+        let userInfo = type
+        NotificationCenter.default.post(
+            name: Notification.Name("textFieldWarningNotification"),
+            object: nil,
+            userInfo: ["userInfo": userInfo]
+        )
+    }
+    
     // MARK: - @objc Methods
     
     @objc
@@ -328,19 +337,14 @@ extension CreateProjectViewController {
                 let status = result.statusCode
                 if status >= 200 && status < 300 {
                     do {
-//                        self.invitationCodeNotification(code: "2150811453")
                         guard let data = try result.map(GeneralResponse<InvitationCodeResponse>.self).data else { return }
                         self.invitationCodeModel = data.convertToInvitationCode()
                         if let code = self.invitationCodeModel?.projectCode {
                             self.invitationCodeNotification(code: code)
                         }
-//                        self.invitationCodeNotification(code: invitationCodeModel?.projectCode)
                     } catch(let error) {
                         print(error.localizedDescription)
                     }
-                }
-                else if status >= 400 {
-                    print("⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️")
                 }
             case .failure(let error):
                 print(error.localizedDescription)

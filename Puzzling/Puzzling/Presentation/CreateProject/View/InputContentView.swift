@@ -191,37 +191,31 @@ extension InputContentView {
         warningLabel.isHidden = true
     }
     
-    private func warningTextFieldBorderSetting(textField: UITextField, type: WarningMessage) {
+    private func warningTextField(textField: UITextField, type: WarningMessage) {
         switch type {
         case .emoji:
             warningLabel.text = "특수문자, 이모지를 사용할 수 없어요."
-            textField.layer.borderColor = UIColor.red200.cgColor
-            textField.layer.borderWidth = 2
-            textFieldButton.isHidden = false
-            textFieldButton.setImage(Image.warning, for: .normal)
-            textFieldButton.isEnabled = false
-            warningLabel.isHidden = false
+            warningTextFieldBorderSetting(textField: textField)
         case .invitationCode:
             warningLabel.text = "유효하지 않은 초대코드에요. 코드를 확인해 주세요."
             if activeTextField == .invitationCode {
-                textField.layer.borderColor = UIColor.red200.cgColor
-                textField.layer.borderWidth = 2
-                textFieldButton.isHidden = false
-                textFieldButton.setImage(Image.warning, for: .normal)
-                textFieldButton.isEnabled = false
-                warningLabel.isHidden = false
+                warningTextFieldBorderSetting(textField: textField)
             }
         case .duplicateNickname:
             warningLabel.text = "이미 사용 중인 닉네임이에요."
             if activeTextField == .nickname {
-                textField.layer.borderColor = UIColor.red200.cgColor
-                textField.layer.borderWidth = 2
-                textFieldButton.isHidden = false
-                textFieldButton.setImage(Image.warning, for: .normal)
-                textFieldButton.isEnabled = false
-                warningLabel.isHidden = false
+                warningTextFieldBorderSetting(textField: textField)
             }
         }
+    }
+    
+    private func warningTextFieldBorderSetting(textField: UITextField) {
+        textField.layer.borderColor = UIColor.red200.cgColor
+        textField.layer.borderWidth = 2
+        textFieldButton.isHidden = false
+        textFieldButton.setImage(Image.warning, for: .normal)
+        textFieldButton.isEnabled = false
+        warningLabel.isHidden = false
     }
     
     private func defaultTextFieldBorderSetting(textField: UITextField) {
@@ -236,7 +230,7 @@ extension InputContentView {
             if text.isOnlyKorEng() {
                 activeTextFieldBorderSetting(textField: textField)
             } else {
-                warningTextFieldBorderSetting(textField: textField, type: .emoji)
+                warningTextField(textField: textField, type: .emoji)
             }
         }
     }
@@ -290,7 +284,7 @@ extension InputContentView {
     private func setTextFieldWarningStatus(_ notification: Notification) {
         
         if let type = notification.userInfo?["userInfo"] as? WarningMessage {
-            warningTextFieldBorderSetting(textField: inputTextField, type: type)
+            warningTextField(textField: inputTextField, type: type)
         }
     }
 }
@@ -304,7 +298,7 @@ extension InputContentView: UITextFieldDelegate {
                 activeTextFieldBorderSetting(textField: textField)
                 textFieldNotification(textField: textField, contentType: activeTextField ?? .name)
             } else {
-                warningTextFieldBorderSetting(textField: textField, type: .emoji)
+                warningTextField(textField: textField, type: .emoji)
                 textFieldButton.isHidden = false
             }
             textFieldButton.isHidden = !text.isEmpty ? false : true
@@ -318,7 +312,7 @@ extension InputContentView: UITextFieldDelegate {
                 defaultTextFieldBorderSetting(textField: textField)
                 textFieldNotification(textField: textField, contentType: activeTextField ?? .name)
             } else {
-                warningTextFieldBorderSetting(textField: textField, type: .emoji)
+                warningTextField(textField: textField, type: .emoji)
                 textFieldButton.isHidden = false
             }
             

@@ -249,7 +249,6 @@ extension InvitationCodeViewController {
                 } else if status == 404 {
                     print("💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭")
                     self.textFieldWarningNotification(type: .invitationCode)
-//                    self.inputCompletionButton.setState(.notAllow)
                 }
             case .failure(let error):
                 print(error.localizedDescription)
