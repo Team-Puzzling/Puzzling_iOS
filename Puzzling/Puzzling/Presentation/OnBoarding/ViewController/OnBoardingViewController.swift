@@ -31,9 +31,8 @@ final class OnBoardingViewContoller: UIViewController {
     
     private let authProvider = MoyaProvider<AuthService>(plugins:[NetworkLoggerPlugin()])
     private var authModel: AuthModel = AuthModel(socialPlatform: "")
-    private var user: User = User(name: "", memberID: 0, projectID: nil, accessToken: "", refreshToken: "", isNewUser: false)
-    private var userModel: UserModel = UserModel(name: "", memberID: 0, projectID: nil, accessToken: "", refreshToken: "", isNewUser: false)
-    private var auth: Auth = Auth(socialPlatform: "")
+//    private var user: User = User(name: "", memberId: 0, projectId: nil, accessToken: "", refreshToken: "", isNewUser: false)
+    private var userModel: UserModel = UserModel(name: "", memberId: 0, projectId: nil, accessToken: "", refreshToken: "", isNewUser: false)
     private var socialPlatform: String = ""
     private var token: String = ""
     // MARK: - UI Components
@@ -87,7 +86,7 @@ extension OnBoardingViewContoller {
 private extension OnBoardingViewContoller {
     
     func kakaoLogin() {
-        auth.socialPlatform = "KAKAO"
+        authModel.socialPlatform = "KAKAO"
         print(socialPlatform,"????")
         if (UserApi.isKakaoTalkLoginAvailable()) {
             //카톡 설치되어있으면 -> 카톡으로 로그인
@@ -129,6 +128,12 @@ private extension OnBoardingViewContoller {
         let vc = EnterProjectViewController()
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    func gotoMainPage() {
+        print("메인페이지지롱")
+        let vc = TabBarController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 
@@ -137,8 +142,8 @@ extension OnBoardingViewContoller {
     // MARK: - Network
     
     private func postAuth() {
-        print(auth.socialPlatform)
-        authProvider.request(.postAuth(param: auth.makePostAuthRequest(), token: token)) { result in
+        print(authModel.socialPlatform)
+        authProvider.request(.postAuth(param: authModel.makePostAuthRequest(), token: token)) { result in
             switch result {
             case .success(let result):
                 let status = result.statusCode
@@ -150,8 +155,17 @@ extension OnBoardingViewContoller {
                         guard let data = try result.map(GeneralResponse<UserResponse>.self).data else { return }
                         self.userModel = data.convertoToUserModel()
                         print("🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰\(self.userModel)🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰")
+                        UserDefaults.standard.set(self.userModel.name, forKey: "name")
+                        if(self.userModel.isNewUser == true) {
+                            self.gotoMainEnterProjectView()
+                        }
+                        else if(self.userModel.isNewUser == false && self.userModel.projectId == nil) {
+                            self.gotoMainEnterProjectView()
+                        }
+                        else {
+                            self.gotoMainPage()
+                        }
                         
-                        self.gotoMainEnterProjectView()
                     } catch(let error) {
                         print(error.localizedDescription)
                     }
