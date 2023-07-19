@@ -10,13 +10,15 @@ import UIKit
 import SnapKit
 import Then
 
+
+
 final class MyProjectTableViewCell: UITableViewCell {
     
     private let view = UIView()
     private let projectNameLabel = UILabel()
     private let durationLabel = UILabel()
     private let dashboardButton = UIButton()
-    private let myReviewButton = UIButton()
+    let myReviewButton = UIButton()
     
     private let dateFormatter = DateFormatter().then {
         $0.dateFormat = "yyyy-MM-dd"
@@ -29,6 +31,7 @@ final class MyProjectTableViewCell: UITableViewCell {
         
         setUI()
         setLayout()
+        setAddTarget()
     }
     
     @available(*, unavailable)
@@ -109,6 +112,28 @@ extension MyProjectTableViewCell {
             $0.trailing.equalToSuperview().inset(12)
             $0.bottom.equalToSuperview().inset(12)
         }
+    }
+    
+    private func setAddTarget() {
+        myReviewButton.addTarget(self, action: #selector(myReviewButtonTapped), for: .touchUpInside)
+    }
+    
+    private func setNotificationCenter(text: String) {
+        let userInfo = text
+        print(userInfo)
+        NotificationCenter.default.post(
+            name: Notification.Name("projectNotification"),
+            object: nil,
+            userInfo: ["userInfo": userInfo]
+        )
+    }
+}
+
+extension MyProjectTableViewCell {
+    @objc
+    private func myReviewButtonTapped() {
+        guard let text = projectNameLabel.text else { return }
+        setNotificationCenter(text: text)
     }
 }
 

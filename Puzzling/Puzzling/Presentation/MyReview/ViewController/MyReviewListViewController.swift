@@ -72,12 +72,12 @@ extension MyReviewListViewController {
     
     private func setNavigationBar() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: Image.leftIcon,
+            image: Image.chevronBackIcon,
             style: .plain,
             target: self,
-            action: #selector(leftChevronButtonTapped)
+            action: #selector(backButtonTapped)
         )
-        navigationItem.rightBarButtonItem?.tintColor = .gray500
+        navigationItem.leftBarButtonItem?.tintColor = .gray500
         
         let title = currentProject
         let attributes: [NSAttributedString.Key: Any] = [
@@ -102,7 +102,7 @@ extension MyReviewListViewController {
 
 extension MyReviewListViewController {
     @objc
-    private func leftChevronButtonTapped() {
+    private func backButtonTapped() {
         self.navigationController?.popViewController(animated: true)
     }
 }
@@ -130,7 +130,13 @@ extension MyReviewListViewController: buttonTappedProtocol {
     }
 }
 
-extension MyReviewListViewController: UICollectionViewDelegate { }
+extension MyReviewListViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = ReviewDetailViewController()
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+}
 
 extension MyReviewListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
