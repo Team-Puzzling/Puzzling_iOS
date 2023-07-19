@@ -10,13 +10,10 @@ import Foundation
 struct UserModel {
     
     let name: String
-    let memberID: Int
-    let projectID: Int?
+    let memberId: Int
+    let projectId: Int?
     let accessToken: String
     let refreshToken: String
     let isNewUser: Bool
-    
-    func makePostUserResponse() -> PostUserResponse {
-        return PostUserResponse(name: name, memberID: memberID, projectID: projectID, accessToken: accessToken, refreshToken: refreshToken, isNewUser: isNewUser)
-    }
+
 }

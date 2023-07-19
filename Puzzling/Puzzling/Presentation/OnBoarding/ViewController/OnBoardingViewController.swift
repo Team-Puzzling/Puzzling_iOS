@@ -31,9 +31,8 @@ final class OnBoardingViewContoller: UIViewController {
     
     private let authProvider = MoyaProvider<AuthService>(plugins:[NetworkLoggerPlugin()])
     private var authModel: AuthModel = AuthModel(socialPlatform: "")
-    private var user: User = User(name: "", memberID: 0, projectID: nil, accessToken: "", refreshToken: "", isNewUser: false)
-    private var userModel: UserModel = UserModel(name: "", memberID: 0, projectID: nil, accessToken: "", refreshToken: "", isNewUser: false)
-    private var auth: Auth = Auth(socialPlatform: "")
+    private var userModel: UserModel = UserModel(name: "", memberId: 0, projectId: nil, accessToken: "", refreshToken: "", isNewUser: false)
+    private var tokenModel: TokenModel = TokenModel(accessToken: "")
     private var socialPlatform: String = ""
     private var token: String = ""
     // MARK: - UI Components
@@ -48,13 +47,17 @@ final class OnBoardingViewContoller: UIViewController {
     
     
     // MARK: - View Life Cycle
+    override func loadView() {
+        super.loadView()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        firstFunction()
         setUI()
         setLayout()
         onBoardingView.delegate = self
-                
+        
     }
 }
 
@@ -86,8 +89,41 @@ extension OnBoardingViewContoller {
 
 private extension OnBoardingViewContoller {
     
+    func firstFunction() {
+        let enterProjectVC = EnterProjectViewController()
+        let tabBar = TabBarController()
+        
+        if let login = UserDefaults.standard.object(forKey: "Login")
+        {
+            if(login as! Bool == false) {
+                print("로그인해라")
+                return
+            }
+            else {
+                
+                
+                if let project = UserDefaults.standard.object(forKey: "projectId") {
+                    print("메인페이지로 가라")
+                    self.gotoMainPage()
+                }
+                else {
+                    print("\(UserDefaults.standard.string(forKey: "memberId"))")
+                    self.gotoMainEnterProjectView() }
+            }
+        }
+        else {
+            print("로그인해라")
+            return
+        }
+        
+        
+        
+        //            if let project = UserDefaults.standard.object(forKey: "projectId") { self.gotoMainPage() }
+        //            self.gotoMainEnterProjectView()
+    }
+    
     func kakaoLogin() {
-        auth.socialPlatform = "KAKAO"
+        authModel.socialPlatform = "KAKAO"
         print(socialPlatform,"????")
         if (UserApi.isKakaoTalkLoginAvailable()) {
             //카톡 설치되어있으면 -> 카톡으로 로그인
@@ -110,18 +146,13 @@ private extension OnBoardingViewContoller {
                     print(error)
                 } else {
                     print("loginWithKakaoAccount() success.")
-
+                    
                     _ = oauthToken
                     // 관련 메소드 추가
                     self.postAuth()
-                        UserDefaults.standard.set(true, forKey: "Login")
                 }
             }
         }
-    }
-    
-    func saveToken() {
-        UserDefaults.standard.set(true, forKey: "Login")
     }
     
     func gotoMainEnterProjectView() {
@@ -129,16 +160,22 @@ private extension OnBoardingViewContoller {
         let vc = EnterProjectViewController()
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    func gotoMainPage() {
+        print("메인페이지지롱")
+        let vc = TabBarController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 
 extension OnBoardingViewContoller {
-
+    
     // MARK: - Network
     
     private func postAuth() {
-        print(auth.socialPlatform)
-        authProvider.request(.postAuth(param: auth.makePostAuthRequest(), token: token)) { result in
+        print(authModel.socialPlatform)
+        authProvider.request(.postAuth(param: authModel.makePostAuthRequest(), token: token)) { result in
             switch result {
             case .success(let result):
                 let status = result.statusCode
@@ -148,10 +185,25 @@ extension OnBoardingViewContoller {
                         print("?????????\(result)")
                         print("?????????\(try result.map(GeneralResponse<UserResponse>.self))")
                         guard let data = try result.map(GeneralResponse<UserResponse>.self).data else { return }
-                        self.userModel = data.convertoToUserModel()
+                        self.userModel = data.convertToUserModel()
                         print("🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰\(self.userModel)🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰")
+                        UserDefaults.standard.set(self.userModel.name, forKey: "name")
+                        UserDefaults.standard.set(self.userModel.projectId, forKey: "projectId")
+                        UserDefaults.standard.set(self.userModel.memberId, forKey: "memberId")
+                        KeyChain.create(key: "accessToken", token: self.userModel.accessToken)
+                        KeyChain.create(key: "refreshToken", token: self.userModel.refreshToken)
                         
-                        self.gotoMainEnterProjectView()
+                        if(self.userModel.isNewUser == true) {
+                            self.gotoMainEnterProjectView()
+                        }
+                        else if(self.userModel.projectId == nil) {
+                            self.gotoMainEnterProjectView()
+                        }
+                        else {
+                            self.gotoMainPage()
+                        }
+                        
+                        UserDefaults.standard.set(true, forKey: "Login")
                     } catch(let error) {
                         print(error.localizedDescription)
                     }
@@ -166,14 +218,17 @@ extension OnBoardingViewContoller {
     }
     
     func getNewToken() {
-        authProvider.request(.authToken) { result in
+        guard let access = KeyChain.read(key: "accessToken") else { return }
+        guard let refresh = KeyChain.read(key: "refreshToken") else { return }
+        authProvider.request(.authToken(Authorization: access, Refresh: refresh)) { result in
             switch result {
             case .success(let result):
                 let status = result.statusCode
                 if status >= 200 && status < 300 {
                     do {
-                        guard let data = try result.map(GeneralResponse<UserResponse>.self).data else { return }
-                        self.userModel = data.convertoToUserModel()
+                        guard let data = try result.map(GeneralResponse<TokenResponse>.self).data else { return }
+                        self.tokenModel = data.convertToTokenModel()
+                        KeyChain.create(key: "accessToken", token: self.tokenModel.accessToken)
                     } catch(let error) {
                         print(error.localizedDescription)
                     }

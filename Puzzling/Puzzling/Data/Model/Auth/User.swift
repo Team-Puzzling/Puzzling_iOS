@@ -10,8 +10,8 @@ import Foundation
 struct User {
     
     let name: String
-    let memberID: Int
-    let projectID: Int?
+    let memberId: Int
+    let projectId: Int?
     let accessToken: String
     let refreshToken: String
     let isNewUser: Bool

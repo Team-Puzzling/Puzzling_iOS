@@ -8,7 +8,7 @@
 import Foundation
 
 struct AuthModel {
-    let socialPlatform: String
+    var socialPlatform: String
     
     public func makePostAuthRequest() -> PostAuthRequest {
         return PostAuthRequest(socialPlatform: socialPlatform)

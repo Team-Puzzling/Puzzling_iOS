@@ -10,13 +10,13 @@ import Foundation
 struct UserResponse: Codable {
     
     let name: String
-    let memberID: Int
-    let projectID: Int?
+    let memberId: Int
+    let projectId: Int?
     let accessToken: String
     let refreshToken: String
     let isNewUser: Bool
     
-    func convertoToUserModel() -> UserModel {
-        return UserModel(name: name, memberID: memberID, projectID: projectID, accessToken: accessToken, refreshToken: refreshToken, isNewUser: isNewUser)
+    func convertToUserModel() -> UserModel {
+        return UserModel(name: name, memberId: memberId, projectId: projectId, accessToken: accessToken, refreshToken: refreshToken, isNewUser: isNewUser)
     }
 }
