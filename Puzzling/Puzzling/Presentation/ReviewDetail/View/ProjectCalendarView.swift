@@ -10,6 +10,7 @@ import UIKit
 import FSCalendar
 import SnapKit
 import Then
+import Moya
 
 protocol reviewDateProtocol: AnyObject {
     func reviewDate(text: String)
@@ -18,6 +19,10 @@ protocol reviewDateProtocol: AnyObject {
 final class ProjectCalendarView: UIView {
     
     weak var delegate: reviewDateProtocol?
+    
+    private var startDate: String = "2023-04-01"
+    private var endDate: String = "2023-12-13"
+    
     lazy var calendarView = FSCalendar(frame: .zero)
     private var calendarViewHeight = NSLayoutConstraint()
     private lazy var headerLabel = UILabel()
@@ -25,7 +30,9 @@ final class ProjectCalendarView: UIView {
     
     private let dateFormatter = DateFormatter()
     
-    private let reviewDetailDataModel = ReviewDetailDataModel.dummy()
+    private let reviewDetailProvider = MoyaProvider<MyProjectService>(plugins:[NetworkLoggerPlugin()])
+    
+    private var reviewDetailDataModel: [ReviewDetailModel] = []
     
     private let headerDateFormatter = DateFormatter()
     
@@ -36,6 +43,7 @@ final class ProjectCalendarView: UIView {
         setLayout()
         setDelegate()
         setDateFormatter()
+        fetchReviewDetail()
     }
     
     required init?(coder: NSCoder) {
@@ -209,5 +217,48 @@ extension ProjectCalendarView {
     
     func getCalendarViewHeight() -> CGFloat{
         return self.calendarViewHeight.constant
+    }
+}
+
+extension ProjectCalendarView {
+    
+    // MARK: - Network
+    
+    private func fetchReviewDetail() {
+        
+        guard let memberId = UserDefaults.standard.string(forKey: "memberId") else { return }
+        let projectId = "1"
+        
+        print(memberId, projectId, startDate, endDate)
+        
+        reviewDetailProvider.request(.reviewDetail(memberId: "1", projectId: projectId, startDate: startDate, endDate: endDate)) { result in
+            switch result {
+            case .success(let result):
+                let status = result.statusCode
+                print(status)
+                if status >= 200 && status < 300 {
+                    do {
+                        guard let data = try result.map(GeneralResponse<[ReviewDetailResponse]>.self).data else { return }
+                        
+                        data.forEach {
+                            self.reviewDetailDataModel.append($0.convertToReviewDetailModel())
+                        }
+                        
+//                        self.sendDateNotification(model: self.dataList)
+//                        self.specificData = self.findData(date: self.selectedDate) ?? TeamMemberModel(reviewDay: "", reviewDate: "", reviewWriters: nil, nonReviewWriters: nil)
+                        self.calendarView.reloadData()
+                        print("♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️")
+                        
+                        
+                    } catch(let error) {
+                        print(error.localizedDescription)
+                    }
+                } else if status == 404 {
+                    print("💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭")
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }

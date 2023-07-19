@@ -14,6 +14,7 @@ import Moya
 final class MyReviewListViewController: UIViewController {
     
     private var currentProject: String = "Project1"
+    private var currentProjectId: Int = 0
     
     private let myReviewListCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
@@ -125,8 +126,9 @@ extension MyReviewListViewController {
 }
 
 extension MyReviewListViewController: projectNameProtocol {
-    func nameData(text: String) {
+    func nameData(id: Int, text: String) {
         currentProject = text
+        currentProjectId = id
         reloadHeaderView(text: text)
     }
 }

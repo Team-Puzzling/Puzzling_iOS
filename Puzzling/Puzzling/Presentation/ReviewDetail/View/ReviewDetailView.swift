@@ -11,11 +11,11 @@ import SnapKit
 import Then
 
 final class ReviewDetailView: UIView {
-    private let reviewDetailData = ReviewDetailDataModel.dummy()
+    private let reviewDetailData: [ReviewDetailModel] = []
     private var selectedDate: String = "2023-07-17"
     
-    private func findMyData() -> ReviewDetailDataModel {
-        var data: ReviewDetailDataModel = ReviewDetailDataModel(reviewId: nil, reviewDay: "", reviewDate: "", contents: nil)
+    private func findMyData() -> ReviewDetailModel {
+        var data: ReviewDetailModel = ReviewDetailModel(reviewId: nil, reviewDay: "", reviewDate: "", reviewTemplateId: nil, contents: nil)
         reviewDetailData.forEach {
             
                 print("👥👥👥👥👥👥👥👥👥👥👥👥👥👥👥")

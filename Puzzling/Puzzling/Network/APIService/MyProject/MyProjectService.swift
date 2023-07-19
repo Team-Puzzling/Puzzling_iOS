@@ -12,6 +12,7 @@ import Moya
 enum MyProjectService {
     case projectList(memberId: String)
     case myReviewList(memberId: String, projectId: String)
+    case reviewDetail(memberId: String, projectId: String, startDate: String, endDate: String)
 }
 
 extension MyProjectService: TargetType {
@@ -25,6 +26,8 @@ extension MyProjectService: TargetType {
             return URLConst.getMemberProjectAllURL.replacingOccurrences(of: "{memberId}", with: "\(memberId)")
         case .myReviewList(let memberId, let projectId):
             return URLConst.getMemberProjectReviewsURL.replacingOccurrences(of: "{memberId}", with: "\(memberId)").replacingOccurrences(of: "{projectId}", with: "\(projectId)")
+        case .reviewDetail(let memberId, let projectId, _, _):
+            return URLConst.getMemberProjectReviewURL.replacingOccurrences(of: "{memberId}", with: "\(memberId)").replacingOccurrences(of: "{projectId}", with: "\(projectId)")
         }
     }
 
@@ -33,6 +36,8 @@ extension MyProjectService: TargetType {
         case .projectList:
             return .get
         case .myReviewList:
+            return .get
+        case .reviewDetail:
             return .get
         }
     }
@@ -43,6 +48,12 @@ extension MyProjectService: TargetType {
             return .requestPlain
         case .myReviewList(_, _):
             return .requestPlain
+        case .reviewDetail(_, _, let startDate, let endDate):
+            let param: [String: Any] = [
+                URLConst.startDate: startDate,
+                URLConst.endDate: endDate
+            ]
+            return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
         }
     }
 
@@ -51,6 +62,8 @@ extension MyProjectService: TargetType {
         case .projectList:
             return APIConstants.headerWithAuthorization
         case .myReviewList:
+            return APIConstants.headerWithAuthorization
+        case .reviewDetail:
             return APIConstants.headerWithAuthorization
         }
     }

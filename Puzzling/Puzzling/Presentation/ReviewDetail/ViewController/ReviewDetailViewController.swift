@@ -9,7 +9,6 @@ import UIKit
 
 import SnapKit
 import Then
-import Moya
 
 extension ReviewDetailViewController {
     @frozen
@@ -32,6 +31,7 @@ extension ReviewDetailViewController {
 extension ReviewDetailViewController: reviewDateProtocol {
     func reviewDate(text: String) {
         selectedDate = text
+        
         print(selectedDate, "aaaaaa👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿")
         let userInfo = selectedDate
         print(userInfo, "xxxxxx")

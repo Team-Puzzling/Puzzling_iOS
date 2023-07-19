@@ -102,6 +102,8 @@
 		0976A8A22A684C6300F1CAE4 /* ProjectListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0976A8A12A684C6300F1CAE4 /* ProjectListModel.swift */; };
 		0976A8A42A685F5300F1CAE4 /* ReviewListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0976A8A32A685F5300F1CAE4 /* ReviewListResponse.swift */; };
 		0976A8A62A685F9000F1CAE4 /* ReviewListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0976A8A52A685F9000F1CAE4 /* ReviewListModel.swift */; };
+		0976A8A82A68648700F1CAE4 /* ReviewDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0976A8A72A68648700F1CAE4 /* ReviewDetailResponse.swift */; };
+		0976A8AA2A6864BC00F1CAE4 /* ReviewDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0976A8A92A6864BC00F1CAE4 /* ReviewDetailModel.swift */; };
 		09B2A0492A682C65007DED5F /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B2A0482A682C65007DED5F /* KeyChain.swift */; };
 		09B2A04B2A683D1A007DED5F /* TokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B2A04A2A683D1A007DED5F /* TokenResponse.swift */; };
 		09B2A04D2A683D54007DED5F /* TokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B2A04C2A683D54007DED5F /* TokenModel.swift */; };
@@ -239,6 +241,8 @@
 		0976A8A12A684C6300F1CAE4 /* ProjectListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListModel.swift; sourceTree = "<group>"; };
 		0976A8A32A685F5300F1CAE4 /* ReviewListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListResponse.swift; sourceTree = "<group>"; };
 		0976A8A52A685F9000F1CAE4 /* ReviewListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListModel.swift; sourceTree = "<group>"; };
+		0976A8A72A68648700F1CAE4 /* ReviewDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailResponse.swift; sourceTree = "<group>"; };
+		0976A8A92A6864BC00F1CAE4 /* ReviewDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailModel.swift; sourceTree = "<group>"; };
 		09B2A0482A682C65007DED5F /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
 		09B2A04A2A683D1A007DED5F /* TokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenResponse.swift; sourceTree = "<group>"; };
 		09B2A04C2A683D54007DED5F /* TokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenModel.swift; sourceTree = "<group>"; };
@@ -806,6 +810,7 @@
 			children = (
 				0976A89E2A684BF400F1CAE4 /* ProjectListResponse.swift */,
 				0976A8A32A685F5300F1CAE4 /* ReviewListResponse.swift */,
+				0976A8A72A68648700F1CAE4 /* ReviewDetailResponse.swift */,
 			);
 			path = MyProject;
 			sourceTree = "<group>";
@@ -815,6 +820,7 @@
 			children = (
 				0976A8A12A684C6300F1CAE4 /* ProjectListModel.swift */,
 				0976A8A52A685F9000F1CAE4 /* ReviewListModel.swift */,
+				0976A8A92A6864BC00F1CAE4 /* ReviewDetailModel.swift */,
 			);
 			path = MyProject;
 			sourceTree = "<group>";
@@ -1118,6 +1124,7 @@
 				25642BD52A67BDD80041200D /* ReviewTILRequest.swift in Sources */,
 				25642BD32A67BD9B0041200D /* ReviewTILModel.swift in Sources */,
 				25642BDD2A67DB830041200D /* ReviewAARModel.swift in Sources */,
+				0976A8AA2A6864BC00F1CAE4 /* ReviewDetailModel.swift in Sources */,
 				0935C8222A675C1B00790A1B /* ProjectNameCollectionReusableView.swift in Sources */,
 				03E6D2002A5325F200F4453C /* Model.swift in Sources */,
 				58DC6A6B2A616A2E0039242C /* TeamDashboardRankView.swift in Sources */,
@@ -1218,6 +1225,7 @@
 				255026F02A65BCB900531543 /* PreviousTemplateModel.swift in Sources */,
 				0935C8202A675BFD00790A1B /* MyReviewListCollectionViewCell.swift in Sources */,
 				583117A82A5BE1490099B517 /* HomeTitleBarView.swift in Sources */,
+				0976A8A82A68648700F1CAE4 /* ReviewDetailResponse.swift in Sources */,
 				03ADF3922A5E9534002CEDDC /* ProjectCycleModel.swift in Sources */,
 				0351AB422A6323A8006B0F4C /* CustomAlertView.swift in Sources */,
 				03ADF3872A5D9F91002CEDDC /* InputContentView.swift in Sources */,

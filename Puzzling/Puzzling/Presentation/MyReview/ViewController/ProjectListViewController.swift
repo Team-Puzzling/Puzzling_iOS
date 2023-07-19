@@ -12,7 +12,7 @@ import Then
 import Moya
 
 protocol projectNameProtocol: AnyObject {
-    func nameData(text: String)
+    func nameData(id: Int, text: String)
 }
 
 final class ProjectListViewController: UIViewController {
@@ -91,7 +91,7 @@ extension ProjectListViewController {
 extension ProjectListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         projectName = myProjectData[indexPath.row].projectName
-        self.delegate?.nameData(text: myProjectData[indexPath.row].projectName)
+        self.delegate?.nameData(id: myProjectData[indexPath.row].projectId, text: projectName)
         self.dismiss(animated: true)
     }
 }
@@ -103,11 +103,11 @@ extension ProjectListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueCell(type: ProjectNameTableViewCell.self, indexPath: indexPath)
-        let nameData = myProjectData[indexPath.row].projectName
+        let name = myProjectData[indexPath.row].projectName
         let projectId = myProjectData[indexPath.row].projectId
-        cell.setDataBind(id: projectId, name: nameData)
+        cell.setDataBind(id: projectId, name: name)
         
-        if nameData == projectName {
+        if name == projectName {
             cell.setPointLabel()
         }
         return cell
