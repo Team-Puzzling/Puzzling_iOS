@@ -339,6 +339,9 @@ extension CreateProjectViewController {
                             object: nil,
                             userInfo: ["userInfo": userInfo]
                         )
+                        // 프로젝트 아이디 요기
+                        // let projectID = self.createProjectModel?.projectId
+                        
 //                        if let code = self.createProjectModel?.projectCode {
 //                            self.projectRegister()
 //                            alertView.invitationCode = code
