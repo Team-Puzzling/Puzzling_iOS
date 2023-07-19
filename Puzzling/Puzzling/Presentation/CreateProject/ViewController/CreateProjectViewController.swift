@@ -32,7 +32,7 @@ final class CreateProjectViewController: UIViewController {
     private var projectCycle: [String] = []
     private var viewHeight: String = ""
     private let projectProvider = MoyaProvider<ProjectService>(plugins:[NetworkLoggerPlugin()])
-    private var invitationCodeModel: InvitationCodeModel?
+    private var createProjectModel: CreateProjectModel?
     
     // MARK: - Initializer
     
@@ -167,7 +167,7 @@ extension CreateProjectViewController {
         present(projectStartTimeVC, animated: true, completion: nil)
     }
     
-    private func projectRegister(code: String) {
+    private func projectRegister() {
         let alert = CustomAlertView(frame: CGRect(x: 0, y: 0, width: 290, height: 373), alertType: .createProject)
         alert.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(alert)
@@ -330,13 +330,20 @@ extension CreateProjectViewController {
                 let status = result.statusCode
                 if status >= 200 && status < 300 {
                     do {
-                        guard let data = try result.map(GeneralResponse<InvitationCodeResponse>.self).data else { return }
-                        self.invitationCodeModel = data.convertToInvitationCode()
-                        if let code = self.invitationCodeModel?.projectCode {
-                            self.projectRegister(code: code)
+                        self.projectRegister()
+                        guard let data = try result.map(GeneralResponse<CreateProjectResponse>.self).data else { return }
+                        self.createProjectModel = data.convertToCreateProjectModel()
+                        let userInfo = data.projectCode
+                        NotificationCenter.default.post(
+                            name: Notification.Name("invitationCodeNotification"),
+                            object: nil,
+                            userInfo: ["userInfo": userInfo]
+                        )
+//                        if let code = self.createProjectModel?.projectCode {
+//                            self.projectRegister()
 //                            alertView.invitationCode = code
 //                            self.invitationCodeNotification(code: code)
-                        }
+//                        }
                     } catch(let error) {
                         print(error.localizedDescription)
                     }

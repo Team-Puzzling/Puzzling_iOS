@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct InvitationCodeModel {
+struct CreateProjectModel {
     let projectCode: String
     let projectId: Int
 }
