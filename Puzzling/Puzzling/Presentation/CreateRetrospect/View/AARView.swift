@@ -40,11 +40,11 @@ class AARView: UIView {
     
     // MARK: - Properties
 
-    private let targetPlaceholder: String = "\"오늘 무슨 일이 있었는지\" 작성해 보세요."
-    private let resultPlaceholder: String = "\"그 과정에서 무슨 느낌이 들었는지\" 작성해 보세요."
-    private let differencePlaceholder: String = "\"오늘 어떤 인사이트를 얻었는지\" 작성해 보세요."
-    private let continuouslyPlaceholder: String = "\"앞으로 무엇을 해야 할지, 어떤 액션을 취해야 할지\" 작성해 보세요."
-    private let purposePlaceholder: String = "\"앞서 정한 향후 행동을 실천해본 뒤, 이에 대해 어떤 피드백을 받았는지\" 작성해 보세요."
+    private let targetPlaceholder: String = "\"업무 전에 의도한 혹은 얻고자 한 결과는 무엇이었는지\" 작성해요."
+    private let resultPlaceholder: String = "\"실제로 오늘 하루 어떤 일이 있었는지\" 작성해요."
+    private let differencePlaceholder: String = "\"목표와 실제 결과 사이의 차이는 왜 발생했을지\" 작성해요."
+    private let continuouslyPlaceholder: String = "\"지속하고 싶은 부분은 무엇인지\" 작성해요."
+    private let purposePlaceholder: String = "\"개선하거나 포기해야 할 부분은 무엇인지\" 작성해요."
     
     var onCompletionAAR: ((Bool) -> Void)?
     

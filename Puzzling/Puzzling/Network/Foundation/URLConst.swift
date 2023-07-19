@@ -25,7 +25,7 @@ public enum URLConst {
     static let getReviewTemplateURL = "/api/v1/review/template"
     static let postReviewTILURL = "/api/v1/member/{memberId}/project/{projectId}/review/TIL"
     static let postReview5FURL = "/api/v1/member/{memberId}/project/{projectId}/review/5F"
-    static let postReviewARRURL = "/api/v1/member/{memberId}/project/{projectId}/review/ARR"
+    static let postReviewARRURL = "/api/v1/member/{memberId}/project/{projectId}/review/AAR"
     static let getReviewPreviousTemplateURL = "/api/v1/member/{memberId}/project/{projectId}/review/previous-template"
     
     // 프로젝트

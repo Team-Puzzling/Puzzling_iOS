@@ -7,6 +7,7 @@
 
 import UIKit
 
+import Moya
 import Then
 import SnapKit
 
@@ -23,7 +24,16 @@ final class CreateRetrospectViewController: UIViewController {
     private var fiveFView: FiveFView! = FiveFView()
     private var arrView: AARView! = AARView()
     
-    private let option: String
+    private let option: Int
+    private var templateID: Int
+
+    private let reviewProvider = MoyaProvider<CreateRetrospectService>(plugins:[NetworkLoggerPlugin()])
+    
+    private var reviewTILModel: ReviewTILModel
+    private var reviewFiveFModel: ReviewFiveFModel
+    private var reviewAARModel: ReviewAARModel
+
+    
     
     // MARK: - View Life Cycle
     
@@ -38,8 +48,14 @@ final class CreateRetrospectViewController: UIViewController {
         updateContentView(option: option)
     }
     
-    init(option: String) {
+    init(option: Int, templateID: Int) {
         self.option = option
+        self.templateID = templateID
+        reviewTILModel = ReviewTILModel(reviewTemplateId: 0, liked: "", lacked: "", actionPlan: "")
+        reviewFiveFModel = ReviewFiveFModel(reviewTemplateId: 0, fact: "", feeling: "",
+                                            finding: "", feedback: "", actionPlan: "")
+        reviewAARModel = ReviewAARModel(reviewTemplateId: 0, initialGoal: "", result: "",
+                                        difference: "", persistence: "", actionPlan: "")
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -59,6 +75,7 @@ extension CreateRetrospectViewController {
     // MARK: - UI Components Property
     
     private func setUI() {
+        
         view.backgroundColor = .white
         
         templatesButton.do {
@@ -79,7 +96,7 @@ extension CreateRetrospectViewController {
     
     private func setLayout() {
         
-        contentView.addSubviews(templatesButton, tilView)
+        contentView.addSubviews(templatesButton)
         scrollView.addSubview(contentView)
         view.addSubview(scrollView)
         
@@ -99,11 +116,6 @@ extension CreateRetrospectViewController {
             $0.leading.equalToSuperview().inset(18)
             $0.height.equalTo(36)
         }
-        
-        tilView.snp.makeConstraints {
-            $0.top.equalTo(templatesButton.snp.bottom).inset(-24)
-            $0.leading.trailing.bottom.equalToSuperview()
-        }
     }
     
     // MARK: - Methods
@@ -116,7 +128,7 @@ extension CreateRetrospectViewController {
         let backButton = UIBarButtonItem(image: Image.chevronBack, style: .plain, target: self, action: #selector(backButtonTapped))
         backButton.imageInsets = UIEdgeInsets(top: 0, left: -8, bottom: 0, right: 0)
         navigationItem.leftBarButtonItem = backButton
-        let saveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveButtonTapped))
+        let saveButton = UIBarButtonItem(title: "저장", style: .plain, target: self, action: #selector(saveNavigationButtonTapped))
         saveButton.tintColor = .gray400
         navigationItem.rightBarButtonItem = saveButton
         navigationItem.rightBarButtonItem?.isEnabled = false
@@ -124,11 +136,9 @@ extension CreateRetrospectViewController {
         tilView.onCompletionTIL = { [weak self] shouldPrint in
             if shouldPrint {
                 print("나와랑")
-                // Enable the save button
                 self?.navigationItem.rightBarButtonItem?.isEnabled = true
                 self?.navigationItem.rightBarButtonItem?.tintColor = .blue400
             } else {
-                // Disable the save button
                 self?.navigationItem.rightBarButtonItem?.isEnabled = false
                 self?.navigationItem.rightBarButtonItem?.tintColor = .gray400
             }
@@ -136,12 +146,9 @@ extension CreateRetrospectViewController {
         
         fiveFView.onCompletionFiveF = { [weak self] shouldPrint in
             if shouldPrint {
-                print("나와랑")
-                // Enable the save button
                 self?.navigationItem.rightBarButtonItem?.isEnabled = true
                 self?.navigationItem.rightBarButtonItem?.tintColor = .blue400
             } else {
-                // Disable the save button
                 self?.navigationItem.rightBarButtonItem?.isEnabled = false
                 self?.navigationItem.rightBarButtonItem?.tintColor = .gray400
             }
@@ -149,27 +156,29 @@ extension CreateRetrospectViewController {
         
         arrView.onCompletionAAR = { [weak self] shouldPrint in
             if shouldPrint {
-                print("나와랑")
-                // Enable the save button
                 self?.navigationItem.rightBarButtonItem?.isEnabled = true
                 self?.navigationItem.rightBarButtonItem?.tintColor = .blue400
             } else {
-                // Disable the save button
                 self?.navigationItem.rightBarButtonItem?.isEnabled = false
                 self?.navigationItem.rightBarButtonItem?.tintColor = .gray400
             }
         }
     }
     
-    private func updateContentView(option: String) {
-        print(option)
-        templatesButton.setTitle(option, for: .normal)
-
+    private func updateContentView(option: Int) {
+        
         contentView.subviews.forEach { $0.removeFromSuperview() } // 기존의 모든 서브뷰를 제거합니다.
-
+        templateID = option
+        print(templateID)
+        print(option)
+        
+        
         switch option {
-        case "TIL":
+            
+        case 1:
+            
             setNavigation()
+            templatesButton.setTitle("TIL", for: .normal)
             contentView.addSubviews(templatesButton, tilView)
             
             contentView.snp.updateConstraints {
@@ -189,8 +198,11 @@ extension CreateRetrospectViewController {
                 $0.leading.trailing.bottom.equalToSuperview()
             }
             
-        case "5F":
+            
+        case 2:
+            
             setNavigation()
+            templatesButton.setTitle("5F", for: .normal)
             contentView.addSubviews(templatesButton, fiveFView)
             
             contentView.snp.updateConstraints {
@@ -210,8 +222,10 @@ extension CreateRetrospectViewController {
                 $0.leading.trailing.bottom.equalToSuperview()
             }
             
-        case "AAR":
+        case 3:
+            
             setNavigation()
+            templatesButton.setTitle("AAR", for: .normal)
             contentView.addSubviews(templatesButton, arrView)
             
             contentView.snp.updateConstraints {
@@ -234,10 +248,6 @@ extension CreateRetrospectViewController {
         default:
             break
         }
-        
-        tilView = nil
-        fiveFView = nil
-        arrView = nil
     }
     
     private func setAddTarget() {
@@ -249,7 +259,57 @@ extension CreateRetrospectViewController {
         view.addGestureRecognizer(tapGestureRecognizer)
     }
     
-    func setupKeyboardEvent() {
+//    private func setTextViewRegister(reviewTemplateId: Int){
+//        switch reviewTemplateId {
+//
+//        case 1:
+////            guard let liked = self.tilView.wellTextView.text else { return }
+////            guard let lacked = self.tilView.regretTextView.text else { return }
+////            guard let actionPlan = self.tilView.learnTextView.text else { return }
+////
+////            postReviewTIL(reviewTemplateId: reviewTemplateId, liked: liked, lacked: lacked,
+////                          actionPlan: actionPlan)
+//
+//        case 2:
+//            guard let fact = self.fiveFView.factTextView.text else { return }
+//            guard let feeling = self.fiveFView.feelingTextView.text else { return }
+//            guard let finding = self.fiveFView.findingTextView.text else { return }
+//            guard let feedback = self.fiveFView.feedbackTextView.text else { return }
+//            guard let actionPlan = self.fiveFView.futureTextView.text else { return }
+//
+//
+//            print(reviewTemplateId)
+//            print(fact)
+//            print(feeling)
+//            print(finding)
+//            print(feedback)
+//            print(actionPlan)
+//
+//        case 3:
+//            guard let initialGoal = self.arrView.targetTextView.text else { return }
+//            guard let result = self.arrView.resultTextView.text else { return }
+//            guard let difference = self.arrView.differenceTextView.text else { return }
+//            guard let persistence = self.arrView.continuouslyTextView.text else { return }
+//            guard let actionPlan = self.arrView.purposeTextView.text else { return }
+//
+//
+//            print(reviewTemplateId)
+//            print(initialGoal)
+//            print(result)
+//            print(difference)
+//            print(persistence)
+//            print(actionPlan)
+//
+//        default:
+//            break
+//        }
+//    }
+    
+    private func setOptionSelected(option: Int) {
+        templateID = option
+    }
+    
+    private func setupKeyboardEvent() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(keyboardWillShow),
                                                name: UIResponder.keyboardWillShowNotification,
@@ -262,7 +322,8 @@ extension CreateRetrospectViewController {
     
     // MARK: - @objc Methods
     
-    @objc func keyboardWillShow(_ sender: Notification) {
+    @objc
+    func keyboardWillShow(_ sender: Notification) {
         guard let keyboardFrame = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue,
               let currentTextView = UIResponder.currentResponder as? UITextView else { return }
         let keyboardTopY = keyboardFrame.cgRectValue.origin.y
@@ -275,17 +336,20 @@ extension CreateRetrospectViewController {
         }
     }
     
-    @objc func keyboardWillHide(_ sender: Notification) {
+    @objc
+    func keyboardWillHide(_ sender: Notification) {
         if view.frame.origin.y != 0 {
             view.frame.origin.y = 0
         }
     }
     
-    @objc private func didTapScreen() {
+    @objc
+    private func didTapScreen() {
         view.endEditing(true)
     }
     
-    @objc func presnetToBottomSheetViewController() {
+    @objc
+    func presnetToBottomSheetViewController() {
         let bottomSheetVC = BottomSheetViewController()
         bottomSheetVC.selectedOption = templatesButton.title(for: .normal)
         bottomSheetVC.onOptionSelected = { [weak self] option in
@@ -307,16 +371,161 @@ extension CreateRetrospectViewController {
     
     @objc
     private func saveButtonTapped() {
+        let templateID = self.templateID
+            switch templateID {
+            case 1:
+                print("1번 옵션이 선택 되었습니다")
+                
+                guard let liked = self.tilView.wellTextView.text else { return }
+                guard let lacked = self.tilView.regretTextView.text else { return }
+                guard let actionPlan = self.tilView.learnTextView.text else { return }
+                
+                postReviewTIL(reviewTemplateId: templateID, liked: liked, lacked: lacked,
+                              actionPlan: actionPlan)
+            case 2:
+                print("2번 옵션이 선택 되었습니다")
+                
+                guard let fact = self.fiveFView.factTextView.text else { return }
+                guard let feeling = self.fiveFView.feelingTextView.text else { return }
+                guard let finding = self.fiveFView.findingTextView.text else { return }
+                guard let feedback = self.fiveFView.feedbackTextView.text else { return }
+                guard let actionPlan = self.fiveFView.futureTextView.text else { return }
+            
+                postReviewFiveF(reviewTemplateId: templateID, fact: fact, feeling: feeling,
+                                finding: finding, feedback: feedback, actionPlan: actionPlan)
+            case 3:
+                print("3번 옵션이 선택 되었습니다")
+                
+                guard let initialGoal = self.arrView.targetTextView.text else { return }
+                guard let result = self.arrView.resultTextView.text else { return }
+                guard let difference = self.arrView.differenceTextView.text else { return }
+                guard let persistence = self.arrView.continuouslyTextView.text else { return }
+                guard let actionPlan = self.arrView.purposeTextView.text else { return }
+                
+                postReviewAAR(reviewTemplateId: templateID, initialGoal: initialGoal, result: result,
+                              difference: difference, persistence: persistence, actionPlan: actionPlan)
+            default:
+                break
+            }
+        
+    }
+    
+    @objc
+    func saveNavigationButtonTapped() {
+        print(templateID)
         navigationController?.navigationBar.isUserInteractionEnabled = false
-
         let alert = CustomAlertView(frame: CGRect(x: 0, y: 0, width: 300, height: 400), alertType: .createRetrospect)
         alert.translatesAutoresizingMaskIntoConstraints = false
+        alert.onSaveButtonTapped = { [weak self] in // Assign the handler closure
+            self?.saveButtonTapped()
+        }
         view.addSubview(alert)
-
+        
         alert.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-
+        
         alert.isUserInteractionEnabled = true
+    }
+}
+
+extension CreateRetrospectViewController {
+    
+    // MARK: - Network
+    
+    private func postReviewTIL(reviewTemplateId: Int, liked: String, lacked: String, actionPlan: String) {
+        reviewTILModel.reviewTemplateId = reviewTemplateId
+        reviewTILModel.liked = liked
+        reviewTILModel.lacked = lacked
+        reviewTILModel.actionPlan = actionPlan
+        
+        reviewProvider.request(.reviewTIL(param: reviewTILModel.makePostReviewTILResponce(), memberID: "1", projectID: "1")) { result in
+            switch result {
+            case .success(let result):
+                let status = result.statusCode
+                if status >= 200 && status < 300 {
+                    do {
+                        print("🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀")
+                        self.navigationController?.popViewController(animated: true)
+                        print("🪀🪀🪀성공적으로 저장 후 화면 전환🪀🪀🪀")
+                        print("🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀")
+
+                    } catch(let error){
+                        print(error.localizedDescription)
+                    }
+                }
+                else if status >= 400 {
+                    print("⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️")
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    private func postReviewFiveF(reviewTemplateId: Int, fact: String, feeling: String, finding: String, feedback: String, actionPlan: String) {
+        reviewFiveFModel.reviewTemplateId = reviewTemplateId
+        reviewFiveFModel.fact = fact
+        reviewFiveFModel.feeling = feeling
+        reviewFiveFModel.finding = finding
+        reviewFiveFModel.feedback = feedback
+        reviewFiveFModel.actionPlan = actionPlan
+        
+        reviewProvider.request(.reviewFiveF(param: reviewFiveFModel.makePostReviewFiveFResponce(), memberID: "1", projectID: "1")) { result in
+            switch result {
+            case .success(let result):
+                let status = result.statusCode
+                if status >= 200 && status < 300 {
+                    do {
+                        print("🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀")
+                        self.navigationController?.popViewController(animated: true)
+                        print("🪀🪀🪀성공적으로 저장 후 화면 전환🪀🪀🪀")
+                        print("🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀")
+
+                    } catch(let error){
+                        print(error.localizedDescription)
+                    }
+                }
+                else if status >= 400 {
+                    print("⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️")
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    private func postReviewAAR(reviewTemplateId: Int, initialGoal: String, result: String, difference: String,
+                               persistence: String, actionPlan: String) {
+        reviewAARModel.reviewTemplateId = reviewTemplateId
+        reviewAARModel.initialGoal = initialGoal
+        reviewAARModel.result = result
+        reviewAARModel.difference = difference
+        reviewAARModel.persistence = persistence
+        reviewAARModel.actionPlan = actionPlan
+        
+        reviewProvider.request(.reivewAAR(param: reviewAARModel.makePostReviewAARResponce(), memberID: "1", projectID: "1")) { result in
+            switch result {
+            case .success(let result):
+                let status = result.statusCode
+                if status >= 200 && status < 300 {
+                    do {
+                        print("🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀")
+                        self.navigationController?.popViewController(animated: true)
+                        print("🪀🪀🪀성공적으로 저장 후 화면 전환🪀🪀🪀")
+                        print("🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀")
+
+                    } catch(let error){
+                        print(error.localizedDescription)
+                    }
+                }
+                else if status >= 400 {
+                    print("⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️")
+                    print(status)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }
