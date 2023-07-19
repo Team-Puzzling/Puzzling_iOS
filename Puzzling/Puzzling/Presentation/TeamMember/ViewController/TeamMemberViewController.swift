@@ -89,7 +89,7 @@ extension TeamMemberViewController {
         view.addSubviews(teamMemberCalenderView, teamMemberTableView)
         
         teamMemberCalenderView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(32.0)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(32)
             $0.trailing.leading.equalToSuperview().inset(16)
             $0.height.equalTo(teamMemberCalenderView.getCalendarViewHeight())
         }

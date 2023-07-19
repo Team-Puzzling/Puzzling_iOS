@@ -27,6 +27,8 @@ public enum Image {
     static let notificationBell = UIImage(named: "notificationBell")!
     static let notification = UIImage(named: "bell1")!
     static let chevronBackIcon = UIImage(named: "chevronBack_icon")!
+    static let xIcon = UIImage(systemName: "multiply")?
+        .withTintColor(.gray500, renderingMode: .alwaysOriginal)
     static let warning = UIImage(named: "warning")!
     static let downIcon = UIImage(systemName: "chevron.down")?
         .withTintColor(.gray500, renderingMode: .alwaysOriginal)
