@@ -32,6 +32,7 @@ final class OnBoardingViewContoller: UIViewController {
     private let authProvider = MoyaProvider<AuthService>(plugins:[NetworkLoggerPlugin()])
     private var authModel: AuthModel = AuthModel(socialPlatform: "")
     private var userModel: UserModel = UserModel(name: "", memberId: 0, projectId: nil, accessToken: "", refreshToken: "", isNewUser: false)
+    private var tokenModel: TokenModel = TokenModel(accessToken: "")
     private var socialPlatform: String = ""
     private var token: String = ""
     // MARK: - UI Components
@@ -56,7 +57,7 @@ final class OnBoardingViewContoller: UIViewController {
         setUI()
         setLayout()
         onBoardingView.delegate = self
-                
+        
     }
 }
 
@@ -99,6 +100,8 @@ private extension OnBoardingViewContoller {
                 return
             }
             else {
+                
+                
                 if let project = UserDefaults.standard.object(forKey: "projectId") {
                     print("메인페이지로 가라")
                     self.gotoMainPage()
@@ -115,8 +118,8 @@ private extension OnBoardingViewContoller {
         
         
         
-//            if let project = UserDefaults.standard.object(forKey: "projectId") { self.gotoMainPage() }
-//            self.gotoMainEnterProjectView()
+        //            if let project = UserDefaults.standard.object(forKey: "projectId") { self.gotoMainPage() }
+        //            self.gotoMainEnterProjectView()
     }
     
     func kakaoLogin() {
@@ -143,17 +146,13 @@ private extension OnBoardingViewContoller {
                     print(error)
                 } else {
                     print("loginWithKakaoAccount() success.")
-
+                    
                     _ = oauthToken
                     // 관련 메소드 추가
                     self.postAuth()
                 }
             }
         }
-    }
-    
-    func saveToken() {
-        UserDefaults.standard.set(true, forKey: "Login")
     }
     
     func gotoMainEnterProjectView() {
@@ -171,7 +170,7 @@ private extension OnBoardingViewContoller {
 
 
 extension OnBoardingViewContoller {
-
+    
     // MARK: - Network
     
     private func postAuth() {
@@ -186,7 +185,7 @@ extension OnBoardingViewContoller {
                         print("?????????\(result)")
                         print("?????????\(try result.map(GeneralResponse<UserResponse>.self))")
                         guard let data = try result.map(GeneralResponse<UserResponse>.self).data else { return }
-                        self.userModel = data.convertoToUserModel()
+                        self.userModel = data.convertToUserModel()
                         print("🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰\(self.userModel)🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰")
                         UserDefaults.standard.set(self.userModel.name, forKey: "name")
                         UserDefaults.standard.set(self.userModel.projectId, forKey: "projectId")
@@ -219,14 +218,17 @@ extension OnBoardingViewContoller {
     }
     
     func getNewToken() {
-        authProvider.request(.authToken) { result in
+        guard let access = KeyChain.read(key: "accessToken") else { return }
+        guard let refresh = KeyChain.read(key: "refreshToken") else { return }
+        authProvider.request(.authToken(Authorization: access, Refresh: refresh)) { result in
             switch result {
             case .success(let result):
                 let status = result.statusCode
                 if status >= 200 && status < 300 {
                     do {
-                        guard let data = try result.map(GeneralResponse<UserResponse>.self).data else { return }
-                        self.userModel = data.convertoToUserModel()
+                        guard let data = try result.map(GeneralResponse<TokenResponse>.self).data else { return }
+                        self.tokenModel = data.convertToTokenModel()
+                        KeyChain.create(key: "accessToken", token: self.tokenModel.accessToken)
                     } catch(let error) {
                         print(error.localizedDescription)
                     }

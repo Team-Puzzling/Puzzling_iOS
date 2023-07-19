@@ -10,7 +10,7 @@ import Moya
 
 enum AuthService {
     case postAuth(param: PostAuthRequest, token: String)
-    case authToken
+    case authToken(Authorization: String, Refresh: String)
 }
 
 extension AuthService: TargetType {
@@ -50,8 +50,10 @@ extension AuthService: TargetType {
         case .postAuth(_, let token):
             APIConstants.accessToken = token
             return APIConstants.headerWithAuthorization
-        case .authToken:
-            return APIConstants.headerWithAuthorization
+        case .authToken(let authorization, let refresh):
+            APIConstants.authorization = authorization
+            APIConstants.refresh = refresh
+            return APIConstants.headerWithRefresh
         }
     }
 }

@@ -98,6 +98,8 @@
 		0967560D2A61E08C00A1E691 /* ProjectCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0967560C2A61E08C00A1E691 /* ProjectCalendarView.swift */; };
 		0967560F2A61E73700A1E691 /* ReviewDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0967560E2A61E73700A1E691 /* ReviewDetailView.swift */; };
 		09B2A0492A682C65007DED5F /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B2A0482A682C65007DED5F /* KeyChain.swift */; };
+		09B2A04B2A683D1A007DED5F /* TokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B2A04A2A683D1A007DED5F /* TokenResponse.swift */; };
+		09B2A04D2A683D54007DED5F /* TokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B2A04C2A683D54007DED5F /* TokenModel.swift */; };
 		09C3AD582A65714800CDE00F /* TeamMemberCustomHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C3AD572A65714800CDE00F /* TeamMemberCustomHeaderView.swift */; };
 		09C3AD5A2A65715C00CDE00F /* TeamMemberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C3AD592A65715C00CDE00F /* TeamMemberTableViewCell.swift */; };
 		09C3AD5E2A65719100CDE00F /* TeamMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C3AD5D2A65719100CDE00F /* TeamMemberViewController.swift */; };
@@ -228,6 +230,8 @@
 		0967560C2A61E08C00A1E691 /* ProjectCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCalendarView.swift; sourceTree = "<group>"; };
 		0967560E2A61E73700A1E691 /* ReviewDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailView.swift; sourceTree = "<group>"; };
 		09B2A0482A682C65007DED5F /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
+		09B2A04A2A683D1A007DED5F /* TokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenResponse.swift; sourceTree = "<group>"; };
+		09B2A04C2A683D54007DED5F /* TokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenModel.swift; sourceTree = "<group>"; };
 		09C3AD572A65714800CDE00F /* TeamMemberCustomHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberCustomHeaderView.swift; sourceTree = "<group>"; };
 		09C3AD592A65715C00CDE00F /* TeamMemberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberTableViewCell.swift; sourceTree = "<group>"; };
 		09C3AD5D2A65719100CDE00F /* TeamMemberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberViewController.swift; sourceTree = "<group>"; };
@@ -661,6 +665,7 @@
 			children = (
 				0935C8092A66F97F00790A1B /* PostAuthRequest.swift */,
 				0935C80B2A66FA8F00790A1B /* UserResponse.swift */,
+				09B2A04A2A683D1A007DED5F /* TokenResponse.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -671,6 +676,7 @@
 				0935C8102A66FBF400790A1B /* AuthModel.swift */,
 				0935C8152A67059E00790A1B /* User.swift */,
 				09F5911B2A67BCEC0033B3EE /* UserModel.swift */,
+				09B2A04C2A683D54007DED5F /* TokenModel.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -1101,6 +1107,7 @@
 				096755FA2A607A7D00A1E691 /* MyReviewListDataModel.swift in Sources */,
 				03E6D25C2A5331FF00F4453C /* GeneralResponse.swift in Sources */,
 				03ADF3942A5EA4DB002CEDDC /* CheckButton.swift in Sources */,
+				09B2A04B2A683D1A007DED5F /* TokenResponse.swift in Sources */,
 				9B1CA97E2A634C7900CB81AC /* ReviewDetailCollectionViewCell.swift in Sources */,
 				03E6D1E52A53219600F4453C /* AppDelegate.swift in Sources */,
 				03E6D2602A53322300F4453C /* URLConst.swift in Sources */,
@@ -1145,6 +1152,7 @@
 				03ADF3892A5E7322002CEDDC /* StartDayView.swift in Sources */,
 				25642BD92A67DB500041200D /* ReviewAARRequest.swift in Sources */,
 				03ADF38D2A5E8A5F002CEDDC /* CreateProjectView.swift in Sources */,
+				09B2A04D2A683D54007DED5F /* TokenModel.swift in Sources */,
 				03E6D2642A53330E00F4453C /* NSObject+.swift in Sources */,
 				588AA06C2A5E77EF0017CB1E /* ActionPlanView.swift in Sources */,
 				0351AB462A645BBF006B0F4C /* InvitationCodeViewController.swift in Sources */,

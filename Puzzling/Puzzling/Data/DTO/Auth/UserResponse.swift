@@ -16,7 +16,7 @@ struct UserResponse: Codable {
     let refreshToken: String
     let isNewUser: Bool
     
-    func convertoToUserModel() -> UserModel {
+    func convertToUserModel() -> UserModel {
         return UserModel(name: name, memberId: memberId, projectId: projectId, accessToken: accessToken, refreshToken: refreshToken, isNewUser: isNewUser)
     }
 }
