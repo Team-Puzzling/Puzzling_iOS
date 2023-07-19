@@ -154,9 +154,9 @@ extension MyProjectTableViewCell {
 }
 
 extension MyProjectTableViewCell {
-    func setDataBind(_ data: MyProjectDataModel) {
+    func setDataBind(_ data: ProjectListResponse) {
         projectNameLabel.text  = data.projectName
-        let duration: Int = calculateDays(date: data.startDate)
+        let duration: Int = calculateDays(date: data.projectStartDate)
 
         if (duration < 0) {
             durationLabel.text = "D - \((duration - 1) * (-1))"
