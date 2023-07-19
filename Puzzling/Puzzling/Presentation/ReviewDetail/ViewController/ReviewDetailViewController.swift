@@ -19,7 +19,9 @@ extension ReviewDetailViewController {
         var reviewDetailViewStatus: UIView? {
             switch self {
             case .review:
-                return ReviewDetailView()
+                let v = ReviewDetailView()
+                v.reviewCollectionview.reloadData()
+                return v
             case .empty:
                 return ReviewDetailEmptyView()
             }
@@ -27,9 +29,24 @@ extension ReviewDetailViewController {
     }
 }
 
+extension ReviewDetailViewController: reviewDateProtocol {
+    func reviewDate(text: String) {
+        selectedDate = text
+        print(selectedDate, "aaaaaa👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿")
+        let userInfo = selectedDate
+        print(userInfo, "xxxxxx")
+        NotificationCenter.default.post(
+            name: Notification.Name("dateNotification"),
+            object: nil,
+            userInfo: ["userInfo": userInfo]
+        )
+        reviewDetailView?.layoutSubviews()
+    }
+}
+
 final class ReviewDetailViewController: UIViewController {
     
-    private let reviewDetailData = ReviewDetailDataModel.dummy()
+    private var selectedDate: String = "2023-07-17"
     
     private let projectCalenderView = ProjectCalendarView()
     
@@ -39,7 +56,6 @@ final class ReviewDetailViewController: UIViewController {
         reviewDetailView?.removeFromSuperview()
         reviewDetailView = nil
         reviewDetailView = status.reviewDetailViewStatus
-        
     }
     
     private var reviewDetailView: UIView? = UIView()
@@ -72,12 +88,11 @@ final class ReviewDetailViewController: UIViewController {
 extension ReviewDetailViewController {
     
     private func setDelegate() {
-
+        projectCalenderView.delegate = self
     }
     
     private func setUI() {
         view.backgroundColor = .white000
-
     }
     
     private func setLayout() {
@@ -135,7 +150,6 @@ extension ReviewDetailViewController {
     private func setNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(getDateBoolNotification(_:)), name: Notification.Name("dateBoolNotification"), object: nil)
     }
- 
 }
 
 extension ReviewDetailViewController {

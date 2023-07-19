@@ -12,11 +12,13 @@ import Then
 
 final class ReviewDetailView: UIView {
     private let reviewDetailData = ReviewDetailDataModel.dummy()
-    private var selectedDate: String = ""
+    private var selectedDate: String = "2023-07-17"
     
     private func findMyData() -> ReviewDetailDataModel {
         var data: ReviewDetailDataModel = ReviewDetailDataModel(reviewId: nil, reviewDay: "", reviewDate: "", contents: nil)
         reviewDetailData.forEach {
+            
+                print("👥👥👥👥👥👥👥👥👥👥👥👥👥👥👥")
             if($0.reviewDate == selectedDate) {
                 data = $0
                 print(data)
@@ -25,7 +27,7 @@ final class ReviewDetailView: UIView {
         return data
     }
     
-    private let reviewCollectionview = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    let reviewCollectionview = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -77,20 +79,25 @@ extension ReviewDetailView {
         reviewCollectionview.registerCell(ReviewDetailCollectionViewCell.self)
     }
     
-    private func setNotificationCenter() {
+    func setNotificationCenter() {
         print("plz")
         NotificationCenter.default.addObserver(self, selector: #selector(getDateNotification(_:)), name: Notification.Name("dateNotification"), object: nil)
+//        reviewCollectionview.reloadData()
     }
 }
 
 extension ReviewDetailView {
     @objc
     private func getDateNotification(_ notification: Notification) {
+        print(#function)
         let dateNotification = notification.userInfo?["userInfo"]
+        selectedDate = dateNotification as! String
+//        calendarView.select(dateFormatter.date(from: selectedDate))
+        print(selectedDate)
         print(dateNotification ?? "","?slsllslslslls??")
         selectedDate = dateNotification as! String
-        print(selectedDate,"✅✅✅✅✅✅")
-        reviewCollectionview.reloadData()
+        print(selectedDate,"✅✅✅✅??✅✅")
+//        reviewCollectionview.reloadData()
     }
 }
 
@@ -98,24 +105,28 @@ extension ReviewDetailView: UICollectionViewDelegate { }
 
 extension ReviewDetailView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let count = reviewDetailData[1].contents?.count else { return 0 }
+        var data = findMyData()
+        guard let count = data.contents?.count else { return 0 }
         return count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = reviewCollectionview.dequeueCell(type: ReviewDetailCollectionViewCell.self, indexPath: indexPath)
-            print(selectedDate,"ㅋㅋㅋㅋㅋ")
-        reviewDetailData.forEach {
-            if($0.reviewDate == selectedDate) {
-                guard let title = $0.contents?[indexPath.row].title else { return }
-                guard let description = $0.contents?[indexPath.row].content else { return }
+//        setNotificationCenter()
+            print(selectedDate,"ㅋㅋ???ㅋㅋㅋ")
+//        reviewDetailData.forEach {
+        var data = findMyData()
+        print(data)
+            if(data.reviewDate == selectedDate) {
+                guard let title = data.contents?[indexPath.row].title else { return UICollectionViewCell() }
+                guard let description = data.contents?[indexPath.row].content else { return UICollectionViewCell() }
                 cell.setDataBind(title: title, description: description)
-                guard let count = $0.contents?.count else { return }
+                guard let count = data.contents?.count else { return UICollectionViewCell() }
                 if (indexPath.row == count - 1) {
                     cell.divisionHidden()
                 }
             }
-        }
+//        }
         
         return cell
     }
@@ -123,7 +134,8 @@ extension ReviewDetailView: UICollectionViewDataSource {
 
 extension ReviewDetailView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        guard let height = reviewDetailData[1].contents?[indexPath.row].content.textHeight(withWidth: UIScreen.main.bounds.width - 64) else { return CGSize(width: 0, height: 0) }
+        var data = findMyData()
+        guard let height = data.contents?[indexPath.row].content.textHeight(withWidth: UIScreen.main.bounds.width - 64) else { return CGSize(width: 0, height: 0) }
         return CGSize(width: UIScreen.main.bounds.width, height: height + 56)
     }
     

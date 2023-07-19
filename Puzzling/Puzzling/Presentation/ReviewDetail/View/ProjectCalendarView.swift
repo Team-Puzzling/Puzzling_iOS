@@ -11,9 +11,14 @@ import FSCalendar
 import SnapKit
 import Then
 
+protocol reviewDateProtocol: AnyObject {
+    func reviewDate(text: String)
+}
+
 final class ProjectCalendarView: UIView {
     
-    private lazy var calendarView = FSCalendar(frame: .zero)
+    weak var delegate: reviewDateProtocol?
+    lazy var calendarView = FSCalendar(frame: .zero)
     private var calendarViewHeight = NSLayoutConstraint()
     private lazy var headerLabel = UILabel()
     private lazy var testLabel = UILabel()
@@ -42,17 +47,8 @@ extension ProjectCalendarView {
     private func setUI() {
         calendarView.do {
             $0.select(Date())
-            print($0.formatter.dateFormat)
-            print($0.formatter.timeZone)
-            print($0.formatter.locale)
-            $0.formatter.timeZone = TimeZone(identifier: "KST")
-            $0.formatter.locale = Locale(identifier: "ko_KR")
-//            $0.timeZone = TimeZone(identifier: "KST")
             $0.locale = Locale(identifier: "ko_KR")
             
-            print($0.formatter.timeZone)
-            print($0.formatter.locale)
-            print($0.locale)
             
             $0.scope = .week
             $0.firstWeekday = 2
@@ -113,6 +109,7 @@ extension ProjectCalendarView {
     
     private func sendDateNotification(string: String) {
         let userInfo = string
+        print(userInfo, "xxxxxx")
         NotificationCenter.default.post(
             name: Notification.Name("dateNotification"),
             object: nil,
@@ -187,17 +184,13 @@ extension ProjectCalendarView: FSCalendarDelegate, FSCalendarDataSource, FSCalen
     }
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        print(date, "🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁")
-        print(date)
-        let str: String = dateFormatter.string(from: date)
-        sendDateNotification(string: str)
         
+        let returnDate = dateFormatter.string(from: date)
+        print(returnDate, "💂‍♀️💂‍♀️💂‍♀️💂‍♀️💂‍♀️💂‍♀️")
         var boolData: Bool = true
         
         reviewDetailDataModel.forEach {
-            if $0.reviewDate == dateFormatter.string(from: date) {
-                print("???????????")
-                print(dateFormatter.string(from: date))
+            if $0.reviewDate == returnDate {
                 if(date == dateFormatter.date(from: $0.reviewDate) && $0.reviewId == nil) {
                     boolData = false
                 }
@@ -205,7 +198,10 @@ extension ProjectCalendarView: FSCalendarDelegate, FSCalendarDataSource, FSCalen
         }
         
         print("dpdpdpdp")
+        sendDateNotification(string: returnDate)
         sendDateBoolNotification(bool: boolData)
+        
+        self.delegate?.reviewDate(text: returnDate)
     }
 }
 
