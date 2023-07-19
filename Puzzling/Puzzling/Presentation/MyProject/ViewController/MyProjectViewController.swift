@@ -98,7 +98,12 @@ extension MyProjectViewController {
     private func notificationButtonTapped() { }
 }
 
-extension MyProjectViewController: UITableViewDelegate { }
+extension MyProjectViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = MyReviewListViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+}
 
 extension MyProjectViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

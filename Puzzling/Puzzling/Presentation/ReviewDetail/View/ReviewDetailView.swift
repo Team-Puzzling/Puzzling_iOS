@@ -19,12 +19,14 @@ final class ReviewDetailView: UIView {
         reviewDetailData.forEach {
             if($0.reviewDate == selectedDate) {
                 data = $0
+                print(data)
             }
         }
         return data
     }
     
     private let reviewCollectionview = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUI()
@@ -87,7 +89,8 @@ extension ReviewDetailView {
         let dateNotification = notification.userInfo?["userInfo"]
         print(dateNotification ?? "","?slsllslslslls??")
         selectedDate = dateNotification as! String
-        print(selectedDate)
+        print(selectedDate,"✅✅✅✅✅✅")
+        reviewCollectionview.reloadData()
     }
 }
 

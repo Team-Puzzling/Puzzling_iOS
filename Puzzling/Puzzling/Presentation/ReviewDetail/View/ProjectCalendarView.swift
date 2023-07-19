@@ -43,10 +43,17 @@ extension ProjectCalendarView {
         calendarView.do {
             $0.select(Date())
             print($0.formatter.dateFormat)
-//            $0.formatter.timeZone = TimeZone(identifier: "KST")
+            print($0.formatter.timeZone)
+            print($0.formatter.locale)
+            $0.formatter.timeZone = TimeZone(identifier: "KST")
             $0.formatter.locale = Locale(identifier: "ko_KR")
-            
+//            $0.timeZone = TimeZone(identifier: "KST")
             $0.locale = Locale(identifier: "ko_KR")
+            
+            print($0.formatter.timeZone)
+            print($0.formatter.locale)
+            print($0.locale)
+            
             $0.scope = .week
             $0.firstWeekday = 2
             $0.appearance.selectionColor = .blue400
@@ -121,11 +128,16 @@ extension ProjectCalendarView {
         }
         
         dateFormatter.do {
-            $0.dateFormat = "yyyy-MM-dd"
             $0.locale = Locale(identifier: "ko_KR")
-            $0.timeZone = TimeZone(identifier: "KST")
+            $0.timeZone = TimeZone(abbreviation: "KST")
+            $0.dateFormat = "yyyy-MM-dd"
         }
     }
+    
+//    private func stringToDate(string: String) -> Date {
+//
+//    }
+    
 }
 
 extension ProjectCalendarView: FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
@@ -175,18 +187,23 @@ extension ProjectCalendarView: FSCalendarDelegate, FSCalendarDataSource, FSCalen
     }
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        sendDateNotification(string: dateFormatter.string(from: date))
+        print(date, "🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁🎁")
+        print(date)
+        let str: String = dateFormatter.string(from: date)
+        sendDateNotification(string: str)
+        
         var boolData: Bool = true
+        
         reviewDetailDataModel.forEach {
-            print($0.reviewDate)
-            let modelDate = dateFormatter.date(from: $0.reviewDate)
-            print(modelDate)
-            print("\(String(describing: modelDate))??qqqq????")
-            if(date == modelDate && $0.reviewId == nil) {
-                boolData = false
-                return
+            if $0.reviewDate == dateFormatter.string(from: date) {
+                print("???????????")
+                print(dateFormatter.string(from: date))
+                if(date == dateFormatter.date(from: $0.reviewDate) && $0.reviewId == nil) {
+                    boolData = false
+                }
             }
         }
+        
         print("dpdpdpdp")
         sendDateBoolNotification(bool: boolData)
     }

@@ -16,7 +16,7 @@ extension ReviewDetailViewController {
     enum reviewDetail: CaseIterable {
         case review, empty
         
-        var reviewDetailViewStatus: UIView {
+        var reviewDetailViewStatus: UIView? {
             switch self {
             case .review:
                 return ReviewDetailView()
@@ -35,11 +35,14 @@ final class ReviewDetailViewController: UIViewController {
     
     func setReviewDetailView(status: reviewDetail) {
         print(#function, status)
+        reviewDetailView?.alpha = 0
+        reviewDetailView?.removeFromSuperview()
+        reviewDetailView = nil
         reviewDetailView = status.reviewDetailViewStatus
         
     }
     
-    private var reviewDetailView = UIView()
+    private var reviewDetailView: UIView? = UIView()
     
     // MARK: - Lifecycle
     
@@ -121,8 +124,8 @@ extension ReviewDetailViewController {
     }
     
     private func layout() {
-        view.addSubviews(reviewDetailView)
-        reviewDetailView.snp.makeConstraints {
+        view.addSubviews(reviewDetailView ?? UIView())
+        reviewDetailView?.snp.makeConstraints {
             $0.top.equalTo(projectCalenderView.snp.bottom).offset(12)
             $0.horizontalEdges.equalToSuperview()
             $0.bottom.equalToSuperview()
@@ -138,7 +141,7 @@ extension ReviewDetailViewController {
 extension ReviewDetailViewController {
     @objc
     private func backButtonTapped() {
-        
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc

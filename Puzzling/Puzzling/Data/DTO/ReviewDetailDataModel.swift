@@ -7,6 +7,9 @@
 
 import Foundation
 
+// didSelect 해당 날짜를 기준으로 filter
+// 없으면 엠티뷰, 있으면 그대로 가져오면 댐
+
 struct ReviewDetailDataModel {
     let reviewId: Int?
     let reviewDay: String
