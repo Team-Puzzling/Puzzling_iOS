@@ -167,14 +167,7 @@ extension CreateProjectViewController {
         present(projectStartTimeVC, animated: true, completion: nil)
     }
     
-    private func projectRegister() {
-        print("-------------------------------------------")
-        print(projectName)
-        print(projectDescription)
-        print(replaceDate(date: projectStartDate))
-        print(projectRole)
-        print(projectNickname)
-        print(projectCycle)
+    private func projectRegister(code: String) {
         let alert = CustomAlertView(frame: CGRect(x: 0, y: 0, width: 290, height: 373), alertType: .createProject)
         alert.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(alert)
@@ -248,7 +241,7 @@ extension CreateProjectViewController {
     
     @objc
     private func registerProjectButtonDidTap() {
-        projectRegister()
+//        projectRegister()
         postProjectInfo()
     }
     
@@ -340,7 +333,9 @@ extension CreateProjectViewController {
                         guard let data = try result.map(GeneralResponse<InvitationCodeResponse>.self).data else { return }
                         self.invitationCodeModel = data.convertToInvitationCode()
                         if let code = self.invitationCodeModel?.projectCode {
-                            self.invitationCodeNotification(code: code)
+                            self.projectRegister(code: code)
+//                            alertView.invitationCode = code
+//                            self.invitationCodeNotification(code: code)
                         }
                     } catch(let error) {
                         print(error.localizedDescription)

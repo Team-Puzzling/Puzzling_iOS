@@ -9,4 +9,5 @@ import Foundation
 
 struct InvitationCodeModel {
     let projectCode: String
+    let projectId: Int
 }

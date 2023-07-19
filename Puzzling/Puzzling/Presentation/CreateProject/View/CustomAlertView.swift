@@ -36,7 +36,7 @@ class CustomAlertView: UIView {
 
     // MARK: - Properties
     
-    private var invitationCode: String = ""
+    var invitationCode: String = ""
     
     // MARK: - Initializer
 
@@ -114,6 +114,7 @@ class CustomAlertView: UIView {
             }
 
             subtitleLabel.do {
+                $0.text = invitationCode
                 $0.numberOfLines = 2
                 $0.font = .fontGuide(.body3_regular_kor)
                 $0.textColor = .gray600
