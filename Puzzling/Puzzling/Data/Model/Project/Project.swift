@@ -15,7 +15,7 @@ struct Project {
     var memberProjectNickname: String
     var reviewCycle: [String]
     
-    public func makePostProjectRequest() -> PostProjectRequest {
+    func makePostProjectRequest() -> PostProjectRequest {
         return PostProjectRequest(projectName: projectName,
                                   projectIntro: projectIntro,
                                   projectStartDate: projectStartDate,

@@ -9,6 +9,7 @@ import UIKit
 
 import SnapKit
 import Then
+import Moya
 
 extension ReviewDetailViewController {
     @frozen
@@ -35,8 +36,6 @@ final class ReviewDetailViewController: UIViewController {
     }
     
     private var reviewDetailView = ReviewDetailView()
-    
-    private let teamMemberData = TeamMemberDataModel.dummy()
     
     // MARK: - Lifecycle
     
