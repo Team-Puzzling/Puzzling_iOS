@@ -10,9 +10,9 @@ import Moya
 
 enum CreateRetrospectService {
     case reviewTemplate
-    case reviewTIL(memberID: String, projectID: String)
-    case reviewFiveF(memberID: String, projectID: String)
-    case reivewAAR(memberID: String, projectID: String)
+    case reviewTIL(param: ReviewTILRequest, memberID: String, projectID: String)
+    case reviewFiveF(param: ReviewFiveFRequest,memberID: String, projectID: String)
+    case reivewAAR(param: ReviewAARRequest, memberID: String, projectID: String)
     case previousTemplate(memberID: String, projectID: String)
 }
 
@@ -25,15 +25,15 @@ extension CreateRetrospectService: TargetType {
         switch self {
         case .reviewTemplate:
             return URLConst.getReviewTemplateURL
-        case .reviewTIL(let memberID, let projectID):
+        case .reviewTIL(_, let memberID, let projectID):
             return URLConst.postReviewTILURL
                 .replacingOccurrences(of: "{memberId}", with: "\(memberID)")
                 .replacingOccurrences(of: "{projectId}", with: "\(projectID)")
-        case .reviewFiveF(let memberID, let projectID):
+        case .reviewFiveF(_, let memberID, let projectID):
             return URLConst.postReview5FURL
                 .replacingOccurrences(of: "{memberId}", with: "\(memberID)")
                 .replacingOccurrences(of: "{projectId}", with: "\(projectID)")
-        case .reivewAAR(let memberID, let projectID):
+        case .reivewAAR(_, let memberID, let projectID):
             return URLConst.postReviewARRURL
                 .replacingOccurrences(of: "{memberId}", with: "\(memberID)")
                 .replacingOccurrences(of: "{projectId}", with: "\(projectID)")
@@ -61,16 +61,15 @@ extension CreateRetrospectService: TargetType {
     
     var task: Moya.Task {
         switch self {
-//            우당탕탕
         case .reviewTemplate:
             return .requestPlain
-        case .reviewTIL(memberID: let memberID, projectID: let projectID):
-            return .requestPlain
-        case .reviewFiveF(memberID: let memberID, projectID: let projectID):
-            return .requestPlain
-        case .reivewAAR(memberID: let memberID, projectID: let projectID):
-            return .requestPlain
-        case .previousTemplate(memberID: let memberID, projectID: let projectID):
+        case .reviewTIL(let param, _, _): // 진짜 권정 멋 지 다 ! 🪀
+            return .requestParameters(parameters: try! param.asParameter(), encoding: JSONEncoding.default)
+        case .reviewFiveF(let param, _, _):
+            return .requestParameters(parameters: try! param.asParameter(), encoding: JSONEncoding.default)
+        case .reivewAAR(let param, _, _):
+            return .requestParameters(parameters: try! param.asParameter(), encoding: JSONEncoding.default)
+        case .previousTemplate(_, _):
             return .requestPlain
         }
     }
