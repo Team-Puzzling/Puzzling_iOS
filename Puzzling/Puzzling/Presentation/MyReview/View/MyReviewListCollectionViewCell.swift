@@ -90,7 +90,7 @@ extension MyReviewListCollectionViewCell {
 
 extension MyReviewListCollectionViewCell {
     
-    func setDataBind(_ reviewListData: MyReviewListDataModel) {
+    func setDataBind(_ reviewListData: ReviewListResponse) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
                 

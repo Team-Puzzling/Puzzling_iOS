@@ -11,6 +11,7 @@ import Moya
 
 enum MyProjectService {
     case projectList(memberId: String)
+    case myReviewList(memberId: String, projectId: String)
 }
 
 extension MyProjectService: TargetType {
@@ -22,12 +23,16 @@ extension MyProjectService: TargetType {
         switch self {
         case .projectList(let memberId):
             return URLConst.getMemberProjectAllURL.replacingOccurrences(of: "{memberId}", with: "\(memberId)")
+        case .myReviewList(let memberId, let projectId):
+            return URLConst.getMemberProjectReviewsURL.replacingOccurrences(of: "{memberId}", with: "\(memberId)").replacingOccurrences(of: "{projectId}", with: "\(projectId)")
         }
     }
 
     var method: Moya.Method {
         switch self {
         case .projectList:
+            return .get
+        case .myReviewList:
             return .get
         }
     }
@@ -36,12 +41,16 @@ extension MyProjectService: TargetType {
         switch self {
         case .projectList(_):
             return .requestPlain
+        case .myReviewList(_, _):
+            return .requestPlain
         }
     }
 
     var headers: [String : String]? {
         switch self {
         case .projectList:
+            return APIConstants.headerWithAuthorization
+        case .myReviewList:
             return APIConstants.headerWithAuthorization
         }
     }

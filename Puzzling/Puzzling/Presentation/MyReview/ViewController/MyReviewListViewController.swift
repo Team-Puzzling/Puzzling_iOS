@@ -9,6 +9,7 @@ import UIKit
 
 import SnapKit
 import Then
+import Moya
 
 final class MyReviewListViewController: UIViewController {
     
@@ -16,7 +17,9 @@ final class MyReviewListViewController: UIViewController {
     
     private let myReviewListCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
-    private let myReviewListData = MyReviewListDataModel.dummy()
+    private let myProjectProvider = MoyaProvider<MyProjectService>(plugins:[NetworkLoggerPlugin()])
+    
+    private var myReviewListData: [ReviewListResponse] = []
     
     // MARK: - Lifecycle
     
@@ -31,6 +34,7 @@ final class MyReviewListViewController: UIViewController {
         setLayout()
         setDelegate()
         setRegister()
+        fetchReviewList()
     }
     
     deinit {
@@ -181,5 +185,38 @@ extension MyReviewListViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: UIScreen.main.bounds.width-32, height: 82)
+    }
+}
+
+extension MyReviewListViewController {
+    
+    // MARK: - Network
+    
+    private func fetchReviewList() {
+        guard let memberId = UserDefaults.standard.string(forKey: "memberId") else { return }
+        print(memberId)
+        myProjectProvider.request(.myReviewList(memberId: "2", projectId: "1")) { result in
+            switch result {
+            case .success(let result):
+                let status = result.statusCode
+                print(status)
+                if status >= 200 && status < 300 {
+                    do {
+                        guard let data = try result.map(GeneralResponse<[ReviewListResponse]>.self).data else { return }
+                        self.myReviewListData = data
+                        self.myReviewListCollectionView.reloadData()
+                        print("💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙")
+                        
+                        
+                    } catch(let error) {
+                        print(error.localizedDescription)
+                    }
+                } else if status == 404 {
+                    print("💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭")
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }
