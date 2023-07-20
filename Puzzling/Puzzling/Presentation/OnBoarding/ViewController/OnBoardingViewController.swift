@@ -29,13 +29,6 @@ extension OnBoardingViewContoller: TappedDelegate {
 
 final class OnBoardingViewContoller: UIViewController {
     
-    private let authProvider = MoyaProvider<AuthService>(plugins:[NetworkLoggerPlugin()])
-    private var authModel: AuthModel = AuthModel(socialPlatform: "")
-    private var userModel: UserModel = UserModel(name: "", memberId: 0, projectId: nil, accessToken: "", refreshToken: "", isNewUser: false)
-    private var tokenModel: TokenModel = TokenModel(accessToken: "")
-    private var socialPlatform: String = ""
-    private var token: String = ""
-    
     // MARK: - UI Components
     
     private let onBoardingView = OnBoardingView()
@@ -43,22 +36,25 @@ final class OnBoardingViewContoller: UIViewController {
     
     // MARK: - Properties
     
-    
-    // MARK: - Initializer
-    
+    private let authProvider = MoyaProvider<AuthService>(plugins:[NetworkLoggerPlugin()])
+    private var authModel: AuthModel = AuthModel(socialPlatform: "")
+    private var userModel: UserModel = UserModel(name: "", memberId: 0, projectId: nil, accessToken: "", refreshToken: "", isNewUser: false)
+    private var tokenModel: TokenModel = TokenModel(accessToken: "")
+    private var socialPlatform: String = ""
+    private var token: String = ""
     
     // MARK: - View Life Cycle
+    
     override func loadView() {
         super.loadView()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        firstFunction()
+        isExistUserInform()
         setUI()
         setLayout()
         onBoardingView.delegate = self
-        
     }
 }
 
@@ -69,7 +65,6 @@ extension OnBoardingViewContoller {
     private func setUI() {
         
         view.backgroundColor = .white000
-        
     }
     
     // MARK: - Layout Helper
@@ -81,53 +76,35 @@ extension OnBoardingViewContoller {
         onBoardingView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-        
     }
-    
-    // MARK: - Methods
-    
 }
 
 private extension OnBoardingViewContoller {
     
-    func firstFunction() {
+    // MARK: - Methods
+    
+    func isExistUserInform() {
         let enterProjectVC = EnterProjectViewController()
         let tabBar = TabBarController()
         
-        if let login = UserDefaults.standard.object(forKey: "Login")
-        {
+        if let login = UserDefaults.standard.object(forKey: "Login") {
             if(login as! Bool == false) {
-                print("로그인해라")
                 return
-            }
-            else {
-                
-                
+            } else {
                 if let project = UserDefaults.standard.object(forKey: "projectId") {
-                    print("메인페이지로 가라")
                     self.gotoMainPage()
+                } else {
+                    self.gotoMainEnterProjectView()
                 }
-                else {
-                    print("\(UserDefaults.standard.string(forKey: "memberId"))")
-                    self.gotoMainEnterProjectView() }
             }
         }
-        else {
-            print("로그인해라")
-            return
-        }
-        
-        
-        
-        //            if let project = UserDefaults.standard.object(forKey: "projectId") { self.gotoMainPage() }
-        //            self.gotoMainEnterProjectView()
+        else { return }
     }
     
     func kakaoLogin() {
         authModel.socialPlatform = "KAKAO"
         if (UserApi.isKakaoTalkLoginAvailable()) {
-            //카톡 설치되어있으면 -> 카톡으로 로그인
-            print("카카오톡 있음 🙏🙏🙏🙏🙏🙏🙏")
+            // 카톡 설치되어있으면 -> 카톡으로 로그인
             UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
                 if let error = error {
                     print(error)
@@ -200,7 +177,6 @@ extension OnBoardingViewContoller {
                         else {
                             self.gotoMainPage()
                         }
-                        
                         UserDefaults.standard.set(true, forKey: "Login")
                     } catch(let error) {
                         print(error.localizedDescription)

@@ -28,7 +28,7 @@ extension TabBarController {
         
         tabs = [
             HomeViewController(),
-            MyPageViewController()
+            MyProjectViewController()
         ]
         
         TabBarItemType.allCases.forEach {
