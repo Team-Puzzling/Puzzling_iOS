@@ -23,6 +23,7 @@ enum APIConstants {
     static var deviceToken: String = ""
     static var jwtToken: String = ""
     static var accessToken: String = ""
+    static var kakaoAccessToken: String = ""
     static var authorization: String = ""
     static var refresh: String = ""
     
@@ -43,6 +44,13 @@ enum APIConstants {
         [
             NetworkHeaderKey.contentType.rawValue: APIConstants.applicationJSON,
             NetworkHeaderKey.authorization.rawValue: URLConst.bearer + APIConstants.accessToken
+        ]
+    }
+    
+    static var headerWithKakaoAuthorization: [String: String] {
+        [
+            NetworkHeaderKey.contentType.rawValue: APIConstants.applicationJSON,
+            NetworkHeaderKey.authorization.rawValue: URLConst.bearer + APIConstants.kakaoAccessToken
         ]
     }
     

@@ -48,7 +48,7 @@ extension AuthService: TargetType {
     var headers: [String : String]? {
         switch self {
         case .postAuth(_):
-            return APIConstants.headerWithAuthorization
+            return APIConstants.headerWithKakaoAuthorization
         case .authToken(let authorization, let refresh):
             APIConstants.authorization = authorization
             APIConstants.refresh = refresh
