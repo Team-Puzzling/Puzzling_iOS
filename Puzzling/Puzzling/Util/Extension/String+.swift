@@ -79,6 +79,7 @@ extension String {
         let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
         return ceil(boundingBox.height)
     }
+    
     /// "yyyy-MM-dd" 형식의 String 을 Date 형식으로 리턴합니다.
     func convertStringToDate() -> Date {
         let dateFormatter = DateFormatter()
