@@ -96,12 +96,8 @@ extension TeamRankPodiumCell {
 }
 
 extension TeamRankPodiumCell {
-    func setPodiumInformation(rankModel: TeamRankTopThreeModel) {
-        guard let rank = rankModel.rankNumber else { return }
-        guard let userInformation = rankModel.userInformation else {
-            return
-        }
-        switch rank {
+    func setPodiumInformation(rankModel: TeamRankTopThreeModel?, rankNumber: Int) {
+        switch rankNumber {
         case 1:
             puzzleImageView.image = Image.rank1st
             podiumImageView.image = Image.rank1Podium
@@ -119,11 +115,16 @@ extension TeamRankPodiumCell {
             break
         }
         
-        piecesCount = userInformation.pieces
+        guard let rank = rankModel?.rankNumber else { return }
+        guard let userInformation = rankModel?.userInformation else {
+            return
+        }
+        
+        piecesCount = userInformation.memberPuzzleCount
         let pieceLabel: String = "\(piecesCount)조각"
         
         piecesCountLabel.text = pieceLabel
-        userNameLabel.text = userInformation.userName
-        roleLabel.text = userInformation.role
+        userNameLabel.text = userInformation.memberNickname
+        roleLabel.text = userInformation.memberRole
     }
 }

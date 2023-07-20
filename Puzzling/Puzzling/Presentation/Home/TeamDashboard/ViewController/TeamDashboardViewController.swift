@@ -7,13 +7,18 @@
 
 import UIKit
 
+import SnapKit
+import Then
+
 final class TeamDashboardViewController: UIViewController {
     
     private let mainScrollView = UIScrollView()
     private let contentView = UIView()
     
-    private let mainView: DashboardMainBoxView = DashboardMainBoxView(frame: .zero, type: .team)
-    private var teamRankView = TeamDashboardRankView()
+    let mainView: DashboardMainBoxView = DashboardMainBoxView(frame: .zero, type: .team)
+    var teamRankView = TeamDashboardRankView()
+    private var teamArray: [TeamProjectRank] = []
+    private var teamBoardCount: Int = 0
     
     private var tabBarHeight: CGFloat {
         guard let height = self.tabBarController?.tabBar.frame.size.height else {
@@ -27,20 +32,22 @@ final class TeamDashboardViewController: UIViewController {
         return height
     }
     
-    private let projectService = ProjectService()
-    private lazy var sortedData: [TeamRankModel] = projectService.getSortedData()
-    
     private var scrollViewHeight: CGFloat {
         let height:CGFloat = view.frame.size.height/4.06
-        let totalHeight: CGFloat = height + CGFloat(sortedData.count - 3) * 52 + 10
-        return totalHeight
+        let sortHeight = CGFloat(teamArray.count - 3)
+        
+        if sortHeight < 0 {
+            return height + 10
+        } else {
+            return height + sortHeight * 52 + 10
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setDelegate()
         setUI()
         setLayout()
+        setAction()
     }
     
     deinit {
@@ -49,10 +56,6 @@ final class TeamDashboardViewController: UIViewController {
 }
 
 extension TeamDashboardViewController {
-    
-    private func setDelegate() {
-        
-    }
     
     private func setUI() {
         view.backgroundColor = .white000
@@ -64,12 +67,10 @@ extension TeamDashboardViewController {
         }
         
         mainView.do {
-            $0.passPuzzleData(userName: "심규보봉", piecesCount: 5)
+            $0.isUserInteractionEnabled = true
+//            $0.card
         }
-        
-        teamRankView.do {
-            $0.passProjectName(projectName: "더퍼즐링s")
-        }
+            
     }
     
     private func setLayout() {
@@ -100,5 +101,32 @@ extension TeamDashboardViewController {
             $0.height.equalTo(scrollViewHeight)
             $0.bottom.equalToSuperview()
         }
+    }
+    
+    private func setAction() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(moveToPuzzleBoardArchive))
+        mainView.cardButtonView.addGestureRecognizer(tapGestureRecognizer)
+    }
+}
+
+extension TeamDashboardViewController {
+    func passTeamArray(data: [TeamProjectRank]) {
+        self.teamArray = data
+    }
+}
+
+extension TeamDashboardViewController {
+    @objc
+    private func moveToPuzzleBoardArchive() {
+        let puzzleBoardVC = PuzzleBoardViewController()
+        puzzleBoardVC.passNavigationTitle(boardType: .team)
+        puzzleBoardVC.passPuzzleBoardCount(count: self.teamBoardCount)
+        self.navigationController?.pushViewController(puzzleBoardVC, animated: true)
+    }
+}
+
+extension TeamDashboardViewController {
+    func passBoardCount(count: Int) {
+        self.teamBoardCount = count
     }
 }

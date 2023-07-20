@@ -107,11 +107,10 @@ extension TeamRankTableViewCell {
 }
 
 extension TeamRankTableViewCell {
-    func setDataBind(rank: Int, teamData: TeamRankModel) {
+    func setDataBind(rank: Int, teamData: TeamProjectRank) {
         rankNumberLabel.text = "\(rank)"
-        userNameLabel.text = teamData.userName
-        roleLabel.text = teamData.role
-        piecesCountLabel.text = "\(teamData.pieces)"
+        userNameLabel.text = teamData.memberNickname
+        roleLabel.text = teamData.memberRole
+        piecesCountLabel.text = "\(teamData.memberPuzzleCount)"
     }
-    
 }
