@@ -9,11 +9,16 @@ import UIKit
 
 import SnapKit
 import Then
+import Moya
 
 final class MyProjectViewController: UIViewController {
     
+    private let myProjectProvider = MoyaProvider<MyProjectService>(plugins:[NetworkLoggerPlugin()])
     private let myProjectTableView = UITableView(frame: .zero, style: .grouped)
-    private let MyProjectData = MyProjectDataModel.dummy()
+    private var myProjectData: [ProjectListResponse] = []
+    
+    private var currentProjectId: Int = 0
+    private var currentProjectTitle: String = ""
     
     // MARK: - Lifecycle
     
@@ -28,7 +33,10 @@ final class MyProjectViewController: UIViewController {
         setLayout()
         setDelegate()
         setRegister()
-        setNotificationCenter()
+        fetchProjectList()
+    }
+    deinit {
+        print(className)
     }
 }
 
@@ -89,40 +97,22 @@ extension MyProjectViewController {
             navigationItem.titleView = titleLabel
         }
     }
-    
-    private func setNotificationCenter() {
-        NotificationCenter.default.addObserver(self, selector: #selector(getProjectNotification(_:)), name: Notification.Name("projectNotification"), object: nil)
-    }
-
-    private func goToMyReview() {
-        let vc = MyReviewListViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
 }
 
 extension MyProjectViewController {
     @objc
     private func notificationButtonTapped() { }
-    
-    @objc
-    private func getProjectNotification(_ notification: Notification) {
-        if let notification = notification.userInfo?["userInfo"] as? String {
-            print(notification,"???????")
-            goToMyReview()
-        }
-    }
 }
 
-extension MyProjectViewController: UITableViewDelegate { }
-
-extension MyProjectViewController: UITableViewDataSource {
+extension MyProjectViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return MyProjectData.count
+        return myProjectData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueCell(type: MyProjectTableViewCell.self, indexPath: indexPath)
-        cell.setDataBind(MyProjectData[indexPath.row])
+        cell.delegate = self
+        cell.setDataBind(myProjectData[indexPath.row])
         return cell
     }
     
@@ -137,5 +127,44 @@ extension MyProjectViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 82
+    }
+}
+
+extension MyProjectViewController: MyProjectPassEventDelegate {
+    func passTouchEvent(projectTitle: String, projectId: Int) {
+        self.currentProjectTitle = projectTitle
+        self.currentProjectId = projectId
+        let vc = MyReviewListViewController()
+        vc.passData(id: self.currentProjectId, title: self.currentProjectTitle)
+        print(currentProjectId, currentProjectTitle, "🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶")
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    // MARK: - Network
+    
+    private func fetchProjectList() {
+        guard let memberId = UserDefaults.standard.string(forKey: "memberId") else { return }
+        print(memberId)
+        myProjectProvider.request(.projectList(memberId: "1")) { result in
+            switch result {
+            case .success(let result):
+                let status = result.statusCode
+                print(status)
+                if status >= 200 && status < 300 {
+                    do {
+                        guard let data = try result.map(GeneralResponse<[ProjectListResponse]>.self).data else { return }
+                        self.myProjectData = data
+                        self.myProjectTableView.reloadData()
+                        print("♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️")
+                    } catch(let error) {
+                        print(error.localizedDescription)
+                    }
+                } else if status == 404 {
+                    print("💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭")
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }

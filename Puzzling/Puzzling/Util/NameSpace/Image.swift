@@ -39,14 +39,13 @@ public enum Image {
     static let rightIcon = UIImage(systemName: "chevron.right")?
         .withTintColor(.label, renderingMode: .alwaysOriginal)
     static let elementPuzzle1 = UIImage(named: "puzzle_element")!
-    static let elementPuzzle = UIImage(named: "puzzle_element")!
+    static let puzzleElement = UIImage(named: "puzzle_element2")!
     static let puzzlingTitle = UIImage(named: "puzzling_title")!
     static let joinPuzzle = UIImage(named: "join_puzzle")!
     static let newPuzzle = UIImage(named: "new_puzzle")!
     static let kakaoLogin = UIImage(named: "kakao_login_large_wide")!
     static let point = UIImage(named: "point")!
     static let checkW = UIImage(named: "check-fill")!
-    
     
     // MARK: - Logo
     
@@ -60,4 +59,7 @@ public enum Image {
     // MARK: - Dashboard
     
     static let indivisualCardBackground = UIImage(named: "puzzleBannerBox")!
+    static let rank1Podium = UIImage(named: "rank1Podium")!
+    static let rankElsePodium = UIImage(named: "rankElsePodium")!
+    static let plusButtonFill = UIImage(named: "plusButton")!
 }

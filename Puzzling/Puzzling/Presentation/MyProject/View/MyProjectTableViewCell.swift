@@ -10,15 +10,21 @@ import UIKit
 import SnapKit
 import Then
 
-
+protocol MyProjectPassEventDelegate: AnyObject {
+    func passTouchEvent(projectTitle: String, projectId: Int)
+}
 
 final class MyProjectTableViewCell: UITableViewCell {
+    
+    weak var delegate: MyProjectPassEventDelegate?
     
     private let view = UIView()
     private let projectNameLabel = UILabel()
     private let durationLabel = UILabel()
     private let dashboardButton = UIButton()
     let myReviewButton = UIButton()
+    private var projectTitle: String = ""
+    private var projectId: Int = 0
     
     private let dateFormatter = DateFormatter().then {
         $0.dateFormat = "yyyy-MM-dd"
@@ -132,8 +138,7 @@ extension MyProjectTableViewCell {
 extension MyProjectTableViewCell {
     @objc
     private func myReviewButtonTapped() {
-        guard let text = projectNameLabel.text else { return }
-        setNotificationCenter(text: text)
+        self.delegate?.passTouchEvent(projectTitle: self.projectTitle, projectId: self.projectId)
     }
 }
 
@@ -154,9 +159,12 @@ extension MyProjectTableViewCell {
 }
 
 extension MyProjectTableViewCell {
-    func setDataBind(_ data: MyProjectDataModel) {
+    func setDataBind(_ data: ProjectListResponse) {
+        self.projectTitle = data.projectName
+        self.projectId = data.projectId
+        
         projectNameLabel.text  = data.projectName
-        let duration: Int = calculateDays(date: data.startDate)
+        let duration: Int = calculateDays(date: data.projectStartDate)
 
         if (duration < 0) {
             durationLabel.text = "D - \((duration - 1) * (-1))"

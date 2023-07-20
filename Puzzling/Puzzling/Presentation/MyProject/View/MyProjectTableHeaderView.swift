@@ -12,7 +12,7 @@ import Then
 
 final class MyProjectTableHeaderView: UITableViewHeaderFooterView {
     
-    private let nickname: String = "공듀"
+    private let nickname: String = UserDefaults.standard.string(forKey: "name") ?? "공듀"
     private let nicknameLabel = UILabel()
     
     override init(reuseIdentifier: String?) {

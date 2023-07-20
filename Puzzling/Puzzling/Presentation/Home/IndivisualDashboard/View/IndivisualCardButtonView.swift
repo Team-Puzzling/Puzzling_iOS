@@ -12,14 +12,15 @@ import Then
 
 final class IndivisualCardButtonView: UIView {
     
+    private let containerView = UIView()
     private let backgroundImageView = UIImageView()
     private let puzzleBoardLabel = UILabel()
     private let puzzleBoardCountLabel = UILabel()
     private let chevronNextImageView = UIImageView()
 
-    private var puzzleCount: Int = 0 {
+    private var puzzleBoardCount: Int = 0 {
         didSet {
-            puzzleBoardCountLabel.text = "\(puzzleCount) 판"
+            puzzleBoardCountLabel.text = "\(puzzleBoardCount) 판"
         }
     }
     
@@ -28,15 +29,8 @@ final class IndivisualCardButtonView: UIView {
     init(frame: CGRect, cardTitle: String) {
         self.cardTitle = cardTitle
         super.init(frame: frame)
-        setDelegate()
         setUI()
         setLayout()
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        self.layer.masksToBounds = true
-        self.layer.cornerRadius = 16
     }
     
     required init?(coder: NSCoder) {
@@ -45,10 +39,17 @@ final class IndivisualCardButtonView: UIView {
 }
  
 extension IndivisualCardButtonView {
-    
-    private func setDelegate() {}
-    
+        
     private func setUI() {
+        self.layer.shadowRadius = 2
+        self.layer.shadowOpacity = 0.2
+        self.layer.shadowOffset = CGSize(width: 2, height: 2)
+        self.layer.shadowColor = UIColor.blue400.cgColor
+        
+        containerView.do {
+            $0.layer.cornerRadius = 16
+            $0.layer.masksToBounds = true
+        }
         
         backgroundImageView.do {
             $0.image = Image.indivisualCardBackground
@@ -69,7 +70,7 @@ extension IndivisualCardButtonView {
         }
         
         puzzleBoardCountLabel.do {
-            $0.text = "n 판"
+            $0.text = "0 판"
             $0.font = .fontGuide(.heading4_kor)
             $0.textColor = .blue400
             $0.textAlignment = .right
@@ -77,11 +78,15 @@ extension IndivisualCardButtonView {
     }
     
     private func setLayout() {
-        self.addSubviews(backgroundImageView, puzzleBoardLabel, chevronNextImageView, puzzleBoardCountLabel)
+        self.addSubview(containerView)
+        containerView.addSubviews(backgroundImageView, puzzleBoardLabel, chevronNextImageView, puzzleBoardCountLabel)
+        
+        containerView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
         
         backgroundImageView.snp.makeConstraints {
-            $0.center.equalToSuperview()
-            $0.width.height.equalToSuperview()
+            $0.edges.equalToSuperview()
         }
         
         puzzleBoardLabel.snp.makeConstraints {
@@ -102,9 +107,9 @@ extension IndivisualCardButtonView {
         }
     }
 }
-//
-//extension IndivisualCardButtonView {
-//    func passCardTitle(title: String) {
-//        self.puzzleBoardLabel.text = title
-//    }
-//}
+
+extension IndivisualCardButtonView {
+    func passBoardCount(count: Int) {
+        self.puzzleBoardCount = count
+    }
+}

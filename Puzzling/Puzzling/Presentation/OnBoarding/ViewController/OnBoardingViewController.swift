@@ -35,6 +35,7 @@ final class OnBoardingViewContoller: UIViewController {
     private var tokenModel: TokenModel = TokenModel(accessToken: "")
     private var socialPlatform: String = ""
     private var token: String = ""
+    
     // MARK: - UI Components
     
     private let onBoardingView = OnBoardingView()
@@ -124,18 +125,16 @@ private extension OnBoardingViewContoller {
     
     func kakaoLogin() {
         authModel.socialPlatform = "KAKAO"
-        print(socialPlatform,"????")
         if (UserApi.isKakaoTalkLoginAvailable()) {
             //카톡 설치되어있으면 -> 카톡으로 로그인
             print("카카오톡 있음 🙏🙏🙏🙏🙏🙏🙏")
             UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
                 if let error = error {
-                    print("😭😭😭😭",error)
+                    print(error)
                 } else {
                     guard let accessToken = oauthToken?.accessToken else { return }
                     print("loginWithKakaoTalk() success.")
-                    print("🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶", accessToken, "🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶")
-                    self.token = accessToken
+                    APIConstants.kakaoAccessToken = accessToken
                     self.postAuth()
                 }
             }
@@ -146,7 +145,8 @@ private extension OnBoardingViewContoller {
                     print(error)
                 } else {
                     print("loginWithKakaoAccount() success.")
-                    
+                    guard let accessToken = oauthToken?.accessToken else { return }
+                    APIConstants.kakaoAccessToken = accessToken
                     _ = oauthToken
                     // 관련 메소드 추가
                     self.postAuth()
@@ -175,15 +175,12 @@ extension OnBoardingViewContoller {
     
     private func postAuth() {
         print(authModel.socialPlatform)
-        authProvider.request(.postAuth(param: authModel.makePostAuthRequest(), token: token)) { result in
+        authProvider.request(.postAuth(param: authModel.makePostAuthRequest())) { result in
             switch result {
             case .success(let result):
                 let status = result.statusCode
                 if status >= 200 && status < 300 {
                     do {
-                        print("💙💙💙💙💙💙💙💙💙💙")
-                        print("?????????\(result)")
-                        print("?????????\(try result.map(GeneralResponse<UserResponse>.self))")
                         guard let data = try result.map(GeneralResponse<UserResponse>.self).data else { return }
                         self.userModel = data.convertToUserModel()
                         print("🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰\(self.userModel)🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰")
@@ -192,6 +189,7 @@ extension OnBoardingViewContoller {
                         UserDefaults.standard.set(self.userModel.memberId, forKey: "memberId")
                         KeyChain.create(key: "accessToken", token: self.userModel.accessToken)
                         KeyChain.create(key: "refreshToken", token: self.userModel.refreshToken)
+                        APIConstants.accessToken = self.userModel.accessToken
                         
                         if(self.userModel.isNewUser == true) {
                             self.gotoMainEnterProjectView()
@@ -229,6 +227,7 @@ extension OnBoardingViewContoller {
                         guard let data = try result.map(GeneralResponse<TokenResponse>.self).data else { return }
                         self.tokenModel = data.convertToTokenModel()
                         KeyChain.create(key: "accessToken", token: self.tokenModel.accessToken)
+                        APIConstants.accessToken = self.tokenModel.accessToken
                     } catch(let error) {
                         print(error.localizedDescription)
                     }
@@ -239,7 +238,6 @@ extension OnBoardingViewContoller {
             case .failure(let error):
                 print(error.localizedDescription)
             }
-            print("wwwwwww")
         }
     }
 }
