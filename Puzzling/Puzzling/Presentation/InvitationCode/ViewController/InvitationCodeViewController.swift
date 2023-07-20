@@ -246,7 +246,7 @@ extension InvitationCodeViewController {
                     } catch(let error) {
                         print(error.localizedDescription)
                     }
-                } else if status == 404 {
+                } else if status >= 400 {
                     print("💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭")
                     self.textFieldWarningNotification(type: .invitationCode)
                 }

@@ -132,6 +132,7 @@ extension CreateProjectViewController {
     // MARK: - Methods
     
     private func setAddTarget() {
+        closeButton.addTarget(self, action: #selector(closeButtonDidTap), for: .touchUpInside)
         registerProjectButton.addTarget(self, action: #selector(registerProjectButtonDidTap), for: .touchUpInside)
     }
     
@@ -243,6 +244,11 @@ extension CreateProjectViewController {
     private func registerProjectButtonDidTap() {
 //        projectRegister()
         postProjectInfo()
+    }
+    
+    @objc
+    private func closeButtonDidTap() {
+        dismiss(animated: true)
     }
     
     @objc

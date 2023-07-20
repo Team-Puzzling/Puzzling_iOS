@@ -25,7 +25,8 @@ class EnterProjectView: UIView {
     
     // MARK: - Properties
     
-    var newProjectButtonhandler: (() -> Void)?
+    var newProjectButtonHandler: (() -> Void)?
+    var joinButtonHandler: (() -> Void)?
     
     // MARK: - Initializer
 
@@ -147,6 +148,7 @@ class EnterProjectView: UIView {
 
     private func setAddTarget() {
         newProjectButton.addTarget(self, action: #selector(newProjectButtonDidTap), for: .touchUpInside)
+        joinButton.addTarget(self, action: #selector(joinButtonDidTap), for: .touchUpInside)
     }
     
     private func setScreenHeight() -> CGFloat {
@@ -158,6 +160,11 @@ class EnterProjectView: UIView {
     
     @objc
     private func newProjectButtonDidTap() {
-        newProjectButtonhandler?()
+        newProjectButtonHandler?()
+    }
+    
+    @objc
+    private func joinButtonDidTap() {
+        joinButtonHandler?()
     }
 }

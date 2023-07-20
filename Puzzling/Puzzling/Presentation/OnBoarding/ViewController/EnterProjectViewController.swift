@@ -40,8 +40,11 @@ extension EnterProjectViewController {
     
     @objc
     private func setButton() {
-        rootView.newProjectButtonhandler  = { [weak self] in
+        rootView.newProjectButtonHandler  = { [weak self] in
             self?.newProjectButtonDidTap()
+        }
+        rootView.joinButtonHandler = { [weak self] in
+            self?.joinButtonDidTap()
         }
     }
     
@@ -50,5 +53,12 @@ extension EnterProjectViewController {
         let createProjectVC = CreateProjectViewController()
         createProjectVC.modalPresentationStyle = .fullScreen
         self.present(createProjectVC, animated: true)
+    }
+    
+    @objc
+    private func joinButtonDidTap() {
+        let invitationCodeVC = InvitationCodeViewController()
+        invitationCodeVC.modalPresentationStyle = .fullScreen
+        self.present(invitationCodeVC, animated: true)
     }
 }
