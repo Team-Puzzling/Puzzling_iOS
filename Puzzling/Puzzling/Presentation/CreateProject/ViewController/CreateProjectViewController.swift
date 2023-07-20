@@ -349,7 +349,6 @@ extension CreateProjectViewController {
                         )
                         let projectID = self.createProjectModel?.projectId
                         UserDefaults.standard.set(projectID, forKey: "projectId")
-                        UIViewController.modifyRootViewController(TabBarController())
                     } catch(let error) {
                         print(error.localizedDescription)
                     }

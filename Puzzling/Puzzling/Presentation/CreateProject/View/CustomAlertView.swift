@@ -287,6 +287,7 @@ class CustomAlertView: UIView {
            let navigationController = windowScene.windows.first(where: { $0.isKeyWindow })?.rootViewController as? UINavigationController {
             navigationController.navigationBar.isUserInteractionEnabled = true
         }
+        UIViewController.modifyRootViewController(TabBarController())
     }
     
     // MARK: - @objc Methods
