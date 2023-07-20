@@ -22,7 +22,7 @@ final class HomeTitleBarView: UIView {
     
     private let titleStackView = UIStackView()
     
-    lazy var alarmButton = UIButton(frame: .zero, primaryAction: setAlarmAction())
+    private lazy var alarmButton = UIButton(frame: .zero, primaryAction: setAlarmAction())
     
     weak var delegate: HomeBottomSheetDelegate?
     
@@ -51,6 +51,8 @@ extension HomeTitleBarView {
         titleLabel.do {
             $0.font = .fontGuide(.heading1_kor)
             $0.textColor = .black000
+
+            $0.text = "프로젝트 이름"
         }
         
         chevronImageView.do {

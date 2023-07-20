@@ -13,8 +13,7 @@ import Then
 final class MainPuzzleCollectionView: UIView {
 
     private lazy var puzzleCollectionView = UICollectionView(frame: .zero, collectionViewLayout: self.setFlowLayout())
-    private var modelData: [ModelProtocol] = []
-    private var hasReviewed: Bool = false
+    private var modelData: [ModelProtocol?] = []
     private var dashboardType: DashboardType
 
     private let cellHeight: CGFloat = UIScreen.main.bounds.height / 9.2
@@ -89,37 +88,31 @@ extension MainPuzzleCollectionView: UICollectionViewDataSource, UICollectionView
         case .indivisual:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: dashboardType.identifier, for: indexPath) as? MainPuzzleCollectionViewCell else {
                 return UICollectionViewCell() }
-            guard let model = modelData as? [UserPuzzleBoard] else { return UICollectionViewCell() }
-            if model.isEmpty {
-                return cell
-            } else {
-                cell.setDataBind(data: model[indexPath.item], isTodayReviewed: self.hasReviewed)
-                return cell
-            }
+            guard let model = modelData as? [IndivisualPuzzleStatusModel?] else { return UICollectionViewCell() }
+            cell.setDataBind(data: model[indexPath.item], index: indexPath.item)
+            return cell
         case .team:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: dashboardType.identifier, for: indexPath) as? MainPuzzleCollectionViewCell else {
                 return UICollectionViewCell() }
-            guard let model = modelData as? [TeamPuzzleBoard] else { return UICollectionViewCell() }
-            if model.isEmpty {
-                return cell
-            } else {
-                cell.setDataBind(data: model[indexPath.item])
-                return cell
-            }
+            guard let model = modelData as? [TeamPuzzleStatusModel?] else { return UICollectionViewCell() }
+            cell.setDataBind(data: model[indexPath.item], index: indexPath.item)
+            return cell
         }
     }
 }
 
 extension MainPuzzleCollectionView {
-    func passPuzzleData(data: [ModelProtocol]) {
-        self.modelData = data
-    }
-    
-    func hasTodayReviewed(_ bool: Bool) {
-        self.hasReviewed = bool
-    }
-    
-    func reloadCollectionView() {
-        self.puzzleCollectionView.reloadData()
+    func passPuzzleData(data: [ModelProtocol?]) {
+        if data.isEmpty {
+            self.modelData = Array(repeating: nil, count: 15)
+        }
+        
+        let restOfDataCount = 15 - data.count
+        if restOfDataCount == 0 {
+            self.modelData = data
+            return
+        }
+        
+        self.modelData = data + Array(repeating: nil, count: restOfDataCount)
     }
 }

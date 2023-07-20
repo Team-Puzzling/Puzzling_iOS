@@ -19,25 +19,6 @@ final class HomeMainButton: UIButton {
         }
     }
     
-    private var type: ButtonType {
-        didSet {
-            switch type {
-            case .notToday:
-                self.setTitle(type.buttonTitle, for: .normal)
-                self.backgroundColor = type.buttonColor
-                self.isEnabled = false
-            case .today:
-                self.setTitle(type.buttonTitle, for: .normal)
-                self.backgroundColor = type.buttonColor
-                self.isEnabled = true
-            case .done:
-                self.setTitle(type.buttonTitle, for: .normal)
-                self.backgroundColor = type.buttonColor
-                self.isEnabled = false
-            }
-        }
-    }
-    
     enum ButtonType {
         case notToday
         case today
@@ -68,7 +49,6 @@ final class HomeMainButton: UIButton {
     init(frame: CGRect, type: ButtonType) {
         self.buttonTitle = type.buttonTitle
         self.buttonBackgroundColor = type.buttonColor
-        self.type = type
         super.init(frame: frame)
         setUI()
     }
@@ -86,12 +66,15 @@ extension HomeMainButton {
         self.layer.cornerRadius = 16
         self.setTitle(buttonTitle, for: .normal)
         self.titleLabel?.font = .fontGuide(.heading4_kor)
-        self.setTitleColor(.white000, for: .normal)
     }
 }
 
 extension HomeMainButton {
-    func enableButton(toType: ButtonType) {
-        self.type = toType
+    func enableButton(to bool: Bool) {
+        if bool == true {
+            self.isButtonEnabled = true
+        } else {
+            self.isButtonEnabled = false
+        }
     }
 }

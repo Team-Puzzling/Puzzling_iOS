@@ -9,11 +9,12 @@ import UIKit
 
 final class MainPuzzleCollectionViewCell: UICollectionViewCell {
     
+    // 5.86 - width, 9.2 - height
     private let puzzleImageView = UIImageView()
     private let dateLabel = UILabel()
     var reviewId: Int? = nil
-    var cellDate: String? = nil
-    var todayDate = Date().dateToServerString
+    
+    var dateee: String? = "aaaaa"
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,8 +27,9 @@ final class MainPuzzleCollectionViewCell: UICollectionViewCell {
         dateLabel.text = nil
         dateLabel.textColor = .blue500
         puzzleImageView.image = nil
+        puzzleImageView.tintColor = .blue500
         reviewId = nil
-        cellDate = nil
+        dateee = nil
     }
     
     required init?(coder: NSCoder) {
@@ -64,75 +66,95 @@ extension MainPuzzleCollectionViewCell {
 }
 
 extension MainPuzzleCollectionViewCell {
-    /// IndivisualDashboard 에서 사용합니다.
-    func setDataBind(data: UserPuzzleBoard, isTodayReviewed: Bool) {
-        // 완성했는지를 boolean 으로 받자.
-        let puzzleImageName = data.puzzleAssetName
-        self.puzzleImageView.image = UIImage(named: puzzleImageName)
+    func setDataBind(data: IndivisualPuzzleStatusModel?, index: Int) {
+        if data == nil {
+            // 아무 데이터가 없을때. index 사용해서 기본 에셋 사용
+            self.puzzleImageView.image = UIImage(systemName: "puzzlepiece.extension")
+            return
+        }
         
-        guard let reviewId = data.reviewId,
-              let date = data.reviewDate
+        /// hasReviewed 는 여기가 아니라 APIService 에서 데이터 필터시에 필요할 것 같다.
+        /// 그 이유는; 퍼즐에는 중간에 뻥 뚫린 퍼즐이 없을 것이기 때문이다.
+        
+        guard let reviewId = data?.reviewId,
+              let hasReviewed = data?.status.hasReviewed,
+              let date = data?.status.reviewDate,
+              let isTodayReviewDay = data?.status.isTodayReviewDay
         else { return }
-        
         let dateModified: String = date.convertDateToSlashFormat()
         self.reviewId = reviewId
-        self.cellDate = date
+        dateee = dateModified
         
-        /// 보여주기식 코드
-        if date == "2023-06-20" {
-            jumpPuzzleAnimation()
-        }
-        
-        /// 원코드 -> 해야하는 날인데 안했을 때만 뛰고, 했으면 안 뛰게!
-//        if self.todayDate == date {
-//            jumpPuzzleAnimation()
-//        }
-        
-        if self.todayDate == date && isTodayReviewed == false {
-            self.puzzleImageView.image = UIImage(named: puzzleImageName)
+        if isTodayReviewDay != false && hasReviewed == false {
+            self.puzzleImageView.image = UIImage(systemName: "puzzlepiece.extension.fill")
+            self.puzzleImageView.tintColor = .yellow500
             self.dateLabel.text = dateModified
             self.dateLabel.textColor = .yellow500
+            print("YELLOW!!!")
             return
         }
+
+        // 근데 그러면 본래의 rawData 에서 filter 로 hasReviewed = true 로만 바꿔서 가져와야하지 않나?? 그러면 굳이 더 필요하지 않잖아.
         
+        self.puzzleImageView.image = UIImage(systemName: "puzzlepiece")
         self.dateLabel.text = dateModified
+        
+        //        switch hasReviewed {
+        //        case true:
+        //            // puzzleAssetNumber 로 받기? Int 활용하기?
+        //            self.puzzleImageView.image = UIImage(systemName: "puzzlepiece")
+        //            self.dateLabel.text = date
+        //        case false:
+        //            // index 로 받아온 Int 로 기본 이미지 박기
+        //            self.puzzleImageView.image = UIImage(systemName: "puzzlepiece")
+        //        }
     }
     
-    /// TeamDashboard 에서 사용합니다.
-    func setDataBind(data: TeamPuzzleBoard) {
-        let puzzleImageName = data.puzzleAssetName
-        self.puzzleImageView.image = UIImage(named: puzzleImageName)
-
-        guard let date = data.reviewDate else {
+    func setDataBind(data: TeamPuzzleStatusModel?, index: Int) {
+        if data == nil {
+            // 아무 데이터가 없을때. index 사용해서 기본 에셋 사용
+            self.puzzleImageView.image = UIImage(systemName: "puzzlepiece.extension")
             return
         }
-        guard let _ = data.reviewMemberPercent
-        else {
-            return }
-        let dateModified: String = date.convertDateToSlashFormat()
-        self.cellDate = date
         
-        if self.todayDate == date {
-            self.puzzleImageView.image = UIImage(named: puzzleImageName)
+        guard let date = data?.status.reviewDate,
+              let hasReviewed = data?.status.hasReviewed,
+              let isTodayReviewDay = data?.status.isTodayReviewDay,
+              let percentage = data?.status.reviewedMemberPercentage
+        else { return }
+        let dateModified: String = date.convertDateToSlashFormat()
+        dateee = dateModified
+        
+        if isTodayReviewDay != false && hasReviewed == false {
+            self.puzzleImageView.image = UIImage(systemName: "puzzlepiece.extension.fill")
             self.dateLabel.text = dateModified
             self.dateLabel.textColor = .yellow500
             return
         }
         
+        let imageName: String
+        
+        // Index 활용해야함, 현재는 그냥 분기처리
+        switch percentage {
+        case "A":
+            imageName = "moonphase.waxing.crescent.inverse"
+        case "B":
+            imageName = "moonphase.first.quarter.inverse"
+        case "C":
+            imageName = "moonphase.waxing.gibbous.inverse"
+        case "D":
+            imageName = "moonphase.new.moon.inverse"
+        default:
+            return
+        }
+        
+        self.puzzleImageView.image = UIImage(systemName: imageName)
         self.dateLabel.text = dateModified
         self.dateLabel.textColor = .blue500
-    }
-    
-    private func jumpPuzzleAnimation() {
-        let jumpAnimation = CAKeyframeAnimation(keyPath: "position.y")
-        jumpAnimation.values = [0, -10, 5, -4, 3, 0]
-        jumpAnimation.keyTimes = [0, 0.15, 0.22, 0.34, 0.5, 0.55]
-        jumpAnimation.duration = 0.55
-        jumpAnimation.repeatCount = 2
-        jumpAnimation.fillMode = .forwards
-        jumpAnimation.isRemovedOnCompletion = false
-        jumpAnimation.isAdditive = true
-        self.puzzleImageView.layer.add(jumpAnimation, forKey: "jumpOnce")
+        
+        /// imageName 에 대한 기능이 구현됐을 때, 사용
+        /// 지금 이렇게 계속 주석처리된 코드가 많은 것은 현재 프로젝트 내에 퍼즐 에셋이 들어있지 않기 때문이다.
+        //        self.puzzleImageView.image = UIImage(named: imageName)
     }
 }
 

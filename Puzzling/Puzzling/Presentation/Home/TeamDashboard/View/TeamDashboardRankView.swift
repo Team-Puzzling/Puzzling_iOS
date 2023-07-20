@@ -15,8 +15,10 @@ final class TeamDashboardRankView: UIView {
     private let projectTitleLabel = UILabel()
     private var rankView = TeamRankPodiumView()
     private let rankTableView = UITableView()
-
-    private var orderedTableData: [TeamProjectRank] = []
+    
+    private var projectService = ProjectServiceTemporary()
+    private lazy var prizeTableData: [TeamRankTopThreeModel] = projectService.getTopThreeData()
+    private lazy var orderedTableData: [TeamRankModel] = projectService.getSortedData()
     
     private let rankViewHeight: CGFloat = UIScreen.main.bounds.height/5.2
     
@@ -45,8 +47,12 @@ extension TeamDashboardRankView {
             $0.font = .fontGuide(.heading4_kor)
         }
         
+        rankView.do {
+            $0.setRank(ranks: prizeTableData)
+        }
+        
         rankTableView.do {
-            $0.register(TeamRankTableViewCell.self, forCellReuseIdentifier: "rankTable")
+            $0.registerCell(TeamRankTableViewCell.self)
             $0.allowsSelection = false
             $0.isScrollEnabled = false
         }
@@ -76,20 +82,14 @@ extension TeamDashboardRankView {
 
 extension TeamDashboardRankView: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if orderedTableData.count - 3 < 0 {
-            return 0
-        } else {
-            return orderedTableData.count - 3
-        }
+        return orderedTableData.count - 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print(indexPath.row)
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "rankTable", for: indexPath) as? TeamRankTableViewCell else {
-            return UITableViewCell() }
-        let rank: Int = indexPath.row + 3
-        cell.setDataBind(rank: rank + 1, teamData: orderedTableData[rank])
-        return cell
+            let cell = tableView.dequeueCell(type: TeamRankTableViewCell.self, indexPath: indexPath)
+            let rank: Int = indexPath.row + 3
+            cell.setDataBind(rank: rank + 1, teamData: orderedTableData[rank])
+            return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -101,37 +101,5 @@ extension TeamDashboardRankView {
     func passProjectName(projectName: String) {
         let titleLabel = "\(projectName)의 랭킹"
         projectTitleLabel.text = titleLabel
-    }
-    
-    func passTopThreeData(data: [TeamProjectRank]) {
-        var defaultTopThreeData: [TeamRankTopThreeModel] = [.init(rankNumber: nil, userInformation: nil), .init(rankNumber: nil, userInformation: nil), .init(rankNumber: nil, userInformation: nil)]
-        
-        switch data.count {
-        case 0:
-            self.rankView.setRank(ranks: defaultTopThreeData)
-        case 1:
-            defaultTopThreeData[0].rankNumber = 1
-            defaultTopThreeData[0].userInformation = data[0]
-            self.rankView.setRank(ranks: defaultTopThreeData)
-        case 2:
-            defaultTopThreeData[0].rankNumber = 1
-            defaultTopThreeData[0].userInformation = data[0]
-            defaultTopThreeData[1].rankNumber = 2
-            defaultTopThreeData[1].userInformation = data[1]
-            self.rankView.setRank(ranks: defaultTopThreeData)
-        default:
-            defaultTopThreeData[0].rankNumber = 1
-            defaultTopThreeData[0].userInformation = data[0]
-            defaultTopThreeData[1].rankNumber = 2
-            defaultTopThreeData[1].userInformation = data[1]
-            defaultTopThreeData[2].rankNumber = 3
-            defaultTopThreeData[2].userInformation = data[2]
-            self.rankView.setRank(ranks: defaultTopThreeData)
-        }
-    }
-    
-    func passOrderedRankData(data: [TeamProjectRank]) {
-        self.orderedTableData = data
-        self.rankTableView.reloadData()
     }
 }

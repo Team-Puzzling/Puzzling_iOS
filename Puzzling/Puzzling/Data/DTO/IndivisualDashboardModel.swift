@@ -27,28 +27,26 @@ import Foundation
 /// 🔸 Ex) ~/api/v1/member/3/project/4/puzzle?until=2023-07-05
 
 struct IndivisualDashboardModel: Codable {
-    let status: Int
-    let success: Bool
-    let message: String
-    let data: IndivisualData
+let status: Int
+let success: Bool
+let message: String
+let data: IndivisualData
 }
 
 struct IndivisualData: Codable {
-    let myPuzzle: MyPuzzle
-    let userPuzzleBoard: [UserPuzzleBoard]
-    let puzzleBoardCount: Int
-    let isReviewDay, hasTodayReview: Bool
+let myPuzzle: MyPuzzle
+let userPuzzleBoard: [UserPuzzleBoard]
+let isReviewDay: Bool
 }
 
 struct MyPuzzle: Codable {
-    let nickname: String
-    let puzzleCount: Int
+let nickname: String
+let puzzleCount: Int
 }
 
-struct UserPuzzleBoard: Codable, ModelProtocol {
-    let puzzleAssetName: String
-    let reviewDate: String?
-    let reviewId: Int?
+struct UserPuzzleBoard: Codable {
+let reviewDay, reviewDate: String
+let reviewId: Int?
 }
 
 // MARK: - ActionPlanModel
@@ -67,14 +65,14 @@ struct UserPuzzleBoard: Codable, ModelProtocol {
 /// 🔸 Ex) ~/api/v1/member/2/project/3/actionplan
 
 struct ActionPlanModel: Codable {
-    let status: Int
-    let success: Bool
-    let message: String
-    let data: [ActionPlan]
+let status: Int
+let success: Bool
+let message: String
+let data: [ActionPlan]
 }
 
 struct ActionPlan: Codable {
-    let actionPlanContent, actionPlanDate: String
+let actionPlanContent, actionPlanDate: String
 }
 
 // MARK: - OngoingProjectsModel
@@ -92,14 +90,13 @@ struct ActionPlan: Codable {
 /// 🔸 Ex) ~/api/v1/member/2/project/all
 
 struct OngoingProjectsModel: Codable {
-    let status: Int
-    let success: Bool
-    let message: String
-    let data: [OngoingProjectData]
+let status: Int
+let success: Bool
+let message: String
+let data: [OngoingProjectInfo]
 }
 
-struct OngoingProjectData: Codable {
-    let projectId: Int
-    let projectName, projectStartDate: String
+struct OngoingProjectInfo: Codable {
+let userProjectId: Int
+let projectName: String
 }
-
