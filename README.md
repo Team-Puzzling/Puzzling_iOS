@@ -5,7 +5,7 @@
 
 <br><br>
 ##  🫶 PUZZLING iOS Developers
-<img src="https://github.com/Team-Puzzling/Puzzling_iOS/assets/48792069/41dae135-36d7-43f6-8463-48c8fd84a462" width="200"> | <img src="https://github.com/Team-Puzzling/Puzzling_iOS/assets/48792069/41dae135-36d7-43f6-8463-48c8fd84a462" width="200"> | <img src="https://github.com/Team-Puzzling/Puzzling_iOS/assets/48792069/41dae135-36d7-43f6-8463-48c8fd84a462" width="200"> | <img src="https://github.com/Team-Puzzling/Puzzling_iOS/assets/48792069/41dae135-36d7-43f6-8463-48c8fd84a462" width="200"> |
+<img src="https://github.com/Team-Puzzling/Puzzling_iOS/assets/48792069/760622d7-7d8a-441b-9048-b40d6f4e16f3" width="200"> | <img src="https://github.com/Team-Puzzling/Puzzling_iOS/assets/48792069/e98179e6-1276-488b-b8e5-8b92fcb2ae48" width="200"> | <img src="https://github.com/Team-Puzzling/Puzzling_iOS/assets/48792069/66ca84dd-8827-4472-80b3-5b6a96baf81a" width="200"> | <img src="https://github.com/Team-Puzzling/Puzzling_iOS/assets/48792069/371e708e-5263-45b8-a31a-d117171cfda6" width="200"> |
 :---------:|:----------:|:---------:|:---------:|
 권 정 | 김민주 | 심규보 | 천성우 |
 [kj9470](https://github.com/kj9470) | [frohsch](https://github.com/frohsch) | [PecanPiePOS](https://github.com/PecanPiePOS) | [cjs1399](https://github.com/cjs1399) |
