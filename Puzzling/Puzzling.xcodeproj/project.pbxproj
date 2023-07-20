@@ -124,7 +124,7 @@
 		250D5CBF2A68000000F648BD /* FiveFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250D5CBE2A68000000F648BD /* FiveFView.swift */; };
 		250D5CC12A68002100F648BD /* TILView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250D5CC02A68002100F648BD /* TILView.swift */; };
 		250D5CC42A68004600F648BD /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250D5CC32A68004600F648BD /* BottomSheetViewController.swift */; };
-		250D5CC62A68005700F648BD /* CreateRetrospectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250D5CC52A68005700F648BD /* CreateRetrospectViewController.swift */; };
+		250D5CC62A68005700F648BD /* CreateReViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250D5CC52A68005700F648BD /* CreateReViewViewController.swift */; };
 		250D5CC82A68007000F648BD /* ReviewTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250D5CC72A68007000F648BD /* ReviewTestViewController.swift */; };
 		251C00D52A5D205300F6838C /* CustomRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251C00D42A5D205300F6838C /* CustomRadioButton.swift */; };
 		255026DF2A656D8100531543 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255026DE2A656D8100531543 /* OnBoardingViewController.swift */; };
@@ -287,7 +287,7 @@
 		250D5CBE2A68000000F648BD /* FiveFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiveFView.swift; sourceTree = "<group>"; };
 		250D5CC02A68002100F648BD /* TILView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TILView.swift; sourceTree = "<group>"; };
 		250D5CC32A68004600F648BD /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
-		250D5CC52A68005700F648BD /* CreateRetrospectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRetrospectViewController.swift; sourceTree = "<group>"; };
+		250D5CC52A68005700F648BD /* CreateReViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReViewViewController.swift; sourceTree = "<group>"; };
 		250D5CC72A68007000F648BD /* ReviewTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTestViewController.swift; sourceTree = "<group>"; };
 		251C00D42A5D205300F6838C /* CustomRadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRadioButton.swift; sourceTree = "<group>"; };
 		255026DE2A656D8100531543 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
@@ -942,7 +942,7 @@
 			isa = PBXGroup;
 			children = (
 				250D5CC32A68004600F648BD /* BottomSheetViewController.swift */,
-				250D5CC52A68005700F648BD /* CreateRetrospectViewController.swift */,
+				250D5CC52A68005700F648BD /* CreateReViewViewController.swift */,
 				250D5CC72A68007000F648BD /* ReviewTestViewController.swift */,
 			);
 			path = ViewController;
@@ -1408,7 +1408,7 @@
 				58DC6A722A61B4940039242C /* TeamRankModel.swift in Sources */,
 				0976A8A42A685F5300F1CAE4 /* ReviewListResponse.swift in Sources */,
 				0351AB5C2A65A06D006B0F4C /* InputContentType.swift in Sources */,
-				250D5CC62A68005700F648BD /* CreateRetrospectViewController.swift in Sources */,
+				250D5CC62A68005700F648BD /* CreateReViewViewController.swift in Sources */,
 				09C3AD5A2A65715C00CDE00F /* TeamMemberTableViewCell.swift in Sources */,
 				03E6D26C2A53336900F4453C /* UITableView+.swift in Sources */,
 			);
@@ -1550,7 +1550,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 98TYR8WM82;
+				DEVELOPMENT_TEAM = X96X8FG389;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Puzzling/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1564,7 +1564,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = puzzling.i;
+				PRODUCT_BUNDLE_IDENTIFIER = puzzling.cheon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1584,7 +1584,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 98TYR8WM82;
+				DEVELOPMENT_TEAM = X96X8FG389;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Puzzling/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1598,7 +1598,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = puzzling.i;
+				PRODUCT_BUNDLE_IDENTIFIER = puzzling.cheon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

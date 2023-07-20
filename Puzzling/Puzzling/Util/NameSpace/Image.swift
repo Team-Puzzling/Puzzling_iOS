@@ -45,6 +45,7 @@ public enum Image {
     static let newPuzzle = UIImage(named: "new_puzzle")!
     static let kakaoLogin = UIImage(named: "kakao_login_large_wide")!
     static let point = UIImage(named: "point")!
+    static let checkW = UIImage(named: "check-fill")!
     
     // MARK: - Logo
     
