@@ -246,8 +246,8 @@ extension CreateProfileViewController {
         }
         profile.memberProjectNickname = nickname
         profile.memberProjectRole = myRole
-        
-        profileProvider.request(.joinProject(param: profile.makePostProfileRequest(), memberID: UserDefaults.standard.object(forKey: "memberId") as! String)) { result in
+        let memberId = UserDefaults.standard.string(forKey: "memberId")
+        profileProvider.request(.joinProject(param: profile.makePostProfileRequest(), memberID: memberId ?? "7")) { result in
             switch result {
             case .success(let result):
                 let status = result.statusCode

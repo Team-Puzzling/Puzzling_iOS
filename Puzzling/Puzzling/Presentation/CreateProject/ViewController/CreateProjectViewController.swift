@@ -330,7 +330,9 @@ extension CreateProjectViewController {
         project.memberProjectNickname = projectNickname
         project.reviewCycle = projectCycle
         
-        projectProvider.request(.postProject(param: project.makePostProjectRequest(), memberID: UserDefaults.standard.object(forKey: "memberId") as! String)) { result in
+        let memberId = UserDefaults.standard.string(forKey: "memberId")
+        
+        projectProvider.request(.postProject(param: project.makePostProjectRequest(), memberID: memberId ?? "7")) { result in
             switch result {
             case .success(let result):
                 let status = result.statusCode
