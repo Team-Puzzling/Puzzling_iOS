@@ -9,18 +9,21 @@ import UIKit
 
 import SnapKit
 import Then
+import Moya
 
 protocol projectNameProtocol: AnyObject {
-    func nameData(text: String)
+    func nameData(id: Int, text: String)
 }
 
-final class ProjectListViewController: UIViewController {
+final class MyPageBottomSheetViewController: UIViewController {
     
     private var projectName: String = "Project1"
     
     weak var delegate: projectNameProtocol?
     
-    private let myProjectData = MyProjectDataModel.dummy()
+    private let myProjectProvider = MoyaProvider<MyProjectService>(plugins:[NetworkLoggerPlugin()])
+    
+    private var myProjectData: [ProjectListResponse] = []
     
     // MARK: - Properties
     
@@ -35,6 +38,7 @@ final class ProjectListViewController: UIViewController {
         setLayout()
         setDelegate()
         setRegister()
+        fetchProjectList()
     }
     
     deinit {
@@ -42,7 +46,7 @@ final class ProjectListViewController: UIViewController {
     }
 }
 
-extension ProjectListViewController {
+extension MyPageBottomSheetViewController {
 
     private func setUI() {
         
@@ -84,25 +88,26 @@ extension ProjectListViewController {
     }
 }
 
-extension ProjectListViewController: UITableViewDelegate {
+extension MyPageBottomSheetViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         projectName = myProjectData[indexPath.row].projectName
-        self.delegate?.nameData(text: myProjectData[indexPath.row].projectName)
+        self.delegate?.nameData(id: myProjectData[indexPath.row].projectId, text: projectName)
         self.dismiss(animated: true)
     }
 }
 
-extension ProjectListViewController: UITableViewDataSource {
+extension MyPageBottomSheetViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return myProjectData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueCell(type: ProjectNameTableViewCell.self, indexPath: indexPath)
-        let nameData = myProjectData[indexPath.row].projectName
-        cell.setDataBind(name: nameData)
+        let name = myProjectData[indexPath.row].projectName
+        let projectId = myProjectData[indexPath.row].projectId
+        cell.setDataBind(id: projectId, name: name)
         
-        if nameData == projectName {
+        if name == projectName {
             cell.setPointLabel()
         }
         return cell
@@ -113,8 +118,41 @@ extension ProjectListViewController: UITableViewDataSource {
     }
 }
 
-extension ProjectListViewController {
+extension MyPageBottomSheetViewController {
     func setProjectName(projectName: String) {
         self.projectName = projectName
+    }
+}
+
+extension MyPageBottomSheetViewController {
+    
+    // MARK: - Network
+    
+    private func fetchProjectList() {
+        guard let memberId = UserDefaults.standard.string(forKey: "memberId") else { return }
+        print(memberId)
+        myProjectProvider.request(.projectList(memberId: "1")) { result in
+            switch result {
+            case .success(let result):
+                let status = result.statusCode
+                print(status)
+                if status >= 200 && status < 300 {
+                    do {
+                        guard let data = try result.map(GeneralResponse<[ProjectListResponse]>.self).data else { return }
+                        self.myProjectData = data
+                        self.tableView.reloadData()
+                        print("♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️")
+                        
+                        
+                    } catch(let error) {
+                        print(error.localizedDescription)
+                    }
+                } else if status == 404 {
+                    print("💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭")
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }
