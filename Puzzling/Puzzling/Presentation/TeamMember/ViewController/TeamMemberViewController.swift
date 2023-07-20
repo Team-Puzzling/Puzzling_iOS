@@ -63,6 +63,8 @@ final class TeamMemberViewController: UIViewController {
     }
     
     deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("dateNotification"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("listNotification"), object: nil)
         print(className)
     }
 }
@@ -89,7 +91,7 @@ extension TeamMemberViewController {
         view.addSubviews(teamMemberCalenderView, teamMemberTableView)
         
         teamMemberCalenderView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(32.0)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(32)
             $0.trailing.leading.equalToSuperview().inset(16)
             $0.height.equalTo(teamMemberCalenderView.getCalendarViewHeight())
         }

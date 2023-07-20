@@ -18,7 +18,7 @@ final class ReviewDetailCollectionViewCell: UICollectionViewCell {
     // MARK: - UI Components
     
     private let titleLabel = UILabel()
-    private let descriptionLabel = UILabel()
+    private let descriptionTextView = UITextView()
     private let divisionLabel = UILabel()
     
     // MARK: - Life Cycles
@@ -45,11 +45,13 @@ extension ReviewDetailCollectionViewCell {
             $0.textColor = .black000
         }
         
-        descriptionLabel.do {
+        descriptionTextView.do {
             $0.font = .fontGuide(.body2_regular_kor)
             $0.textColor = .gray500
-            $0.numberOfLines = 0
-            $0.lineBreakMode = .byCharWrapping
+            $0.isEditable = false
+            $0.textContainer.lineFragmentPadding = 0
+            $0.textContainerInset =  UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            $0.isScrollEnabled = false
         }
         
         divisionLabel.do {
@@ -58,14 +60,14 @@ extension ReviewDetailCollectionViewCell {
     }
     
     private func setLayout() {
-        contentView.addSubviews(titleLabel, descriptionLabel, divisionLabel)
+        contentView.addSubviews(titleLabel, descriptionTextView, divisionLabel)
         titleLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(16)
             $0.horizontalEdges.equalToSuperview().inset(32)
             $0.height.equalTo(24)
         }
         
-        descriptionLabel.snp.makeConstraints {
+        descriptionTextView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom)
             $0.horizontalEdges.equalToSuperview().inset(32)
             $0.bottom.equalToSuperview().inset(16)
@@ -83,7 +85,7 @@ extension ReviewDetailCollectionViewCell {
     
     func setDataBind(title: String, description: String) {
         titleLabel.text = title
-        descriptionLabel.text = description
+        descriptionTextView.text = description
     }
     
     func divisionHidden() {

@@ -27,6 +27,8 @@ public enum Image {
     static let notificationBell = UIImage(named: "notificationBell")!
     static let notification = UIImage(named: "bell1")!
     static let chevronBackIcon = UIImage(named: "chevronBack_icon")!
+    static let xIcon = UIImage(systemName: "multiply")?
+        .withTintColor(.gray500, renderingMode: .alwaysOriginal)
     static let warning = UIImage(named: "warning")!
     static let downIcon = UIImage(systemName: "chevron.down")?
         .withTintColor(.gray500, renderingMode: .alwaysOriginal)
@@ -41,7 +43,7 @@ public enum Image {
     static let puzzlingTitle = UIImage(named: "puzzling_title")!
     static let joinPuzzle = UIImage(named: "join_puzzle")!
     static let newPuzzle = UIImage(named: "new_puzzle")!
-    static let kakaoLogin = UIImage(named: "KakaoLogin")!
+    static let kakaoLogin = UIImage(named: "kakao_login_large_wide")!
     static let point = UIImage(named: "point")!
     
     
