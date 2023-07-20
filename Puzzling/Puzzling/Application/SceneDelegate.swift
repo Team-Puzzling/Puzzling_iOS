@@ -24,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
             let window = UIWindow(windowScene: windowScene)
             window.overrideUserInterfaceStyle = UIUserInterfaceStyle.light
-            let vc = InvitationCodeViewController()
+            let vc = OnBoardingViewContoller()
 //            let onBoardingVC = OnBoardingViewContoller()
 //            let enterProjectVC = EnterProjectViewController()
 //            let tabBar = TabBarController()

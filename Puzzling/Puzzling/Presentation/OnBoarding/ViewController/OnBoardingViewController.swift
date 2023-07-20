@@ -166,7 +166,7 @@ extension OnBoardingViewContoller {
                         UserDefaults.standard.set(self.userModel.memberId, forKey: "memberId")
                         KeyChain.create(key: "accessToken", token: self.userModel.accessToken)
                         KeyChain.create(key: "refreshToken", token: self.userModel.refreshToken)
-                        APIConstants.accessToken = self.userModel.accessToken
+//                        APIConstants.accessToken = self.userModel.accessToken
                         
                         if(self.userModel.isNewUser == true) {
                             self.gotoMainEnterProjectView()
