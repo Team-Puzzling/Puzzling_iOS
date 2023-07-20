@@ -1,5 +1,5 @@
 //
-//  CreateRetrospectViewController.swift
+//  CreateReViewViewController.swift
 //  Puzzling
 //
 //  Created by 천성우 on 2023/07/10.
@@ -11,7 +11,7 @@ import Moya
 import Then
 import SnapKit
 
-final class CreateRetrospectViewController: UIViewController {
+final class CreateReViewViewController: UIViewController {
     
     // MARK: - UI Components
     
@@ -26,6 +26,7 @@ final class CreateRetrospectViewController: UIViewController {
     
     private let option: Int
     private var templateID: Int
+    private var keyboardOverlapKey: Int? = 0
 
     private let reviewProvider = MoyaProvider<CreateRetrospectService>(plugins:[NetworkLoggerPlugin()])
     
@@ -70,7 +71,7 @@ final class CreateRetrospectViewController: UIViewController {
     }
 }
 
-extension CreateRetrospectViewController {
+extension CreateReViewViewController {
     
     // MARK: - UI Components Property
     
@@ -135,7 +136,6 @@ extension CreateRetrospectViewController {
         
         tilView.onCompletionTIL = { [weak self] shouldPrint in
             if shouldPrint {
-                print("나와랑")
                 self?.navigationItem.rightBarButtonItem?.isEnabled = true
                 self?.navigationItem.rightBarButtonItem?.tintColor = .blue400
             } else {
@@ -258,53 +258,7 @@ extension CreateRetrospectViewController {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapScreen))
         view.addGestureRecognizer(tapGestureRecognizer)
     }
-    
-//    private func setTextViewRegister(reviewTemplateId: Int){
-//        switch reviewTemplateId {
-//
-//        case 1:
-////            guard let liked = self.tilView.wellTextView.text else { return }
-////            guard let lacked = self.tilView.regretTextView.text else { return }
-////            guard let actionPlan = self.tilView.learnTextView.text else { return }
-////
-////            postReviewTIL(reviewTemplateId: reviewTemplateId, liked: liked, lacked: lacked,
-////                          actionPlan: actionPlan)
-//
-//        case 2:
-//            guard let fact = self.fiveFView.factTextView.text else { return }
-//            guard let feeling = self.fiveFView.feelingTextView.text else { return }
-//            guard let finding = self.fiveFView.findingTextView.text else { return }
-//            guard let feedback = self.fiveFView.feedbackTextView.text else { return }
-//            guard let actionPlan = self.fiveFView.futureTextView.text else { return }
-//
-//
-//            print(reviewTemplateId)
-//            print(fact)
-//            print(feeling)
-//            print(finding)
-//            print(feedback)
-//            print(actionPlan)
-//
-//        case 3:
-//            guard let initialGoal = self.arrView.targetTextView.text else { return }
-//            guard let result = self.arrView.resultTextView.text else { return }
-//            guard let difference = self.arrView.differenceTextView.text else { return }
-//            guard let persistence = self.arrView.continuouslyTextView.text else { return }
-//            guard let actionPlan = self.arrView.purposeTextView.text else { return }
-//
-//
-//            print(reviewTemplateId)
-//            print(initialGoal)
-//            print(result)
-//            print(difference)
-//            print(persistence)
-//            print(actionPlan)
-//
-//        default:
-//            break
-//        }
-//    }
-    
+        
     private func setOptionSelected(option: Int) {
         templateID = option
     }
@@ -332,14 +286,28 @@ extension CreateRetrospectViewController {
         
         if textViewBottomY > keyboardTopY {
             let keyboardOverlap = textViewBottomY - keyboardTopY
-            view.frame.origin.y = -keyboardOverlap - 40
+            scrollView.contentOffset.y += keyboardOverlap + 40
+            self.keyboardOverlapKey = 40
         }
     }
     
     @objc
     func keyboardWillHide(_ sender: Notification) {
-        if view.frame.origin.y != 0 {
-            view.frame.origin.y = 0
+        
+        switch self.templateID {
+        case 1:
+            scrollView.contentOffset.y = 0
+            print(templateID)
+        case 2:
+            if scrollView.contentOffset.y != 0 {
+                scrollView.contentOffset.y -= 40
+            }
+        case 3:
+            if scrollView.contentOffset.y != 0 {
+                scrollView.contentOffset.y -= 40
+            }
+        default:
+            return
         }
     }
     
@@ -371,6 +339,7 @@ extension CreateRetrospectViewController {
     
     @objc
     private func saveButtonTapped() {
+//        showToast(message: "저장 완료!")
         let templateID = self.templateID
             switch templateID {
             case 1:
@@ -429,7 +398,7 @@ extension CreateRetrospectViewController {
     }
 }
 
-extension CreateRetrospectViewController {
+extension CreateReViewViewController {
     
     // MARK: - Network
     
@@ -439,7 +408,7 @@ extension CreateRetrospectViewController {
         reviewTILModel.lacked = lacked
         reviewTILModel.actionPlan = actionPlan
         
-        reviewProvider.request(.reviewTIL(param: reviewTILModel.makePostReviewTILResponce(), memberID: "1", projectID: "1")) { result in
+        reviewProvider.request(.reviewTIL(param: reviewTILModel.makePostReviewTILResponce(), memberID: "7", projectID: "2")) { result in
             switch result {
             case .success(let result):
                 let status = result.statusCode
@@ -471,7 +440,7 @@ extension CreateRetrospectViewController {
         reviewFiveFModel.feedback = feedback
         reviewFiveFModel.actionPlan = actionPlan
         
-        reviewProvider.request(.reviewFiveF(param: reviewFiveFModel.makePostReviewFiveFResponce(), memberID: "1", projectID: "1")) { result in
+        reviewProvider.request(.reviewFiveF(param: reviewFiveFModel.makePostReviewFiveFResponce(), memberID: "7", projectID: "2")) { result in
             switch result {
             case .success(let result):
                 let status = result.statusCode
@@ -504,7 +473,7 @@ extension CreateRetrospectViewController {
         reviewAARModel.persistence = persistence
         reviewAARModel.actionPlan = actionPlan
         
-        reviewProvider.request(.reivewAAR(param: reviewAARModel.makePostReviewAARResponce(), memberID: "1", projectID: "1")) { result in
+        reviewProvider.request(.reivewAAR(param: reviewAARModel.makePostReviewAARResponce(), memberID: "7", projectID: "2")) { result in
             switch result {
             case .success(let result):
                 let status = result.statusCode
