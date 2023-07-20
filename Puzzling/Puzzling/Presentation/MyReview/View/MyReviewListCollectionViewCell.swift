@@ -17,7 +17,7 @@ final class MyReviewListCollectionViewCell: UICollectionViewCell {
     // MARK: - UI Components
     
     private let view = UIView()
-    private let dateLabel = UILabel()
+    let dateLabel = UILabel()
     private let descriptionLabel = UILabel()
     private let chevronRightLabel = UIImageView()
     
@@ -90,7 +90,7 @@ extension MyReviewListCollectionViewCell {
 
 extension MyReviewListCollectionViewCell {
     
-    func setDataBind(_ reviewListData: MyReviewListDataModel) {
+    func setDataBind(_ reviewListData: ReviewListResponse) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
                 

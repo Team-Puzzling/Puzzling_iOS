@@ -9,7 +9,6 @@ import UIKit
 
 import SnapKit
 import Then
-import Moya
 
 extension ReviewDetailViewController {
     @frozen
@@ -32,6 +31,7 @@ extension ReviewDetailViewController {
 extension ReviewDetailViewController: reviewDateProtocol {
     func reviewDate(text: String) {
         selectedDate = text
+        
         print(selectedDate, "aaaaaa👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿")
         let userInfo = selectedDate
         print(userInfo, "xxxxxx")
@@ -104,31 +104,6 @@ extension ReviewDetailViewController {
             $0.height.equalTo(projectCalenderView.getCalendarViewHeight())
         }
     }
-
-    private func setNavigationBar() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: Image.chevronBackIcon,
-            style: .plain,
-            target: self,
-            action: #selector(backButtonTapped)
-        )
-        
-        navigationItem.leftBarButtonItem?.tintColor = .gray500
-        
-        let title = "프로젝트 1"
-        let attributes: [NSAttributedString.Key: Any] = [
-            NSAttributedString.Key.foregroundColor: UIColor.black000,
-            NSAttributedString.Key.font: UIFont.fontGuide(.heading4_kor)
-        ]
-        
-        if let titleLabel = navigationItem.titleView as? UILabel {
-            titleLabel.attributedText = NSAttributedString(string: title, attributes: attributes)
-        } else {
-            let titleLabel = UILabel()
-            titleLabel.attributedText = NSAttributedString(string: title, attributes: attributes)
-            navigationItem.titleView = titleLabel
-        }
-    }
     
     private func setCalendarViewLayout() {
         projectCalenderView.snp.remakeConstraints {
@@ -149,6 +124,35 @@ extension ReviewDetailViewController {
     
     private func setNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(getDateBoolNotification(_:)), name: Notification.Name("dateBoolNotification"), object: nil)
+    }
+}
+
+extension ReviewDetailViewController: UIGestureRecognizerDelegate {
+    
+    private func setNavigationBar() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: Image.chevronBackIcon,
+            style: .plain,
+            target: self,
+            action: #selector(backButtonTapped)
+        )
+
+        navigationItem.leftBarButtonItem?.tintColor = .gray500
+        
+        let title = "프로젝트 1"
+        let attributes: [NSAttributedString.Key: Any] = [
+            NSAttributedString.Key.foregroundColor: UIColor.black000,
+            NSAttributedString.Key.font: UIFont.fontGuide(.heading4_kor)
+        ]
+        
+        if let titleLabel = navigationItem.titleView as? UILabel {
+            titleLabel.attributedText = NSAttributedString(string: title, attributes: attributes)
+        } else {
+            let titleLabel = UILabel()
+            titleLabel.attributedText = NSAttributedString(string: title, attributes: attributes)
+            navigationItem.titleView = titleLabel
+        }
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
 }
 

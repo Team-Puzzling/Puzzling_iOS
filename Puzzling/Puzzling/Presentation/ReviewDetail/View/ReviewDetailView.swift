@@ -11,11 +11,11 @@ import SnapKit
 import Then
 
 final class ReviewDetailView: UIView {
-    private let reviewDetailData = ReviewDetailDataModel.dummy()
+    private var reviewDetailData: [ReviewDetailModel] = []
     private var selectedDate: String = "2023-07-17"
     
-    private func findMyData() -> ReviewDetailDataModel {
-        var data: ReviewDetailDataModel = ReviewDetailDataModel(reviewId: nil, reviewDay: "", reviewDate: "", contents: nil)
+    private func findMyData() -> ReviewDetailModel {
+        var data: ReviewDetailModel = ReviewDetailModel(reviewId: nil, reviewDay: "", reviewDate: "", reviewTemplateId: nil, contents: nil)
         reviewDetailData.forEach {
             
                 print("👥👥👥👥👥👥👥👥👥👥👥👥👥👥👥")
@@ -36,6 +36,7 @@ final class ReviewDetailView: UIView {
         setDelegate()
         setRegister()
         setNotificationCenter()
+        self.backgroundColor = .systemRed
     }
     
     required init?(coder: NSCoder) {
@@ -87,6 +88,13 @@ extension ReviewDetailView {
 }
 
 extension ReviewDetailView {
+    func setDataBind(data: [ReviewDetailModel]) {
+        self.reviewDetailData = data
+        self.reviewCollectionview.reloadData()
+    }
+}
+
+extension ReviewDetailView {
     @objc
     private func getDateNotification(_ notification: Notification) {
         print(#function)
@@ -97,7 +105,7 @@ extension ReviewDetailView {
         print(dateNotification ?? "","?slsllslslslls??")
         selectedDate = dateNotification as! String
         print(selectedDate,"✅✅✅✅??✅✅")
-//        reviewCollectionview.reloadData()
+        reviewCollectionview.reloadData()
     }
 }
 
