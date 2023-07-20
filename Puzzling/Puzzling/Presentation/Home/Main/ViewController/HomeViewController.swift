@@ -7,7 +7,16 @@
 
 import UIKit
 
+import Moya
+
 final class HomeViewController: UIViewController {
+    
+    // TODO: 전역 변수로 받아와야함
+    private var currentProjectId: Int = 1
+    
+    private var alarmView: UIView?
+    
+    private let dashboardNetworkProvider = MoyaProvider<ProjectServiceKBS>(plugins: [NetworkLoggerPlugin(verbose: true)])
     
     private var titleBarView = HomeTitleBarView()
     private let segmentedView = HomeSegmentedView()
@@ -24,17 +33,29 @@ final class HomeViewController: UIViewController {
         return height
     }
     
+    private var currentProjectTitle: String = ""
+    private var currentProjectRetrospectCycle: String = ""
+    
+    private var ongoingProjectArray: [OngoingProjectData] = []
+            
     override func viewDidLoad() {
         super.viewDidLoad()
         setDelegate()
         setUI()
         setLayout()
         setPage()
+        setData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        setBackButton()
     }
     
     deinit {
@@ -43,6 +64,12 @@ final class HomeViewController: UIViewController {
 }
 
 extension HomeViewController {
+    
+    private func setData() {
+        setHomeData()
+        setIndivisualDashboardData()
+        setTeamDashboardData()
+    }
     
     private func setDelegate() {
         titleBarView.delegate = self
@@ -64,7 +91,7 @@ extension HomeViewController {
         titleBarView.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(48)
-            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(8)
         }
         
         segmentedView.snp.makeConstraints {
@@ -86,15 +113,287 @@ extension HomeViewController {
             currentPage = firstViewController
         }
     }
+    
+    private func setHomeData() {
+        // MARK: - 모든 프로젝트 들고오기
+        dashboardNetworkProvider.request(.fetchOngoingProjectList(memberId: 1)) { [weak self] response in
+            switch response {
+            case .success(let result):
+                let status = result.statusCode
+                switch status {
+                case 200..<299:
+                    guard let data = try? result.map(GeneralResponse<[OngoingProjectData]>.self).data else {
+                        return
+                    }
+                    
+                    guard let currentProject = data.filter({
+                        $0.projectId == self?.currentProjectId
+                    }).first else { return }
+                    
+                    self?.currentProjectId = currentProject.projectId
+                    self?.currentProjectTitle = currentProject.projectName
+                    
+                    self?.ongoingProjectArray = data
+                    self?.titleBarView.setTitleOfProject(title: currentProject.projectName)
+                    self?.teamDashboardViewController.teamRankView.passProjectName(projectName: currentProject.projectName)
+                    
+                case 400:
+                    print(result.description)
+                case 401:
+                    print(result.description)
+                case 404:
+                    print(result.debugDescription)
+                case 500:
+                    print(result.description)
+                default:
+                    print("Other Errors")
+                    break
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    private func setIndivisualDashboardData() {
+        // MARK: - 개인 퍼즐 정보 가져오기
+        dashboardNetworkProvider.request(.fetchIndivisualPuzzle(memberId: 1, projectId: self.currentProjectId, todayString: Date().dateToServerString)) { [weak self] response in
+            switch response {
+            case .success(let result):
+                let status = result.statusCode
+                switch status {
+                case 200..<299:
+                    guard let data = try? result.map(GeneralResponse<IndivisualData>.self).data else {
+                        return
+                    }
+                    let userName: String = data.myPuzzle.nickname
+                    let puzzleCount: Int = data.myPuzzle.puzzleCount
+                    let totalPuzzleBoardCount = data.puzzleBoardCount
+                    let puzzles = data.userPuzzleBoard
+                    self?.indivisualDashboardViewController.mainView.passPuzzleData(userName: userName, piecesCount: puzzleCount, totalPuzzleBoardCount: totalPuzzleBoardCount, dashboardData: puzzles)
+                    self?.indivisualDashboardViewController.mainView.reloadPuzzleView()
+                    self?.indivisualDashboardViewController.passBoardCount(count: totalPuzzleBoardCount)
+                    
+                    if data.hasTodayReview == true {
+                        self?.indivisualDashboardViewController.homeMainButton.enableButton(toType: .done)
+                        return
+                    }
+                    
+                    if data.isReviewDay == false {
+                        self?.indivisualDashboardViewController.homeMainButton.enableButton(toType: .notToday)
+                        return
+                    }
+                    
+                    self?.indivisualDashboardViewController.homeMainButton.enableButton(toType: .today)
+                case 400:
+                    print(result.description)
+                case 401:
+                    print(result.description)
+                case 404:
+                    print(result.debugDescription)
+                case 500:
+                    print(result.description)
+                default:
+                    print("Other Errors")
+                    break
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+        
+        // MARK: - Action Plan 가져오기
+        dashboardNetworkProvider.request(.fetchActionPlans(memberId: 1, projectId: self.currentProjectId)) { [weak self] response in
+            switch response {
+            case .success(let result):
+                let status = result.statusCode
+                switch status {
+                case 200..<299:
+                    guard let data = try? result.map(GeneralResponse<[ActionPlan]>.self).data else {
+                        return
+                    }
+                    self?.indivisualDashboardViewController.actionPlanView.passActionPlanView(data: data)
+                case 400:
+                    print(result.description)
+                case 401:
+                    print(result.description)
+                case 404:
+                    print(result.debugDescription)
+                case 500:
+                    print(result.description)
+                default:
+                    print("Other Errors")
+                    break
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+        
+        // MARK: - 회고 주기 가져오기
+        dashboardNetworkProvider.request(.fetchRetrospectCycle(projectId: self.currentProjectId)) { [weak self] response in
+            switch response {
+            case .success(let result):
+                let status = result.statusCode
+                switch status {
+                case 200..<299:
+                    guard let data = try? result.map(GeneralResponse<ProjectCycle>.self).data else { return }
+                    
+                    self?.currentProjectRetrospectCycle = data.projectReviewCycle
+                    
+                case 400:
+                    print(result.description)
+                case 401:
+                    print(result.description)
+                case 404:
+                    print(result.debugDescription)
+                case 500:
+                    print(result.description)
+                default:
+                    print("Other Errors")
+                    break
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    private func setTeamDashboardData() {
+
+        // MARK: - 팀 퍼즐 가져오기
+        dashboardNetworkProvider.request(.fetchTeamPuzzle(projectId: self.currentProjectId, todayString: Date().dateToServerString)) { [weak self] response in
+            switch response {
+            case .success(let result):
+                let status = result.statusCode
+                switch status {
+                case 200..<299:
+                    guard let data = try? result.map(GeneralResponse<TeamDashboardData>.self).data else {
+                        return
+                    }
+
+                    let userName: String = data.myPuzzle.nickname
+                    let puzzleCount: Int = data.myPuzzle.puzzleCount
+                    let totalPuzzleBoardCount = data.teamPuzzleBoardCount
+                    let puzzles = data.teamPuzzleBoard
+                    
+                    self?.teamDashboardViewController.mainView.passPuzzleData(userName: userName, piecesCount: puzzleCount, totalPuzzleBoardCount: totalPuzzleBoardCount, dashboardData: puzzles)
+                    self?.teamDashboardViewController.mainView.reloadPuzzleView()
+                    self?.teamDashboardViewController.passBoardCount(count: totalPuzzleBoardCount)
+                case 400:
+                    print(result.description)
+                case 401:
+                    print(result.description)
+                case 404:
+                    print(result.debugDescription)
+                case 500:
+                    print(result.description)
+                default:
+                    print("Other Errors")
+                    break
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+        
+        // MARK: - 팀 랭크 가져오기
+        dashboardNetworkProvider.request(.fetchTeamRankTable(projectId: self.currentProjectId)) { [weak self] response in
+            switch response {
+            case .success(let result):
+                let status = result.statusCode
+                switch status {
+                case 200..<299:
+                    guard let data = try? result.map(GeneralResponse<[TeamProjectRank]>.self).data else {
+                        return
+                    }
+                    let orderedRankData = data.sorted {
+                        ($1.memberPuzzleCount, $0.memberNickname) < ($0.memberPuzzleCount, $1.memberNickname)
+                    }
+                    
+                    self?.teamDashboardViewController.passTeamArray(data: data)
+                    self?.teamDashboardViewController.teamRankView.passTopThreeData(data: orderedRankData)
+                    self?.teamDashboardViewController.teamRankView.passOrderedRankData(data: orderedRankData)
+                case 400:
+                    print(result.description)
+                case 401:
+                    print(result.description)
+                case 404:
+                    print(result.debugDescription)
+                case 500:
+                    print(result.description)
+                default:
+                    print("Other Errors")
+                    break
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    private func setBackButton() {
+        let backButton = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        backButton.tintColor = .gray500
+        self.navigationItem.backBarButtonItem = backButton
+    }
 }
 
 extension HomeViewController: HomeBottomSheetDelegate {
     func popAlarmAction() {
-        print("pppopALALALALALARM")
+        print(self.currentProjectTitle)
+        let modifiedCycleString = self.currentProjectRetrospectCycle.replacingOccurrences(of: ",", with: ", ")
+        alarmView = PopUpDayView(frame: .zero, projectTitle: self.currentProjectTitle, daysString: modifiedCycleString)
+        self.titleBarView.alarmButton.isEnabled = false
+        view.addSubview(alarmView ?? UIView())
+        
+        alarmView?.snp.makeConstraints {
+            $0.top.equalTo(titleBarView.snp.bottom).offset(-8)
+            $0.trailing.equalToSuperview().inset(16)
+            $0.width.equalToSuperview().dividedBy(2.2)
+            $0.height.equalToSuperview().dividedBy(6.9)
+        }
+        
+        UIView.animate(withDuration: 1.5, delay: 1.2, options: .curveEaseOut) { [weak self] in
+            self?.alarmView?.alpha = 0
+        } completion: { [weak self] _ in
+            self?.alarmView?.removeFromSuperview()
+            self?.alarmView = nil
+            self?.titleBarView.alarmButton.isEnabled = true
+        }
     }
     
     func openBottomSheet() {
-        print("OOO")
+        let bottomSheetViewController = HomeBottomSheetViewController()
+        bottomSheetViewController.modalPresentationStyle = .pageSheet
+        bottomSheetViewController.passOngoingProjectsData(projects: ongoingProjectArray, currentId: self.currentProjectId, currentProjectTitle: self.currentProjectTitle)
+        
+        if let sheet = bottomSheetViewController.sheetPresentationController {
+            sheet.detents = [.custom { [weak self] _ in
+                let detentHeight: Int
+                guard let count = self?.ongoingProjectArray.count else { return 0 }
+                if count < 5 {
+                    detentHeight = count * 60 + 200
+                    return CGFloat(detentHeight)
+                } else {
+                    detentHeight = 470
+                    return CGFloat(detentHeight)
+                }
+            }]
+            sheet.preferredCornerRadius = 16
+            sheet.prefersGrabberVisible = true
+            sheet.prefersScrollingExpandsWhenScrolledToEdge = false
+        }
+        bottomSheetViewController.delegate = self
+        self.navigationController?.present(bottomSheetViewController, animated: true)
+    }
+}
+
+extension HomeViewController: HomeBottomSheetPassNewProjectDelegate {
+    func changeProjectId(to newId: Int) {
+        self.currentProjectId = newId
+        // 새로운 통신
+        self.setData()
     }
 }
 
