@@ -135,7 +135,7 @@ private extension OnBoardingViewContoller {
                     guard let accessToken = oauthToken?.accessToken else { return }
                     print("loginWithKakaoTalk() success.")
                     print("🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶", accessToken, "🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶")
-                    self.token = accessToken
+                    APIConstants.accessToken = accessToken
                     self.postAuth()
                 }
             }
@@ -146,7 +146,10 @@ private extension OnBoardingViewContoller {
                     print(error)
                 } else {
                     print("loginWithKakaoAccount() success.")
-                    
+                    guard let accessToken = oauthToken?.accessToken else { return }
+                    print("🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶", accessToken, "🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶")
+                    print(accessToken)
+                    APIConstants.accessToken = accessToken
                     _ = oauthToken
                     // 관련 메소드 추가
                     self.postAuth()
@@ -175,15 +178,12 @@ extension OnBoardingViewContoller {
     
     private func postAuth() {
         print(authModel.socialPlatform)
-        authProvider.request(.postAuth(param: authModel.makePostAuthRequest(), token: token)) { result in
+        authProvider.request(.postAuth(param: authModel.makePostAuthRequest())) { result in
             switch result {
             case .success(let result):
                 let status = result.statusCode
                 if status >= 200 && status < 300 {
                     do {
-                        print("💙💙💙💙💙💙💙💙💙💙")
-                        print("?????????\(result)")
-                        print("?????????\(try result.map(GeneralResponse<UserResponse>.self))")
                         guard let data = try result.map(GeneralResponse<UserResponse>.self).data else { return }
                         self.userModel = data.convertToUserModel()
                         print("🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰\(self.userModel)🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰")

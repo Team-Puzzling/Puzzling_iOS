@@ -9,7 +9,7 @@ import Foundation
 import Moya
 
 enum AuthService {
-    case postAuth(param: PostAuthRequest, token: String)
+    case postAuth(param: PostAuthRequest)
     case authToken(Authorization: String, Refresh: String)
 }
 
@@ -20,7 +20,7 @@ extension AuthService: TargetType {
 
     var path: String {
         switch self {
-        case .postAuth(_, _):
+        case .postAuth(_):
             return URLConst.postUserURL
         case .authToken:
             return URLConst.getUserTokenURL
@@ -38,7 +38,7 @@ extension AuthService: TargetType {
 
     var task: Moya.Task {
         switch self {
-        case .postAuth(let param, _):
+        case .postAuth(let param):
             return .requestParameters(parameters: try! param.asParameter(), encoding: JSONEncoding.default)
         case .authToken:
             return .requestPlain
@@ -47,8 +47,7 @@ extension AuthService: TargetType {
 
     var headers: [String : String]? {
         switch self {
-        case .postAuth(_, let token):
-            APIConstants.accessToken = token
+        case .postAuth(_):
             return APIConstants.headerWithAuthorization
         case .authToken(let authorization, let refresh):
             APIConstants.authorization = authorization
