@@ -115,16 +115,17 @@ extension TeamRankPodiumCell {
             break
         }
         
-        guard let rank = rankModel?.rankNumber else { return }
-        guard let userInformation = rankModel?.userInformation else {
-            return
+        if let rank = rankModel?.rankNumber, let userInformation = rankModel?.userInformation {
+            piecesCount = userInformation.memberPuzzleCount
+            let pieceLabel: String = "\(piecesCount)조각"
+            
+            piecesCountLabel.text = pieceLabel
+            userNameLabel.text = userInformation.memberNickname
+            roleLabel.text = userInformation.memberRole
+        } else {
+            piecesCountLabel.text = nil
+            userNameLabel.text = nil
+            roleLabel.text = nil
         }
-        
-        piecesCount = userInformation.memberPuzzleCount
-        let pieceLabel: String = "\(piecesCount)조각"
-        
-        piecesCountLabel.text = pieceLabel
-        userNameLabel.text = userInformation.memberNickname
-        roleLabel.text = userInformation.memberRole
     }
 }
