@@ -224,7 +224,8 @@ extension InvitationCodeViewController {
     
     private func fetchInvitationCode() {
         print(invitationCode)
-        projectProvider.request(.invitationCode(memberID: "1", invitationCode: invitationCode)) { result in
+        let memberId = UserDefaults.standard.string(forKey: "memberId")
+        projectProvider.request(.invitationCode(memberID: memberId ?? "1", invitationCode: invitationCode)) { result in
             switch result {
             case .success(let result):
                 let status = result.statusCode
@@ -246,7 +247,7 @@ extension InvitationCodeViewController {
                     } catch(let error) {
                         print(error.localizedDescription)
                     }
-                } else if status == 404 {
+                } else if status >= 400 {
                     print("💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭")
                     self.textFieldWarningNotification(type: .invitationCode)
                 }

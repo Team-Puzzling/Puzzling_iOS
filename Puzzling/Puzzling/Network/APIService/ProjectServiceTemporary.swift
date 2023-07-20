@@ -32,13 +32,13 @@ extension ProjectServiceKBS: TargetType {
     
     var path: String {
         switch self {
-        case .fetchIndivisualPuzzle(let memberId, let projectId, let todayString):
+        case .fetchIndivisualPuzzle(let memberId, let projectId, _):
             return URLConst.getMemberProjectPuzzleURL.replacingOccurrences(of: "{memberId}", with: "\(memberId)").replacingOccurrences(of: "{projectId}", with: "\(projectId)")
         case .fetchActionPlans(let memberId, let projectId):
             return URLConst.getMemberProjectActionplanURL.replacingOccurrences(of: "{memberId}", with: "\(memberId)").replacingOccurrences(of: "{projectId}", with: "\(projectId)")
         case .fetchOngoingProjectList(let memberId):
             return URLConst.getMemberProjectAllURL.replacingOccurrences(of: "{memberId}", with: "\(memberId)")
-        case .fetchTeamPuzzle(let projectId, let todayString):
+        case .fetchTeamPuzzle(let projectId, _):
             return URLConst.getTeamProjectPuzzleURL.replacingOccurrences(of: "{projectId}", with: "\(projectId)")
         case .fetchTeamRankTable(let projectId):
             return URLConst.getProjectRankURL.replacingOccurrences(of: "{projectId}", with: "\(projectId)")

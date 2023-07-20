@@ -24,9 +24,9 @@
 		0351AB642A65D78E006B0F4C /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB632A65D78E006B0F4C /* Profile.swift */; };
 		0351AB662A65EDD9006B0F4C /* CreateProjectResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB652A65EDD9006B0F4C /* CreateProjectResponse.swift */; };
 		0351AB682A65EE17006B0F4C /* CreateProjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB672A65EE17006B0F4C /* CreateProjectModel.swift */; };
+		0372614D2A69BA9F005CC3DE /* Config+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0372614C2A69BA9F005CC3DE /* Config+.swift */; };
 		03734EB82A59A0BD00B401D6 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03734EB72A59A0BD00B401D6 /* TabBarController.swift */; };
 		03734EBD2A59A1F800B401D6 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03734EBC2A59A1F800B401D6 /* TabBarItem.swift */; };
-		03734EBF2A59A26800B401D6 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03734EBE2A59A26800B401D6 /* MyPageViewController.swift */; };
 		03ADF3872A5D9F91002CEDDC /* InputContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ADF3862A5D9F91002CEDDC /* InputContentView.swift */; };
 		03ADF3892A5E7322002CEDDC /* StartDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ADF3882A5E7322002CEDDC /* StartDayView.swift */; };
 		03ADF38D2A5E8A5F002CEDDC /* CreateProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ADF38C2A5E8A5F002CEDDC /* CreateProjectView.swift */; };
@@ -194,10 +194,10 @@
 		0351AB632A65D78E006B0F4C /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		0351AB652A65EDD9006B0F4C /* CreateProjectResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectResponse.swift; sourceTree = "<group>"; };
 		0351AB672A65EE17006B0F4C /* CreateProjectModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectModel.swift; sourceTree = "<group>"; };
+		0372614C2A69BA9F005CC3DE /* Config+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Config+.swift"; sourceTree = "<group>"; };
 		03734EB42A599FDB00B401D6 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = "<group>"; };
 		03734EB72A59A0BD00B401D6 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		03734EBC2A59A1F800B401D6 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
-		03734EBE2A59A26800B401D6 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		03ADF3862A5D9F91002CEDDC /* InputContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputContentView.swift; sourceTree = "<group>"; };
 		03ADF3882A5E7322002CEDDC /* StartDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDayView.swift; sourceTree = "<group>"; };
 		03ADF38C2A5E8A5F002CEDDC /* CreateProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectView.swift; sourceTree = "<group>"; };
@@ -416,14 +416,6 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
-		03734EB92A59A1A600B401D6 /* MyPage */ = {
-			isa = PBXGroup;
-			children = (
-				03734EC12A59AB6A00B401D6 /* ViewController */,
-			);
-			path = MyPage;
-			sourceTree = "<group>";
-		};
 		03734EC02A59AB5E00B401D6 /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -432,14 +424,6 @@
 				5831179E2A5B71620099B517 /* ViewController */,
 			);
 			path = Main;
-			sourceTree = "<group>";
-		};
-		03734EC12A59AB6A00B401D6 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				03734EBE2A59A26800B401D6 /* MyPageViewController.swift */,
-			);
-			path = ViewController;
 			sourceTree = "<group>";
 		};
 		03ADF3902A5E932F002CEDDC /* Cell */ = {
@@ -566,7 +550,6 @@
 				096755C22A5E96DC00A1E691 /* MyProject */,
 				03E6D20E2A5327D300F4453C /* Common */,
 				03E6D20F2A5327E600F4453C /* Home */,
-				03734EB92A59A1A600B401D6 /* MyPage */,
 				03FFD2D52A5D92CE00A3B70D /* CreateProject */,
 				0351AB432A645B96006B0F4C /* InvitationCode */,
 				03734EB62A59A08E00B401D6 /* TabBar */,
@@ -690,6 +673,7 @@
 				03B004A82A556C7400E71CA7 /* UIWindow+.swift */,
 				03FFD2C92A5B15BA00A3B70D /* UIFont+.swift */,
 				0351AB3F2A630EE6006B0F4C /* UIResponder+.swift */,
+				0372614C2A69BA9F005CC3DE /* Config+.swift */,
 				58597C522A66BE130048B12C /* Date+.swift */,
 			);
 			path = Extension;
@@ -1359,6 +1343,7 @@
 				0976A8A22A684C6300F1CAE4 /* ProjectListModel.swift in Sources */,
 				25642BD92A67DB500041200D /* ReviewAARRequest.swift in Sources */,
 				03ADF38D2A5E8A5F002CEDDC /* CreateProjectView.swift in Sources */,
+				0372614D2A69BA9F005CC3DE /* Config+.swift in Sources */,
 				09B2A04D2A683D54007DED5F /* TokenModel.swift in Sources */,
 				03E6D2642A53330E00F4453C /* NSObject+.swift in Sources */,
 				588AA06C2A5E77EF0017CB1E /* ActionPlanView.swift in Sources */,
@@ -1547,10 +1532,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				BASE_URL = "http://3.39.174.107";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = X96X8FG389;
+				DEVELOPMENT_TEAM = DGT9BQA4KH;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Puzzling/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1581,10 +1567,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				BASE_URL = "http://3.39.174.107";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = X96X8FG389;
+				DEVELOPMENT_TEAM = DGT9BQA4KH;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Puzzling/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

@@ -22,7 +22,7 @@ enum APIConstants {
     static let applicationJSON = "application/json"
     static var deviceToken: String = ""
     static var jwtToken: String = ""
-    static var accessToken: String = ""
+    static var accessToken: String = KeyChain.read(key: "accessToken") ?? ""
     static var kakaoAccessToken: String = ""
     static var authorization: String = ""
     static var refresh: String = ""

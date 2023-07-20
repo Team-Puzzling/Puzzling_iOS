@@ -116,7 +116,8 @@ extension HomeViewController {
     
     private func setHomeData() {
         // MARK: - 모든 프로젝트 들고오기
-        dashboardNetworkProvider.request(.fetchOngoingProjectList(memberId: 1)) { [weak self] response in
+        let memberId = UserDefaults.standard.integer(forKey: "memberId")
+        dashboardNetworkProvider.request(.fetchOngoingProjectList(memberId: memberId)) { [weak self] response in
             switch response {
             case .success(let result):
                 let status = result.statusCode
@@ -157,7 +158,8 @@ extension HomeViewController {
     
     private func setIndivisualDashboardData() {
         // MARK: - 개인 퍼즐 정보 가져오기
-        dashboardNetworkProvider.request(.fetchIndivisualPuzzle(memberId: 1, projectId: self.currentProjectId, todayString: Date().dateToServerString)) { [weak self] response in
+        let memberId = UserDefaults.standard.integer(forKey: "memberId")
+        dashboardNetworkProvider.request(.fetchIndivisualPuzzle(memberId: memberId, projectId: self.currentProjectId, todayString: Date().dateToServerString)) { [weak self] response in
             switch response {
             case .success(let result):
                 let status = result.statusCode
@@ -203,7 +205,7 @@ extension HomeViewController {
         }
         
         // MARK: - Action Plan 가져오기
-        dashboardNetworkProvider.request(.fetchActionPlans(memberId: 1, projectId: self.currentProjectId)) { [weak self] response in
+        dashboardNetworkProvider.request(.fetchActionPlans(memberId: memberId, projectId: self.currentProjectId)) { [weak self] response in
             switch response {
             case .success(let result):
                 let status = result.statusCode
