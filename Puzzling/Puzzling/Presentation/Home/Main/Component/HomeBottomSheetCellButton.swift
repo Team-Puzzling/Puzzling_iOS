@@ -1,5 +1,5 @@
 //
-//  BottomSheetCellButton.swift
+//  HomeBottomSheetCellButton.swift
 //  Puzzling
 //
 //  Created by KYUBO A. SHIM on 2023/07/19.
@@ -7,14 +7,67 @@
 
 import UIKit
 
-class BottomSheetCellButton: UIView {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+enum HomeBottomViewButtonType {
+    case create
+    case join
+    
+    var title: String {
+        switch self {
+        case .create:
+            return "프로젝트 등록하기"
+        case .join:
+            return "프로젝트 참여하기"
+        }
     }
-    */
+}
 
+final class HomeBottomSheetCellButton: UIView {
+    
+    private let plusImageView = UIImageView()
+    private let titleLabel = UILabel()
+    private var buttonTitle: String!
+    
+    init(frame: CGRect, buttonTitle: String) {
+        self.buttonTitle = buttonTitle
+        super.init(frame: frame)
+        setUI()
+        setLayout()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension HomeBottomSheetCellButton {
+    
+    private func setUI() {
+        self.backgroundColor = .white000
+        
+        plusImageView.do {
+            $0.image = Image.plusButtonFill
+            $0.contentMode = .scaleAspectFit
+        }
+        
+        titleLabel.do {
+            $0.textColor = .gray600
+            $0.font = .fontGuide(.body1_bold_kor)
+            $0.text = buttonTitle
+        }
+    }
+    
+    private func setLayout() {
+        self.addSubviews(plusImageView, titleLabel)
+        
+        plusImageView.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().inset(20)
+            $0.size.equalTo(28)
+        }
+        
+        titleLabel.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalTo(plusImageView.snp.trailing).offset(16)
+        }
+    }
 }
