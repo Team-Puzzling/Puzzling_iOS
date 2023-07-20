@@ -17,14 +17,17 @@ final class ActionPlanCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setDelegate()
         setUI()
         setLayout()
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        self.makeRounded(radius: 16)
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        dateLabel.text = nil
+        dateLabel.textColor = .gray300
+        actionTextView.text = nil
+        actionTextView.textColor = .gray600
+        self.backgroundColor = .gray100
     }
     
     required init?(coder: NSCoder) {
@@ -34,12 +37,10 @@ final class ActionPlanCollectionViewCell: UICollectionViewCell {
 
 extension ActionPlanCollectionViewCell {
     
-    private func setDelegate() {
-        
-    }
-    
     private func setUI() {
-        self.backgroundColor = .background050
+        self.backgroundColor = .gray100
+        self.layer.cornerRadius = 16
+        self.layer.masksToBounds = true
         
         actionTextView.do {
             let paragraphStyle = NSMutableParagraphStyle()
