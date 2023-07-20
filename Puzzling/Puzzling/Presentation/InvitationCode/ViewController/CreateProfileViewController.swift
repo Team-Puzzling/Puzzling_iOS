@@ -247,14 +247,14 @@ extension CreateProfileViewController {
         profile.memberProjectNickname = nickname
         profile.memberProjectRole = myRole
         
-        profileProvider.request(.joinProject(param: profile.makePostProfileRequest(), memberID:"2")) { result in
+        profileProvider.request(.joinProject(param: profile.makePostProfileRequest(), memberID: UserDefaults.standard.object(forKey: "memberId") as! String)) { result in
             switch result {
             case .success(let result):
                 let status = result.statusCode
                 if status >= 200 && status < 300 {
                     do {
                         print("♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️")
-                        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+                        UIViewController.modifyRootViewController(TabBarController())
                     } catch(let error) {
                         print(error.localizedDescription)
                         self.participateProjectButton.setState(.notAllow)

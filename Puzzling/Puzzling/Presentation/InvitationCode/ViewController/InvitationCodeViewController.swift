@@ -224,7 +224,7 @@ extension InvitationCodeViewController {
     
     private func fetchInvitationCode() {
         print(invitationCode)
-        projectProvider.request(.invitationCode(memberID: "1", invitationCode: invitationCode)) { result in
+        projectProvider.request(.invitationCode(memberID: UserDefaults.standard.object(forKey: "memberId") as! String, invitationCode: invitationCode)) { result in
             switch result {
             case .success(let result):
                 let status = result.statusCode

@@ -330,7 +330,7 @@ extension CreateProjectViewController {
         project.memberProjectNickname = projectNickname
         project.reviewCycle = projectCycle
         
-        projectProvider.request(.postProject(param: project.makePostProjectRequest(), memberID: "1")) { result in
+        projectProvider.request(.postProject(param: project.makePostProjectRequest(), memberID: UserDefaults.standard.object(forKey: "memberId") as! String)) { result in
             switch result {
             case .success(let result):
                 let status = result.statusCode
@@ -345,14 +345,9 @@ extension CreateProjectViewController {
                             object: nil,
                             userInfo: ["userInfo": userInfo]
                         )
-                        // 프로젝트 아이디 요기
-                        // let projectID = self.createProjectModel?.projectId
-                        
-//                        if let code = self.createProjectModel?.projectCode {
-//                            self.projectRegister()
-//                            alertView.invitationCode = code
-//                            self.invitationCodeNotification(code: code)
-//                        }
+                        let projectID = self.createProjectModel?.projectId
+                        UserDefaults.standard.set(projectID, forKey: "projectId")
+                        UIViewController.modifyRootViewController(TabBarController())
                     } catch(let error) {
                         print(error.localizedDescription)
                     }
