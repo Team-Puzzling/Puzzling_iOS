@@ -12,9 +12,6 @@ import Then
 
 class EnterProjectView: UIView {
 
-    // MARK: - Properties
-    
-
     // MARK: - UI Components
 
     private let titleImage = UIImageView()
@@ -26,13 +23,17 @@ class EnterProjectView: UIView {
     private let joinTitle = UILabel()
     private let joinButton = UIButton()
     
+    // MARK: - Properties
+    
+    var newProjectButtonhandler: (() -> Void)?
+    
     // MARK: - Initializer
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUI()
         setLayout()
- 
+        setAddTarget()
     }
 
     required init?(coder: NSCoder) {
@@ -64,12 +65,6 @@ class EnterProjectView: UIView {
             $0.setTitle("프로젝트 등록하기 >", for: .normal)
             $0.setTitleColor(UIColor.blue400, for: .normal)
             $0.titleLabel?.font = .fontGuide(.body1_bold_kor)
-//            $0.setImage(Image.chevronBack, for: .normal)
-//            $0.tintColor = .blue400
-//            var config = UIButton.Configuration.plain()
-//            config.imagePlacement = NSDirectionalRectEdge.trailing
-//
-//            newProjectButton.configuration = config
         }
         
         wall.do {
@@ -90,12 +85,6 @@ class EnterProjectView: UIView {
             $0.setTitle("프로젝트 참여하기 >", for: .normal)
             $0.setTitleColor(UIColor.blue400, for: .normal)
             $0.titleLabel?.font = .fontGuide(.body1_bold_kor)
-//            $0.setImage(Image.chevronBack, for: .normal)
-//            $0.tintColor = .blue400
-//            var config = UIButton.Configuration.plain()
-//            config.imagePlacement = NSDirectionalRectEdge.trailing
-//
-//            newProjectButton.configuration = config
         }
     }
 
@@ -107,61 +96,68 @@ class EnterProjectView: UIView {
         addSubviews(titleImage, newProjectLogo, newProjectTitle,
                     newProjectButton, wall, jointLogo,
                     joinTitle, joinButton)
-
+        
         titleImage.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(76)
+            $0.top.equalToSuperview().offset(64)
             $0.centerX.equalToSuperview()
-            $0.width.equalTo(85)
-        }
-        
-        newProjectLogo.snp.makeConstraints {
-            $0.top.equalTo(titleImage.snp.bottom).inset(-44)
-            $0.centerX.equalToSuperview()
-            $0.width.equalTo(150)
-            $0.height.equalTo(150)
-        }
-        
-        newProjectTitle.snp.makeConstraints {
-            $0.top.equalTo(newProjectLogo.snp.bottom).inset(-16)
-            $0.width.equalTo(205)
-            $0.centerX.equalToSuperview()
-        }
-        
-        newProjectButton.snp.makeConstraints {
-            $0.top.equalTo(newProjectTitle.snp.bottom).inset(-11)
-            $0.centerX.equalToSuperview()
-            $0.width.equalTo(145)
         }
         
         wall.snp.makeConstraints {
-            $0.top.equalTo(newProjectButton.snp.bottom).inset(-36)
+            $0.top.equalToSuperview().inset(setScreenHeight() + 20)
             $0.leading.trailing.equalToSuperview().inset(30)
             $0.height.equalTo(1)
         }
         
-        jointLogo.snp.makeConstraints {
-            $0.top.equalTo(wall.snp.bottom).inset(-50)
+        newProjectButton.snp.makeConstraints {
+            $0.bottom.equalTo(wall.snp.top).offset(-53)
             $0.centerX.equalToSuperview()
-            $0.width.equalTo(150)
-            $0.height.equalTo(150)
+            $0.width.equalTo(145)
+            $0.height.equalTo(16)
+        }
+        
+        newProjectTitle.snp.makeConstraints {
+            $0.bottom.equalTo(newProjectButton.snp.top).offset(-11)
+            $0.centerX.equalToSuperview()
+        }
+        
+        newProjectLogo.snp.makeConstraints {
+            $0.bottom.equalTo(newProjectTitle.snp.top).offset(-16)
+            $0.centerX.equalToSuperview()
+            $0.width.height.equalTo(150)
+        }
+        
+        jointLogo.snp.makeConstraints {
+            $0.top.equalTo(wall.snp.bottom).offset(36)
+            $0.centerX.equalToSuperview()
+            $0.width.height.equalTo(150)
         }
         
         joinTitle.snp.makeConstraints {
-            $0.top.equalTo(jointLogo.snp.bottom).inset(-16)
+            $0.top.equalTo(jointLogo.snp.bottom).offset(16)
             $0.centerX.equalToSuperview()
-
         }
         
         joinButton.snp.makeConstraints {
-            $0.top.equalTo(joinTitle.snp.bottom).inset(-11)
+            $0.top.equalTo(joinTitle.snp.bottom).offset(11)
             $0.centerX.equalToSuperview()
         }
     }
 
     // MARK: - Methods
 
-    private func setAddTarget() {}
+    private func setAddTarget() {
+        newProjectButton.addTarget(self, action: #selector(newProjectButtonDidTap), for: .touchUpInside)
+    }
+    
+    private func setScreenHeight() -> CGFloat {
+        let screenHeight = UIScreen.main.bounds.height
+        return screenHeight / 2
+    }
 
     // MARK: - @objc Methods
-
+    
+    @objc
+    private func newProjectButtonDidTap() {
+        newProjectButtonhandler?()
+    }
 }

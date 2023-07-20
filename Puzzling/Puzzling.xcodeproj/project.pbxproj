@@ -26,7 +26,6 @@
 		0351AB682A65EE17006B0F4C /* CreateProjectModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB672A65EE17006B0F4C /* CreateProjectModel.swift */; };
 		03734EB82A59A0BD00B401D6 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03734EB72A59A0BD00B401D6 /* TabBarController.swift */; };
 		03734EBD2A59A1F800B401D6 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03734EBC2A59A1F800B401D6 /* TabBarItem.swift */; };
-		03734EBF2A59A26800B401D6 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03734EBE2A59A26800B401D6 /* MyPageViewController.swift */; };
 		03ADF3872A5D9F91002CEDDC /* InputContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ADF3862A5D9F91002CEDDC /* InputContentView.swift */; };
 		03ADF3892A5E7322002CEDDC /* StartDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ADF3882A5E7322002CEDDC /* StartDayView.swift */; };
 		03ADF38D2A5E8A5F002CEDDC /* CreateProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03ADF38C2A5E8A5F002CEDDC /* CreateProjectView.swift */; };
@@ -172,7 +171,6 @@
 		03734EB42A599FDB00B401D6 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = "<group>"; };
 		03734EB72A59A0BD00B401D6 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		03734EBC2A59A1F800B401D6 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
-		03734EBE2A59A26800B401D6 /* MyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		03ADF3862A5D9F91002CEDDC /* InputContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputContentView.swift; sourceTree = "<group>"; };
 		03ADF3882A5E7322002CEDDC /* StartDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartDayView.swift; sourceTree = "<group>"; };
 		03ADF38C2A5E8A5F002CEDDC /* CreateProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateProjectView.swift; sourceTree = "<group>"; };
@@ -366,14 +364,6 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
-		03734EB92A59A1A600B401D6 /* MyPage */ = {
-			isa = PBXGroup;
-			children = (
-				03734EC12A59AB6A00B401D6 /* ViewController */,
-			);
-			path = MyPage;
-			sourceTree = "<group>";
-		};
 		03734EC02A59AB5E00B401D6 /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -381,14 +371,6 @@
 				5831179E2A5B71620099B517 /* ViewController */,
 			);
 			path = Main;
-			sourceTree = "<group>";
-		};
-		03734EC12A59AB6A00B401D6 /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				03734EBE2A59A26800B401D6 /* MyPageViewController.swift */,
-			);
-			path = ViewController;
 			sourceTree = "<group>";
 		};
 		03ADF3902A5E932F002CEDDC /* Cell */ = {
@@ -455,7 +437,6 @@
 				0935C8062A66F5CE00790A1B /* Auth */,
 				0935C7F62A65FCFC00790A1B /* Team */,
 				0351AB552A65797C006B0F4C /* Project */,
-				03E6D2042A5326D400F4453C /* DTO.swift */,
 				255026EB2A65BB7400531543 /* CreateRetrospect */,
 				588AA0722A5ECDE70017CB1E /* IndivisualDashboardModel.swift */,
 				588AA0742A5ECDF10017CB1E /* TeamDashboardModel.swift */,
@@ -472,7 +453,6 @@
 				0351AB582A657BC3006B0F4C /* Project */,
 				255026EE2A65BC9F00531543 /* CreateRetrospectModel */,
 				0935C80D2A66FB2800790A1B /* Auth */,
-				03E6D1FF2A5325F100F4453C /* Model.swift */,
 				03ADF3912A5E9534002CEDDC /* ProjectCycleModel.swift */,
 				0351AB3D2A619F04006B0F4C /* textFieldNotificationModel.swift */,
 				0935C7FE2A6664CA00790A1B /* TeamMemberModel.swift */,
@@ -495,7 +475,6 @@
 				0351AB502A656C77006B0F4C /* Project */,
 				255026E82A65AF3F00531543 /* CreateRetrospect */,
 				0935C8122A66FCD900790A1B /* Auth */,
-				03E6D2062A5326DD00F4453C /* APIService.swift */,
 				0935C8002A66727200790A1B /* ProjectTeamService.swift */,
 			);
 			path = APIService;
@@ -523,7 +502,6 @@
 				096755C22A5E96DC00A1E691 /* MyProject */,
 				03E6D20E2A5327D300F4453C /* Common */,
 				03E6D20F2A5327E600F4453C /* Home */,
-				03734EB92A59A1A600B401D6 /* MyPage */,
 				03FFD2D52A5D92CE00A3B70D /* CreateProject */,
 				0351AB432A645B96006B0F4C /* InvitationCode */,
 				03734EB62A59A08E00B401D6 /* TabBar */,
@@ -1129,7 +1107,6 @@
 				25642BD32A67BD9B0041200D /* ReviewTILModel.swift in Sources */,
 				25642BDD2A67DB830041200D /* ReviewAARModel.swift in Sources */,
 				0935C8222A675C1B00790A1B /* ProjectNameCollectionReusableView.swift in Sources */,
-				03E6D2002A5325F200F4453C /* Model.swift in Sources */,
 				58DC6A6B2A616A2E0039242C /* TeamDashboardRankView.swift in Sources */,
 				9B1CA97C2A62E12000CB81AC /* ReviewDetailDataModel.swift in Sources */,
 				03E6D2422A532C3300F4453C /* Image.swift in Sources */,
@@ -1229,7 +1206,6 @@
 				0351AB622A65D71F006B0F4C /* PostProfileRequest.swift in Sources */,
 				03E6D2072A5326DD00F4453C /* (null) in Sources */,
 				03E6D27A2A5333C900F4453C /* UIImage+.swift in Sources */,
-				03734EBF2A59A26800B401D6 /* MyPageViewController.swift in Sources */,
 				255026F02A65BCB900531543 /* PreviousTemplateModel.swift in Sources */,
 				0935C8202A675BFD00790A1B /* MyReviewListCollectionViewCell.swift in Sources */,
 				583117A82A5BE1490099B517 /* HomeTitleBarView.swift in Sources */,
