@@ -26,6 +26,7 @@ final class CreateReViewViewController: UIViewController {
     
     private let option: Int
     private var templateID: Int
+    private var keyboardOverlapKey: Int? = 0
 
     private let reviewProvider = MoyaProvider<CreateRetrospectService>(plugins:[NetworkLoggerPlugin()])
     
@@ -285,14 +286,28 @@ extension CreateReViewViewController {
         
         if textViewBottomY > keyboardTopY {
             let keyboardOverlap = textViewBottomY - keyboardTopY
-            view.frame.origin.y = -keyboardOverlap - 40
+            scrollView.contentOffset.y += keyboardOverlap + 40
+            self.keyboardOverlapKey = 40
         }
     }
     
     @objc
     func keyboardWillHide(_ sender: Notification) {
-        if view.frame.origin.y != 0 {
-            view.frame.origin.y = 0
+        
+        switch self.templateID {
+        case 1:
+            scrollView.contentOffset.y = 0
+            print(templateID)
+        case 2:
+            if scrollView.contentOffset.y != 0 {
+                scrollView.contentOffset.y -= 40
+            }
+        case 3:
+            if scrollView.contentOffset.y != 0 {
+                scrollView.contentOffset.y -= 40
+            }
+        default:
+            return
         }
     }
     

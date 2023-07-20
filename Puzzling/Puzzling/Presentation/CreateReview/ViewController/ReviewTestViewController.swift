@@ -37,7 +37,7 @@ class ReviewTestViewController: UIViewController {
             $0.addTarget(self,
                         action: #selector(pushButtonTapped),
                         for: .touchUpInside)
-            $0.backgroundColor = .background050
+            $0.backgroundColor = .blue400
         }
         pushButton.snp.makeConstraints {
             $0.center.equalToSuperview()
