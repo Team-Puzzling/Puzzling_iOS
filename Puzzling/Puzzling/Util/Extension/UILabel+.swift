@@ -36,6 +36,20 @@ extension UILabel {
         attributedText = attributeString
     }
     
+    func lineHeightMultiple(spacing: CGFloat) {
+        guard let text = text else { return }
+        
+        let attributeString = NSMutableAttributedString(string: text)
+        let style = NSMutableParagraphStyle()
+        style.lineSpacing = spacing
+        style.alignment = .center
+        style.lineHeightMultiple = 1.25
+        attributeString.addAttribute(.paragraphStyle,
+                                     value: style,
+                                     range: NSRange(location: 0, length: attributeString.length))
+        attributedText = attributeString
+    }
+    
     func addCharacterSpacing(kernValue:Double = -0.5) {
         guard let text = text, !text.isEmpty else { return }
         let string = NSMutableAttributedString(string: text)

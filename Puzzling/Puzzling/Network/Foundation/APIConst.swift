@@ -12,6 +12,7 @@ enum NetworkHeaderKey: String {
     case accessToken = "accesstoken"
     case contentType = "Content-Type"
     case authorization = "Authorization"
+    case refresh = "Refresh"
 }
 
 enum APIConstants {
@@ -21,6 +22,10 @@ enum APIConstants {
     static let applicationJSON = "application/json"
     static var deviceToken: String = ""
     static var jwtToken: String = ""
+    static var accessToken: String = ""
+    static var kakaoAccessToken: String = ""
+    static var authorization: String = ""
+    static var refresh: String = ""
     
     //MARK: - Header
     
@@ -31,14 +36,28 @@ enum APIConstants {
     static var headerWithDeviceToken: [String: String] {
         [
             NetworkHeaderKey.contentType.rawValue: APIConstants.applicationJSON,
-            NetworkHeaderKey.deviceToken.rawValue: APIConstants.deviceToken
+            NetworkHeaderKey.authorization.rawValue: URLConst.bearer + APIConstants.accessToken
         ]
     }
     
     static var headerWithAuthorization: [String: String] {
         [
             NetworkHeaderKey.contentType.rawValue: APIConstants.applicationJSON,
-            NetworkHeaderKey.authorization.rawValue: URLConst.bearer + "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2ODk2MTIzODEsImV4cCI6MTY4OTk3MjM4MSwibWVtYmVySWQiOjF9.Ktl_IFV0hKtOG4qgyx9erGfBP-w80CzhslxZWgUFg3s"
+            NetworkHeaderKey.authorization.rawValue: URLConst.bearer + APIConstants.accessToken
+        ]
+    }
+    
+    static var headerWithKakaoAuthorization: [String: String] {
+        [
+            NetworkHeaderKey.contentType.rawValue: APIConstants.applicationJSON,
+            NetworkHeaderKey.authorization.rawValue: URLConst.bearer + APIConstants.kakaoAccessToken
+        ]
+    }
+    
+    static var headerWithRefresh: [String: String] {
+        [
+            NetworkHeaderKey.contentType.rawValue: APIConstants.applicationJSON,
+            NetworkHeaderKey.authorization.rawValue: URLConst.bearer + APIConstants.accessToken
         ]
     }
 }

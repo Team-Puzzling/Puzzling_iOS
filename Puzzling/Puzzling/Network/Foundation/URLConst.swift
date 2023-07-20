@@ -11,7 +11,7 @@ public enum URLConst {
     
     //MARK: - Base URL
     
-    public static let baseURL = "http://3.39.174.107"
+    static let baseURL = "http://3.39.174.107"
     
     //MARK: - URL Path
     
@@ -25,13 +25,13 @@ public enum URLConst {
     static let getReviewTemplateURL = "/api/v1/review/template"
     static let postReviewTILURL = "/api/v1/member/{memberId}/project/{projectId}/review/TIL"
     static let postReview5FURL = "/api/v1/member/{memberId}/project/{projectId}/review/5F"
-    static let postReviewARRURL = "/api/v1/member/{memberId}/project/{projectId}/review/ARR"
+    static let postReviewARRURL = "/api/v1/member/{memberId}/project/{projectId}/review/AAR"
     static let getReviewPreviousTemplateURL = "/api/v1/member/{memberId}/project/{projectId}/review/previous-template"
     
     // 프로젝트
     
     static let postProjectURL = "/api/v1/member/{memberId}/project"
-    static let postProjectJoinURL = "/api/v1/member/{merberId}/project/join"
+    static let postProjectJoinURL = "/api/v1/member/{memberId}/project/join"
     static let getInvitationCodeURL = "/api/v1/project/verify"
     static let getProjectCycleURL = "/api/v1/project/{projectId}/cycle"
     

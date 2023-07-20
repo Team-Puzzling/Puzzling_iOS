@@ -9,16 +9,19 @@ import UIKit
 
 import SnapKit
 import Then
+import Moya
 
 extension ReviewDetailViewController {
     @frozen
     enum reviewDetail: CaseIterable {
         case review, empty
         
-        var reviewDetailView: UIView {
+        var reviewDetailViewStatus: UIView? {
             switch self {
             case .review:
-                return ReviewDetailView()
+                let v = ReviewDetailView()
+                v.reviewCollectionview.reloadData()
+                return v
             case .empty:
                 return ReviewDetailEmptyView()
             }
@@ -26,17 +29,36 @@ extension ReviewDetailViewController {
     }
 }
 
+extension ReviewDetailViewController: reviewDateProtocol {
+    func reviewDate(text: String) {
+        selectedDate = text
+        print(selectedDate, "aaaaaa👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿")
+        let userInfo = selectedDate
+        print(userInfo, "xxxxxx")
+        NotificationCenter.default.post(
+            name: Notification.Name("dateNotification"),
+            object: nil,
+            userInfo: ["userInfo": userInfo]
+        )
+        reviewDetailView?.layoutSubviews()
+    }
+}
+
 final class ReviewDetailViewController: UIViewController {
+    
+    private var selectedDate: String = "2023-07-17"
     
     private let projectCalenderView = ProjectCalendarView()
     
-    func reviewDetailStatus(status: reviewDetail) {
-        print(#function)
+    func setReviewDetailView(status: reviewDetail) {
+        print(#function, status)
+        reviewDetailView?.alpha = 0
+        reviewDetailView?.removeFromSuperview()
+        reviewDetailView = nil
+        reviewDetailView = status.reviewDetailViewStatus
     }
     
-    private var reviewDetailView = ReviewDetailView()
-    
-    private let teamMemberData = TeamMemberDataModel.dummy()
+    private var reviewDetailView: UIView? = UIView()
     
     // MARK: - Lifecycle
     
@@ -45,7 +67,7 @@ final class ReviewDetailViewController: UIViewController {
         setDelegate()
         setUI()
         setLayout()
-        reviewDetailStatus(status: .review)
+        setNotificationCenter()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,27 +88,20 @@ final class ReviewDetailViewController: UIViewController {
 extension ReviewDetailViewController {
     
     private func setDelegate() {
-
+        projectCalenderView.delegate = self
     }
     
     private func setUI() {
         view.backgroundColor = .white000
-
     }
     
     private func setLayout() {
-        view.addSubviews(projectCalenderView, reviewDetailView)
+        view.addSubviews(projectCalenderView)
         
         projectCalenderView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.horizontalEdges.equalToSuperview().inset(16)
             $0.height.equalTo(projectCalenderView.getCalendarViewHeight())
-        }
-        
-        reviewDetailView.snp.makeConstraints {
-            $0.top.equalTo(projectCalenderView.snp.bottom).offset(12)
-            $0.horizontalEdges.equalToSuperview()
-            $0.bottom.equalToSuperview()
         }
     }
 
@@ -122,11 +137,36 @@ extension ReviewDetailViewController {
             $0.height.equalTo(projectCalenderView.getCalendarViewHeight())
         }
     }
+    
+    private func layout() {
+        view.addSubviews(reviewDetailView ?? UIView())
+        reviewDetailView?.snp.makeConstraints {
+            $0.top.equalTo(projectCalenderView.snp.bottom).offset(12)
+            $0.horizontalEdges.equalToSuperview()
+            $0.bottom.equalToSuperview()
+        }
+    }
+    
+    private func setNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(getDateBoolNotification(_:)), name: Notification.Name("dateBoolNotification"), object: nil)
+    }
 }
 
 extension ReviewDetailViewController {
     @objc
     private func backButtonTapped() {
-        
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc
+    private func getDateBoolNotification(_ notification: Notification) {
+        if let dateNotification = notification.userInfo?["userInfo"] as? Bool {
+            print(dateNotification,"???????")
+            if (dateNotification == true) {
+                setReviewDetailView(status: .review)
+            }
+            else { setReviewDetailView(status: .empty) }
+        }
+        layout()
     }
 }

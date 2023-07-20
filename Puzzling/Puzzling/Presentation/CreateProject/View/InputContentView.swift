@@ -10,14 +10,6 @@ import UIKit
 import SnapKit
 import Then
 
-enum InputContentType: CaseIterable {
-    case name
-    case description
-    case role
-    case nickname
-    case invitationCode
-}
-
 final class InputContentView: UIView {
     
     // MARK: - UI Components
@@ -34,11 +26,6 @@ final class InputContentView: UIView {
     // MARK: - Properties
     
     var activeTextField: InputContentType?
-    private enum WarningMessage: CaseIterable {
-        case emoji
-        case invitationCode
-        case duplicateNickname
-    }
     
     // MARK: - Initializer
     
@@ -51,6 +38,7 @@ final class InputContentView: UIView {
         setAddTarget()
         activeTextField = type
         setTapScreen()
+        setNotification()
     }
     
     required init?(coder: NSCoder) {
@@ -153,6 +141,10 @@ extension InputContentView {
         textFieldButton.addTarget(self, action: #selector(removeTextButtonDidTap), for: .touchUpInside)
     }
     
+    private func setNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(setTextFieldWarningStatus(_:)), name: Notification.Name("textFieldWarningNotification"), object: nil)
+    }
+    
     private func textFieldPlaceholder(type: InputContentType) -> String {
         switch type {
         case .name:
@@ -199,16 +191,27 @@ extension InputContentView {
         warningLabel.isHidden = true
     }
     
-    private func warningTextFieldBorderSetting(textField: UITextField, type: WarningMessage) {
+    private func warningTextField(textField: UITextField, type: WarningMessage) {
         switch type {
         case .emoji:
             warningLabel.text = "특수문자, 이모지를 사용할 수 없어요."
+            warningTextFieldBorderSetting(textField: textField)
         case .invitationCode:
             warningLabel.text = "유효하지 않은 초대코드에요. 코드를 확인해 주세요."
+            if activeTextField == .invitationCode {
+                warningTextFieldBorderSetting(textField: textField)
+            }
         case .duplicateNickname:
             warningLabel.text = "이미 사용 중인 닉네임이에요."
+            if activeTextField == .nickname {
+                warningTextFieldBorderSetting(textField: textField)
+            }
         }
+    }
+    
+    private func warningTextFieldBorderSetting(textField: UITextField) {
         textField.layer.borderColor = UIColor.red200.cgColor
+        textField.layer.borderWidth = 2
         textFieldButton.isHidden = false
         textFieldButton.setImage(Image.warning, for: .normal)
         textFieldButton.isEnabled = false
@@ -227,7 +230,7 @@ extension InputContentView {
             if text.isOnlyKorEng() {
                 activeTextFieldBorderSetting(textField: textField)
             } else {
-                warningTextFieldBorderSetting(textField: textField, type: .emoji)
+                warningTextField(textField: textField, type: .emoji)
             }
         }
     }
@@ -276,6 +279,14 @@ extension InputContentView {
             self.endEditing(true)
         }
     }
+    
+    @objc
+    private func setTextFieldWarningStatus(_ notification: Notification) {
+        
+        if let type = notification.userInfo?["userInfo"] as? WarningMessage {
+            warningTextField(textField: inputTextField, type: type)
+        }
+    }
 }
 
 extension InputContentView: UITextFieldDelegate {
@@ -287,7 +298,7 @@ extension InputContentView: UITextFieldDelegate {
                 activeTextFieldBorderSetting(textField: textField)
                 textFieldNotification(textField: textField, contentType: activeTextField ?? .name)
             } else {
-                warningTextFieldBorderSetting(textField: textField, type: .emoji)
+                warningTextField(textField: textField, type: .emoji)
                 textFieldButton.isHidden = false
             }
             textFieldButton.isHidden = !text.isEmpty ? false : true
@@ -301,7 +312,7 @@ extension InputContentView: UITextFieldDelegate {
                 defaultTextFieldBorderSetting(textField: textField)
                 textFieldNotification(textField: textField, contentType: activeTextField ?? .name)
             } else {
-                warningTextFieldBorderSetting(textField: textField, type: .emoji)
+                warningTextField(textField: textField, type: .emoji)
                 textFieldButton.isHidden = false
             }
             

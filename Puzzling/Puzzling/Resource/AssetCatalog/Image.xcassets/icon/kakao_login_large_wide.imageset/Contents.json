@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "kakao_login_large_wide.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

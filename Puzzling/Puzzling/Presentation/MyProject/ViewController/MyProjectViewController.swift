@@ -26,9 +26,9 @@ final class MyProjectViewController: UIViewController {
         super.viewDidLoad()
         setUI()
         setLayout()
-        setAddTarget()
         setDelegate()
         setRegister()
+        setNotificationCenter()
     }
 }
 
@@ -90,12 +90,27 @@ extension MyProjectViewController {
         }
     }
     
-    private func setAddTarget() { }
+    private func setNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(getProjectNotification(_:)), name: Notification.Name("projectNotification"), object: nil)
+    }
+
+    private func goToMyReview() {
+        let vc = MyReviewListViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 extension MyProjectViewController {
     @objc
     private func notificationButtonTapped() { }
+    
+    @objc
+    private func getProjectNotification(_ notification: Notification) {
+        if let notification = notification.userInfo?["userInfo"] as? String {
+            print(notification,"???????")
+            goToMyReview()
+        }
+    }
 }
 
 extension MyProjectViewController: UITableViewDelegate { }
