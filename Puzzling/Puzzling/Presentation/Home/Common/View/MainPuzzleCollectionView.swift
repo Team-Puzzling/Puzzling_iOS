@@ -103,7 +103,7 @@ extension MainPuzzleCollectionView: UICollectionViewDataSource, UICollectionView
             if model.isEmpty {
                 return cell
             } else {
-                cell.setDataBind(data: model[indexPath.item])
+                cell.setDataBind(data: model[indexPath.item], index: indexPath.item)
                 return cell
             }
         }

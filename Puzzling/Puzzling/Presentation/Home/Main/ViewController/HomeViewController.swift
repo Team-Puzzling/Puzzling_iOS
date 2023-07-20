@@ -172,8 +172,9 @@ extension HomeViewController {
                     let puzzleCount: Int = data.myPuzzle.puzzleCount
                     let totalPuzzleBoardCount = data.puzzleBoardCount
                     let puzzles = data.userPuzzleBoard
+                    let hasReviewed = data.hasTodayReview
                     self?.indivisualDashboardViewController.mainView.passPuzzleData(userName: userName, piecesCount: puzzleCount, totalPuzzleBoardCount: totalPuzzleBoardCount, dashboardData: puzzles)
-                    self?.indivisualDashboardViewController.mainView.reloadPuzzleView()
+                    self?.indivisualDashboardViewController.mainView.reloadPuzzleView(withTodayReviewedCheck: hasReviewed)
                     self?.indivisualDashboardViewController.passBoardCount(count: totalPuzzleBoardCount)
                     
                     if data.hasTodayReview == true {
@@ -278,6 +279,7 @@ extension HomeViewController {
                     let puzzleCount: Int = data.myPuzzle.puzzleCount
                     let totalPuzzleBoardCount = data.teamPuzzleBoardCount
                     let puzzles = data.teamPuzzleBoard
+                    let hasTodayReviewed = data.hasTodayReview
                     
                     self?.teamDashboardViewController.mainView.passPuzzleData(userName: userName, piecesCount: puzzleCount, totalPuzzleBoardCount: totalPuzzleBoardCount, dashboardData: puzzles)
                     self?.teamDashboardViewController.mainView.reloadPuzzleView()
