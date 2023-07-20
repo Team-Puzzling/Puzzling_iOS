@@ -63,7 +63,7 @@ final class DashboardMainBoxView: UIView {
     private let piecesCountLabel = UILabel()
     private let maxCountLabel = UILabel()
     lazy var puzzleCollectionView = MainPuzzleCollectionView(frame: .zero, dashboardType: puzzleBoardType)
-    private lazy var cardButtonView = IndivisualCardButtonView(frame: .zero, cardTitle: boxType.cardButtonTitle)
+    lazy var cardButtonView = IndivisualCardButtonView(frame: .zero, cardTitle: boxType.cardButtonTitle)
     
     private var boxType: DashboardType!
     private var puzzleBoardType: DashboardType!
@@ -72,7 +72,6 @@ final class DashboardMainBoxView: UIView {
         self.boxType = type
         self.puzzleBoardType = type
         super.init(frame: frame)
-        setDelegate()
         setUI()
         setLayout()
     }
@@ -88,10 +87,6 @@ final class DashboardMainBoxView: UIView {
 }
  
 extension DashboardMainBoxView {
-    
-    private func setDelegate() {
-        
-    }
     
     private func setUI() {
         self.backgroundColor = .blue50
@@ -111,6 +106,10 @@ extension DashboardMainBoxView {
             $0.text = "/15"
             $0.font = .fontGuide(.detail1_regular_kor)
             $0.textColor = .gray500
+        }
+        
+        cardButtonView.do {
+            $0.isUserInteractionEnabled = true
         }
     }
     
