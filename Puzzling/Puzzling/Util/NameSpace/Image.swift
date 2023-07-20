@@ -58,4 +58,5 @@ public enum Image {
     static let indivisualCardBackground = UIImage(named: "puzzleBannerBox")!
     static let rank1Podium = UIImage(named: "rank1Podium")!
     static let rankElsePodium = UIImage(named: "rankElsePodium")!
+    static let plusButtonFill = UIImage(named: "plusButton")!
 }

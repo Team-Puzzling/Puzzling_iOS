@@ -31,6 +31,15 @@ enum DashboardType {
             return "team"
         }
     }
+    
+    var navigationTitle: String {
+        switch self {
+        case .indivisual:
+            return "내 퍼즐판"
+        case .team:
+            return "팀 퍼즐판"
+        }
+    }
 }
 
 final class DashboardMainBoxView: UIView {
@@ -43,18 +52,17 @@ final class DashboardMainBoxView: UIView {
     
     private var piecesCount: Int = 0 {
         didSet {
-            piecesCountLabel.text = "\(piecesCount) 조각"
+            piecesCountLabel.text = "\(piecesCount % 15) 조각"
         }
     }
     
     private let puzzleViewHeight = UIScreen.main.bounds.height / 7.12
-    
-    private lazy var projectServiceData = ProjectServiceTemporary().getPuzzleData(type: puzzleBoardType)
+    private let cardButtonHeight = UIScreen.main.bounds.height / 14
     
     private let userNameLabel = UILabel()
     private let piecesCountLabel = UILabel()
     private let maxCountLabel = UILabel()
-    private lazy var puzzleCollectionView = MainPuzzleCollectionView(frame: .zero, dashboardType: puzzleBoardType)
+    lazy var puzzleCollectionView = MainPuzzleCollectionView(frame: .zero, dashboardType: puzzleBoardType)
     private lazy var cardButtonView = IndivisualCardButtonView(frame: .zero, cardTitle: boxType.cardButtonTitle)
     
     private var boxType: DashboardType!
@@ -104,10 +112,6 @@ extension DashboardMainBoxView {
             $0.font = .fontGuide(.detail1_regular_kor)
             $0.textColor = .gray500
         }
-        
-        puzzleCollectionView.do {
-            $0.passPuzzleData(data: projectServiceData)
-        }
     }
     
     private func setLayout() {
@@ -137,15 +141,21 @@ extension DashboardMainBoxView {
         cardButtonView.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview().inset(16)
             $0.bottom.equalToSuperview().inset(18)
-            $0.height.equalToSuperview().dividedBy(3.78)
+            $0.height.equalTo(cardButtonHeight)
         }
     }
 }
 
 extension DashboardMainBoxView {
-    func passPuzzleData(userName: String, piecesCount: Int) {
+    func passPuzzleData(userName: String, piecesCount: Int, totalPuzzleBoardCount: Int, dashboardData: [ModelProtocol]) {
         self.userName = userName
         self.piecesCount = piecesCount
+        self.cardButtonView.passBoardCount(count: totalPuzzleBoardCount)
+        self.puzzleCollectionView.passPuzzleData(data: dashboardData)
+    }
+    
+    func reloadPuzzleView() {
+        self.puzzleCollectionView.reloadCollectionView()
     }
 }
 
