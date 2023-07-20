@@ -23,6 +23,22 @@ final class ProjectCalendarView: UIView {
     private var startDate: String = "2023-04-01"
     private var endDate: String = "2023-12-13"
     
+    private var selectedDate: String = "2023-07-14"
+    
+    private var specificData = ReviewDetailModel(reviewId: nil, reviewDay: "", reviewDate: "", reviewTemplateId: nil, contents: nil)
+    
+    private var dataList: [ReviewDetailModel] = []
+    
+    private func findData(date: String) -> ReviewDetailModel? {
+        var data = ReviewDetailModel(reviewId: nil, reviewDay: "", reviewDate: "", reviewTemplateId: nil, contents: nil)
+        dataList.forEach {
+            if($0.reviewDate == date){
+                data = $0
+            }
+        }
+        return data
+    }
+    
     lazy var calendarView = FSCalendar(frame: .zero)
     private var calendarViewHeight = NSLayoutConstraint()
     private lazy var headerLabel = UILabel()
@@ -54,7 +70,8 @@ final class ProjectCalendarView: UIView {
 extension ProjectCalendarView {
     private func setUI() {
         calendarView.do {
-            $0.select(Date())
+            print(selectedDate,"🐯🐯🐯🐯🐯🐯🐯")
+            $0.select(dateFormatter.date(from: selectedDate))
             $0.locale = Locale(identifier: "ko_KR")
             
             
@@ -83,7 +100,7 @@ extension ProjectCalendarView {
         headerLabel.do {
             $0.font = .fontGuide(.heading2_kor)
             $0.textColor = .black000
-            $0.text = self.headerDateFormatter.string(from: Date())
+            $0.text = self.headerDateFormatter.string(for: selectedDate)
         }
         calendarViewHeight.constant = 350
     }
@@ -138,11 +155,6 @@ extension ProjectCalendarView {
             $0.dateFormat = "yyyy-MM-dd"
         }
     }
-    
-//    private func stringToDate(string: String) -> Date {
-//
-//    }
-    
 }
 
 extension ProjectCalendarView: FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
@@ -231,7 +243,7 @@ extension ProjectCalendarView {
         
         print(memberId, projectId, startDate, endDate)
         
-        reviewDetailProvider.request(.reviewDetail(memberId: "1", projectId: projectId, startDate: startDate, endDate: endDate)) { result in
+        reviewDetailProvider.request(.reviewDetail(memberId: "1", projectId: "1", startDate: startDate, endDate: endDate)) { result in
             switch result {
             case .success(let result):
                 let status = result.statusCode
@@ -243,12 +255,14 @@ extension ProjectCalendarView {
                         data.forEach {
                             self.reviewDetailDataModel.append($0.convertToReviewDetailModel())
                         }
+                        print("🎒🎒🎒🎒🎒🎒🎒🎒🎒🎒🎒🎒🎒")
                         
-//                        self.sendDateNotification(model: self.dataList)
-//                        self.specificData = self.findData(date: self.selectedDate) ?? TeamMemberModel(reviewDay: "", reviewDate: "", reviewWriters: nil, nonReviewWriters: nil)
+//                        print(self.reviewDetailDataModel)
                         self.calendarView.reloadData()
-                        print("♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️")
+                        print(self.selectedDate, "🐸🐸🐸🐸🐸🐸🐸🐸🐸🐸🐸🐸🐸🐸🐸🐸🐸🐸🐸🐸🐸🐸")
+                        self.headerLabel.text = self.headerDateFormatter.string(for: self.selectedDate)
                         
+                        print("♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️")
                         
                     } catch(let error) {
                         print(error.localizedDescription)

@@ -15,7 +15,7 @@ protocol projectNameProtocol: AnyObject {
     func nameData(id: Int, text: String)
 }
 
-final class ProjectListViewController: UIViewController {
+final class MyPageBottomSheetViewController: UIViewController {
     
     private var projectName: String = "Project1"
     
@@ -46,7 +46,7 @@ final class ProjectListViewController: UIViewController {
     }
 }
 
-extension ProjectListViewController {
+extension MyPageBottomSheetViewController {
 
     private func setUI() {
         
@@ -88,7 +88,7 @@ extension ProjectListViewController {
     }
 }
 
-extension ProjectListViewController: UITableViewDelegate {
+extension MyPageBottomSheetViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         projectName = myProjectData[indexPath.row].projectName
         self.delegate?.nameData(id: myProjectData[indexPath.row].projectId, text: projectName)
@@ -96,7 +96,7 @@ extension ProjectListViewController: UITableViewDelegate {
     }
 }
 
-extension ProjectListViewController: UITableViewDataSource {
+extension MyPageBottomSheetViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return myProjectData.count
     }
@@ -118,20 +118,20 @@ extension ProjectListViewController: UITableViewDataSource {
     }
 }
 
-extension ProjectListViewController {
+extension MyPageBottomSheetViewController {
     func setProjectName(projectName: String) {
         self.projectName = projectName
     }
 }
 
-extension ProjectListViewController {
+extension MyPageBottomSheetViewController {
     
     // MARK: - Network
     
     private func fetchProjectList() {
         guard let memberId = UserDefaults.standard.string(forKey: "memberId") else { return }
         print(memberId)
-        myProjectProvider.request(.projectList(memberId: "2")) { result in
+        myProjectProvider.request(.projectList(memberId: "1")) { result in
             switch result {
             case .success(let result):
                 let status = result.statusCode

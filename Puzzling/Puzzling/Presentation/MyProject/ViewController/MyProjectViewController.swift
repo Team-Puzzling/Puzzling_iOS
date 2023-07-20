@@ -17,6 +17,9 @@ final class MyProjectViewController: UIViewController {
     private let myProjectTableView = UITableView(frame: .zero, style: .grouped)
     private var myProjectData: [ProjectListResponse] = []
     
+    private var currentProjectId: Int = 0
+    private var currentProjectTitle: String = ""
+    
     // MARK: - Lifecycle
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,8 +33,10 @@ final class MyProjectViewController: UIViewController {
         setLayout()
         setDelegate()
         setRegister()
-        setNotificationCenter()
         fetchProjectList()
+    }
+    deinit {
+        print(className)
     }
 }
 
@@ -92,39 +97,21 @@ extension MyProjectViewController {
             navigationItem.titleView = titleLabel
         }
     }
-    
-    private func setNotificationCenter() {
-        NotificationCenter.default.addObserver(self, selector: #selector(getProjectNotification(_:)), name: Notification.Name("projectNotification"), object: nil)
-    }
-
-    private func goToMyReview() {
-        let vc = MyReviewListViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
 }
 
 extension MyProjectViewController {
     @objc
     private func notificationButtonTapped() { }
-    
-    @objc
-    private func getProjectNotification(_ notification: Notification) {
-        if let notification = notification.userInfo?["userInfo"] as? String {
-            print(notification,"???????")
-            goToMyReview()
-        }
-    }
 }
 
-extension MyProjectViewController: UITableViewDelegate { }
-
-extension MyProjectViewController: UITableViewDataSource {
+extension MyProjectViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return myProjectData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueCell(type: MyProjectTableViewCell.self, indexPath: indexPath)
+        cell.delegate = self
         cell.setDataBind(myProjectData[indexPath.row])
         return cell
     }
@@ -143,7 +130,15 @@ extension MyProjectViewController: UITableViewDataSource {
     }
 }
 
-extension MyProjectViewController {
+extension MyProjectViewController: MyProjectPassEventDelegate {
+    func passTouchEvent(projectTitle: String, projectId: Int) {
+        self.currentProjectTitle = projectTitle
+        self.currentProjectId = projectId
+        let vc = MyReviewListViewController()
+        vc.passData(id: self.currentProjectId, title: self.currentProjectTitle)
+        print(currentProjectId, currentProjectTitle, "🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶")
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     
     // MARK: - Network
     
@@ -161,8 +156,6 @@ extension MyProjectViewController {
                         self.myProjectData = data
                         self.myProjectTableView.reloadData()
                         print("♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️")
-                        
-                        
                     } catch(let error) {
                         print(error.localizedDescription)
                     }

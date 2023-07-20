@@ -13,7 +13,7 @@ import Moya
 
 final class MyReviewListViewController: UIViewController {
     
-    private var currentProject: String = "Project1"
+    private var currentProjectTitle: String = "Project1"
     private var currentProjectId: Int = 0
     
     private let myReviewListCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -24,11 +24,6 @@ final class MyReviewListViewController: UIViewController {
     
     // MARK: - Lifecycle
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setNavigationBar()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
@@ -36,6 +31,11 @@ final class MyReviewListViewController: UIViewController {
         setDelegate()
         setRegister()
         fetchReviewList()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNavigationBar()
     }
     
     deinit {
@@ -75,6 +75,15 @@ extension MyReviewListViewController {
         myReviewListCollectionView.registerHeader(ProjectNameCollecionReusableView.self)
     }
     
+    private func reloadHeaderView(text: String) {
+        guard let headerView = myReviewListCollectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: IndexPath(item: 0, section: 0)) as? ProjectNameCollecionReusableView else { return }
+        headerView.setDataBind(projectName: self.currentProjectTitle)
+    }
+}
+
+
+extension MyReviewListViewController: UIGestureRecognizerDelegate {
+    
     private func setNavigationBar() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: Image.chevronBackIcon,
@@ -82,12 +91,13 @@ extension MyReviewListViewController {
             target: self,
             action: #selector(backButtonTapped)
         )
+
         navigationItem.leftBarButtonItem?.tintColor = .gray500
         
-        let title = currentProject
+        let title = currentProjectTitle
         let attributes: [NSAttributedString.Key: Any] = [
             NSAttributedString.Key.foregroundColor: UIColor.black000,
-            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: .bold)
+            NSAttributedString.Key.font: UIFont.fontGuide(.heading4_kor)
         ]
         
         if let titleLabel = navigationItem.titleView as? UILabel {
@@ -97,18 +107,10 @@ extension MyReviewListViewController {
             titleLabel.attributedText = NSAttributedString(string: title, attributes: attributes)
             navigationItem.titleView = titleLabel
         }
-    }
-    
-    private func reloadHeaderView(text: String) {
-        guard let headerView = myReviewListCollectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: IndexPath(item: 0, section: 0)) as? ProjectNameCollecionReusableView else { return }
-        print(#function, text)
-        headerView.setDataBind(projectName: text)
-    }
-    
-    private func setNotificationCenter() {
-        NotificationCenter.default.addObserver(self, selector: #selector(getProjectNotification(_:)), name: Notification.Name("projectNotification"), object: nil)
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
 }
+
 
 extension MyReviewListViewController {
     @objc
@@ -119,30 +121,37 @@ extension MyReviewListViewController {
     @objc
     private func getProjectNotification(_ notification: Notification) {
         if let notification = notification.userInfo?["userInfo"] as? String {
-            currentProject = notification
-            reloadHeaderView(text: currentProject)
+            currentProjectTitle = notification
+            print("ReviewListVC✉️✉️✉️✉️✉️✉️✉️✉️✉️✉️✉️✉️ \(currentProjectTitle)")
+            reloadHeaderView(text: currentProjectTitle)
         }
     }
 }
 
 extension MyReviewListViewController: projectNameProtocol {
     func nameData(id: Int, text: String) {
-        currentProject = text
-        currentProjectId = id
+        self.currentProjectTitle = text
+        self.currentProjectId = id
+        self.setNavigationBar()
+        self.fetchReviewList()
         reloadHeaderView(text: text)
     }
 }
 
 extension MyReviewListViewController: buttonTappedProtocol {
     func passButtonEvent(projectName: String) {
-        self.currentProject = projectName
+        self.currentProjectTitle = projectName
         
-        let vc = ProjectListViewController()
+        let vc = MyPageBottomSheetViewController()
         vc.delegate = self
         vc.setProjectName(projectName: projectName)
         vc.modalPresentationStyle = .pageSheet
+        let smallId = UISheetPresentationController.Detent.Identifier("small")
+        let smallDetent = UISheetPresentationController.Detent.custom(identifier: smallId) { context in
+            return 300
+        }
         if let sheet = vc.sheetPresentationController {
-            sheet.detents = [.medium()]
+            sheet.detents = [smallDetent, .medium(), .large()]
             sheet.prefersGrabberVisible = true
         }
         present(vc, animated: true, completion: nil)
@@ -171,7 +180,7 @@ extension MyReviewListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let view = myReviewListCollectionView.dequeueReusableCell(kind: UICollectionView.elementKindSectionHeader, type: ProjectNameCollecionReusableView.self, indexPath: indexPath)
         view.delegate = self
-        view.setDataBind(projectName: currentProject)
+        view.setDataBind(projectName: currentProjectTitle)
         return view
     }
 }
@@ -197,7 +206,7 @@ extension MyReviewListViewController {
     private func fetchReviewList() {
         guard let memberId = UserDefaults.standard.string(forKey: "memberId") else { return }
         print(memberId)
-        myProjectProvider.request(.myReviewList(memberId: "2", projectId: "1")) { result in
+        myProjectProvider.request(.myReviewList(memberId: "1", projectId: "\(self.currentProjectId)")) { result in
             switch result {
             case .success(let result):
                 let status = result.statusCode
@@ -207,6 +216,7 @@ extension MyReviewListViewController {
                         guard let data = try result.map(GeneralResponse<[ReviewListResponse]>.self).data else { return }
                         self.myReviewListData = data
                         self.myReviewListCollectionView.reloadData()
+                        
                         print("💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙💙")
                         
                         
@@ -220,5 +230,12 @@ extension MyReviewListViewController {
                 print(error.localizedDescription)
             }
         }
+    }
+}
+
+extension MyReviewListViewController {
+    func passData(id: Int, title: String) {
+        self.currentProjectTitle = title
+        self.currentProjectId = id
     }
 }

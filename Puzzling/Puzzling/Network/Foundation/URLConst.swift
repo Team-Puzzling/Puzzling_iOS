@@ -51,7 +51,7 @@ public enum URLConst {
     // My
     
     static let getMemberProjectReviewsURL = "/api/v1/member/{memberId}/project/{projectId}/reviews"
-    static let getMemberProjectReviewURL = "~/api/v1/member/{memberId}/project/{projectId}/review"
+    static let getMemberProjectReviewURL = "/api/v1/member/{memberId}/project/{projectId}/review"
     
     static let startDate = "startDate"
     static let endDate = "endDate"
