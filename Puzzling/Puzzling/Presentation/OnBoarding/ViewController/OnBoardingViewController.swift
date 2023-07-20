@@ -88,7 +88,7 @@ private extension OnBoardingViewContoller {
         let tabBar = TabBarController()
         
         if let login = UserDefaults.standard.object(forKey: "Login") {
-            if(login as! Bool == false) {
+            if(login as! Int == 0) {
                 return
             } else {
                 if let project = UserDefaults.standard.object(forKey: "projectId") {
