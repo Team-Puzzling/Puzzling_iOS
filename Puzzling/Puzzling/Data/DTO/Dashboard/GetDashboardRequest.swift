@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct GetDashboardRequest: Codable {
+    var memberId: Int
+    var projectId: Int
+}
