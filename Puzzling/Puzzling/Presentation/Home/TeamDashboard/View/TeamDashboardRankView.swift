@@ -15,7 +15,6 @@ final class TeamDashboardRankView: UIView {
     private let projectTitleLabel = UILabel()
     private var rankView = TeamRankPodiumView()
     private let rankTableView = UITableView()
-
     private var orderedTableData: [TeamProjectRank] = []
     
     private let rankViewHeight: CGFloat = UIScreen.main.bounds.height/5.2

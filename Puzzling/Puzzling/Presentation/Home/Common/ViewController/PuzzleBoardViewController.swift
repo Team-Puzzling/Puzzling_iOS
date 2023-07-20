@@ -36,7 +36,7 @@ final class PuzzleBoardViewController: UIViewController, UIGestureRecognizerDele
             image: Image.chevronBackIcon,
             style: .plain,
             target: self,
-            action: nil
+            action: #selector(popAction)
         )
         
         navigationItem.leftBarButtonItem?.tintColor = .gray500
@@ -124,6 +124,11 @@ extension PuzzleBoardViewController {
         label.attributedText = naviTitle
         
         return label
+    }
+    
+    @objc
+    private func popAction() {
+        self.navigationController?.popViewController(animated: true)
     }
 }
 
