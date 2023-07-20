@@ -35,7 +35,10 @@ class CustomAlertView: UIView {
     private let kakaoShareButton = UIButton()
     private let closeButton = UIButton()
 
-
+    // MARK: - Properties
+    
+    var invitationCode: String = ""
+    
     // MARK: - Initializer
 
     init(frame: CGRect, alertType: CustomAlertType) {
@@ -44,6 +47,9 @@ class CustomAlertView: UIView {
         setUI()
         setLayout()
         setAddTarget()
+        if alertType == .createProject {
+            setNotificationCenter()
+        }
     }
 
     required init?(coder: NSCoder) {
@@ -109,7 +115,7 @@ class CustomAlertView: UIView {
             }
 
             subtitleLabel.do {
-                $0.text = "ABCDEFG"
+                $0.text = invitationCode
                 $0.numberOfLines = 2
                 $0.font = .fontGuide(.body3_regular_kor)
                 $0.textColor = .gray600
@@ -264,6 +270,10 @@ class CustomAlertView: UIView {
             closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
         }
     }
+    
+    private func setNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(getInvitationCode), name: Notification.Name("invitationCodeNotification"), object: nil)
+    }
 
     private func closeAlertView() {
         removeFromSuperview()
@@ -301,6 +311,16 @@ class CustomAlertView: UIView {
         let pasteboard = UIPasteboard.general
         pasteboard.string = text
         closeAlertView()
+    }
+    
+    @objc
+    private func getInvitationCode(_ notification: Notification) {
+        if let code = notification.userInfo?["userInfo"] as? String {
+            invitationCode = code
+            if !invitationCode.isEmpty {
+                subtitleLabel.text = invitationCode
+            }
+        }
     }
 }
 

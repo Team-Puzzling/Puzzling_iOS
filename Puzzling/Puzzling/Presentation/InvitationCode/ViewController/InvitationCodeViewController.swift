@@ -21,10 +21,12 @@ final class InvitationCodeViewController: UIViewController {
     private let logoImageView = UIImageView()
     private let invitationCodeInputView = InputContentView(type: .invitationCode)
     private let inputCompletionButton = CheckButton()
+    private let projectProvider = MoyaProvider<ProjectService>(plugins:[NetworkLoggerPlugin()])
     
     // MARK: - Properties
     
-    var invitationCode: String = ""
+    private var invitationCode: String = ""
+    private var projectList: ProjectModel?
     
     // MARK: - Initializer
     
@@ -104,6 +106,8 @@ extension InvitationCodeViewController {
         logoImageView.snp.makeConstraints {
             $0.top.equalTo(navigationView.snp.bottom).offset(88)
             $0.centerX.equalToSuperview()
+            $0.width.equalTo(100)
+            $0.height.equalTo(124)
         }
         
         invitationCodeInputView.snp.makeConstraints {
@@ -147,14 +151,21 @@ extension InvitationCodeViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(getTextFieldInfo(_:)), name: Notification.Name("textFieldNotification"), object: nil)
     }
     
+    private func textFieldWarningNotification(type: WarningMessage) {
+        let userInfo = type
+        NotificationCenter.default.post(
+            name: Notification.Name("textFieldWarningNotification"),
+            object: nil,
+            userInfo: ["userInfo": userInfo]
+        )
+    }
+    
     private func buttonStateSetting() {
         !invitationCode.isEmpty ? inputCompletionButton.setState(.allow) : inputCompletionButton.setState(.notAllow)
     }
     
     private func presentToCreateProfile() {
-        let createProfileVC = CreateProfileViewController()
-        createProfileVC.modalPresentationStyle = .fullScreen
-        self.present(createProfileVC, animated: true)
+        fetchInvitationCode()
     }
     
     private func dismissToMain() {
@@ -203,6 +214,45 @@ extension InvitationCodeViewController {
                 invitationCode = updateTextInfo.text
             }
             buttonStateSetting()
+        }
+    }
+}
+
+extension InvitationCodeViewController {
+    
+    // MARK: - Network
+    
+    private func fetchInvitationCode() {
+        print(invitationCode)
+        projectProvider.request(.invitationCode(memberID: "1", invitationCode: invitationCode)) { result in
+            switch result {
+            case .success(let result):
+                let status = result.statusCode
+                if status >= 200 && status < 300 {
+                    do {
+                        guard let data = try result.map(GeneralResponse<ProjectResponse>.self).data else { return }
+                        self.projectList = data.convertToProjectModel()
+                        print("♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️")
+                        let createProfileVC = CreateProfileViewController()
+                        createProfileVC.modalPresentationStyle = .fullScreen
+                        if let projectID = self.projectList?.projectId {
+                            createProfileVC.projectID = projectID
+                        }
+                        if let projectName = self.projectList?.projectName {
+                            createProfileVC.projectName = projectName
+                            print(projectName)
+                        }
+                        self.present(createProfileVC, animated: true)
+                    } catch(let error) {
+                        print(error.localizedDescription)
+                    }
+                } else if status == 404 {
+                    print("💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭")
+                    self.textFieldWarningNotification(type: .invitationCode)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
         }
     }
 }

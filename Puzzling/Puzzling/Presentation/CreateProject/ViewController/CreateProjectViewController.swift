@@ -20,6 +20,10 @@ final class CreateProjectViewController: UIViewController {
     private let closeButton = UIButton()
     private let createProjectView = CreateProjectView()
     private let registerProjectButton = CheckButton()
+    
+    // MARK: - Properties
+    
+    private var project: Project
     private var projectName: String = ""
     private var projectDescription: String = ""
     private var projectStartDate: String = ""
@@ -27,8 +31,19 @@ final class CreateProjectViewController: UIViewController {
     private var projectNickname: String = ""
     private var projectCycle: [String] = []
     private var viewHeight: String = ""
+    private let projectProvider = MoyaProvider<ProjectService>(plugins:[NetworkLoggerPlugin()])
+    private var createProjectModel: CreateProjectModel?
     
-    // MARK: - Properties
+    // MARK: - Initializer
+    
+    init() {
+        project = Project(projectName: "", projectIntro: "", projectStartDate: "", memberProjectRole: "", memberProjectNickname: "", reviewCycle: [])
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - View Life Cycle
     
@@ -153,13 +168,6 @@ extension CreateProjectViewController {
     }
     
     private func projectRegister() {
-        print("-------------------------------------------")
-        print(projectName)
-        print(projectDescription)
-        print(replaceDate(date: projectStartDate))
-        print(projectRole)
-        print(projectNickname)
-        print(projectCycle)
         let alert = CustomAlertView(frame: CGRect(x: 0, y: 0, width: 290, height: 373), alertType: .createProject)
         alert.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(alert)
@@ -211,11 +219,30 @@ extension CreateProjectViewController {
 
     }
     
+    private func invitationCodeNotification(code: String) {
+        let userInfo = code
+        NotificationCenter.default.post(
+            name: Notification.Name("invitationCodeNotification"),
+            object: nil,
+            userInfo: ["userInfo": userInfo]
+        )
+    }
+    
+    private func textFieldWarningNotification(type: WarningMessage) {
+        let userInfo = type
+        NotificationCenter.default.post(
+            name: Notification.Name("textFieldWarningNotification"),
+            object: nil,
+            userInfo: ["userInfo": userInfo]
+        )
+    }
+    
     // MARK: - @objc Methods
     
     @objc
     private func registerProjectButtonDidTap() {
-        projectRegister()
+//        projectRegister()
+        postProjectInfo()
     }
     
     @objc
@@ -282,5 +309,51 @@ extension CreateProjectViewController: UISheetPresentationControllerDelegate { }
 extension CreateProjectViewController: ProjectStartProtocol {
     func presentToStartTimeVC() {
         presentToHalfModalViewController()
+    }
+}
+
+extension CreateProjectViewController {
+    
+    // MARK: - Network
+    
+    private func postProjectInfo() {
+        project.projectName = projectName
+        project.projectIntro = projectDescription
+        project.projectStartDate = replaceDate(date: projectStartDate)
+        project.memberProjectRole = projectRole
+        project.memberProjectNickname = projectNickname
+        project.reviewCycle = projectCycle
+        
+        projectProvider.request(.postProject(param: project.makePostProjectRequest(), memberID: "1")) { result in
+            switch result {
+            case .success(let result):
+                let status = result.statusCode
+                if status >= 200 && status < 300 {
+                    do {
+                        guard let data = try result.map(GeneralResponse<CreateProjectResponse>.self).data else { return }
+                        self.createProjectModel = data.convertToCreateProjectModel()
+                        self.projectRegister()
+                        let userInfo = self.createProjectModel?.projectCode ?? ""
+                        NotificationCenter.default.post(
+                            name: Notification.Name("invitationCodeNotification"),
+                            object: nil,
+                            userInfo: ["userInfo": userInfo]
+                        )
+                        // 프로젝트 아이디 요기
+                        // let projectID = self.createProjectModel?.projectId
+                        
+//                        if let code = self.createProjectModel?.projectCode {
+//                            self.projectRegister()
+//                            alertView.invitationCode = code
+//                            self.invitationCodeNotification(code: code)
+//                        }
+                    } catch(let error) {
+                        print(error.localizedDescription)
+                    }
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }
