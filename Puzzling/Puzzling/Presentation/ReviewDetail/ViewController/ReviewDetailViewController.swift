@@ -10,47 +10,50 @@ import UIKit
 import SnapKit
 import Then
 
-extension ReviewDetailViewController {
-    @frozen
-    enum reviewDetail: CaseIterable {
-        case review, empty
-        
-        var reviewDetailViewStatus: UIView? {
-            switch self {
-            case .review:
-                let v = ReviewDetailView()
-                v.reviewCollectionview.reloadData()
-                return v
-            case .empty:
-                return ReviewDetailEmptyView()
-            }
-        }
-    }
-}
-
-extension ReviewDetailViewController: reviewDateProtocol {
-    func reviewDate(reviewDetailModel: ReviewDetailModel) {
-        
-        print(selectedDate, "aaaaaa👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿")
-        
-    }
-}
+protocol DetailViewType {}
 
 final class ReviewDetailViewController: UIViewController {
     
-    private var selectedDate: String = "2023-07-17"
+    enum reviewDetail: CaseIterable {
+        case review, empty
+    }
     
+    private var detailType: reviewDetail = .review
+    private var selectedDate: String = "2023-07-17"
     private let projectCalenderView = ProjectCalendarView()
     
-    func setReviewDetailView(status: reviewDetail) {
-        print(#function, status)
+    private func removeReviewDetailView(status: reviewDetail) {
         reviewDetailView?.alpha = 0
         reviewDetailView?.removeFromSuperview()
         reviewDetailView = nil
-        reviewDetailView = status.reviewDetailViewStatus
+        detailType = status
     }
     
-    private var reviewDetailView: UIView? = UIView()
+    private func addReviewDetailView(data: ReviewDetailModel?) {
+        guard let data else { return }
+        reviewDetailView = ReviewDetailView()
+        reviewDetailView?.setDataBind(data: data)
+        
+        view.addSubview(reviewDetailView ?? UIView())
+        
+        reviewDetailView?.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(160)
+            $0.horizontalEdges.bottom.equalToSuperview()
+        }
+    }
+    
+    private func addEmptyView() {
+        reviewDetailView = ReviewDetailEmptyView()
+        
+        view.addSubview(reviewDetailView ?? UIView())
+        
+        reviewDetailView?.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(160)
+            $0.horizontalEdges.bottom.equalToSuperview()
+        }
+    }
+    
+    private var reviewDetailView: DetailTypeView?
     
     // MARK: - Lifecycle
     
@@ -59,7 +62,6 @@ final class ReviewDetailViewController: UIViewController {
         setDelegate()
         setUI()
         setLayout()
-        setNotificationCenter()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -104,19 +106,6 @@ extension ReviewDetailViewController {
             $0.height.equalTo(projectCalenderView.getCalendarViewHeight())
         }
     }
-    
-    private func layout() {
-        view.addSubviews(reviewDetailView ?? UIView())
-        reviewDetailView?.snp.makeConstraints {
-            $0.top.equalTo(projectCalenderView.snp.bottom).offset(12)
-            $0.horizontalEdges.equalToSuperview()
-            $0.bottom.equalToSuperview()
-        }
-    }
-    
-    private func setNotificationCenter() {
-        NotificationCenter.default.addObserver(self, selector: #selector(getDateBoolNotification(_:)), name: Notification.Name("dateBoolNotification"), object: nil)
-    }
 }
 
 extension ReviewDetailViewController: UIGestureRecognizerDelegate {
@@ -154,17 +143,17 @@ extension ReviewDetailViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    @objc
-    private func getDateBoolNotification(_ notification: Notification) {
-        if let dateNotification = notification.userInfo?["userInfo"] as? Bool {
-            print(dateNotification,"???????")
-            if (dateNotification == true) {
-                setReviewDetailView(status: .review)
-            }
-            else { setReviewDetailView(status: .empty) }
-        }
-        layout()
-    }
+//    @objc
+//    private func getDateBoolNotification(_ notification: Notification) {
+//        if let dateNotification = notification.userInfo?["userInfo"] as? Bool {
+//            print(dateNotification,"???????")
+//            if (dateNotification == true) {
+//                setReviewDetailView(status: .review)
+//            }
+//            else { setReviewDetailView(status: .empty) }
+//        }
+//        layout()
+//    }
 }
 
 extension ReviewDetailViewController: StringTransferDelegate {
@@ -172,5 +161,20 @@ extension ReviewDetailViewController: StringTransferDelegate {
         selectedDate = value
         print(selectedDate, "🧢🧢🧢🧢🧢🧢🧢🧢🧢🧢🧢🧢🧢")
         projectCalenderView.selectDate(date: selectedDate)
+    }
+}
+
+extension ReviewDetailViewController: reviewDateProtocol {
+    func reviewDate(reviewDetailModel: ReviewDetailModel) {
+        print(")_*(_*_*")
+        let isDetailViewEmpty = reviewDetailModel.reviewId == nil
+        if isDetailViewEmpty == false {
+            removeReviewDetailView(status: .empty)
+            addReviewDetailView(data: reviewDetailModel)
+        }
+        else {
+            removeReviewDetailView(status: .review)
+            addEmptyView()
+        }
     }
 }

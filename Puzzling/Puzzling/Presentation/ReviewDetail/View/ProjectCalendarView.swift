@@ -31,11 +31,15 @@ final class ProjectCalendarView: UIView {
     
     private func findData(date: String) -> ReviewDetailModel? {
         var data = ReviewDetailModel(reviewId: nil, reviewDay: "", reviewDate: "", reviewTemplateId: nil, contents: nil)
-        dataList.forEach {
+        reviewDetailDataModel.forEach {
             if($0.reviewDate == date){
                 data = $0
             }
         }
+//        let filteredData =  dataList.filter {
+//            $0.reviewDate == date
+//        }.first
+        
         return data
     }
     
@@ -135,16 +139,16 @@ extension ProjectCalendarView {
         calendarView.delegate = self
         calendarView.dataSource = self
     }
-    
-    private func sendDateBoolNotification(bool: Bool) {
-        let userInfo = bool
-        NotificationCenter.default.post(
-            name: Notification.Name("dateBoolNotification"),
-            object: nil,
-            userInfo: ["userInfo": userInfo]
-        )
-    }
-    
+//
+//    private func sendDateBoolNotification(bool: Bool) {
+//        let userInfo = bool
+//        NotificationCenter.default.post(
+//            name: Notification.Name("dateBoolNotification"),
+//            object: nil,
+//            userInfo: ["userInfo": userInfo]
+//        )
+//    }
+//
     private func sendDateNotification(string: String) {
         let userInfo = string
         print(userInfo, "xxxxxx")
@@ -232,20 +236,8 @@ extension ProjectCalendarView: FSCalendarDelegate, FSCalendarDataSource, FSCalen
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         
         let returnDate = dateFormatter.string(from: date)
-        print(returnDate, "💂‍♀️💂‍♀️💂‍♀️💂‍♀️💂‍♀️💂‍♀️")
-        var boolData: Bool = true
-        
-        reviewDetailDataModel.forEach {
-            if $0.reviewDate == returnDate {
-                if(date == dateFormatter.date(from: $0.reviewDate) && $0.reviewId == nil) {
-                    boolData = false
-                }
-            }
-        }
-        
-        print("dpdpdpdp")
-        sendDateNotification(string: returnDate)
-        sendDateBoolNotification(bool: boolData)
+        guard let model = self.findData(date: returnDate) else { return }
+        self.delegate?.reviewDate(reviewDetailModel: model)
     }
 }
 
@@ -290,13 +282,16 @@ extension ProjectCalendarView {
                         data.forEach {
                             self.reviewDetailDataModel.append($0.convertToReviewDetailModel())
                         }
+                        
+                        print(self.reviewDetailDataModel, "🐹🐹🐹🐹🐹")
                         print("🎒🎒🎒🎒🎒🎒🎒🎒🎒🎒🎒🎒🎒")
                         self.calendarToView()
 //                        print(self.reviewDetailDataModel)
                         self.calendarView.reloadData()
                         self.setUI()
-                        
+                        print(self.selectedDate, "👑👑👑👑👑👑")
                         let myModel = self.findData(date: self.selectedDate)
+                        print(myModel, "🌂🌂🌂🌂🌂🌂🌂🌂🌂🌂")
                         self.delegate?.reviewDate(reviewDetailModel: myModel ?? ReviewDetailModel(reviewId: nil, reviewDay: "월", reviewDate: "2023-07-17", reviewTemplateId: nil, contents: nil))
                         print(self.selectedDate, "🐻‍❄️🐻‍❄️🐻‍❄️🐻‍❄️🐻‍❄️🐻‍❄️🐻‍❄️🐻‍❄️🐻‍❄️🐻‍❄️🐻‍❄️🐻‍❄️🐻‍❄️🐻‍❄️🐻‍❄️🐻‍❄️")
                         self.selectDate(date: self.selectedDate)

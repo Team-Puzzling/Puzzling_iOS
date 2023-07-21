@@ -10,23 +10,13 @@ import UIKit
 import SnapKit
 import Then
 
-final class ReviewDetailView: UIView {
-    private var reviewDetailData: [ReviewDetailModel] = []
+class DetailTypeView: UIView {
+    func setDataBind(data: ReviewDetailModel) {}
+}
+
+final class ReviewDetailView: DetailTypeView {
+    private var reviewDetailData: ReviewDetailModel = ReviewDetailModel(reviewId: nil, reviewDay: "", reviewDate: "", reviewTemplateId: nil, contents: nil)
     private var selectedDate: String = "2023-07-17"
-    
-    private var specificData: ReviewDetailModel = ReviewDetailModel(reviewId: nil, reviewDay: "", reviewDate: "", reviewTemplateId: nil, contents: nil)
-    private func findMyData() -> ReviewDetailModel {
-        var data: ReviewDetailModel = ReviewDetailModel(reviewId: nil, reviewDay: "", reviewDate: "", reviewTemplateId: nil, contents: nil)
-        reviewDetailData.forEach {
-            
-                print("👥👥👥👥👥👥👥👥👥👥👥👥👥👥👥")
-            if($0.reviewDate == selectedDate) {
-                data = $0
-                print(data)
-            }
-        }
-        return data
-    }
     
     let reviewCollectionview = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
@@ -36,9 +26,12 @@ final class ReviewDetailView: UIView {
         setLayout()
         setDelegate()
         setRegister()
-        setNotificationCenter()
-        dateNotification() 
         self.backgroundColor = .systemRed
+    }
+    
+    override func setDataBind(data: ReviewDetailModel) {
+        self.reviewDetailData = data
+        self.reviewCollectionview.reloadData()
     }
     
     required init?(coder: NSCoder) {
@@ -76,26 +69,6 @@ extension ReviewDetailView {
     private func setRegister() {
         reviewCollectionview.registerCell(ReviewDetailCollectionViewCell.self)
     }
-    
-    func setNotificationCenter() {
-        print("plz")
-        NotificationCenter.default.addObserver(self, selector: #selector(getDateNotification(_:)), name: Notification.Name("dateNotification"), object: nil)
-//        reviewCollectionview.reloadData()
-    }
-    
-    private func dateNotification() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(receiveDataFromView1(_:)),
-                                               name: NSNotification.Name("calendarToView"),
-                                               object: nil)
-    }
-}
-
-extension ReviewDetailView {
-    func setDataBind(data: [ReviewDetailModel]) {
-        self.reviewDetailData = data
-        self.reviewCollectionview.reloadData()
-    }
 }
 
 extension ReviewDetailView {
@@ -111,49 +84,35 @@ extension ReviewDetailView {
         print(selectedDate,"✅✅✅✅??✅✅")
         reviewCollectionview.reloadData()
     }
-    
-    @objc func receiveDataFromView1(_ notification: Notification) {
-        if let data = notification.object as? ReviewDetailModel {
-            specificData = data
-        }
-    }
 }
 
 extension ReviewDetailView: UICollectionViewDelegate { }
 
 extension ReviewDetailView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let data = findMyData()
-        guard let count = data.contents?.count else { return 0 }
+        guard let count = reviewDetailData.contents?.count else { return 0 }
         return count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = reviewCollectionview.dequeueCell(type: ReviewDetailCollectionViewCell.self, indexPath: indexPath)
-//        setNotificationCenter()
-            print(selectedDate,"ㅋㅋ???ㅋㅋㅋ")
-//        reviewDetailData.forEach {
-        let data = findMyData()
-        print(data)
-            if(data.reviewDate == selectedDate) {
-                guard let title = data.contents?[indexPath.row].title else { return UICollectionViewCell() }
-                guard let description = data.contents?[indexPath.row].content else { return UICollectionViewCell() }
-                cell.setDataBind(title: title, description: description)
-                guard let count = data.contents?.count else { return UICollectionViewCell() }
-                if (indexPath.row == count - 1) {
-                    cell.divisionHidden()
-                }
-            }
-//        }
+        print(reviewDetailData)
         
+        guard let title = reviewDetailData.contents?[indexPath.row].title else { return UICollectionViewCell() }
+        guard let description = reviewDetailData.contents?[indexPath.row].content else { return UICollectionViewCell() }
+        cell.setDataBind(title: title, description: description)
+        guard let count = reviewDetailData.contents?.count else { return UICollectionViewCell() }
+        if (indexPath.row == count - 1) {
+            cell.divisionHidden()
+            
+        }
         return cell
     }
 }
 
 extension ReviewDetailView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        var data = findMyData()
-        guard let height = data.contents?[indexPath.row].content.textHeight(withWidth: UIScreen.main.bounds.width - 64) else { return CGSize(width: 0, height: 0) }
+        guard let height = reviewDetailData.contents?[indexPath.row].content.textHeight(withWidth: UIScreen.main.bounds.width - 64) else { return CGSize(width: 0, height: 0) }
         return CGSize(width: UIScreen.main.bounds.width, height: height + 56)
     }
     
