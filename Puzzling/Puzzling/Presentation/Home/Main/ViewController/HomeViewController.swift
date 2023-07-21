@@ -43,12 +43,16 @@ final class HomeViewController: UIViewController {
             
     override func viewDidLoad() {
         super.viewDidLoad()
-//        setData()
         setDelegate()
         setUI()
         setLayout()
         setPage()
         setData()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -201,6 +205,7 @@ extension HomeViewController {
                 case 400:
                     print(result.description)
                 case 401:
+                    
                     print(result.description)
                 case 404:
                     print(result.debugDescription)
