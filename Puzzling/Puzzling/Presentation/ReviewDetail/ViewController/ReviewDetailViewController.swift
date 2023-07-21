@@ -194,8 +194,14 @@ extension ReviewDetailViewController {
     
     @objc
     private func gotoTabBar() {
-        let vc = TabBarController()
-        UIApplication.shared.keyWindow?.replaceRootViewController(vc, animated: true, completion: nil)
+        let mainViewController = TabBarController()
+        let navigationController = UINavigationController(rootViewController: mainViewController)
+        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
+        guard let delegate = sceneDelegate else {
+            // 에러 알림
+            return
+        }
+        delegate.window?.rootViewController = navigationController
     }
 }
 

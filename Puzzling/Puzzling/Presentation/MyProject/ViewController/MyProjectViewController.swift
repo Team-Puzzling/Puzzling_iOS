@@ -136,6 +136,7 @@ extension MyProjectViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueCell(type: MyProjectTableViewCell.self, indexPath: indexPath)
         cell.delegate = self
+        cell.delegateVC = self
         cell.setDataBind(myProjectData[indexPath.row])
         return cell
     }
@@ -154,7 +155,12 @@ extension MyProjectViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-extension MyProjectViewController: MyProjectPassEventDelegate, ReviewButtonPassEventDelegate {
+extension MyProjectViewController: MyProjectPassEventDelegate, MyProjectSwitchTabDelegate {
+    func passTouchEvent(newProject: Int) {
+        self.tabBarController?.selectedIndex = 0
+        UserDefaults.standard.setValue(newProject, forKey: "projectId")
+    }
+    
     func passTouchEvent(projectTitle: String, projectId: Int) {
         self.currentProjectTitle = projectTitle
         self.currentProjectId = projectId

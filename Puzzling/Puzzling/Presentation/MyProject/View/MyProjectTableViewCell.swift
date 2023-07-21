@@ -10,8 +10,8 @@ import UIKit
 import SnapKit
 import Then
 
-protocol ReviewButtonPassEventDelegate: AnyObject {
-    func passReviewButton()
+protocol MyProjectSwitchTabDelegate: AnyObject {
+    func passTouchEvent(newProject: Int)
 }
 
 protocol MyProjectPassEventDelegate: AnyObject {
@@ -32,7 +32,9 @@ final class MyProjectTableViewCell: UITableViewCell {
     
     private var projectTitle: String = ""
     private var projectId: Int = 0
+    
     weak var delegate: MyProjectPassEventDelegate?
+    weak var delegateVC: MyProjectSwitchTabDelegate?
     
     private let dateFormatter = DateFormatter().then {
         $0.dateFormat = "yyyy-MM-dd"
@@ -167,11 +169,7 @@ extension MyProjectTableViewCell {
     
     @objc
     private func dashboardButtonTapped() {
-//        self.delegate?.passTouchEvent(projectTitle: self.projectTitle, projectId: self.projectId)
-        
-//        let vc = TabBarController()
-//        UIApplication.shared.keyWindow?.replaceRootViewController(vc, animated: true, completion: nil)
-        
+        self.delegateVC?.passTouchEvent(newProject: self.projectId)
     }
 }
 
