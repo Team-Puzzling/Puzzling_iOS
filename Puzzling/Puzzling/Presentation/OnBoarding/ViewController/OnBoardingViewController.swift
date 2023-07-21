@@ -183,6 +183,9 @@ extension OnBoardingViewContoller {
                         print(error.localizedDescription)
                     }
                 }
+                else if status == 401 {
+                    self.getNewToken()
+                }
                 else if status >= 400 {
                     print("⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️")
                 }
