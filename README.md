@@ -1454,7 +1454,17 @@ final class MyViewController: UIViewController, UITableViewDataSource, UITableVi
 <summary> 🐸 정 </summary>
 <div markdown="1">
 
-[🐸 뷰 및 기능](https://www.notion.so/kwonjeong/f8651318d9d146d58271b5578b930196?pvs=4)
+프로젝트 등록 뷰
+
+- 텍스트필드가 반복되는 뷰이기 때문에 커스텀 뷰를 만들어서 switch 문으로 분기처리를 해 주고 재활용했습니다.
+- 텍스트필드를 입력하는 중 특수문자나 이모지가 입력되었을 시 경고 메시지를 출력하기 위해 textField delegate에 있는 함수를 사용해 텍스트필드 입력 시작, 입력 도중, 입력 끝 부분에 세부적으로 하나하나 함수를 넣어 글자를 감지해 처리해주었습니다.
+- 또한 데이트피커를 사용해 날짜를 입력할 수 있도록 하고 컬렉션뷰를 이용해 회고 주기를 입력할 수 있도록 하였습니다.
+- 모든 컴포넌트에 값이 입력된 경우 notification center를 통해 뷰컨의 버튼을 활성화 할 수 있도록 했습니다.
+
+초대코드 입력 뷰
+
+- 프로젝트 등록 뷰에서 사용한 커스텀 뷰를 활용했습니다.
+- 서버통신을 이용해 발급받은 초대코드를 입력하고 초대코드가 유효하지 않은 경우 경고 메세지를 띄우도록 구현했습니다
 </div>
 </details>
 	
@@ -1462,7 +1472,29 @@ final class MyViewController: UIViewController, UITableViewDataSource, UITableVi
 <summary> 😼 민주 </summary>
 <div markdown="1">
 	
-[😼 뷰 및 기능](https://www.notion.so/kwonjeong/12be9e89c7574c2797820d2a9c7ef407?pvs=4)
+마이페이지 내 프로젝트 리스트 조회 뷰
+
+- UITableView를 사용해서 전체 리스트가 나타나게 했습니다.
+- TableView에 헤더를 만들어 닉네임이 나타나게 했습니다.
+- 프로젝트 시작 날짜를 받아와 D-Day를 계산해 넣었습니다. 음수일 때, 0일 때를 분기처리 했습니다. 음수일 때는 D-로 표시되게 하고, 양수일 때는 D+로 표시되게 했습니다. 0일 때를 따로 분기처리해서 프로젝트가 시작한 날짜를 +1일이 되게 만들었습니다.
+
+마이페이지 회고 리스트 조회 뷰
+
+- UICollectionView를 만들어서 전체 리스트가 나타나게 했습니다. 상단에 프로젝트를 선택할 수 있는 버튼을 만들었습니다.
+- UICollectionViewDelegate를 사용해서 CollectionView의 셀을 선택하면 다음 뷰로 넘어가도록 만들었습니다.
+- 상단 버튼에 BottomSheet를 연결해서 프로젝트를 선택하도록 만들었습니다. 선택한 프로젝트에 맞춰 네비게이션의 title이 변경되게 했습니다.
+
+마이페이지 회고 상세조회 뷰
+
+- FSCalendar로 상단 캘린더를 구현했습니다. 회고 주기일 때는 검정색으로 날짜가 나오고 회고 주기가 아닐 때는 회색으로 표시되고, 선택이 안됩니다.
+- 회고가 입력된 날은 하늘색 선택이 되게 하고 유저가 클릭한 날짜는 파란색으로 선택되게 만들었습니다.
+- 회고 내용을 UICollectionView로 만들었습니다. 회고 내용의 사이즈에 맞게 셀의 높이가 조정되도록 만들었습니다.
+
+팀원 회고 상황 조회 뷰
+
+- FSCalendar로 상단 캘린더를 구현했습니다. 회고 주기일 때는 검정색으로 날짜가 나오고, 회고 주기가 아닐 때는 회색으로 표시되고, 선택이 안됩니다.
+- 회고를 아무도 진행하지 않았으면 검정색 글씨만 나오고, 회고를 진행한 인원이 한 명이라도 있으면 하늘색 동그라미로 표시됩니다.
+- UITableView로 하단 회고 진행 여부를 확인할 수 있는 뷰를 만들었습니다. 회고를 진행한 사람이 없으면 “회고를 진행해야 해요” 부분만 나오고, 반대로 모두가 회고를 진행했으면 “회고를 진행했어요” 부분만 나옵니다.
 </div>
 </details>
   
@@ -1479,7 +1511,7 @@ final class MyViewController: UIViewController, UITableViewDataSource, UITableVi
 <summary> 🐰 성우 </summary>
 <div markdown="1">
 
- [🐰 뷰 및 기능](https://www.notion.so/kwonjeong/7706c7ab5fda47d2a5433b454295eb17?pvs=4)
+제가 맡은 부분은 회고의 템플릿을 선택할 수 있고, 선택한 템플릿에 회고를 작성하여 저장하는 기능을 맡았습니다. 각각의 옵션들은 하나의 UIView로 구현했고, 옵션을 선택하면UIViewController에서 case 별로 화면이 업데이트 되도록 하였습니다. 하나의 View에서 작성 된 회고는 TextView에 입력이 되며 입력에 따른 화면 처리는 UITextViewDelegate로 처리했습니다. 
 
 </div>
 </details>
