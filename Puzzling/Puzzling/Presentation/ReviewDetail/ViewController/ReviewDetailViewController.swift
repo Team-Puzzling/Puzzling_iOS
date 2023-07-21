@@ -160,7 +160,6 @@ extension ReviewDetailViewController: UIGestureRecognizerDelegate {
     
     private func setTodayNavigation(title: String) {
         self.navigationItem.leftBarButtonItem?.isHidden = true
-        
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: Image.xMark,
             style: .plain,
