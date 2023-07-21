@@ -19,6 +19,7 @@ final class TeamMemberViewController: UIViewController {
     private var selectedDate: String = "2023-07-21"
     private var startDate: String = "2023-04-01"
     private var endDate: String = "2023-12-13"
+    private var projectTitle: String = ""
     
     private var specificData = TeamMemberModel(reviewDay: "", reviewDate: "", reviewWriters: nil, nonReviewWriters: nil)
     private var dataList: [TeamMemberModel] = []
@@ -118,7 +119,7 @@ extension TeamMemberViewController {
         
         navigationItem.leftBarButtonItem?.tintColor = .black
         
-        let title = "프로젝트 1"
+        let title = self.projectTitle
         let attributes: [NSAttributedString.Key: Any] = [
             NSAttributedString.Key.foregroundColor: UIColor.black000,
             NSAttributedString.Key.font: UIFont.fontGuide(.heading4_kor)
@@ -292,5 +293,12 @@ extension TeamMemberViewController {
                 print(error.localizedDescription)
             }
         }
+    }
+}
+
+extension TeamMemberViewController {
+    func passData(date: String, title: String) {
+        self.selectedDate = date
+        self.projectTitle = title
     }
 }

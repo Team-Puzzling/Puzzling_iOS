@@ -153,7 +153,8 @@ extension DashboardMainBoxView {
         self.puzzleCollectionView.passPuzzleData(data: dashboardData)
     }
     
-    func reloadPuzzleView() {
+    func reloadPuzzleView(withTodayReviewedCheck: Bool = true) {
+        self.puzzleCollectionView.hasTodayReviewed(withTodayReviewedCheck)
         self.puzzleCollectionView.reloadCollectionView()
     }
 }

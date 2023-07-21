@@ -89,7 +89,27 @@ extension HomeBottomSheetViewController {
     }
     
     private func setAction() {
-        // Button -> didsmiss 하고 Navigation?
+        let moveToCreateProjectViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(moveToCreateView))
+        let moveToJoinProjectViewTapGesture = UITapGestureRecognizer(target: self, action: #selector(moveToJoinView))
+        
+        self.createProjectButton.addGestureRecognizer(moveToCreateProjectViewTapGesture)
+        self.joinProjectButton.addGestureRecognizer(moveToJoinProjectViewTapGesture)
+    }
+}
+
+extension HomeBottomSheetViewController {
+    @objc
+    private func moveToCreateView() {
+        let createViewController = CreateProjectViewController()
+        createViewController.modalPresentationStyle = .fullScreen
+        self.present(createViewController, animated: true)
+    }
+    
+    @objc
+    private func moveToJoinView() {
+        let joinViewController = InvitationCodeViewController()
+        joinViewController.modalPresentationStyle = .fullScreen
+        self.present(joinViewController, animated: true)
     }
 }
 
@@ -124,18 +144,11 @@ extension HomeBottomSheetViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) as? HomeBottomSheetTableViewCell else { return }
         guard let newProjectId = cell.getServiceParameter() else { return }
-        print("🚩🚩🚩")
-        print("newId: \(newProjectId)")
-        print("🚩🚩🚩")
         if let originalId = currentProjectId {
             if originalId == newProjectId {
-                print("🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩🚩")
                 self.dismiss(animated: true)
             } else {
                 self.delegate?.changeProjectId(to: newProjectId)
-                
-                print(newProjectId)
-                print("🚩🚩🚩🚩🚩🚩🍕🚩🚩🚩🚩🚩")
                 self.dismiss(animated: true)
             }
         } else {
