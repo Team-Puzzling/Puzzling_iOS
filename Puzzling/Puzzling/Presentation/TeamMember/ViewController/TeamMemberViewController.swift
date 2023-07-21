@@ -108,10 +108,12 @@ extension TeamMemberViewController {
         teamMemberTableView.registerCell(TeamMemberTableViewCell.self)
         teamMemberTableView.registerReusableView(TeamMemberCustomHeaderView.self)
     }
-    
+}
+
+extension TeamMemberViewController: UIGestureRecognizerDelegate {
     private func setNavigationBar() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: Image.leftIcon,
+            image: Image.chevronBackIcon,
             style: .plain,
             target: self,
             action: #selector(backButtonTapped)
@@ -132,6 +134,7 @@ extension TeamMemberViewController {
             titleLabel.attributedText = NSAttributedString(string: title, attributes: attributes)
             navigationItem.titleView = titleLabel
         }
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
     
     private func setCalendarViewLayout() {
@@ -263,7 +266,6 @@ extension TeamMemberViewController {
     // MARK: - Network
     
     private func fetchTeamMember() {
-        print(startDate, endDate)
         projectTeamProvider.request(.teamMember(projectId: "1", startDate: startDate, endDate: endDate)) { result in
             switch result {
             case .success(let result):

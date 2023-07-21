@@ -136,7 +136,6 @@ extension MyProjectViewController: MyProjectPassEventDelegate {
         self.currentProjectId = projectId
         let vc = MyReviewListViewController()
         vc.passData(id: self.currentProjectId, title: self.currentProjectTitle)
-        print(currentProjectId, currentProjectTitle, "🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶")
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -144,7 +143,6 @@ extension MyProjectViewController: MyProjectPassEventDelegate {
     
     private func fetchProjectList() {
         guard let memberId = UserDefaults.standard.string(forKey: "memberId") else { return }
-        print(memberId)
         myProjectProvider.request(.projectList(memberId: "1")) { result in
             switch result {
             case .success(let result):

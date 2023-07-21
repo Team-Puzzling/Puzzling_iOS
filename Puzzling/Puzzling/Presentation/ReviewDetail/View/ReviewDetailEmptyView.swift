@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 import Then
 
-final class ReviewDetailEmptyView: UIView {
+final class ReviewDetailEmptyView: DetailTypeView {
     
     private let puzzleImageView = UIImageView()
     private let label = UILabel()

@@ -103,4 +103,15 @@ extension MyReviewListCollectionViewCell {
         dateLabel.text = convertStr
         descriptionLabel.text = reviewListData.contents
     }
+    
+    func getSelectedData() -> String {
+        guard let text = dateLabel.text else { return "2023.07.17" }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy.MM.dd"
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        dateFormatter.timeZone = TimeZone(identifier: "KST")
+        guard let yyyymmDate = dateFormatter.date(from: text) else { return "2023-07-17" }
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.string(from: yyyymmDate)
+    }
 }

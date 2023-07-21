@@ -133,13 +133,11 @@ private extension OnBoardingViewContoller {
     }
     
     func gotoMainEnterProjectView() {
-        print(#function)
         let vc = EnterProjectViewController()
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func gotoMainPage() {
-        print("메인페이지지롱")
         let vc = TabBarController()
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -160,7 +158,6 @@ extension OnBoardingViewContoller {
                     do {
                         guard let data = try result.map(GeneralResponse<UserResponse>.self).data else { return }
                         self.userModel = data.convertToUserModel()
-                        print("🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰\(self.userModel)🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰🥰")
                         UserDefaults.standard.set(self.userModel.name, forKey: "name")
                         UserDefaults.standard.set(self.userModel.projectId, forKey: "projectId")
                         UserDefaults.standard.set(self.userModel.memberId, forKey: "memberId")
