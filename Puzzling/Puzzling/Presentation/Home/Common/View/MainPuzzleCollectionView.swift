@@ -138,15 +138,12 @@ extension MainPuzzleCollectionView: UICollectionViewDataSource, UICollectionView
             return
         }
         guard let dateString = cell.cellDate else {
-            print("TOUCH NOT ALLOWED")
             return }
         
         switch dashboardType {
         case .indivisual:
-            print("IndiPuzzleTOUCHED")
             self.delegateForIndivisual?.passTouchEventIndivisual(withDate: dateString)
         case .team:
-            print("TeamPuzzleTOUCHED")
             self.delegateForTeam?.passTouchEventTeam(withDate: dateString)
         }
     }

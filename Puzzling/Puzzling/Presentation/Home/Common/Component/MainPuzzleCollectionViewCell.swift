@@ -84,12 +84,9 @@ extension MainPuzzleCollectionViewCell {
         let puzzleImageName = data.puzzleAssetName
         self.puzzleImageView.image = UIImage(named: puzzleImageName)
         
-        guard let reviewId = data.reviewId,
-              let date = data.reviewDate
-        else { return }
+        guard let date = data.reviewDate else { return }
         
         let dateModified: String = date.convertDateToSlashFormat()
-        self.reviewId = reviewId
         self.cellDate = date
         
         if self.todayDate == date {
@@ -104,6 +101,9 @@ extension MainPuzzleCollectionViewCell {
         }
         
         self.dateLabel.text = dateModified
+        
+        guard let reviewId = data.reviewId else { return }
+        self.reviewId = reviewId
     }
     
     /// TeamDashboard 에서 사용합니다.
