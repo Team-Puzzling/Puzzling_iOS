@@ -22,8 +22,8 @@ final class TeamRankPodiumView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setDelegate()
-        setUI()
+//        setDelegate()
+//        setUI()
         setLayout()
     }
     
