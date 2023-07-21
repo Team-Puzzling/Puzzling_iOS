@@ -56,6 +56,7 @@ extension OnBoardingView {
             $0.font = .fontGuide(.heading3_kor)
             $0.textColor = .gray500
             $0.numberOfLines = 3
+            $0.textAlignment = .center
             $0.lineHeightMultiple(spacing: 1.25)
         }
         
@@ -77,20 +78,20 @@ extension OnBoardingView {
         addSubviews(puzzlingImageView, logoImageView, descriptionLabel, appleLoginButton, kakaoLoginButton)
         
         puzzlingImageView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(76)
+            $0.bottom.equalTo(logoImageView.snp.top).offset(-78)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(85)
         }
         
         logoImageView.snp.makeConstraints {
-            $0.top.equalTo(puzzlingImageView.snp.bottom).offset(110)
+            $0.bottom.equalTo(descriptionLabel.snp.top).offset(-56)
             $0.centerX.equalToSuperview()
             $0.width.equalTo(120)
             $0.height.equalTo(148)
         }
         
         descriptionLabel.snp.makeConstraints {
-            $0.top.equalTo(logoImageView.snp.bottom).offset(56)
+            $0.top.equalToSuperview().offset(setScreenHeight())
             $0.centerX.equalToSuperview()
         }
         
@@ -117,10 +118,16 @@ extension OnBoardingView {
     }
     
     func buttonAction() {
-            delegate?.tapAction()
-        }
+        delegate?.tapAction()
+    }
+    
+    private func setScreenHeight() -> CGFloat {
+        let screenHeight = UIScreen.main.bounds.height
+        return screenHeight / 2
+    }
     
     // MARK: - @objc Methods
+    
     @objc func kakaoLoginButtonTapped() {
         buttonAction()
     }
