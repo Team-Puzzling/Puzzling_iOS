@@ -8,26 +8,26 @@
 import UIKit
 
 import KakaoSDKAuth
+import Moya
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+//    var vc: UIViewController = UIViewController()
 
-
+    private let authProvider = MoyaProvider<AuthService>(plugins:[NetworkLoggerPlugin()])
+    private var tokenModel: TokenModel = TokenModel(accessToken: "")
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
-        guard let _ = (scene as? UIWindowScene) else { return }
-
-        if let windowScene = scene as? UIWindowScene {
-            
-            let window = UIWindow(windowScene: windowScene)
-            window.overrideUserInterfaceStyle = UIUserInterfaceStyle.light
-            let vc = OnBoardingViewContoller()
-            let rootVC = UINavigationController(rootViewController: vc)
-            window.rootViewController = rootVC
-            window.makeKeyAndVisible()
-            self.window = window
-        }
+        let vc = setVC()
+        
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        self.window = UIWindow(windowScene: windowScene)
+        let navigationController = UINavigationController(rootViewController: vc)
+        navigationController.navigationBar.isHidden = true
+        self.window?.rootViewController = navigationController
+        self.window?.makeKeyAndVisible()
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
@@ -65,7 +65,48 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-
-
 }
 
+extension SceneDelegate {
+    
+    func setVC() -> UIViewController {
+        if let login = UserDefaults.standard.object(forKey: "Login") {
+            if(login as! Int == 0) {
+                return OnBoardingViewContoller()
+            } else {
+                if let project = UserDefaults.standard.object(forKey: "projectId") {
+                    return TabBarController()
+                } else {
+                    return EnterProjectViewController()
+                }
+            }
+        }
+        else { return OnBoardingViewContoller() }
+    }
+    
+    func getNewToken() {
+        guard let access = KeyChain.read(key: "accessToken") else { return }
+        guard let refresh = KeyChain.read(key: "refreshToken") else { return }
+        authProvider.request(.authToken(Authorization: access, Refresh: refresh)) { result in
+            switch result {
+            case .success(let result):
+                let status = result.statusCode
+                if status >= 200 && status < 300 {
+                    do {
+                        guard let data = try result.map(GeneralResponse<TokenResponse>.self).data else { return }
+                        self.tokenModel = data.convertToTokenModel()
+                        KeyChain.create(key: "accessToken", token: self.tokenModel.accessToken)
+                        APIConstants.accessToken = self.tokenModel.accessToken
+                    } catch(let error) {
+                        print(error.localizedDescription)
+                    }
+                }
+                else if status >= 400 {
+                    print("⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️")
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+}
