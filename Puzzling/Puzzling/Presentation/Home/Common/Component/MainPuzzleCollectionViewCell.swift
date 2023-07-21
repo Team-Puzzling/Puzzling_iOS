@@ -78,15 +78,9 @@ extension MainPuzzleCollectionViewCell {
         self.reviewId = reviewId
         self.cellDate = date
         
-        /// 보여주기식 코드
-        if date == "2023-06-20" {
+        if self.todayDate == date {
             jumpPuzzleAnimation()
         }
-        
-        /// 원코드 -> 해야하는 날인데 안했을 때만 뛰고, 했으면 안 뛰게!
-//        if self.todayDate == date {
-//            jumpPuzzleAnimation()
-//        }
         
         if self.todayDate == date && isTodayReviewed == false {
             self.puzzleImageView.image = UIImage(named: puzzleImageName)
@@ -99,16 +93,15 @@ extension MainPuzzleCollectionViewCell {
     }
     
     /// TeamDashboard 에서 사용합니다.
-    func setDataBind(data: TeamPuzzleBoard) {
+    func setDataBind(data: TeamPuzzleBoard, index: Int) {
         let puzzleImageName = data.puzzleAssetName
         self.puzzleImageView.image = UIImage(named: puzzleImageName)
 
         guard let date = data.reviewDate else {
             return
         }
-        guard let _ = data.reviewMemberPercent
-        else {
-            return }
+        guard let _ = data.reviewMemberPercent else { return }
+        
         let dateModified: String = date.convertDateToSlashFormat()
         self.cellDate = date
         

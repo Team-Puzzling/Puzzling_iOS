@@ -8,6 +8,8 @@
 import UIKit
 
 import Moya
+import SnapKit
+import Then
 
 final class IndivisualDashboardViewController: UIViewController {
     
@@ -20,17 +22,20 @@ final class IndivisualDashboardViewController: UIViewController {
     
     private var indivisualBoardCount: Int = 0
     private var todayString: String = Date().dateToServerString
+    private var memberId: Int = 0
+    private var projectId: Int = 0
     
     let mainView: DashboardMainBoxView = DashboardMainBoxView(frame: .zero, type: .indivisual)
     let actionPlanView = ActionPlanView()
     let homeMainButton = HomeMainButton(frame: .zero, type: .notToday)
+    
+    private let templateNetworkProvider = MoyaProvider<CreateRetrospectService>(plugins: [NetworkLoggerPlugin(verbose: true)])
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
         setLayout()
         setAction()
-//        jumpWhenStartPuzzleAnimation()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -47,6 +52,10 @@ extension IndivisualDashboardViewController {
         
     private func setUI() {
         view.backgroundColor = .white000
+        
+        homeMainButton.do {
+            $0.addTarget(self, action: #selector(moveToCreateRetrospect), for: .touchUpInside)
+        }
     }
     
     private func setLayout() {
@@ -76,18 +85,6 @@ extension IndivisualDashboardViewController {
         mainView.cardButtonView.addGestureRecognizer(tapGestureRecognizer)
     }
     
-//    private func jumpWhenStartPuzzleAnimation() {
-//        let jumpAnimation = CAKeyframeAnimation(keyPath: "position.y")
-//        jumpAnimation.values = [0, -10, 5, -4, 3, 0]
-//        jumpAnimation.keyTimes = [0, 0.15, 0.22, 0.34, 0.5, 0.55]
-//        jumpAnimation.duration = 0.55
-//        jumpAnimation.repeatCount = 2
-//        jumpAnimation.fillMode = .forwards
-//        jumpAnimation.isRemovedOnCompletion = false
-//        jumpAnimation.isAdditive = true
-//        mainView.puzzleCollectionView.layer.add(jumpAnimation, forKey: "jumpWhenStart")
-//    }
-    
     private func showOffRetrospectButtonAnimation() {
         
     }
@@ -101,10 +98,22 @@ extension IndivisualDashboardViewController {
         puzzleBoardVC.passPuzzleBoardCount(count: self.indivisualBoardCount)
         self.navigationController?.pushViewController(puzzleBoardVC, animated: true)
     }
+    
+    @objc
+    private func moveToCreateRetrospect() {
+        // 수정해야함
+        let createRetrospectViewController = CreateReViewViewController()
+        self.navigationController?.pushViewController(createRetrospectViewController, animated: true)
+    }
 }
 
 extension IndivisualDashboardViewController {
     func passBoardCount(count: Int) {
         self.indivisualBoardCount = count
+    }
+    
+    func passUserInformation(memberId: Int, projectId: Int) {
+        self.memberId = memberId
+        self.projectId = projectId
     }
 }

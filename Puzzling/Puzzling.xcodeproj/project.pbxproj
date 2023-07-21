@@ -1354,7 +1354,7 @@
 				03734EB82A59A0BD00B401D6 /* TabBarController.swift in Sources */,
 				0935C8292A675C5E00790A1B /* MyPageBottomSheetViewController.swift in Sources */,
 				0351AB642A65D78E006B0F4C /* Profile.swift in Sources */,
-				0935C8292A675C5E00790A1B /* ProjectListViewController.swift in Sources */,
+				0935C8292A675C5E00790A1B /* MyPageBottomSheetViewController.swift in Sources */,
 				03E6D25E2A53321000F4453C /* NetworkLoggerPlugin.swift in Sources */,
 				03E6D2622A5332F700F4453C /* Encodable+.swift in Sources */,
 				0351AB542A656DEB006B0F4C /* ProjectService.swift in Sources */,
@@ -1372,7 +1372,6 @@
 				03E6D2072A5326DD00F4453C /* (null) in Sources */,
 				03E6D27A2A5333C900F4453C /* UIImage+.swift in Sources */,
 				58597C552A670B650048B12C /* GetCycleModel.swift in Sources */,
-				03734EBF2A59A26800B401D6 /* MyPageViewController.swift in Sources */,
 				255026F02A65BCB900531543 /* PreviousTemplateModel.swift in Sources */,
 				0935C8202A675BFD00790A1B /* MyReviewListCollectionViewCell.swift in Sources */,
 				583117A82A5BE1490099B517 /* HomeTitleBarView.swift in Sources */,
@@ -1536,7 +1535,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = DGT9BQA4KH;
+				DEVELOPMENT_TEAM = 98TYR8WM82;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Puzzling/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1571,7 +1570,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = DGT9BQA4KH;
+				DEVELOPMENT_TEAM = 98TYR8WM82;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Puzzling/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
