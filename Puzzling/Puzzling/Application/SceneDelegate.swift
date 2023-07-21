@@ -8,37 +8,26 @@
 import UIKit
 
 import KakaoSDKAuth
+import Moya
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+//    var vc: UIViewController = UIViewController()
 
-
+    private let authProvider = MoyaProvider<AuthService>(plugins:[NetworkLoggerPlugin()])
+    private var tokenModel: TokenModel = TokenModel(accessToken: "")
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         
+        let vc = setVC()
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(windowScene: windowScene)
-        let navigationController = UINavigationController(rootViewController: OnBoardingViewContoller())
+        let navigationController = UINavigationController(rootViewController: vc)
         navigationController.navigationBar.isHidden = true
         self.window?.rootViewController = navigationController
         self.window?.makeKeyAndVisible()
-        
-//        guard let _ = (scene as? UIWindowScene) else { return }
-//
-//        if let windowScene = scene as? UIWindowScene {
-//
-//            let window = UIWindow(windowScene: windowScene)
-//            window.overrideUserInterfaceStyle = UIUserInterfaceStyle.light
-//            let vc = OnBoardingViewContoller()
-//            let rootVC = UINavigationController(rootViewController: vc)
-//            window.rootViewController = rootVC
-//            window.makeKeyAndVisible()
-//            self.window = window
-        
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
@@ -80,3 +69,46 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 }
 
+extension SceneDelegate {
+    
+    func setVC() -> UIViewController {
+        if let login = UserDefaults.standard.object(forKey: "Login") {
+            if(login as! Int == 0) {
+                return OnBoardingViewContoller()
+            } else {
+                if let project = UserDefaults.standard.object(forKey: "projectId") {
+                    return TabBarController()
+                } else {
+                    return EnterProjectViewController()
+                }
+            }
+        }
+        else { return OnBoardingViewContoller() }
+    }
+    
+    func getNewToken() {
+        guard let access = KeyChain.read(key: "accessToken") else { return }
+        guard let refresh = KeyChain.read(key: "refreshToken") else { return }
+        authProvider.request(.authToken(Authorization: access, Refresh: refresh)) { result in
+            switch result {
+            case .success(let result):
+                let status = result.statusCode
+                if status >= 200 && status < 300 {
+                    do {
+                        guard let data = try result.map(GeneralResponse<TokenResponse>.self).data else { return }
+                        self.tokenModel = data.convertToTokenModel()
+                        KeyChain.create(key: "accessToken", token: self.tokenModel.accessToken)
+                        APIConstants.accessToken = self.tokenModel.accessToken
+                    } catch(let error) {
+                        print(error.localizedDescription)
+                    }
+                }
+                else if status >= 400 {
+                    print("⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️")
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+}
