@@ -78,7 +78,6 @@ final class ProjectCalendarView: UIView {
 extension ProjectCalendarView {
     private func setUI() {
         calendarView.do {
-            print(selectedDate,"🐯🐯🐯🐯🐯🐯🐯")
             $0.select(dateFormatter.date(from: selectedDate))
             $0.locale = Locale(identifier: "ko_KR")
             
@@ -112,11 +111,8 @@ extension ProjectCalendarView {
             dateformat.locale = Locale(identifier: "ko_KR")
             dateformat.timeZone = TimeZone(identifier: "KST")
             guard let yyyymmDate = dateformat.date(from: self.selectedDate) else { return }
-            print(yyyymmDate, "🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥")
             $0.textColor = .black000
             $0.text = self.headerDateFormatter.string(from: yyyymmDate)
-            
-            print($0.text, "33535355353553535355")
         }
         
         calendarViewHeight.constant = 350
@@ -151,7 +147,6 @@ extension ProjectCalendarView {
 //
     private func sendDateNotification(string: String) {
         let userInfo = string
-        print(userInfo, "xxxxxx")
         NotificationCenter.default.post(
             name: Notification.Name("dateNotification"),
             object: nil,
@@ -238,6 +233,7 @@ extension ProjectCalendarView: FSCalendarDelegate, FSCalendarDataSource, FSCalen
         let returnDate = dateFormatter.string(from: date)
         guard let model = self.findData(date: returnDate) else { return }
         self.delegate?.reviewDate(reviewDetailModel: model)
+        headerLabel.text = headerDateFormatter.string(from: date)
     }
 }
 
@@ -267,9 +263,6 @@ extension ProjectCalendarView {
         
         guard let memberId = UserDefaults.standard.string(forKey: "memberId") else { return }
         let projectId = "1"
-        
-        print(memberId, projectId, startDate, endDate)
-        
         reviewDetailProvider.request(.reviewDetail(memberId: "1", projectId: "1", startDate: startDate, endDate: endDate)) { result in
             switch result {
             case .success(let result):
@@ -282,18 +275,11 @@ extension ProjectCalendarView {
                         data.forEach {
                             self.reviewDetailDataModel.append($0.convertToReviewDetailModel())
                         }
-                        
-                        print(self.reviewDetailDataModel, "🐹🐹🐹🐹🐹")
-                        print("🎒🎒🎒🎒🎒🎒🎒🎒🎒🎒🎒🎒🎒")
                         self.calendarToView()
-//                        print(self.reviewDetailDataModel)
                         self.calendarView.reloadData()
                         self.setUI()
-                        print(self.selectedDate, "👑👑👑👑👑👑")
                         let myModel = self.findData(date: self.selectedDate)
-                        print(myModel, "🌂🌂🌂🌂🌂🌂🌂🌂🌂🌂")
                         self.delegate?.reviewDate(reviewDetailModel: myModel ?? ReviewDetailModel(reviewId: nil, reviewDay: "월", reviewDate: "2023-07-17", reviewTemplateId: nil, contents: nil))
-                        print(self.selectedDate, "🐻‍❄️🐻‍❄️🐻‍❄️🐻‍❄️🐻‍❄️🐻‍❄️🐻‍❄️🐻‍❄️🐻‍❄️🐻‍❄️🐻‍❄️🐻‍❄️🐻‍❄️🐻‍❄️🐻‍❄️🐻‍❄️")
                         self.selectDate(date: self.selectedDate)
                         print("♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️")
                         

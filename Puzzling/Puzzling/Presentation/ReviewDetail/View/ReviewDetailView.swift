@@ -74,14 +74,8 @@ extension ReviewDetailView {
 extension ReviewDetailView {
     @objc
     private func getDateNotification(_ notification: Notification) {
-        print(#function)
         let dateNotification = notification.userInfo?["userInfo"]
         selectedDate = dateNotification as! String
-//        calendarView.select(dateFormatter.date(from: selectedDate))
-        print(selectedDate)
-        print(dateNotification ?? "","?slsllslslslls??")
-        selectedDate = dateNotification as! String
-        print(selectedDate,"✅✅✅✅??✅✅")
         reviewCollectionview.reloadData()
     }
 }

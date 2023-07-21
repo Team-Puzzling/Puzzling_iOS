@@ -167,8 +167,8 @@ extension MyReviewListViewController: UICollectionViewDelegate {
             currentReviewDate = cell?.getSelectedData() ?? "2023-07-17"
             print(currentReviewDate, "zzzzzz")
         }
-//        vc.delegate = self
         vc.passString(currentReviewDate)
+        vc.passData(id: self.currentProjectId, title: self.currentProjectTitle)
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

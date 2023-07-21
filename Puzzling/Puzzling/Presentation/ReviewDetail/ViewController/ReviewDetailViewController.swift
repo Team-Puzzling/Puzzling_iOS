@@ -18,6 +18,9 @@ final class ReviewDetailViewController: UIViewController {
         case review, empty
     }
     
+    private var currentProjectTitle: String = "Project1"
+    private var currentProjectId: Int = 0
+    
     private var detailType: reviewDetail = .review
     private var selectedDate: String = "2023-07-17"
     private let projectCalenderView = ProjectCalendarView()
@@ -117,10 +120,9 @@ extension ReviewDetailViewController: UIGestureRecognizerDelegate {
             target: self,
             action: #selector(backButtonTapped)
         )
-
         navigationItem.leftBarButtonItem?.tintColor = .gray500
         
-        let title = "프로젝트 1"
+        let title = currentProjectTitle
         let attributes: [NSAttributedString.Key: Any] = [
             NSAttributedString.Key.foregroundColor: UIColor.black000,
             NSAttributedString.Key.font: UIFont.fontGuide(.heading4_kor)
@@ -142,31 +144,17 @@ extension ReviewDetailViewController {
     private func backButtonTapped() {
         self.navigationController?.popViewController(animated: true)
     }
-    
-//    @objc
-//    private func getDateBoolNotification(_ notification: Notification) {
-//        if let dateNotification = notification.userInfo?["userInfo"] as? Bool {
-//            print(dateNotification,"???????")
-//            if (dateNotification == true) {
-//                setReviewDetailView(status: .review)
-//            }
-//            else { setReviewDetailView(status: .empty) }
-//        }
-//        layout()
-//    }
 }
 
 extension ReviewDetailViewController: StringTransferDelegate {
     func passString(_ value: String) {
         selectedDate = value
-        print(selectedDate, "🧢🧢🧢🧢🧢🧢🧢🧢🧢🧢🧢🧢🧢")
         projectCalenderView.selectDate(date: selectedDate)
     }
 }
 
 extension ReviewDetailViewController: reviewDateProtocol {
     func reviewDate(reviewDetailModel: ReviewDetailModel) {
-        print(")_*(_*_*")
         let isDetailViewEmpty = reviewDetailModel.reviewId == nil
         if isDetailViewEmpty == false {
             removeReviewDetailView(status: .empty)
@@ -176,5 +164,12 @@ extension ReviewDetailViewController: reviewDateProtocol {
             removeReviewDetailView(status: .review)
             addEmptyView()
         }
+    }
+}
+
+extension ReviewDetailViewController {
+    func passData(id: Int, title: String) {
+        self.currentProjectTitle = title
+        self.currentProjectId = id
     }
 }
