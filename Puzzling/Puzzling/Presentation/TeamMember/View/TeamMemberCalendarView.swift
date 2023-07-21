@@ -206,7 +206,6 @@ extension TeamMemberCalendarView: FSCalendarDelegate, FSCalendarDataSource, FSCa
 extension TeamMemberCalendarView {
     
     func getCalendarViewHeight() -> CGFloat{
-        print(self.calendarViewHeight.constant , #function)
         return self.calendarViewHeight.constant
     }
 }

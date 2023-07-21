@@ -130,7 +130,6 @@ extension MyPageBottomSheetViewController {
     
     private func fetchProjectList() {
         guard let memberId = UserDefaults.standard.string(forKey: "memberId") else { return }
-        print(memberId)
         myProjectProvider.request(.projectList(memberId: "1")) { result in
             switch result {
             case .success(let result):
