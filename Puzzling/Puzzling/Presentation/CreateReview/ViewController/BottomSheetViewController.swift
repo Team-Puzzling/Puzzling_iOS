@@ -205,8 +205,9 @@ extension BottomSheetViewController {
     // MARK: - Methods
     
     private func setAddTarget() {
-        // 원래는 버튼에 대한 addTarget을 여기서 설정하던 것을 사용하지 않습니다.
-        // 대신 각 옵션 뷰에 터치 제스처를 추가하여 버튼의 선택을 처리합니다.
+        optionFirstButton.addTarget(self, action: #selector(optionFirstSelected), for: .touchUpInside)
+         optionSecondButton.addTarget(self, action: #selector(optionSecondSelected), for: .touchUpInside)
+        optionThirdButton.addTarget(self, action: #selector(optionThirdSelected), for: .touchUpInside)
     }
     
     func dismissBottomSheet() {
