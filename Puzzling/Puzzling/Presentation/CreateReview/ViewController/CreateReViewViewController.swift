@@ -24,10 +24,13 @@ final class CreateReViewViewController: UIViewController {
     private var fiveFView: FiveFView! = FiveFView()
     private var arrView: AARView! = AARView()
     
-    private let option: Int
-    private var templateID: Int
+    private var option = 0
+    private var templateID = 1
     private var keyboardOverlapKey: Int? = 0
-
+    private var projectTitle: String = ""
+    
+    let previousTemplateProvider = MoyaProvider<CreateRetrospectService>(plugins: [NetworkLoggerPlugin(verbose: true)])
+    private var previousTemplateId: PreviousTemplateModel?
     private let reviewProvider = MoyaProvider<CreateRetrospectService>(plugins:[NetworkLoggerPlugin()])
     
     private var reviewTILModel: ReviewTILModel
@@ -40,18 +43,25 @@ final class CreateReViewViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setNavigation()
+        fetchPreviousTemplate()
         setLayout()
         setUI()
         setupKeyboardEvent()
         setAddTarget()
         setTapScreen()
-        updateContentView(option: option)
     }
     
-    init(option: Int, templateID: Int) {
-        self.option = option
-        self.templateID = templateID
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNavigation()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+          super.viewDidAppear(animated)
+        updateContentView(option: option)
+      }
+    
+    init() {
         reviewTILModel = ReviewTILModel(reviewTemplateId: 0, liked: "", lacked: "", actionPlan: "")
         reviewFiveFModel = ReviewFiveFModel(reviewTemplateId: 0, fact: "", feeling: "",
                                             finding: "", feedback: "", actionPlan: "")
@@ -125,7 +135,7 @@ extension CreateReViewViewController {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.tintColor = .gray500
-        navigationItem.title = "프로젝트 이름"
+        navigationItem.title = projectTitle
         let backButton = UIBarButtonItem(image: Image.chevronBack, style: .plain, target: self, action: #selector(backButtonTapped))
         backButton.imageInsets = UIEdgeInsets(top: 0, left: -8, bottom: 0, right: 0)
         navigationItem.leftBarButtonItem = backButton
@@ -402,6 +412,44 @@ extension CreateReViewViewController {
     
     // MARK: - Network
     
+        func fetchPreviousTemplate() {
+            previousTemplateProvider.request(.previousTemplate(memberID: "7", projectID: "2")) { result in
+                switch result {
+                case .success(let result):
+                    let status = result.statusCode
+                    if status >= 200 && status < 300 {
+                        do {
+                            guard let data = try result.map(GeneralResponse<PreviousTemplateResponce>.self).data else {
+                                return
+                            }
+    
+                            self.previousTemplateId = data.convertToPreviousTemplate()
+                            let template = data
+                            print(template)
+                            print("♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️")
+                            print(self.previousTemplateId)
+                            if let templateNum = self.previousTemplateId?.previousTemplateId {
+                                print("이전에 작성한 회고 Option은~")
+                                print("♥️♥️♥️♥️ \(templateNum) 입니다♥️♥️♥️♥️")
+                                self.option = templateNum
+    
+                            }
+                        }
+                        catch (let error) {
+                            print(error.localizedDescription)
+                        }
+                    }
+                    else if status >= 400 {
+                        print("💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭")
+                        print("400 이상에러")
+                        print("💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭")
+                    }
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    
     private func postReviewTIL(reviewTemplateId: Int, liked: String, lacked: String, actionPlan: String) {
         reviewTILModel.reviewTemplateId = reviewTemplateId
         reviewTILModel.liked = liked
@@ -496,5 +544,11 @@ extension CreateReViewViewController {
                 print(error.localizedDescription)
             }
         }
+    }
+}
+
+extension CreateReViewViewController {
+    func passProjectTitle(title: String) {
+        self.projectTitle = title
     }
 }
