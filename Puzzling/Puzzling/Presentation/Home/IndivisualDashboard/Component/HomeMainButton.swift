@@ -8,6 +8,8 @@
 import UIKit
 
 final class HomeMainButton: UIButton {
+    
+    // MARK: - Properties
 
     private var isButtonEnabled: Bool = false {
         didSet {
@@ -65,6 +67,8 @@ final class HomeMainButton: UIButton {
     private let buttonTitle: String
     private let buttonBackgroundColor: UIColor
     
+    // MARK: - Initializer
+    
     init(frame: CGRect, type: ButtonType) {
         self.buttonTitle = type.buttonTitle
         self.buttonBackgroundColor = type.buttonColor
@@ -79,6 +83,8 @@ final class HomeMainButton: UIButton {
 }
 
 extension HomeMainButton {
+    
+    // MARK: - UI Components Property
 
     private func setUI() {
         self.isEnabled = false
@@ -91,6 +97,9 @@ extension HomeMainButton {
 }
 
 extension HomeMainButton {
+    
+    // MARK: - Methods
+    
     func enableButton(toType: ButtonType) {
         self.type = toType
     }

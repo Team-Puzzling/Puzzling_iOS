@@ -13,26 +13,29 @@ import Then
 
 final class IndivisualDashboardViewController: UIViewController {
     
+    // MARK: - UI Components
+    
+    let mainView: DashboardMainBoxView = DashboardMainBoxView(frame: .zero, type: .indivisual)
+    let actionPlanView = ActionPlanView()
+    let homeMainButton = HomeMainButton(frame: .zero, type: .notToday)
+    
+    // MARK: - Properties
+    
     private var tabBarHeight: CGFloat {
         guard let height = self.tabBarController?.tabBar.frame.size.height else {
             return 0.0
         }
         return height
     }
-    
     private lazy var actionPlanHeight = view.frame.size.height/3.95
-    
     private var indivisualBoardCount: Int = 0
     private var todayString: String = Date().dateToServerString
     private var memberId: Int = 0
     private var projectId: Int = 0
     private var projectTitle: String = ""
-    
-    let mainView: DashboardMainBoxView = DashboardMainBoxView(frame: .zero, type: .indivisual)
-    let actionPlanView = ActionPlanView()
-    let homeMainButton = HomeMainButton(frame: .zero, type: .notToday)
-    
     private let templateNetworkProvider = MoyaProvider<CreateRetrospectService>(plugins: [NetworkLoggerPlugin(verbose: true)])
+    
+    // MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +55,8 @@ final class IndivisualDashboardViewController: UIViewController {
 }
 
 extension IndivisualDashboardViewController {
+    
+    // MARK: - UI Components Property
         
     private func setUI() {
         view.backgroundColor = .white000
@@ -60,6 +65,8 @@ extension IndivisualDashboardViewController {
             $0.addTarget(self, action: #selector(moveToCreateRetrospect), for: .touchUpInside)
         }
     }
+    
+    // MARK: - Layout Helper
     
     private func setLayout() {
         view.addSubviews(mainView, homeMainButton, actionPlanView)
@@ -83,6 +90,8 @@ extension IndivisualDashboardViewController {
         }
     }
     
+    // MARK: - Methods
+    
     private func setAction() {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(moveToPuzzleBoardArchive))
         mainView.cardButtonView.addGestureRecognizer(tapGestureRecognizer)
@@ -94,6 +103,9 @@ extension IndivisualDashboardViewController {
 }
 
 extension IndivisualDashboardViewController {
+    
+    // MARK: - @objc Methods
+    
     @objc
     private func moveToPuzzleBoardArchive() {
         let puzzleBoardVC = PuzzleBoardViewController()
@@ -112,6 +124,7 @@ extension IndivisualDashboardViewController {
 }
 
 extension IndivisualDashboardViewController {
+    
     func passBoardCount(count: Int) {
         self.indivisualBoardCount = count
     }

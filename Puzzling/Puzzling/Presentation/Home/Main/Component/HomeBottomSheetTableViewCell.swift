@@ -8,14 +8,19 @@
 import UIKit
 
 final class HomeBottomSheetTableViewCell: UITableViewCell {
-
-    typealias ProjectId = Int?
     
-    private var projectTitle: String? = nil
-    private var projectId: ProjectId = nil
+    // MARK: - UI Components
     
     private let projectTitleLabel = UILabel()
     private let selectedDotView = UIImageView()
+    
+    // MARK: - Properties
+
+    typealias ProjectId = Int?
+    private var projectTitle: String? = nil
+    private var projectId: ProjectId = nil
+    
+    // MARK: - Initializer
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -36,6 +41,8 @@ final class HomeBottomSheetTableViewCell: UITableViewCell {
 }
 
 extension HomeBottomSheetTableViewCell {
+    
+    // MARK: - UI Components Property
 
     private func setUI() {
         self.backgroundColor = .gray200
@@ -50,6 +57,8 @@ extension HomeBottomSheetTableViewCell {
             $0.isHidden = true
         }
     }
+    
+    // MARK: - Layout Helper
     
     private func setLayout() {
         self.addSubviews(projectTitleLabel, selectedDotView)
@@ -67,6 +76,9 @@ extension HomeBottomSheetTableViewCell {
 }
 
 extension HomeBottomSheetTableViewCell {
+    
+    // MARK: - Methods
+    
     func setDataBind(project: OngoingProjectData, isCurrentProject: Bool) {
         projectTitleLabel.text = project.projectName
         projectTitle = project.projectName

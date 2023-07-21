@@ -36,7 +36,7 @@ final class EnterProjectViewController: UIViewController {
 
 extension EnterProjectViewController {
     
-    // MARK: - Methods
+    // MARK: - @objc Methods
     
     @objc
     private func setButton() {

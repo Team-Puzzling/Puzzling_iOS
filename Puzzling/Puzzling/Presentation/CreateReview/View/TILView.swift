@@ -365,6 +365,5 @@ extension TILView: UITextViewDelegate {
         } else {
             onCompletionTIL?(false)
         }
-        
     }
 }

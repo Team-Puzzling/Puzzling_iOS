@@ -15,10 +15,17 @@ class DetailTypeView: UIView {
 }
 
 final class ReviewDetailView: DetailTypeView {
+    
+    // MARK: - UI Components
+    
+    let reviewCollectionview = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    
+    // MARK: - Properties
+    
     private var reviewDetailData: ReviewDetailModel = ReviewDetailModel(reviewId: nil, reviewDay: "", reviewDate: "", reviewTemplateId: nil, contents: nil)
     private var selectedDate: String = "2023-07-17"
     
-    let reviewCollectionview = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    // MARK: - Initializer
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -46,12 +53,17 @@ final class ReviewDetailView: DetailTypeView {
 }
 
 extension ReviewDetailView {
+    
+    // MARK: - UI Components Property
+    
     private func setUI() {
         reviewCollectionview.do {
             $0.contentInsetAdjustmentBehavior = .never
             $0.showsVerticalScrollIndicator = false
         }
     }
+    
+    // MARK: - Layout Helper
     
     private func setLayout() {
         self.addSubviews(reviewCollectionview)
@@ -72,6 +84,9 @@ extension ReviewDetailView {
 }
 
 extension ReviewDetailView {
+    
+    // MARK: - @objc Methods
+    
     @objc
     private func getDateNotification(_ notification: Notification) {
         let dateNotification = notification.userInfo?["userInfo"]

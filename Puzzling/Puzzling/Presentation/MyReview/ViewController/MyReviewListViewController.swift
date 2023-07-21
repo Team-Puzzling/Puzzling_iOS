@@ -17,20 +17,20 @@ protocol StringTransferDelegate: AnyObject {
 
 final class MyReviewListViewController: UIViewController {
     
-    weak var delegate: StringTransferDelegate?
-    
-    private var currentProjectTitle: String = "Project1"
-    private var currentProjectId: Int = 0
-    
-    private var currentReviewDate: String = ""
+    // MARK: - UI Components
     
     private let myReviewListCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
-    private let myProjectProvider = MoyaProvider<MyProjectService>(plugins:[NetworkLoggerPlugin()])
+    // MARK: - Properties
     
+    weak var delegate: StringTransferDelegate?
+    private var currentProjectTitle: String = "Project1"
+    private var currentProjectId: Int = 0
+    private var currentReviewDate: String = ""
+    private let myProjectProvider = MoyaProvider<MyProjectService>(plugins:[NetworkLoggerPlugin()])
     private var myReviewListData: [ReviewListResponse] = []
     
-    // MARK: - Lifecycle
+    // MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +53,8 @@ final class MyReviewListViewController: UIViewController {
 
 extension MyReviewListViewController {
     
+    // MARK: - UI Components Property
+    
     private func setUI() {
         view.backgroundColor = .white000
         
@@ -63,6 +65,8 @@ extension MyReviewListViewController {
         }
     }
     
+    // MARK: - Layout Helper
+    
     private func setLayout() {
         view.addSubviews(myReviewListCollectionView)
         
@@ -72,6 +76,8 @@ extension MyReviewListViewController {
             $0.bottom.equalToSuperview()
         }
     }
+    
+    // MARK: - Methods
     
     private func setDelegate() {
         myReviewListCollectionView.delegate = self
@@ -121,6 +127,9 @@ extension MyReviewListViewController: UIGestureRecognizerDelegate {
 
 
 extension MyReviewListViewController {
+    
+    // MARK: - @objc Methods
+    
     @objc
     private func backButtonTapped() {
         self.navigationController?.popViewController(animated: true)

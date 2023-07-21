@@ -44,6 +44,16 @@ enum DashboardType {
 
 final class DashboardMainBoxView: UIView {
     
+    // MARK: - UI Components
+    
+    private let userNameLabel = UILabel()
+    private let piecesCountLabel = UILabel()
+    private let maxCountLabel = UILabel()
+    lazy var puzzleCollectionView = MainPuzzleCollectionView(frame: .zero, dashboardType: puzzleBoardType)
+    lazy var cardButtonView = IndivisualCardButtonView(frame: .zero, cardTitle: boxType.cardButtonTitle)
+    
+    // MARK: - Properties
+    
     private var userName: String = "User" {
         didSet {
             userNameLabel.text = "\(userName)님이 모은 퍼즐"
@@ -58,16 +68,11 @@ final class DashboardMainBoxView: UIView {
     
     private let puzzleViewHeight = UIScreen.main.bounds.height / 7.12
     private let cardButtonHeight = UIScreen.main.bounds.height / 14
-    
-    private let userNameLabel = UILabel()
-    private let piecesCountLabel = UILabel()
-    private let maxCountLabel = UILabel()
-    lazy var puzzleCollectionView = MainPuzzleCollectionView(frame: .zero, dashboardType: puzzleBoardType)
-    lazy var cardButtonView = IndivisualCardButtonView(frame: .zero, cardTitle: boxType.cardButtonTitle)
-    
     private var boxType: DashboardType!
     private var puzzleBoardType: DashboardType!
     
+    // MARK: - Initializer
+
     init(frame: CGRect, type: DashboardType) {
         self.boxType = type
         self.puzzleBoardType = type
@@ -87,6 +92,8 @@ final class DashboardMainBoxView: UIView {
 }
  
 extension DashboardMainBoxView {
+    
+    // MARK: - UI Components Property
     
     private func setUI() {
         self.backgroundColor = .blue50
@@ -112,6 +119,8 @@ extension DashboardMainBoxView {
             $0.isUserInteractionEnabled = true
         }
     }
+    
+    // MARK: - Layout Helper
     
     private func setLayout() {
         self.addSubviews(userNameLabel, maxCountLabel, piecesCountLabel, puzzleCollectionView, cardButtonView)
@@ -146,6 +155,9 @@ extension DashboardMainBoxView {
 }
 
 extension DashboardMainBoxView {
+    
+    // MARK: - Methods
+    
     func passPuzzleData(userName: String, piecesCount: Int, totalPuzzleBoardCount: Int, dashboardData: [ModelProtocol]) {
         self.userName = userName
         self.piecesCount = piecesCount

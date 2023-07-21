@@ -18,17 +18,21 @@ protocol reviewDateProtocol: AnyObject {
 
 final class ProjectCalendarView: UIView {
     
-    weak var delegate: reviewDateProtocol?
+    // MARK: - UI Components
     
+    lazy var calendarView = FSCalendar(frame: .zero)
+    private var calendarViewHeight = NSLayoutConstraint()
+    private lazy var headerLabel = UILabel()
+    private lazy var testLabel = UILabel()
+    
+    // MARK: - Properties
+    
+    weak var delegate: reviewDateProtocol?
     private var startDate: String = "2023-04-01"
     private var endDate: String = "2023-12-13"
-    
     private var selectedDate: String = "2023-07-14"
-    
     private var specificData = ReviewDetailModel(reviewId: nil, reviewDay: "", reviewDate: "", reviewTemplateId: nil, contents: nil)
-    
     private var dataList: [ReviewDetailModel] = []
-    
     private func findData(date: String) -> ReviewDetailModel? {
         var data = ReviewDetailModel(reviewId: nil, reviewDay: "", reviewDate: "", reviewTemplateId: nil, contents: nil)
         reviewDetailDataModel.forEach {
@@ -42,19 +46,12 @@ final class ProjectCalendarView: UIView {
         
         return data
     }
-    
-    lazy var calendarView = FSCalendar(frame: .zero)
-    private var calendarViewHeight = NSLayoutConstraint()
-    private lazy var headerLabel = UILabel()
-    private lazy var testLabel = UILabel()
-    
     private let dateFormatter = DateFormatter()
-    
     private let reviewDetailProvider = MoyaProvider<MyProjectService>(plugins:[NetworkLoggerPlugin()])
-    
     private var reviewDetailDataModel: [ReviewDetailModel] = []
-    
     private let headerDateFormatter = DateFormatter()
+    
+    // MARK: - Initializer
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -76,14 +73,9 @@ final class ProjectCalendarView: UIView {
 }
 
 extension ProjectCalendarView {
+
+    // MARK: - UI Components Property
     
-    func setting() {
-        setUI()
-        setLayout()
-        setDelegate()
-        setDateFormatter()
-        fetchReviewDetail()
-    }
     private func setUI() {
         calendarView.do {
             $0.select(dateFormatter.date(from: selectedDate))
@@ -126,6 +118,8 @@ extension ProjectCalendarView {
         calendarViewHeight.constant = 350
     }
     
+    // MARK: - Layout Helper
+    
     private func setLayout() {
         self.addSubviews(calendarView, headerLabel)
         
@@ -137,6 +131,16 @@ extension ProjectCalendarView {
             $0.top.equalToSuperview().inset(14)
             $0.leading.equalToSuperview().inset(8)
         }
+    }
+    
+    // MARK: - Methods
+    
+    func setting() {
+        setUI()
+        setLayout()
+        setDelegate()
+        setDateFormatter()
+        fetchReviewDetail()
     }
     
     private func setDelegate() {
