@@ -135,7 +135,7 @@ extension CreateReViewViewController {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.tintColor = .gray500
-        navigationItem.title = projectTitle
+        navigationItem.title = self.projectTitle
         let backButton = UIBarButtonItem(image: Image.chevronBack, style: .plain, target: self, action: #selector(backButtonTapped))
         backButton.imageInsets = UIEdgeInsets(top: 0, left: -8, bottom: 0, right: 0)
         navigationItem.leftBarButtonItem = backButton

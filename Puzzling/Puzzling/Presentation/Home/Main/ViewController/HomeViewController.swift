@@ -43,6 +43,8 @@ final class HomeViewController: UIViewController {
             
     override func viewDidLoad() {
         super.viewDidLoad()
+     
+//        setData()
         setDelegate()
         setUI()
         setLayout()
@@ -87,8 +89,6 @@ extension HomeViewController {
         pageViewController.do {
             $0.didMove(toParent: self)
         }
-        
-        indivisualDashboardViewController.passUserInformation(memberId: self.memberId, projectId: self.currentProjectId)
     }
     
     private func setLayout() {
@@ -136,13 +136,14 @@ extension HomeViewController {
                     guard let currentProject = data.filter({
                         $0.projectId == self?.currentProjectId
                     }).first else { return }
-                    
+
                     self?.currentProjectId = currentProject.projectId
                     self?.currentProjectTitle = currentProject.projectName
-                    
                     self?.ongoingProjectArray = data
                     self?.titleBarView.setTitleOfProject(title: currentProject.projectName)
                     self?.teamDashboardViewController.teamRankView.passProjectName(projectName: currentProject.projectName)
+                    // 23-07-21 AM 10:21 회고 작성뷰 Title 넘미기위한 코드 추가 
+                    self?.indivisualDashboardViewController.passUserInformation(memberId: self?.memberId ?? 0, projectId: currentProject.projectId, projectTitle: currentProject.projectName)
                     
                 case 400:
                     print(result.description)
@@ -182,15 +183,15 @@ extension HomeViewController {
                     self?.indivisualDashboardViewController.mainView.reloadPuzzleView(withTodayReviewedCheck: hasReviewed)
                     self?.indivisualDashboardViewController.passBoardCount(count: totalPuzzleBoardCount)
                     
-                    if data.hasTodayReview == true {
-                        self?.indivisualDashboardViewController.homeMainButton.enableButton(toType: .done)
-                        return
-                    }
-
-                    if data.isReviewDay == false {
-                        self?.indivisualDashboardViewController.homeMainButton.enableButton(toType: .notToday)
-                        return
-                    }
+//                    if data.hasTodayReview == true {
+//                        self?.indivisualDashboardViewController.homeMainButton.enableButton(toType: .done)
+//                        return
+//                    }
+//
+//                    if data.isReviewDay == false {
+//                        self?.indivisualDashboardViewController.homeMainButton.enableButton(toType: .notToday)
+//                        return
+//                    }
                     self?.indivisualDashboardViewController.homeMainButton.enableButton(toType: .today)
                 case 400:
                     print(result.description)
