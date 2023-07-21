@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "plusButton.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

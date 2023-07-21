@@ -9,7 +9,7 @@ import Foundation
 
 struct UserModel {
     
-    let name: String
+    let name: String?
     let memberId: Int
     let projectId: Int?
     let accessToken: String

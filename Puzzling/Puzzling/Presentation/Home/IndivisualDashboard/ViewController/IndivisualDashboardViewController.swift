@@ -7,25 +7,40 @@
 
 import UIKit
 
-final class IndivisualDashboardViewController: UIViewController {
+import Moya
+import SnapKit
+import Then
 
+final class IndivisualDashboardViewController: UIViewController {
+    
     private var tabBarHeight: CGFloat {
         guard let height = self.tabBarController?.tabBar.frame.size.height else {
-            print("fffffff")
             return 0.0
         }
         return height
     }
     
-    private let mainView: DashboardMainBoxView = DashboardMainBoxView(frame: .zero, type: .indivisual)
-    private let actionPlanView = ActionPlanView()
-    private var homeMainButton = HomeMainButton(frame: .zero, type: .notToday)
+    private var indivisualBoardCount: Int = 0
+    private var todayString: String = Date().dateToServerString
+    private var memberId: Int = 0
+    private var projectId: Int = 0
+    
+    let mainView: DashboardMainBoxView = DashboardMainBoxView(frame: .zero, type: .indivisual)
+    let actionPlanView = ActionPlanView()
+    let homeMainButton = HomeMainButton(frame: .zero, type: .notToday)
+    
+    private let templateNetworkProvider = MoyaProvider<CreateRetrospectService>(plugins: [NetworkLoggerPlugin(verbose: true)])
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setDelegate()
         setUI()
         setLayout()
+        setAction()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        mainView.puzzleCollectionView.reloadCollectionView()
     }
     
     deinit {
@@ -34,14 +49,12 @@ final class IndivisualDashboardViewController: UIViewController {
 }
 
 extension IndivisualDashboardViewController {
-    
-    private func setDelegate() {}
-    
+        
     private func setUI() {
         view.backgroundColor = .white000
         
-        mainView.do {
-            $0.passPuzzleData(userName: "심규보봉", piecesCount: 5)
+        homeMainButton.do {
+            $0.addTarget(self, action: #selector(moveToCreateRetrospect), for: .touchUpInside)
         }
     }
     
@@ -62,9 +75,45 @@ extension IndivisualDashboardViewController {
         
         actionPlanView.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview()
-            $0.top.equalTo(mainView.snp.bottom).offset(20)
-//            $0.height.equalTo(300)
+            $0.top.equalTo(mainView.snp.bottom).offset(30)
             $0.bottom.equalTo(homeMainButton.snp.top).offset(-49)
         }
+    }
+    
+    private func setAction() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(moveToPuzzleBoardArchive))
+        mainView.cardButtonView.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    private func showOffRetrospectButtonAnimation() {
+        
+    }
+}
+
+extension IndivisualDashboardViewController {
+    @objc
+    private func moveToPuzzleBoardArchive() {
+        let puzzleBoardVC = PuzzleBoardViewController()
+        puzzleBoardVC.passNavigationTitle(boardType: .indivisual)
+        puzzleBoardVC.passPuzzleBoardCount(count: self.indivisualBoardCount)
+        self.navigationController?.pushViewController(puzzleBoardVC, animated: true)
+    }
+    
+    @objc
+    private func moveToCreateRetrospect() {
+        // 수정해야함
+        let createRetrospectViewController = CreateReViewViewController()
+        self.navigationController?.pushViewController(createRetrospectViewController, animated: true)
+    }
+}
+
+extension IndivisualDashboardViewController {
+    func passBoardCount(count: Int) {
+        self.indivisualBoardCount = count
+    }
+    
+    func passUserInformation(memberId: Int, projectId: Int) {
+        self.memberId = memberId
+        self.projectId = projectId
     }
 }

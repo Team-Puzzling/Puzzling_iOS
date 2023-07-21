@@ -22,14 +22,13 @@ class ReviewTestViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
         setUI()
         setLayout()
         setDelegate()
     }
     
     private func setUI() {
-        view.backgroundColor = .systemIndigo
+        view.backgroundColor = .white000
         
         view.addSubview(pushButton)
         
@@ -38,6 +37,7 @@ class ReviewTestViewController: UIViewController {
             $0.addTarget(self,
                         action: #selector(pushButtonTapped),
                         for: .touchUpInside)
+            $0.backgroundColor = .blue400
         }
         pushButton.snp.makeConstraints {
             $0.center.equalToSuperview()
@@ -53,12 +53,12 @@ class ReviewTestViewController: UIViewController {
     }
     
     func pushToCreateRetrospectViewController(option: Int) {
-        let VC = CreateRetrospectViewController(option: option, templateID: option )
+        let VC = CreateReViewViewController(option: option, templateID: option)
         self.navigationController?.pushViewController(VC, animated: true)
     }
     
     func fetchPreviousTemplate() {
-        previousTemplateProvider.request(.previousTemplate(memberID: "1", projectID: "1")) { result in
+        previousTemplateProvider.request(.previousTemplate(memberID: "7", projectID: "2")) { result in
             switch result {
             case .success(let result):
                 let status = result.statusCode
@@ -76,7 +76,7 @@ class ReviewTestViewController: UIViewController {
                         if let templateNum = self.previousTemplateId?.previousTemplateId {
                             print("이전에 작성한 회고 Option은~")
                             print("♥️♥️♥️♥️ \(templateNum) 입니다♥️♥️♥️♥️")
-                            let crVC = CreateRetrospectViewController(option: templateNum, templateID: templateNum)
+                            let crVC = CreateReViewViewController(option: templateNum, templateID: templateNum)
                             self.navigationController?.pushViewController(crVC, animated: true)
                             
                         }
@@ -99,5 +99,6 @@ class ReviewTestViewController: UIViewController {
     @objc
     func pushButtonTapped() {
         fetchPreviousTemplate()
+//        showToast(withImage: Image.checkW, message: "저장 완료!")
     }
 }

@@ -132,6 +132,7 @@ extension CreateProjectViewController {
     // MARK: - Methods
     
     private func setAddTarget() {
+        closeButton.addTarget(self, action: #selector(closeButtonDidTap), for: .touchUpInside)
         registerProjectButton.addTarget(self, action: #selector(registerProjectButtonDidTap), for: .touchUpInside)
     }
     
@@ -246,6 +247,11 @@ extension CreateProjectViewController {
     }
     
     @objc
+    private func closeButtonDidTap() {
+        dismiss(animated: true)
+    }
+    
+    @objc
     private func getTextFieldInfo(_ notification: Notification) {
         if let textInfo = notification.userInfo as? [String: TextFieldInfo], let updateTextInfo = textInfo["userInfo"] {
             switch updateTextInfo.type {
@@ -324,7 +330,9 @@ extension CreateProjectViewController {
         project.memberProjectNickname = projectNickname
         project.reviewCycle = projectCycle
         
-        projectProvider.request(.postProject(param: project.makePostProjectRequest(), memberID: "1")) { result in
+        let memberId = UserDefaults.standard.string(forKey: "memberId")
+        
+        projectProvider.request(.postProject(param: project.makePostProjectRequest(), memberID: memberId ?? "7")) { result in
             switch result {
             case .success(let result):
                 let status = result.statusCode
@@ -339,14 +347,8 @@ extension CreateProjectViewController {
                             object: nil,
                             userInfo: ["userInfo": userInfo]
                         )
-                        // 프로젝트 아이디 요기
-                        // let projectID = self.createProjectModel?.projectId
-                        
-//                        if let code = self.createProjectModel?.projectCode {
-//                            self.projectRegister()
-//                            alertView.invitationCode = code
-//                            self.invitationCodeNotification(code: code)
-//                        }
+                        let projectID = self.createProjectModel?.projectId
+                        UserDefaults.standard.set(projectID, forKey: "projectId")
                     } catch(let error) {
                         print(error.localizedDescription)
                     }

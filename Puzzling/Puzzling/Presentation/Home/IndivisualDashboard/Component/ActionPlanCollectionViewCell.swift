@@ -17,14 +17,17 @@ final class ActionPlanCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setDelegate()
         setUI()
         setLayout()
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        self.makeRounded(radius: 16)
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        dateLabel.text = nil
+        dateLabel.textColor = .gray300
+        actionTextView.text = nil
+        actionTextView.textColor = .gray600
+        self.backgroundColor = .gray100
     }
     
     required init?(coder: NSCoder) {
@@ -34,20 +37,22 @@ final class ActionPlanCollectionViewCell: UICollectionViewCell {
 
 extension ActionPlanCollectionViewCell {
     
-    private func setDelegate() {
-        
-    }
-    
     private func setUI() {
-        self.backgroundColor = .background050
+        self.backgroundColor = .gray100
+        self.layer.cornerRadius = 16
+        self.layer.masksToBounds = true
         
         actionTextView.do {
-            $0.textContainerInset = UIEdgeInsets(top: 12, left: 12, bottom: 20, right: 12)
-            $0.font = .fontGuide(.body3_regular_kor)
-            $0.textColor = .gray600
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineSpacing = 6.5
+            let attributes = [NSAttributedString.Key.paragraphStyle: paragraphStyle, NSAttributedString.Key.foregroundColor: UIColor.gray600, NSAttributedString.Key.font: UIFont.fontGuide(.body3_regular_kor)]
+            
+            $0.textContainerInset = UIEdgeInsets(top: 12, left: 8, bottom: 20, right: 8)
             $0.isEditable = false
             $0.isScrollEnabled = false
             $0.backgroundColor = .clear
+            $0.textContainer.maximumNumberOfLines = 4
+            $0.typingAttributes = attributes
         }
         
         dateLabel.do {

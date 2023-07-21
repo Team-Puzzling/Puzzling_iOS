@@ -14,18 +14,51 @@ import Then
 final class EnterProjectViewController: UIViewController {
     
     // MARK: - UI Components
+    
     private let rootView = EnterProjectView()
     
-    override func loadView() {
-        self.view = rootView
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+    // MARK: - View Life Cycle
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setButton()
+    }
+    
+    override func loadView() {
+        self.view = rootView
+    }
+}
+
+extension EnterProjectViewController {
+    
+    // MARK: - Methods
+    
+    @objc
+    private func setButton() {
+        rootView.newProjectButtonHandler  = { [weak self] in
+            self?.newProjectButtonDidTap()
+        }
+        rootView.joinButtonHandler = { [weak self] in
+            self?.joinButtonDidTap()
+        }
+    }
+    
+    @objc
+    private func newProjectButtonDidTap() {
+        let createProjectVC = CreateProjectViewController()
+        createProjectVC.modalPresentationStyle = .fullScreen
+        self.present(createProjectVC, animated: true)
+    }
+    
+    @objc
+    private func joinButtonDidTap() {
+        let invitationCodeVC = InvitationCodeViewController()
+        invitationCodeVC.modalPresentationStyle = .fullScreen
+        self.present(invitationCodeVC, animated: true)
     }
 }
