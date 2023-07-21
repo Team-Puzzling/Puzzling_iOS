@@ -8,11 +8,14 @@
 import UIKit
 
 import Moya
+import SnapKit
+import Then
 
 final class HomeViewController: UIViewController {
     
     // TODO: 전역 변수로 받아와야함
-    private var currentProjectId: Int = 1
+    private var currentProjectId: Int = UserDefaults.standard.integer(forKey: "projectId")
+    private var memberId: Int = UserDefaults.standard.integer(forKey: "memberId")
     
     private var alarmView: UIView?
     
@@ -74,6 +77,8 @@ extension HomeViewController {
     private func setDelegate() {
         titleBarView.delegate = self
         segmentedView.delegate = self
+        indivisualDashboardViewController.mainView.puzzleCollectionView.delegateForIndivisual = self
+        teamDashboardViewController.mainView.puzzleCollectionView.delegateForTeam = self
     }
     
     private func setUI() {
@@ -82,6 +87,8 @@ extension HomeViewController {
         pageViewController.do {
             $0.didMove(toParent: self)
         }
+        
+        indivisualDashboardViewController.passUserInformation(memberId: self.memberId, projectId: self.currentProjectId)
     }
     
     private func setLayout() {
@@ -116,8 +123,7 @@ extension HomeViewController {
     
     private func setHomeData() {
         // MARK: - 모든 프로젝트 들고오기
-        let memberId = UserDefaults.standard.integer(forKey: "memberId")
-        dashboardNetworkProvider.request(.fetchOngoingProjectList(memberId: memberId)) { [weak self] response in
+        dashboardNetworkProvider.request(.fetchOngoingProjectList(memberId: self.memberId)) { [weak self] response in
             switch response {
             case .success(let result):
                 let status = result.statusCode
@@ -158,8 +164,7 @@ extension HomeViewController {
     
     private func setIndivisualDashboardData() {
         // MARK: - 개인 퍼즐 정보 가져오기
-        let memberId = UserDefaults.standard.integer(forKey: "memberId")
-        dashboardNetworkProvider.request(.fetchIndivisualPuzzle(memberId: memberId, projectId: self.currentProjectId, todayString: Date().dateToServerString)) { [weak self] response in
+        dashboardNetworkProvider.request(.fetchIndivisualPuzzle(memberId: self.memberId, projectId: self.currentProjectId, todayString: Date().dateToServerString)) { [weak self] response in
             switch response {
             case .success(let result):
                 let status = result.statusCode
@@ -181,12 +186,11 @@ extension HomeViewController {
                         self?.indivisualDashboardViewController.homeMainButton.enableButton(toType: .done)
                         return
                     }
-                    
+
                     if data.isReviewDay == false {
                         self?.indivisualDashboardViewController.homeMainButton.enableButton(toType: .notToday)
                         return
                     }
-                    
                     self?.indivisualDashboardViewController.homeMainButton.enableButton(toType: .today)
                 case 400:
                     print(result.description)
@@ -206,7 +210,7 @@ extension HomeViewController {
         }
         
         // MARK: - Action Plan 가져오기
-        dashboardNetworkProvider.request(.fetchActionPlans(memberId: memberId, projectId: self.currentProjectId)) { [weak self] response in
+        dashboardNetworkProvider.request(.fetchActionPlans(memberId: self.memberId, projectId: self.currentProjectId)) { [weak self] response in
             switch response {
             case .success(let result):
                 let status = result.statusCode
@@ -263,7 +267,6 @@ extension HomeViewController {
     }
     
     private func setTeamDashboardData() {
-
         // MARK: - 팀 퍼즐 가져오기
         dashboardNetworkProvider.request(.fetchTeamPuzzle(projectId: self.currentProjectId, todayString: Date().dateToServerString)) { [weak self] response in
             switch response {
@@ -396,6 +399,7 @@ extension HomeViewController: HomeBottomSheetDelegate {
 extension HomeViewController: HomeBottomSheetPassNewProjectDelegate {
     func changeProjectId(to newId: Int) {
         self.currentProjectId = newId
+        UserDefaults.standard.setValue(newId, forKey: "projectId")
         // 새로운 통신
         self.setData()
     }
@@ -424,5 +428,19 @@ extension HomeViewController: HomeSegmentDelegate {
             break
         }
         currentPage = dashboardViewControllers[page + difference]
+    }
+}
+
+extension HomeViewController: MainPuzzleCollectionPassEventForIndivisuals, MaMainPuzzleCollectionPassEventForTeam {
+    func passTouchEventIndivisual(withDate: String) {
+        let indivisualMemberViewController = ReviewDetailViewController()
+        /// TODO: 여기에도 passData 해야함
+        self.navigationController?.pushViewController(indivisualMemberViewController, animated: true)
+    }
+    
+    func passTouchEventTeam(withDate: String) {
+        let teamMemberViewController = TeamMemberViewController()
+        teamMemberViewController.passData(date: withDate, title: self.currentProjectTitle)
+        self.navigationController?.pushViewController(teamMemberViewController, animated: true)
     }
 }
