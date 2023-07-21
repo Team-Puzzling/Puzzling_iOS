@@ -13,14 +13,18 @@ import Moya
 
 final class MyProjectViewController: UIViewController {
     
-    private let myProjectProvider = MoyaProvider<MyProjectService>(plugins:[NetworkLoggerPlugin()])
-    private let myProjectTableView = UITableView(frame: .zero, style: .grouped)
-    private var myProjectData: [ProjectListResponse] = []
+    // MARK: - UI Components
     
+    private let myProjectTableView = UITableView(frame: .zero, style: .grouped)
+    
+    // MARK: - Properties
+    
+    private let myProjectProvider = MoyaProvider<MyProjectService>(plugins:[NetworkLoggerPlugin()])
+    private var myProjectData: [ProjectListResponse] = []
     private var currentProjectId: Int = 0
     private var currentProjectTitle: String = ""
     
-    // MARK: - Lifecycle
+    // MARK: - View Life Cycle
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -42,6 +46,8 @@ final class MyProjectViewController: UIViewController {
 
 extension MyProjectViewController {
     
+    // MARK: - UI Components Property
+    
     private func setUI() {
         view.backgroundColor = .white000
         myProjectTableView.do {
@@ -49,6 +55,8 @@ extension MyProjectViewController {
             $0.backgroundColor = .clear
         }
     }
+    
+    // MARK: - Layout Helper
     
     private func setLayout() {
         view.addSubviews(myProjectTableView)
@@ -59,6 +67,8 @@ extension MyProjectViewController {
             $0.bottom.equalToSuperview()
         }
     }
+    
+    // MARK: - Methods
     
     private func setDelegate() {
         myProjectTableView.delegate = self
@@ -100,8 +110,11 @@ extension MyProjectViewController {
 }
 
 extension MyProjectViewController {
+    
+    // MARK: - @objc Methods
     @objc
     private func notificationButtonTapped() { }
+    
 }
 
 extension MyProjectViewController: UITableViewDataSource, UITableViewDelegate {
