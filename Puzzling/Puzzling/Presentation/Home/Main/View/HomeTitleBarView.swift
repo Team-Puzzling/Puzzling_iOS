@@ -17,14 +17,18 @@ protocol HomeBottomSheetDelegate: AnyObject {
 
 final class HomeTitleBarView: UIView {
     
+    // MARK: - UI Components
+    
     private let titleLabel = UILabel()
     private let chevronImageView = UIImageView()
-    
     private let titleStackView = UIStackView()
-    
     lazy var alarmButton = UIButton(frame: .zero, primaryAction: setAlarmAction())
     
+    // MARK: - Properties
+    
     weak var delegate: HomeBottomSheetDelegate?
+    
+    // MARK: - Initializer
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -46,6 +50,8 @@ final class HomeTitleBarView: UIView {
 }
 
 extension HomeTitleBarView {
+    
+    // MARK: - UI Components Property
     
     private func setUI() {
         titleLabel.do {
@@ -70,6 +76,8 @@ extension HomeTitleBarView {
         }
     }
     
+    // MARK: - Layout Helper
+    
     private func setLayout() {
         self.addSubviews(titleStackView, alarmButton)
         titleStackView.addArrangedSubviews(titleLabel, chevronImageView)
@@ -90,6 +98,8 @@ extension HomeTitleBarView {
         }
     }
     
+    // MARK: - Methods
+    
     private func setActions() {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(openBottomSheetTapped))
         titleStackView.addGestureRecognizer(tapGestureRecognizer)
@@ -103,6 +113,8 @@ extension HomeTitleBarView {
         })
         return action
     }
+    
+    // MARK: - @objc Methods
     
     @objc
     private func openBottomSheetTapped() {

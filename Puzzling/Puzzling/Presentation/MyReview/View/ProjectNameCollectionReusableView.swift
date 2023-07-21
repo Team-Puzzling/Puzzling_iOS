@@ -16,29 +16,33 @@ protocol buttonTappedProtocol: AnyObject {
 
 final class ProjectNameCollecionReusableView: UICollectionReusableView {
     
-    weak var delegate: buttonTappedProtocol?
+    // MARK: - UI Components
     
     private let button = UIButton()
     private let projectNameLabel = UILabel()
     private let chevronDownImageView = UIImageView()
-
-    // MARK: - Life Cycles
-
+    
+    // MARK: - Properties
+    
+    weak var delegate: buttonTappedProtocol?
+    
+    // MARK: - Initializer
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUI()
         setLayout()
         setAddTarget()
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
-// MARK: - Extensions
-
 extension ProjectNameCollecionReusableView {
+    
+    // MARK: - UI Components Property
     
     private func setUI() {
         button.do {
@@ -55,6 +59,8 @@ extension ProjectNameCollecionReusableView {
             $0.image = Image.chevronDown
         }
     }
+    
+    // MARK: - Layout Helper
     
     private func setLayout() {
         self.addSubview(button)
@@ -78,13 +84,17 @@ extension ProjectNameCollecionReusableView {
             $0.size.equalTo(36)
         }
     }
- 
+    
+    // MARK: - Methods
+    
     private func setAddTarget() {
         button.addTarget(self, action: #selector(projectButtonTapped), for: .touchUpInside)
     }
 }
 
 extension ProjectNameCollecionReusableView {
+    
+    // MARK: - @objc Methods
     
     @objc
     func projectButtonTapped() {

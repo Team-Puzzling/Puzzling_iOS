@@ -14,33 +14,24 @@ import Moya
 
 final class TeamMemberViewController: UIViewController {
     
-    private var index: Int = 0
+    // MARK: - UI Components
     
+    private let teamMemberTableView = UITableView(frame: .zero, style: .grouped)
+    
+    // MARK: - Properties
+    
+    private var index: Int = 0
     private var selectedDate: String = "2023-07-21"
     private var startDate: String = "2023-04-01"
     private var endDate: String = "2023-12-13"
     private var projectTitle: String = ""
-    
     private var specificData = TeamMemberModel(reviewDay: "", reviewDate: "", reviewWriters: nil, nonReviewWriters: nil)
     private var dataList: [TeamMemberModel] = []
-    
-    private func findData(date: String) -> TeamMemberModel? {
-        var data = TeamMemberModel(reviewDay: "", reviewDate: "", reviewWriters: nil, nonReviewWriters: nil)
-        dataList.forEach {
-            if($0.reviewDate == date){
-                data = $0
-            }
-        }
-        return data
-    }
-    
     private let teamMemberCalenderView = TeamMemberCalendarView()
-    private let teamMemberTableView = UITableView(frame: .zero, style: .grouped)
-    
     private let projectTeamProvider = MoyaProvider<ProjectTeamService>(plugins:[NetworkLoggerPlugin()])
     private var teamMemberList: [TeamMemberModel] = []
     
-    // MARK: - Lifecycle
+    // MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,10 +63,7 @@ final class TeamMemberViewController: UIViewController {
 
 extension TeamMemberViewController {
     
-    private func setDelegate() {
-        teamMemberTableView.delegate = self
-        teamMemberTableView.dataSource = self
-    }
+    // MARK: - UI Components Property
     
     private func setUI() {
         view.backgroundColor = .white000
@@ -87,6 +75,8 @@ extension TeamMemberViewController {
             $0.sectionFooterHeight = 0
         }
     }
+    
+    // MARK: - Layout Helper
     
     private func setLayout() {
         view.addSubviews(teamMemberCalenderView, teamMemberTableView)
@@ -102,6 +92,23 @@ extension TeamMemberViewController {
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
+    }
+    
+    // MARK: - Methods
+    
+    private func setDelegate() {
+        teamMemberTableView.delegate = self
+        teamMemberTableView.dataSource = self
+    }
+    
+    private func findData(date: String) -> TeamMemberModel? {
+        var data = TeamMemberModel(reviewDay: "", reviewDate: "", reviewWriters: nil, nonReviewWriters: nil)
+        dataList.forEach {
+            if($0.reviewDate == date){
+                data = $0
+            }
+        }
+        return data
     }
     
     private func setRegister() {

@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0351AB3C2A605A7D006B0F4C /* ProjectStartTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB3B2A605A7D006B0F4C /* ProjectStartTimeViewController.swift */; };
-		0351AB3E2A619F04006B0F4C /* textFieldNotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB3D2A619F04006B0F4C /* textFieldNotificationModel.swift */; };
+		0351AB3E2A619F04006B0F4C /* TextFieldNotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB3D2A619F04006B0F4C /* TextFieldNotificationModel.swift */; };
 		0351AB402A630EE6006B0F4C /* UIResponder+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB3F2A630EE6006B0F4C /* UIResponder+.swift */; };
 		0351AB422A6323A8006B0F4C /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB412A6323A8006B0F4C /* CustomAlertView.swift */; };
 		0351AB462A645BBF006B0F4C /* InvitationCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0351AB452A645BBF006B0F4C /* InvitationCodeViewController.swift */; };
@@ -92,8 +92,6 @@
 		096755C62A5E970500A1E691 /* MyProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755C52A5E970500A1E691 /* MyProjectViewController.swift */; };
 		096755CB2A5E9AF500A1E691 /* MyProjectTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755CA2A5E9AF500A1E691 /* MyProjectTableViewCell.swift */; };
 		096755E62A60700E00A1E691 /* MyProjectTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755E52A60700E00A1E691 /* MyProjectTableHeaderView.swift */; };
-		096755EA2A60710100A1E691 /* MyProjectDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755E92A60710100A1E691 /* MyProjectDataModel.swift */; };
-		096755FA2A607A7D00A1E691 /* MyReviewListDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096755F92A607A7D00A1E691 /* MyReviewListDataModel.swift */; };
 		096755FB2A607C5300A1E691 /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03734EB42A599FDB00B401D6 /* Image.xcassets */; };
 		096755FC2A607C8600A1E691 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03E6D1ED2A53219800F4453C /* Assets.xcassets */; };
 		096755FD2A607D1B00A1E691 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03E6D1EF2A53219800F4453C /* LaunchScreen.storyboard */; };
@@ -171,13 +169,12 @@
 		58EDAF932A5DD25D004EF5D3 /* DashboardMainBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EDAF922A5DD25D004EF5D3 /* DashboardMainBoxView.swift */; };
 		58EDAF952A5DDA04004EF5D3 /* IndivisualCardButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58EDAF942A5DDA04004EF5D3 /* IndivisualCardButtonView.swift */; };
 		9B1CA9782A62ADFD00CB81AC /* ReviewDetailEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1CA9772A62ADFD00CB81AC /* ReviewDetailEmptyView.swift */; };
-		9B1CA97C2A62E12000CB81AC /* ReviewDetailDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1CA97B2A62E12000CB81AC /* ReviewDetailDataModel.swift */; };
 		9B1CA97E2A634C7900CB81AC /* ReviewDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1CA97D2A634C7900CB81AC /* ReviewDetailCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0351AB3B2A605A7D006B0F4C /* ProjectStartTimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectStartTimeViewController.swift; sourceTree = "<group>"; };
-		0351AB3D2A619F04006B0F4C /* textFieldNotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = textFieldNotificationModel.swift; sourceTree = "<group>"; };
+		0351AB3D2A619F04006B0F4C /* TextFieldNotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldNotificationModel.swift; sourceTree = "<group>"; };
 		0351AB3F2A630EE6006B0F4C /* UIResponder+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+.swift"; sourceTree = "<group>"; };
 		0351AB412A6323A8006B0F4C /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		0351AB452A645BBF006B0F4C /* InvitationCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationCodeViewController.swift; sourceTree = "<group>"; };
@@ -262,8 +259,6 @@
 		096755C52A5E970500A1E691 /* MyProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProjectViewController.swift; sourceTree = "<group>"; };
 		096755CA2A5E9AF500A1E691 /* MyProjectTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProjectTableViewCell.swift; sourceTree = "<group>"; };
 		096755E52A60700E00A1E691 /* MyProjectTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProjectTableHeaderView.swift; sourceTree = "<group>"; };
-		096755E92A60710100A1E691 /* MyProjectDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProjectDataModel.swift; sourceTree = "<group>"; };
-		096755F92A607A7D00A1E691 /* MyReviewListDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReviewListDataModel.swift; sourceTree = "<group>"; };
 		096756082A61DB5700A1E691 /* ReviewDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailViewController.swift; sourceTree = "<group>"; };
 		0967560C2A61E08C00A1E691 /* ProjectCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectCalendarView.swift; sourceTree = "<group>"; };
 		0967560E2A61E73700A1E691 /* ReviewDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailView.swift; sourceTree = "<group>"; };
@@ -334,7 +329,6 @@
 		58EDAF922A5DD25D004EF5D3 /* DashboardMainBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardMainBoxView.swift; sourceTree = "<group>"; };
 		58EDAF942A5DDA04004EF5D3 /* IndivisualCardButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndivisualCardButtonView.swift; sourceTree = "<group>"; };
 		9B1CA9772A62ADFD00CB81AC /* ReviewDetailEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailEmptyView.swift; sourceTree = "<group>"; };
-		9B1CA97B2A62E12000CB81AC /* ReviewDetailDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailDataModel.swift; sourceTree = "<group>"; };
 		9B1CA97D2A634C7900CB81AC /* ReviewDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -356,6 +350,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		031CBDFC2A6AB81100301F06 /* DashBoard */ = {
+			isa = PBXGroup;
+			children = (
+				583BA7C62A62FFB00030CF14 /* ProjectServiceTemporary.swift */,
+			);
+			path = DashBoard;
+			sourceTree = "<group>";
+		};
+		031CBDFD2A6AB83200301F06 /* ProjectTeam */ = {
+			isa = PBXGroup;
+			children = (
+				0935C8002A66727200790A1B /* ProjectTeamService.swift */,
+			);
+			path = ProjectTeam;
+			sourceTree = "<group>";
+		};
 		0351AB432A645B96006B0F4C /* InvitationCode */ = {
 			isa = PBXGroup;
 			children = (
@@ -396,6 +406,8 @@
 		0351AB582A657BC3006B0F4C /* Project */ = {
 			isa = PBXGroup;
 			children = (
+				0351AB3D2A619F04006B0F4C /* TextFieldNotificationModel.swift */,
+				03ADF3912A5E9534002CEDDC /* ProjectCycleModel.swift */,
 				0351AB5B2A65A06D006B0F4C /* InputContentType.swift */,
 				0351AB592A657BCF006B0F4C /* Project.swift */,
 				0351AB5F2A65CCB6006B0F4C /* ProjectModel.swift */,
@@ -482,9 +494,6 @@
 				0935C7F62A65FCFC00790A1B /* Team */,
 				0351AB552A65797C006B0F4C /* Project */,
 				255026EB2A65BB7400531543 /* CreateRetrospect */,
-				9B1CA97B2A62E12000CB81AC /* ReviewDetailDataModel.swift */,
-				096755E92A60710100A1E691 /* MyProjectDataModel.swift */,
-				096755F92A607A7D00A1E691 /* MyReviewListDataModel.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -497,9 +506,6 @@
 				0351AB582A657BC3006B0F4C /* Project */,
 				255026EE2A65BC9F00531543 /* CreateRetrospectModel */,
 				0935C80D2A66FB2800790A1B /* Auth */,
-				03ADF3912A5E9534002CEDDC /* ProjectCycleModel.swift */,
-				0351AB3D2A619F04006B0F4C /* textFieldNotificationModel.swift */,
-				0935C7FE2A6664CA00790A1B /* TeamMemberModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -516,12 +522,12 @@
 		03E6D2022A53263600F4453C /* APIService */ = {
 			isa = PBXGroup;
 			children = (
+				0935C8122A66FCD900790A1B /* Auth */,
+				031CBDFD2A6AB83200301F06 /* ProjectTeam */,
+				031CBDFC2A6AB81100301F06 /* DashBoard */,
 				0976A89A2A68494000F1CAE4 /* MyProject */,
 				0351AB502A656C77006B0F4C /* Project */,
 				255026E82A65AF3F00531543 /* CreateRetrospect */,
-				0935C8122A66FCD900790A1B /* Auth */,
-				583BA7C62A62FFB00030CF14 /* ProjectServiceTemporary.swift */,
-				0935C8002A66727200790A1B /* ProjectTeamService.swift */,
 			);
 			path = APIService;
 			sourceTree = "<group>";
@@ -876,6 +882,7 @@
 		0976A8A02A684C5200F1CAE4 /* MyProject */ = {
 			isa = PBXGroup;
 			children = (
+				0935C7FE2A6664CA00790A1B /* TeamMemberModel.swift */,
 				0976A8A12A684C6300F1CAE4 /* ProjectListModel.swift */,
 				0976A8A52A685F9000F1CAE4 /* ReviewListModel.swift */,
 				0976A8A92A6864BC00F1CAE4 /* ReviewDetailModel.swift */,
@@ -1248,7 +1255,6 @@
 				0976A8AA2A6864BC00F1CAE4 /* ReviewDetailModel.swift in Sources */,
 				0935C8222A675C1B00790A1B /* ProjectNameCollectionReusableView.swift in Sources */,
 				58DC6A6B2A616A2E0039242C /* TeamDashboardRankView.swift in Sources */,
-				9B1CA97C2A62E12000CB81AC /* ReviewDetailDataModel.swift in Sources */,
 				03E6D2422A532C3300F4453C /* Image.swift in Sources */,
 				58705B582A686C4B00D92990 /* PuzzleBoardCollectionViewCell.swift in Sources */,
 				0976A8A62A685F9000F1CAE4 /* ReviewListModel.swift in Sources */,
@@ -1278,10 +1284,9 @@
 				588AA0732A5ECDE70017CB1E /* IndivisualDashboardModel.swift in Sources */,
 				583117AA2A5BE2D90099B517 /* HomeSegmentedView.swift in Sources */,
 				0351AB602A65CCB6006B0F4C /* ProjectModel.swift in Sources */,
-				0351AB3E2A619F04006B0F4C /* textFieldNotificationModel.swift in Sources */,
+				0351AB3E2A619F04006B0F4C /* TextFieldNotificationModel.swift in Sources */,
 				255026EA2A65AF7700531543 /* CreateRetrospectService.swift in Sources */,
 				0976A89C2A68495300F1CAE4 /* MyProjectService.swift in Sources */,
-				096755FA2A607A7D00A1E691 /* MyReviewListDataModel.swift in Sources */,
 				03E6D25C2A5331FF00F4453C /* GeneralResponse.swift in Sources */,
 				03ADF3942A5EA4DB002CEDDC /* CheckButton.swift in Sources */,
 				09B2A04B2A683D1A007DED5F /* TokenResponse.swift in Sources */,
@@ -1327,7 +1332,6 @@
 				03ADF38F2A5E932A002CEDDC /* ProjectCycleCollectionViewCell.swift in Sources */,
 				0935C8272A675C4900790A1B /* MyReviewListViewController.swift in Sources */,
 				03E6D2282A532AB900F4453C /* BaseViewController.swift in Sources */,
-				096755EA2A60710100A1E691 /* MyProjectDataModel.swift in Sources */,
 				9B1CA9782A62ADFD00CB81AC /* ReviewDetailEmptyView.swift in Sources */,
 				0935C8012A66727200790A1B /* ProjectTeamService.swift in Sources */,
 				0967560F2A61E73700A1E691 /* ReviewDetailView.swift in Sources */,

@@ -12,19 +12,24 @@ import Then
 
 final class IndivisualCardButtonView: UIView {
     
+    // MARK: - UI Components
+    
     private let containerView = UIView()
     private let backgroundImageView = UIImageView()
     private let puzzleBoardLabel = UILabel()
     private let puzzleBoardCountLabel = UILabel()
     private let chevronNextImageView = UIImageView()
+    
+    // MARK: - Properties
 
     private var puzzleBoardCount: Int = 0 {
         didSet {
             puzzleBoardCountLabel.text = "\(puzzleBoardCount) 판"
         }
     }
-    
     private var cardTitle: String!
+    
+    // MARK: - Initializer
     
     init(frame: CGRect, cardTitle: String) {
         self.cardTitle = cardTitle
@@ -39,6 +44,8 @@ final class IndivisualCardButtonView: UIView {
 }
  
 extension IndivisualCardButtonView {
+    
+    // MARK: - UI Components Property
         
     private func setUI() {
         self.layer.shadowRadius = 2
@@ -77,6 +84,8 @@ extension IndivisualCardButtonView {
         }
     }
     
+    // MARK: - Layout Helper
+    
     private func setLayout() {
         self.addSubview(containerView)
         containerView.addSubviews(backgroundImageView, puzzleBoardLabel, chevronNextImageView, puzzleBoardCountLabel)
@@ -109,6 +118,9 @@ extension IndivisualCardButtonView {
 }
 
 extension IndivisualCardButtonView {
+    
+    // MARK: - Methods
+    
     func passBoardCount(count: Int) {
         self.puzzleBoardCount = count
     }

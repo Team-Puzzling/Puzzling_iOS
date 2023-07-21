@@ -9,15 +9,20 @@ import UIKit
 
 final class TeamRankPodiumCell: UIView {
     
+    // MARK: - UI Components
+    
     private let puzzleImageView = UIImageView()
     private let podiumImageView = UIImageView()
-    
     private let textStackView = UIStackView()
     private let userNameLabel = UILabel()
     private let roleLabel = UILabel()
     private let piecesCountLabel = UILabel()
     
+    // MARK: - Properties
+    
     private var piecesCount = 0
+    
+    // MARK: - Initializer
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -33,7 +38,7 @@ final class TeamRankPodiumCell: UIView {
 
 extension TeamRankPodiumCell {
     
-    private func setDelegate() {}
+    // MARK: - UI Components Property
     
     private func setUI() {
         puzzleImageView.do {
@@ -70,6 +75,8 @@ extension TeamRankPodiumCell {
         }
     }
     
+    // MARK: - Layout Helper
+    
     private func setLayout() {
         self.addSubviews(podiumImageView, puzzleImageView, textStackView)
         
@@ -96,6 +103,9 @@ extension TeamRankPodiumCell {
 }
 
 extension TeamRankPodiumCell {
+    
+    // MARK: - Methods
+    
     func setPodiumInformation(rankModel: TeamRankTopThreeModel?, rankNumber: Int) {
         switch rankNumber {
         case 1:

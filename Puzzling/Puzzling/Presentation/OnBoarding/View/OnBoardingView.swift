@@ -13,8 +13,6 @@ import AuthenticationServices
 
 class OnBoardingView: UIView {
     
-    weak var delegate: TappedDelegate?
-    
     // MARK: - UI Components
     
     private let puzzlingImageView = UIImageView()
@@ -22,6 +20,10 @@ class OnBoardingView: UIView {
     private let descriptionLabel = UILabel()
     private let appleLoginButton = ASAuthorizationAppleIDButton()
     private let kakaoLoginButton = UIButton()
+    
+    // MARK: - Properties
+    
+    weak var delegate: TappedDelegate?
     
     // MARK: - Initializer
     
@@ -38,6 +40,8 @@ class OnBoardingView: UIView {
 }
 
 extension OnBoardingView {
+    
+    // MARK: - UI Components Property
 
     private func setUI(){
         
@@ -69,7 +73,6 @@ extension OnBoardingView {
             $0.imageView?.contentMode = .scaleAspectFill
         }
     }
-
 
     // MARK: - Layout Helper
 
@@ -108,7 +111,6 @@ extension OnBoardingView {
             $0.leading.trailing.equalToSuperview().inset(16)
             $0.height.equalTo(50)
         }
-        
     }
 
     // MARK: - Methods

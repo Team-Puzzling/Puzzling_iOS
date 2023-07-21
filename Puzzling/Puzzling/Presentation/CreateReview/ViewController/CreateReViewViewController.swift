@@ -24,6 +24,8 @@ final class CreateReViewViewController: UIViewController {
     private var fiveFView: FiveFView! = FiveFView()
     private var arrView: AARView! = AARView()
     
+    // MARK: - Properties
+    
     private var option = 0
     private var templateID = 1
     private var keyboardOverlapKey: Int? = 0
@@ -36,8 +38,21 @@ final class CreateReViewViewController: UIViewController {
     private var reviewTILModel: ReviewTILModel
     private var reviewFiveFModel: ReviewFiveFModel
     private var reviewAARModel: ReviewAARModel
-
     
+    // MARK: - Initializer
+    
+    init() {
+        reviewTILModel = ReviewTILModel(reviewTemplateId: 0, liked: "", lacked: "", actionPlan: "")
+        reviewFiveFModel = ReviewFiveFModel(reviewTemplateId: 0, fact: "", feeling: "",
+                                            finding: "", feedback: "", actionPlan: "")
+        reviewAARModel = ReviewAARModel(reviewTemplateId: 0, initialGoal: "", result: "",
+                                        difference: "", persistence: "", actionPlan: "")
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - View Life Cycle
     
@@ -57,21 +72,8 @@ final class CreateReViewViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-          super.viewDidAppear(animated)
+        super.viewDidAppear(animated)
         updateContentView(option: option)
-      }
-    
-    init() {
-        reviewTILModel = ReviewTILModel(reviewTemplateId: 0, liked: "", lacked: "", actionPlan: "")
-        reviewFiveFModel = ReviewFiveFModel(reviewTemplateId: 0, fact: "", feeling: "",
-                                            finding: "", feedback: "", actionPlan: "")
-        reviewAARModel = ReviewAARModel(reviewTemplateId: 0, initialGoal: "", result: "",
-                                        difference: "", persistence: "", actionPlan: "")
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - deinit
@@ -268,7 +270,7 @@ extension CreateReViewViewController {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapScreen))
         view.addGestureRecognizer(tapGestureRecognizer)
     }
-        
+    
     private func setOptionSelected(option: Int) {
         templateID = option
     }
@@ -357,41 +359,41 @@ extension CreateReViewViewController {
     @objc
     private func saveButtonTapped() {
         let templateID = self.templateID
-            switch templateID {
-            case 1:
-                print("1번 옵션이 선택 되었습니다")
-                
-                guard let liked = self.tilView.wellTextView.text else { return }
-                guard let lacked = self.tilView.regretTextView.text else { return }
-                guard let actionPlan = self.tilView.learnTextView.text else { return }
-                
-                postReviewTIL(reviewTemplateId: templateID, liked: liked, lacked: lacked,
-                              actionPlan: actionPlan)
-            case 2:
-                print("2번 옵션이 선택 되었습니다")
-                
-                guard let fact = self.fiveFView.factTextView.text else { return }
-                guard let feeling = self.fiveFView.feelingTextView.text else { return }
-                guard let finding = self.fiveFView.findingTextView.text else { return }
-                guard let feedback = self.fiveFView.feedbackTextView.text else { return }
-                guard let actionPlan = self.fiveFView.futureTextView.text else { return }
+        switch templateID {
+        case 1:
+            print("1번 옵션이 선택 되었습니다")
             
-                postReviewFiveF(reviewTemplateId: templateID, fact: fact, feeling: feeling,
-                                finding: finding, feedback: feedback, actionPlan: actionPlan)
-            case 3:
-                print("3번 옵션이 선택 되었습니다")
-                
-                guard let initialGoal = self.arrView.targetTextView.text else { return }
-                guard let result = self.arrView.resultTextView.text else { return }
-                guard let difference = self.arrView.differenceTextView.text else { return }
-                guard let persistence = self.arrView.continuouslyTextView.text else { return }
-                guard let actionPlan = self.arrView.purposeTextView.text else { return }
-                
-                postReviewAAR(reviewTemplateId: templateID, initialGoal: initialGoal, result: result,
-                              difference: difference, persistence: persistence, actionPlan: actionPlan)
-            default:
-                break
-            }
+            guard let liked = self.tilView.wellTextView.text else { return }
+            guard let lacked = self.tilView.regretTextView.text else { return }
+            guard let actionPlan = self.tilView.learnTextView.text else { return }
+            
+            postReviewTIL(reviewTemplateId: templateID, liked: liked, lacked: lacked,
+                          actionPlan: actionPlan)
+        case 2:
+            print("2번 옵션이 선택 되었습니다")
+            
+            guard let fact = self.fiveFView.factTextView.text else { return }
+            guard let feeling = self.fiveFView.feelingTextView.text else { return }
+            guard let finding = self.fiveFView.findingTextView.text else { return }
+            guard let feedback = self.fiveFView.feedbackTextView.text else { return }
+            guard let actionPlan = self.fiveFView.futureTextView.text else { return }
+            
+            postReviewFiveF(reviewTemplateId: templateID, fact: fact, feeling: feeling,
+                            finding: finding, feedback: feedback, actionPlan: actionPlan)
+        case 3:
+            print("3번 옵션이 선택 되었습니다")
+            
+            guard let initialGoal = self.arrView.targetTextView.text else { return }
+            guard let result = self.arrView.resultTextView.text else { return }
+            guard let difference = self.arrView.differenceTextView.text else { return }
+            guard let persistence = self.arrView.continuouslyTextView.text else { return }
+            guard let actionPlan = self.arrView.purposeTextView.text else { return }
+            
+            postReviewAAR(reviewTemplateId: templateID, initialGoal: initialGoal, result: result,
+                          difference: difference, persistence: persistence, actionPlan: actionPlan)
+        default:
+            break
+        }
         
     }
     
@@ -418,46 +420,46 @@ extension CreateReViewViewController {
     
     // MARK: - Network
     
-        func fetchPreviousTemplate() {
-            
-            guard let memberId = UserDefaults.standard.string(forKey: "memberId") else { return }
-            guard let projectId = UserDefaults.standard.string(forKey: "projectId") else { return }
-           
-            previousTemplateProvider.request(.previousTemplate(memberID: memberId, projectID: projectId)) { result in
-                switch result {
-                case .success(let result):
-                    let status = result.statusCode
-                    if status >= 200 && status < 300 {
-                        do {
-                            guard let data = try result.map(GeneralResponse<PreviousTemplateResponce>.self).data else {
-                                return
-                            }
-                            self.previousTemplateId = data.convertToPreviousTemplate()
-                            let template = data
-                            print(template)
-                            print("♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️")
-                            print(self.previousTemplateId)
-                            if let templateNum = self.previousTemplateId?.previousTemplateId {
-                                print("이전에 작성한 회고 Option은~")
-                                print("♥️♥️♥️♥️ \(templateNum) 입니다♥️♥️♥️♥️")
-                                self.option = templateNum
-    
-                            }
+    func fetchPreviousTemplate() {
+        
+        guard let memberId = UserDefaults.standard.string(forKey: "memberId") else { return }
+        guard let projectId = UserDefaults.standard.string(forKey: "projectId") else { return }
+        
+        previousTemplateProvider.request(.previousTemplate(memberID: memberId, projectID: projectId)) { result in
+            switch result {
+            case .success(let result):
+                let status = result.statusCode
+                if status >= 200 && status < 300 {
+                    do {
+                        guard let data = try result.map(GeneralResponse<PreviousTemplateResponce>.self).data else {
+                            return
                         }
-                        catch (let error) {
-                            print(error.localizedDescription)
+                        self.previousTemplateId = data.convertToPreviousTemplate()
+                        let template = data
+                        print(template)
+                        print("♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️")
+                        print(self.previousTemplateId)
+                        if let templateNum = self.previousTemplateId?.previousTemplateId {
+                            print("이전에 작성한 회고 Option은~")
+                            print("♥️♥️♥️♥️ \(templateNum) 입니다♥️♥️♥️♥️")
+                            self.option = templateNum
+                            
                         }
                     }
-                    else if status >= 400 {
-                        print("💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭")
-                        print("400 이상에러")
-                        print("💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭")
+                    catch (let error) {
+                        print(error.localizedDescription)
                     }
-                case .failure(let error):
-                    print(error.localizedDescription)
                 }
+                else if status >= 400 {
+                    print("💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭")
+                    print("400 이상에러")
+                    print("💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭💭")
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
             }
         }
+    }
     
     private func postReviewTIL(reviewTemplateId: Int, liked: String, lacked: String, actionPlan: String) {
         
@@ -513,7 +515,7 @@ extension CreateReViewViewController {
                         print("🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀")
                         print("🪀🪀🪀성공적으로 저장 후 화면 전환🪀🪀🪀")
                         print("🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀")
-
+                        
                     } catch(let error){
                         print(error.localizedDescription)
                     }
@@ -550,7 +552,7 @@ extension CreateReViewViewController {
                         self.navigationController?.popViewController(animated: true)
                         print("🪀🪀🪀성공적으로 저장 후 화면 전환🪀🪀🪀")
                         print("🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀")
-
+                        
                     } catch(let error){
                         print(error.localizedDescription)
                     }
