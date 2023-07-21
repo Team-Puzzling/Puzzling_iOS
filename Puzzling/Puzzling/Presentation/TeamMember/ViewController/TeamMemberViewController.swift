@@ -266,7 +266,10 @@ extension TeamMemberViewController {
     // MARK: - Network
     
     private func fetchTeamMember() {
-        projectTeamProvider.request(.teamMember(projectId: "1", startDate: startDate, endDate: endDate)) { result in
+        
+        guard let projectId = UserDefaults.standard.string(forKey: "projectId") else { return }
+        
+        projectTeamProvider.request(.teamMember(projectId: projectId, startDate: startDate, endDate: endDate)) { result in
             switch result {
             case .success(let result):
                 let status = result.statusCode

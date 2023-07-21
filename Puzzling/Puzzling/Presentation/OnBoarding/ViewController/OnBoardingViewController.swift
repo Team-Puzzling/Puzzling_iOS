@@ -84,9 +84,6 @@ private extension OnBoardingViewContoller {
     // MARK: - Methods
     
     func isExistUserInform() {
-        let enterProjectVC = EnterProjectViewController()
-        let tabBar = TabBarController()
-        
         if let login = UserDefaults.standard.object(forKey: "Login") {
             if(login as! Int == 0) {
                 return

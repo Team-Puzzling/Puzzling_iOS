@@ -212,8 +212,7 @@ extension MyReviewListViewController {
     
     private func fetchReviewList() {
         guard let memberId = UserDefaults.standard.string(forKey: "memberId") else { return }
-        print(memberId)
-        myProjectProvider.request(.myReviewList(memberId: "1", projectId: "\(self.currentProjectId)")) { result in
+        myProjectProvider.request(.myReviewList(memberId: memberId, projectId: "\(self.currentProjectId)")) { result in
             switch result {
             case .success(let result):
                 let status = result.statusCode
