@@ -230,13 +230,13 @@ extension ReviewDetailViewController {
     func passData(id: Int, title: String) {
         self.currentProjectTitle = title
         self.currentProjectId = id
+        
     }
     
     func sendTitle(_ title: String, date: String) {
         navigationBool = true
         self.selectedDate = date
-        print("❌❌❌❌❌❌")
-        print(date, self.selectedDate)
-        print("❌❌❌❌❌❌")
+        self.currentProjectTitle = title
+        self.navigationBool = false
     }
 }

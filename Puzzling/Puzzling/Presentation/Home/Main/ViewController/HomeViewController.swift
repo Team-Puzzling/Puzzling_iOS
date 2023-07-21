@@ -28,6 +28,8 @@ final class HomeViewController: UIViewController {
     
     // TODO: 전역 변수로 받아와야함
     private var currentProjectId: Int = UserDefaults.standard.integer(forKey: "projectId")
+    private var didProjectChangeFlag: Int = 0
+    
     private var memberId: Int = UserDefaults.standard.integer(forKey: "memberId")
     
     private let authProvider = MoyaProvider<AuthService>(plugins:[NetworkLoggerPlugin()])
@@ -50,6 +52,7 @@ final class HomeViewController: UIViewController {
         setLayout()
         setPage()
         setData()
+        jumpPuzzleAnimation()
     }
     
     override func viewDidLayoutSubviews() {
@@ -60,6 +63,21 @@ final class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        print("🚩🚩🚩🚩🚩🚩")
+        print(self.currentProjectId)
+        print(self.didProjectChangeFlag)
+        print("🚩🚩🚩🚩🚩🚩")
+        
+        if self.didProjectChangeFlag == 1 {
+            self.currentProjectId = UserDefaults.standard.integer(forKey: "projectId")
+            setData()
+        }
+        self.didProjectChangeFlag = 1
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -434,6 +452,18 @@ extension HomeViewController: HomeBottomSheetDelegate {
         bottomSheetViewController.delegate = self
         self.navigationController?.present(bottomSheetViewController, animated: true)
     }
+    
+    private func jumpPuzzleAnimation() {
+        let jumpAnimation = CAKeyframeAnimation(keyPath: "position.y")
+        jumpAnimation.values = [0, -10, 5, -4, 3, 0]
+        jumpAnimation.keyTimes = [0, 0.15, 0.22, 0.34, 0.5, 0.55]
+        jumpAnimation.duration = 0.55
+        jumpAnimation.repeatCount = 2
+        jumpAnimation.fillMode = .forwards
+        jumpAnimation.isRemovedOnCompletion = false
+        jumpAnimation.isAdditive = true
+        self.indivisualDashboardViewController.mainView.puzzleCollectionView.layer.add(jumpAnimation, forKey: "jumpOnce")
+    }
 }
 
 extension HomeViewController: HomeBottomSheetPassNewProjectDelegate {
@@ -474,7 +504,7 @@ extension HomeViewController: HomeSegmentDelegate {
 extension HomeViewController: MainPuzzleCollectionPassEventForIndivisuals, MaMainPuzzleCollectionPassEventForTeam {
     func passTouchEventIndivisual(withDate: String) {
         let indivisualMemberViewController = ReviewDetailViewController()
-        /// TODO: 여기에도 passData 해야함
+        indivisualMemberViewController.sendTitle(self.currentProjectTitle, date: withDate)
         self.navigationController?.pushViewController(indivisualMemberViewController, animated: true)
     }
     
