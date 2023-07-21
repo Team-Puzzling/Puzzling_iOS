@@ -8,9 +8,9 @@
 import UIKit
 
 import FSCalendar
+import Moya
 import SnapKit
 import Then
-import Moya
 
 final class TeamMemberViewController: UIViewController {
     
@@ -30,6 +30,7 @@ final class TeamMemberViewController: UIViewController {
     private let teamMemberCalenderView = TeamMemberCalendarView()
     private let projectTeamProvider = MoyaProvider<ProjectTeamService>(plugins:[NetworkLoggerPlugin()])
     private var teamMemberList: [TeamMemberModel] = []
+    private lazy var loadingIndicatorView = UIActivityIndicatorView(style: .large)
     
     // MARK: - View Life Cycle
     
@@ -74,12 +75,17 @@ extension TeamMemberViewController {
             $0.sectionHeaderTopPadding = 0
             $0.sectionFooterHeight = 0
         }
+        
+        loadingIndicatorView.do {
+            $0.color = .blue300
+            $0.startAnimating()
+        }
     }
     
     // MARK: - Layout Helper
     
     private func setLayout() {
-        view.addSubviews(teamMemberCalenderView, teamMemberTableView)
+        view.addSubviews(teamMemberCalenderView, teamMemberTableView, loadingIndicatorView)
         
         teamMemberCalenderView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
@@ -91,6 +97,11 @@ extension TeamMemberViewController {
             $0.top.equalTo(teamMemberCalenderView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
+        }
+        
+        loadingIndicatorView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.size.equalTo(90)
         }
     }
     
@@ -292,9 +303,9 @@ extension TeamMemberViewController {
                         self.sendDateNotification(model: self.dataList)
                         self.specificData = self.findData(date: self.selectedDate) ?? TeamMemberModel(reviewDay: "", reviewDate: "", reviewWriters: nil, nonReviewWriters: nil)
                         self.teamMemberTableView.reloadData()
-                        print("♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️")
-                        
-                        
+                        self.loadingIndicatorView.stopAnimating()
+                        self.loadingIndicatorView.alpha = 0
+                        self.loadingIndicatorView.removeFromSuperview()
                     } catch(let error) {
                         print(error.localizedDescription)
                     }
