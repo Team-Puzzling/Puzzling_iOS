@@ -10,6 +10,10 @@ import UIKit
 import SnapKit
 import Then
 
+protocol ReviewButtonPassEventDelegate: AnyObject {
+    func passReviewButton()
+}
+
 protocol MyProjectPassEventDelegate: AnyObject {
     func passTouchEvent(projectTitle: String, projectId: Int)
 }
@@ -17,6 +21,7 @@ protocol MyProjectPassEventDelegate: AnyObject {
 final class MyProjectTableViewCell: UITableViewCell {
     
     weak var delegate: MyProjectPassEventDelegate?
+//    weak var delegate: ReviewButtonPassEventDelegate?
     
     private let view = UIView()
     private let projectNameLabel = UILabel()
@@ -121,6 +126,7 @@ extension MyProjectTableViewCell {
     }
     
     private func setAddTarget() {
+        dashboardButton.addTarget(self, action: #selector(dashboardButtonTapped), for: .touchUpInside)
         myReviewButton.addTarget(self, action: #selector(myReviewButtonTapped), for: .touchUpInside)
     }
     
@@ -140,6 +146,19 @@ extension MyProjectTableViewCell {
     private func myReviewButtonTapped() {
         UserDefaults.standard.set(self.projectId, forKey: "projectId")
         self.delegate?.passTouchEvent(projectTitle: self.projectTitle, projectId: self.projectId)
+//        self.delegate?.passReviewButton()
+//        @objc
+//        private func gotoTabBar() {
+//        }
+    }
+    
+    @objc
+    private func dashboardButtonTapped() {
+//        self.delegate?.passTouchEvent(projectTitle: self.projectTitle, projectId: self.projectId)
+        
+//        let vc = TabBarController()
+//        UIApplication.shared.keyWindow?.replaceRootViewController(vc, animated: true, completion: nil)
+        
     }
 }
 
