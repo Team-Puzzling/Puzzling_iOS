@@ -102,7 +102,7 @@ extension IndivisualDashboardViewController {
     @objc
     private func moveToCreateRetrospect() {
         // 수정해야함
-        let createRetrospectViewController = CreateReViewViewController()
+        let createRetrospectViewController = CreateReViewViewController(option: 1, templateID: 7)
         self.navigationController?.pushViewController(createRetrospectViewController, animated: true)
     }
 }
