@@ -64,7 +64,7 @@ extension TeamMemberCalendarView {
             
             $0.locale = Locale(identifier: "ko_KR")
             $0.scope = .week
-            
+            $0.firstWeekday = 2
             $0.appearance.selectionColor = .blue400
             
             $0.weekdayHeight = 20
