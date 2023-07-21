@@ -15,16 +15,20 @@ protocol HomeSegmentDelegate: AnyObject {
 }
 
 final class HomeSegmentedView: UIView {
+    
+    // MARK: - UI Components
 
     private lazy var indivisualDashboardButton = UIButton(frame: .zero, primaryAction: moveToIndivisualAction())
     private lazy var teamDashboardButton = UIButton(frame: .zero, primaryAction: moveToTeamAction())
-    
     private let backLineView = UIView()
     private let segmentedLineView = UIView()
     
-    private var selectedIndex: Int = 0
+    // MARK: - Properties
     
+    private var selectedIndex: Int = 0
     weak var delegate: HomeSegmentDelegate?
+    
+    // MARK: - Initializer
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,6 +42,8 @@ final class HomeSegmentedView: UIView {
 }
 
 extension HomeSegmentedView {
+    
+    // MARK: - UI Components Property
     
     private func setUI() {
         indivisualDashboardButton.do {
@@ -60,6 +66,8 @@ extension HomeSegmentedView {
             $0.backgroundColor = .blue400
         }
     }
+    
+    // MARK: - Layout Helper
     
     private func setLayout() {
         self.addSubviews(indivisualDashboardButton, teamDashboardButton, backLineView, segmentedLineView)
@@ -94,6 +102,9 @@ extension HomeSegmentedView {
 }
 
 extension HomeSegmentedView {
+    
+    // MARK: - Methods
+    
     private func moveToTeamAction() -> UIAction? {
         let action = UIAction(handler: { [weak self] _ in
             guard let index = self?.selectedIndex else { return }

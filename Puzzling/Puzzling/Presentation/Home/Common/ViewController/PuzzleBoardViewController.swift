@@ -11,13 +11,19 @@ import SnapKit
 import Then
 
 final class PuzzleBoardViewController: UIViewController, UIGestureRecognizerDelegate {
+    
+    // MARK: - UI Components
+    
+    private lazy var puzzleCollectionView = UICollectionView(frame: .zero, collectionViewLayout: setFlowLayout())
+    
+    // MARK: - Properties
 
     private var puzzleBoardCount: Int = 0
-    
     private let emptyLabel = UILabel()
     private var puzzleBoardArray: [PuzzleBoardData] = []
     private var navigationTitle: String = ""
-    private lazy var puzzleCollectionView = UICollectionView(frame: .zero, collectionViewLayout: setFlowLayout())
+    
+    // MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,10 +62,7 @@ final class PuzzleBoardViewController: UIViewController, UIGestureRecognizerDele
 
 extension PuzzleBoardViewController {
     
-    private func setDelegate() {
-        puzzleCollectionView.delegate = self
-        puzzleCollectionView.dataSource = self
-    }
+    // MARK: - UI Components Property
     
     private func setUI() {
         view.backgroundColor = .white000
@@ -76,6 +79,8 @@ extension PuzzleBoardViewController {
         }
     }
     
+    // MARK: - Layout Helper
+    
     private func setLayout() {
         view.addSubviews(puzzleCollectionView, emptyLabel)
         
@@ -87,6 +92,13 @@ extension PuzzleBoardViewController {
         emptyLabel.snp.makeConstraints {
             $0.center.equalToSuperview()
         }
+    }
+    
+    // MARK: - Methods
+    
+    private func setDelegate() {
+        puzzleCollectionView.delegate = self
+        puzzleCollectionView.dataSource = self
     }
 }
 
@@ -125,6 +137,8 @@ extension PuzzleBoardViewController {
         
         return label
     }
+    
+    // MARK: - @objc Methods
     
     @objc
     private func popAction() {

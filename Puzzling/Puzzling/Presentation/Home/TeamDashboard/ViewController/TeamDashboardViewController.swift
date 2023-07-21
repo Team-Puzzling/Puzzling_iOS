@@ -12,36 +12,19 @@ import Then
 
 final class TeamDashboardViewController: UIViewController {
     
+    // MARK: - UI Components
+    
     private let mainScrollView = UIScrollView()
     private let contentView = UIView()
-    
     let mainView: DashboardMainBoxView = DashboardMainBoxView(frame: .zero, type: .team)
     var teamRankView = TeamDashboardRankView()
+    
+    // MARK: - Properties
+    
     private var teamArray: [TeamProjectRank] = []
     private var teamBoardCount: Int = 0
     
-    private var tabBarHeight: CGFloat {
-        guard let height = self.tabBarController?.tabBar.frame.size.height else {
-            return 0.0
-        }
-        return height
-    }
-    
-    private var mainViewHeight: CGFloat {
-        let height = view.frame.size.height/3.35
-        return height
-    }
-    
-    private var scrollViewHeight: CGFloat {
-        let height:CGFloat = view.frame.size.height/4.06
-        let sortHeight = CGFloat(teamArray.count - 3)
-        
-        if sortHeight < 0 {
-            return height + 10
-        } else {
-            return height + sortHeight * 52 + 10
-        }
-    }
+    // MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +40,8 @@ final class TeamDashboardViewController: UIViewController {
 
 extension TeamDashboardViewController {
     
+    // MARK: - UI Components Property
+    
     private func setUI() {
         view.backgroundColor = .white000
         
@@ -70,8 +55,9 @@ extension TeamDashboardViewController {
             $0.isUserInteractionEnabled = true
 //            $0.card
         }
-            
     }
+    
+    // MARK: - Layout Helper
     
     private func setLayout() {
         view.addSubviews(mainScrollView)
@@ -103,9 +89,34 @@ extension TeamDashboardViewController {
         }
     }
     
+    // MARK: - Methods
+    
     private func setAction() {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(moveToPuzzleBoardArchive))
         mainView.cardButtonView.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    private var tabBarHeight: CGFloat {
+        guard let height = self.tabBarController?.tabBar.frame.size.height else {
+            return 0.0
+        }
+        return height
+    }
+    
+    private var mainViewHeight: CGFloat {
+        let height = view.frame.size.height/3.35
+        return height
+    }
+    
+    private var scrollViewHeight: CGFloat {
+        let height:CGFloat = view.frame.size.height/4.06
+        let sortHeight = CGFloat(teamArray.count - 3)
+        
+        if sortHeight < 0 {
+            return height + 10
+        } else {
+            return height + sortHeight * 52 + 10
+        }
     }
 }
 

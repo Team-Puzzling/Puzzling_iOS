@@ -17,18 +17,17 @@ protocol projectNameProtocol: AnyObject {
 
 final class MyPageBottomSheetViewController: UIViewController {
     
-    private var projectName: String = "Project1"
-    
-    weak var delegate: projectNameProtocol?
-    
-    private let myProjectProvider = MoyaProvider<MyProjectService>(plugins:[NetworkLoggerPlugin()])
-    
-    private var myProjectData: [ProjectListResponse] = []
-    
-    // MARK: - Properties
+    // MARK: - UI Components
     
     private let modalView = UIView()
     private let tableView = UITableView(frame: .zero, style: .plain)
+    
+    // MARK: - Properties
+    
+    private var projectName: String = "Project1"
+    weak var delegate: projectNameProtocol?
+    private let myProjectProvider = MoyaProvider<MyProjectService>(plugins:[NetworkLoggerPlugin()])
+    private var myProjectData: [ProjectListResponse] = []
     
     // MARK: - View Life Cycle
     
@@ -47,6 +46,8 @@ final class MyPageBottomSheetViewController: UIViewController {
 }
 
 extension MyPageBottomSheetViewController {
+    
+    // MARK: - UI Components Property
 
     private func setUI() {
         
@@ -64,6 +65,8 @@ extension MyPageBottomSheetViewController {
         }
     }
     
+    // MARK: - Layout Helper
+    
     private func setLayout() {
         view.addSubview(modalView)
         modalView.addSubview(tableView)
@@ -77,6 +80,8 @@ extension MyPageBottomSheetViewController {
             $0.horizontalEdges.equalToSuperview()
         }
     }
+    
+    // MARK: - Methods
     
     private func setDelegate() {
         tableView.delegate = self
@@ -142,8 +147,6 @@ extension MyPageBottomSheetViewController {
                         self.myProjectData = data
                         self.tableView.reloadData()
                         print("♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️")
-                        
-                        
                     } catch(let error) {
                         print(error.localizedDescription)
                     }

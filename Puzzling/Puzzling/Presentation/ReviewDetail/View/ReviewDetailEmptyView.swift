@@ -12,8 +12,12 @@ import Then
 
 final class ReviewDetailEmptyView: DetailTypeView {
     
+    // MARK: - UI Components
+    
     private let puzzleImageView = UIImageView()
     private let label = UILabel()
+    
+    // MARK: - Initializer
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,6 +31,9 @@ final class ReviewDetailEmptyView: DetailTypeView {
 }
 
 extension ReviewDetailEmptyView {
+    
+    // MARK: - UI Components Property
+    
     private func setUI() {
         puzzleImageView.do {
             $0.image = Image.puzzleElement
@@ -37,6 +44,8 @@ extension ReviewDetailEmptyView {
             $0.font = .fontGuide(.heading4_kor)
         }
     }
+    
+    // MARK: - Layout Helper
     
     private func setLayout() {
         

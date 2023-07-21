@@ -16,15 +16,20 @@ protocol HomeBottomSheetPassNewProjectDelegate: AnyObject {
 
 final class HomeBottomSheetViewController: UIViewController {
     
-    weak var delegate: HomeBottomSheetPassNewProjectDelegate?
-    
-    private var existingProjectsArray: [OngoingProjectData] = []
-    private var currentProjectId: Int?
-    private var currentProjectTitle: String?
+    // MARK: - UI Components
     
     private let projectTableView = UITableView()
     private let createProjectButton = HomeBottomSheetCellButton(frame: .zero, buttonTitle: HomeBottomViewButtonType.create.title)
     private let joinProjectButton = HomeBottomSheetCellButton(frame: .zero, buttonTitle: HomeBottomViewButtonType.join.title)
+    
+    // MARK: - Properties
+    
+    weak var delegate: HomeBottomSheetPassNewProjectDelegate?
+    private var existingProjectsArray: [OngoingProjectData] = []
+    private var currentProjectId: Int?
+    private var currentProjectTitle: String?
+    
+    // MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,10 +45,8 @@ final class HomeBottomSheetViewController: UIViewController {
 }
 
 extension HomeBottomSheetViewController {
-    private func setDelegate() {
-        projectTableView.delegate = self
-        projectTableView.dataSource = self
-    }
+    
+    // MARK: - UI Components Property
     
     private func setUI() {
         view.backgroundColor = .white000
@@ -55,6 +58,8 @@ extension HomeBottomSheetViewController {
             $0.isUserInteractionEnabled = true
         }
     }
+    
+    // MARK: - Layout Helper
     
     private func setLayout() {
         view.addSubviews(projectTableView, createProjectButton, joinProjectButton)
@@ -76,6 +81,13 @@ extension HomeBottomSheetViewController {
             $0.horizontalEdges.equalToSuperview()
             $0.height.equalTo(60)
         }
+    }
+    
+    // MARK: - Methods
+    
+    private func setDelegate() {
+        projectTableView.delegate = self
+        projectTableView.dataSource = self
     }
     
     private func getTableViewHeight() -> CGFloat {

@@ -13,13 +13,18 @@ import Then
 
 final class ActionPlanView: UIView {
     
-    private let indivisualDashboardNetworkProvider = MoyaProvider<ProjectServiceKBS>(plugins: [NetworkLoggerPlugin(verbose: true)])
+    // MARK: - UI Components
+    
     private let headerLabel = UILabel()
     private lazy var actionPlanCollectionView: UICollectionView = UICollectionView(frame: .zero, collectionViewLayout: setFlowLayout())
     
-    private var actionPlanData: [ActionPlan] = []
+    // MARK: - Properties
     
+    private let indivisualDashboardNetworkProvider = MoyaProvider<ProjectServiceKBS>(plugins: [NetworkLoggerPlugin(verbose: true)])
+    private var actionPlanData: [ActionPlan] = []
     private var collectionViewHeight: CGFloat = UIScreen.main.bounds.height / 5.6
+    
+    // MARK: - Initializer
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -35,7 +40,51 @@ final class ActionPlanView: UIView {
 }
 
 extension ActionPlanView {
-
+    
+    // MARK: - UI Components Property
+    
+    private func setUI() {
+        headerLabel.do {
+            $0.text = "ACTION PLAN"
+            $0.font = .fontGuide(.heading4_kor)
+            $0.textColor = .black000
+        }
+        
+        actionPlanCollectionView.do {
+            $0.registerCell(ActionPlanCollectionViewCell.self)
+            $0.isScrollEnabled = true
+            $0.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+            $0.showsHorizontalScrollIndicator = false
+            $0.backgroundColor = .clear
+        }
+    }
+    
+    // MARK: - Layout Helper
+    
+    private func setLayout() {
+        self.addSubviews(headerLabel, actionPlanCollectionView)
+        
+        headerLabel.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.equalToSuperview().inset(16)
+        }
+        
+        actionPlanCollectionView.snp.makeConstraints {
+            $0.horizontalEdges.equalToSuperview()
+            $0.top.equalTo(headerLabel.snp.bottom).offset(16)
+            $0.height.equalTo(collectionViewHeight)
+        }
+    }
+    
+    // MARK: - Methods
+    
+    private func setDelegate() {
+        actionPlanCollectionView.delegate = self
+        actionPlanCollectionView.dataSource = self
+    }
+    
+    // MARK: - Network
+    
     private func setData() {
         indivisualDashboardNetworkProvider.request(.fetchActionPlans(memberId: 1, projectId: 2)) { [weak self] response in
             switch response {
@@ -61,42 +110,6 @@ extension ActionPlanView {
             case .failure(let error):
                 print(error)
             }
-        }
-    }
-    
-    private func setDelegate() {
-        actionPlanCollectionView.delegate = self
-        actionPlanCollectionView.dataSource = self
-    }
-    
-    private func setUI() {
-        headerLabel.do {
-            $0.text = "ACTION PLAN"
-            $0.font = .fontGuide(.heading4_kor)
-            $0.textColor = .black000
-        }
-        
-        actionPlanCollectionView.do {
-            $0.registerCell(ActionPlanCollectionViewCell.self)
-            $0.isScrollEnabled = true
-            $0.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
-            $0.showsHorizontalScrollIndicator = false
-            $0.backgroundColor = .clear
-        }
-    }
-    
-    private func setLayout() {
-        self.addSubviews(headerLabel, actionPlanCollectionView)
-        
-        headerLabel.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.leading.equalToSuperview().inset(16)
-        }
-        
-        actionPlanCollectionView.snp.makeConstraints {
-            $0.horizontalEdges.equalToSuperview()
-            $0.top.equalTo(headerLabel.snp.bottom).offset(16)
-            $0.height.equalTo(collectionViewHeight)
         }
     }
     

@@ -12,8 +12,12 @@ import Then
 
 final class TeamMemberCustomHeaderView: UITableViewHeaderFooterView {
     
+    // MARK: - UI Components
+    
     private let title = UILabel()
-
+    
+    // MARK: - Initializer
+    
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         setLayout()
@@ -23,6 +27,11 @@ final class TeamMemberCustomHeaderView: UITableViewHeaderFooterView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+extension TeamMemberCustomHeaderView {
+    
+    // MARK: - UI Components Property
     
     private func setUI() {
         title.do {
@@ -30,6 +39,8 @@ final class TeamMemberCustomHeaderView: UITableViewHeaderFooterView {
             $0.font = .fontGuide(.body1_bold_kor)
         }
     }
+    
+    // MARK: - Layout Helper
     
     private func setLayout() {
         title.translatesAutoresizingMaskIntoConstraints = false
@@ -44,6 +55,9 @@ final class TeamMemberCustomHeaderView: UITableViewHeaderFooterView {
 }
 
 extension TeamMemberCustomHeaderView {
+    
+    // MARK: - Methods
+    
     func setDataBind(section: Int) {
         switch section {
         case 0: title.text = "회고를 진행했어요"

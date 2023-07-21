@@ -12,14 +12,18 @@ import Then
 
 final class TeamRankPodiumView: UIView {
     
+    // MARK: - UI Components
+    
     private var firstRankView = TeamRankPodiumCell()
     private var secondRankView = TeamRankPodiumCell()
     private var thirdRankView = TeamRankPodiumCell()
     
+    // MARK: - Initializer
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setDelegate()
-        setUI()
+//        setDelegate()
+//        setUI()
         setLayout()
     }
     
@@ -30,9 +34,7 @@ final class TeamRankPodiumView: UIView {
 
 extension TeamRankPodiumView {
     
-    private func setDelegate() {}
-    
-    private func setUI() {}
+    // MARK: - Layout Helper
     
     private func setLayout() {
         self.addSubviews(firstRankView, secondRankView, thirdRankView)
@@ -61,6 +63,9 @@ extension TeamRankPodiumView {
 }
 
 extension TeamRankPodiumView {
+    
+    // MARK: - Methods
+    
     func setRank(ranks: [TeamRankTopThreeModel]) {
         firstRankView.setPodiumInformation(rankModel: nil, rankNumber: 1)
         secondRankView.setPodiumInformation(rankModel: nil, rankNumber: 2)

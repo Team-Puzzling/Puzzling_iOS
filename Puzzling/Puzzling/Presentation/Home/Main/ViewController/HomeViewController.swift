@@ -13,37 +13,36 @@ import Then
 
 final class HomeViewController: UIViewController {
     
+    // MARK: - UI Components
+    
+    private var alarmView: UIView?
+    private var titleBarView = HomeTitleBarView()
+    private let segmentedView = HomeSegmentedView()
+    private let indivisualDashboardViewController = IndivisualDashboardViewController()
+    private let teamDashboardViewController = TeamDashboardViewController()
+    private lazy var dashboardViewControllers: [UIViewController] = [indivisualDashboardViewController, teamDashboardViewController]
+    private let pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
+    private var currentPage: UIViewController!
+    
+    // MARK: - Properties
+    
     // TODO: 전역 변수로 받아와야함
     private var currentProjectId: Int = UserDefaults.standard.integer(forKey: "projectId")
     private var memberId: Int = UserDefaults.standard.integer(forKey: "memberId")
     
-    private var alarmView: UIView?
-    
     private let dashboardNetworkProvider = MoyaProvider<ProjectServiceKBS>(plugins: [NetworkLoggerPlugin(verbose: true)])
-    
-    private var titleBarView = HomeTitleBarView()
-    private let segmentedView = HomeSegmentedView()
-    
-    private let indivisualDashboardViewController = IndivisualDashboardViewController()
-    private let teamDashboardViewController = TeamDashboardViewController()
-    private lazy var dashboardViewControllers: [UIViewController] = [indivisualDashboardViewController, teamDashboardViewController]
-    
-    private let pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
-    private var currentPage: UIViewController!
-    
     private var tabBarHeight: CGFloat {
         guard let height = self.tabBarController?.tabBar.frame.size.height else { return 0.0 }
         return height
     }
-    
     private var currentProjectTitle: String = ""
     private var currentProjectRetrospectCycle: String = ""
-    
     private var ongoingProjectArray: [OngoingProjectData] = []
+    
+    // MARK: - View Life Cycle
             
     override func viewDidLoad() {
         super.viewDidLoad()
-     
 //        setData()
         setDelegate()
         setUI()
@@ -70,18 +69,7 @@ final class HomeViewController: UIViewController {
 
 extension HomeViewController {
     
-    private func setData() {
-        setHomeData()
-        setIndivisualDashboardData()
-        setTeamDashboardData()
-    }
-    
-    private func setDelegate() {
-        titleBarView.delegate = self
-        segmentedView.delegate = self
-        indivisualDashboardViewController.mainView.puzzleCollectionView.delegateForIndivisual = self
-        teamDashboardViewController.mainView.puzzleCollectionView.delegateForTeam = self
-    }
+    // MARK: - UI Components Property
     
     private func setUI() {
         view.backgroundColor = .white000
@@ -90,6 +78,8 @@ extension HomeViewController {
             $0.didMove(toParent: self)
         }
     }
+    
+    // MARK: - Layout Helper
     
     private func setLayout() {
         self.addChild(pageViewController)
@@ -112,6 +102,21 @@ extension HomeViewController {
             $0.horizontalEdges.equalToSuperview()
             $0.bottom.equalToSuperview().inset(tabBarHeight)
         }
+    }
+    
+    // MARK: - Methods
+    
+    private func setData() {
+        setHomeData()
+        setIndivisualDashboardData()
+        setTeamDashboardData()
+    }
+    
+    private func setDelegate() {
+        titleBarView.delegate = self
+        segmentedView.delegate = self
+        indivisualDashboardViewController.mainView.puzzleCollectionView.delegateForIndivisual = self
+        teamDashboardViewController.mainView.puzzleCollectionView.delegateForTeam = self
     }
     
     private func setPage() {

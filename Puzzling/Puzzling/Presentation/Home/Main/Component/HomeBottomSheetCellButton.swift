@@ -23,9 +23,13 @@ enum HomeBottomViewButtonType {
 
 final class HomeBottomSheetCellButton: UIView {
     
+    // MARK: - UI Components
+    
     private let plusImageView = UIImageView()
     private let titleLabel = UILabel()
     private var buttonTitle: String!
+    
+    // MARK: - Initializer
     
     init(frame: CGRect, buttonTitle: String) {
         self.buttonTitle = buttonTitle
@@ -41,6 +45,8 @@ final class HomeBottomSheetCellButton: UIView {
 
 extension HomeBottomSheetCellButton {
     
+    // MARK: - UI Components Property
+    
     private func setUI() {
         self.backgroundColor = .white000
         
@@ -55,6 +61,8 @@ extension HomeBottomSheetCellButton {
             $0.text = buttonTitle
         }
     }
+    
+    // MARK: - Layout Helper
     
     private func setLayout() {
         self.addSubviews(plusImageView, titleLabel)

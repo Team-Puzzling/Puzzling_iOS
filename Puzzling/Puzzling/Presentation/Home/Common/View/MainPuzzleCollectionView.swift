@@ -21,17 +21,22 @@ protocol MaMainPuzzleCollectionPassEventForTeam: AnyObject {
 }
 
 final class MainPuzzleCollectionView: UIView {
+    
+    // MARK: - UI Components
+    
+    private lazy var puzzleCollectionView = UICollectionView(frame: .zero, collectionViewLayout: self.setFlowLayout())
+    
+    // MARK: - Properties
 
     weak var delegateForIndivisual: MainPuzzleCollectionPassEventForIndivisuals?
     weak var delegateForTeam: MaMainPuzzleCollectionPassEventForTeam?
-    
-    private lazy var puzzleCollectionView = UICollectionView(frame: .zero, collectionViewLayout: self.setFlowLayout())
     private var modelData: [ModelProtocol] = []
     private var hasReviewed: Bool = false
     private var dashboardType: DashboardType
-
     private let cellHeight: CGFloat = UIScreen.main.bounds.height / 9.2
     private let cellWidth: CGFloat = UIScreen.main.bounds.width / 5.86
+    
+    // MARK: - Initializer
     
     init(frame: CGRect, dashboardType: DashboardType) {
         self.dashboardType = dashboardType
@@ -49,10 +54,7 @@ final class MainPuzzleCollectionView: UIView {
 
 extension MainPuzzleCollectionView {
     
-    private func setDelegate() {
-        puzzleCollectionView.dataSource = self
-        puzzleCollectionView.delegate = self
-    }
+    // MARK: - UI Components Property
     
     private func setUI() {
         self.backgroundColor = .clear
@@ -64,6 +66,8 @@ extension MainPuzzleCollectionView {
         }
     }
     
+    // MARK: - Layout Helper
+    
     private func setLayout() {
         self.addSubviews(puzzleCollectionView)
         
@@ -73,8 +77,15 @@ extension MainPuzzleCollectionView {
         }
     }
     
+    // MARK: - Methods
+    
     private func setRegister() {
         puzzleCollectionView.register(MainPuzzleCollectionViewCell.self, forCellWithReuseIdentifier: dashboardType.identifier)
+    }
+    
+    private func setDelegate() {
+        puzzleCollectionView.dataSource = self
+        puzzleCollectionView.delegate = self
     }
 }
 
