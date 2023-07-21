@@ -24,6 +24,7 @@ final class IndivisualDashboardViewController: UIViewController {
     private var todayString: String = Date().dateToServerString
     private var memberId: Int = 0
     private var projectId: Int = 0
+    private var projectTitle: String = ""
     
     let mainView: DashboardMainBoxView = DashboardMainBoxView(frame: .zero, type: .indivisual)
     let actionPlanView = ActionPlanView()
@@ -102,7 +103,8 @@ extension IndivisualDashboardViewController {
     @objc
     private func moveToCreateRetrospect() {
         // 수정해야함
-        let createRetrospectViewController = CreateReViewViewController(option: 1, templateID: 7)
+        let createRetrospectViewController = CreateReViewViewController()
+        createRetrospectViewController.passProjectTitle(title: self.projectTitle)
         self.navigationController?.pushViewController(createRetrospectViewController, animated: true)
     }
 }
@@ -112,8 +114,10 @@ extension IndivisualDashboardViewController {
         self.indivisualBoardCount = count
     }
     
-    func passUserInformation(memberId: Int, projectId: Int) {
+    func passUserInformation(memberId: Int, projectId: Int, projectTitle: String) {
+        self.projectTitle = projectTitle
         self.memberId = memberId
         self.projectId = projectId
+
     }
 }
