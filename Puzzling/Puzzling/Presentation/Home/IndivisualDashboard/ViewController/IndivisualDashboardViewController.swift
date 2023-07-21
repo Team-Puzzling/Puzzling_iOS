@@ -20,6 +20,8 @@ final class IndivisualDashboardViewController: UIViewController {
         return height
     }
     
+    private lazy var actionPlanHeight = view.frame.size.height/3.95
+    
     private var indivisualBoardCount: Int = 0
     private var todayString: String = Date().dateToServerString
     private var memberId: Int = 0
@@ -39,10 +41,10 @@ final class IndivisualDashboardViewController: UIViewController {
         setAction()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        mainView.puzzleCollectionView.reloadCollectionView()
-    }
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        mainView.puzzleCollectionView.reloadCollectionView()
+//    }
     
     deinit {
         print(className)
@@ -68,16 +70,16 @@ extension IndivisualDashboardViewController {
             $0.height.equalToSuperview().dividedBy(2.55)
         }
         
-        homeMainButton.snp.makeConstraints {
-            $0.horizontalEdges.equalToSuperview().inset(16)
-            $0.height.equalTo(55)
-            $0.bottom.equalToSuperview().inset(tabBarHeight + 19)
-        }
-        
         actionPlanView.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview()
             $0.top.equalTo(mainView.snp.bottom).offset(30)
-            $0.bottom.equalTo(homeMainButton.snp.top).offset(-49)
+            $0.height.equalTo(actionPlanHeight)
+        }
+        
+        homeMainButton.snp.makeConstraints {
+            $0.horizontalEdges.equalToSuperview().inset(16)
+            $0.height.equalTo(55)
+            $0.top.equalTo(actionPlanView.snp.bottom)
         }
     }
     
@@ -118,6 +120,5 @@ extension IndivisualDashboardViewController {
         self.projectTitle = projectTitle
         self.memberId = memberId
         self.projectId = projectId
-
     }
 }
