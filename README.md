@@ -775,7 +775,23 @@ final class MyViewController: UIViewController, UITableViewDataSource, UITableVi
 <summary> 🦊 규보 </summary>
 <div markdown="1">
 
-[🦊 뷰 및 기능](https://www.notion.so/kwonjeong/0f902051a9f34de8bb3d46bf9ed9bdca?pvs=4)
+**홈 뷰**
+공통 사항: 
+1. 공통 View 를 만들어, 두 개의 대시뷰에 대응하려 했습니다.
+2. 네트워크를 받아, 모든 뷰에 뿌렸습니다.
+3. 데이터에 대한 로직을 홈 뷰에서 작성했습니다.
+4. 알림 토스트뷰를 애니메이션을 통해 구현했습니다.
+
+1. 개인 대시뷰
+    - 오늘 날짜의 퍼즐은 점프를 합니다. 사용자에게 앱의 생동감을 부여합니다.
+    - 액션 플랜 뷰를 CollectionView 로 구현합니다.
+    - 데이터 로직을 통해 ”회고 작성하기” 버튼을 활성/비활성화합니다.
+2. 팀 대시뷰
+    - 랭킹뷰를 구현합니다.
+    - 팀원이 3명 이하인 경우, TableView 는 사용하지 않습니다.
+    - 데이터의 크기에 따라 ScrollView 의 높이를 조절합니다.
+3. 프로젝트 변경 바텀시트 뷰
+    - 프로젝트 Id 를 다시 홈뷰로 보내면서 새롭게 통신을 잇습니다.
 
 </div>
 </details>
