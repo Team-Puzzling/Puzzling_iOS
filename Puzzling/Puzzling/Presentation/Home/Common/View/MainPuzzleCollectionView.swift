@@ -10,8 +10,21 @@ import UIKit
 import SnapKit
 import Then
 
+protocol MainPuzzleCollectionPassEventForIndivisuals: AnyObject {
+    /// 서버에서 오는 Date 형태의 String 을 보냅니다.
+    func passTouchEventIndivisual(withDate: String)
+}
+
+protocol MaMainPuzzleCollectionPassEventForTeam: AnyObject {
+    /// 서버에서 오는 Date 형태의 String 을 보냅니다.
+    func passTouchEventTeam(withDate: String)
+}
+
 final class MainPuzzleCollectionView: UIView {
 
+    weak var delegateForIndivisual: MainPuzzleCollectionPassEventForIndivisuals?
+    weak var delegateForTeam: MaMainPuzzleCollectionPassEventForTeam?
+    
     private lazy var puzzleCollectionView = UICollectionView(frame: .zero, collectionViewLayout: self.setFlowLayout())
     private var modelData: [ModelProtocol] = []
     private var hasReviewed: Bool = false
@@ -106,6 +119,24 @@ extension MainPuzzleCollectionView: UICollectionViewDataSource, UICollectionView
                 cell.setDataBind(data: model[indexPath.item], index: indexPath.item)
                 return cell
             }
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? MainPuzzleCollectionViewCell else {
+            return
+        }
+        guard let dateString = cell.cellDate else {
+            print("TOUCH NOT ALLOWED")
+            return }
+        
+        switch dashboardType {
+        case .indivisual:
+            print("IndiPuzzleTOUCHED")
+            self.delegateForIndivisual?.passTouchEventIndivisual(withDate: dateString)
+        case .team:
+            print("TeamPuzzleTOUCHED")
+            self.delegateForTeam?.passTouchEventTeam(withDate: dateString)
         }
     }
 }
