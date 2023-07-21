@@ -143,7 +143,7 @@ extension MyProjectViewController: MyProjectPassEventDelegate {
     
     private func fetchProjectList() {
         guard let memberId = UserDefaults.standard.string(forKey: "memberId") else { return }
-        myProjectProvider.request(.projectList(memberId: "1")) { result in
+        myProjectProvider.request(.projectList(memberId: memberId)) { result in
             switch result {
             case .success(let result):
                 let status = result.statusCode

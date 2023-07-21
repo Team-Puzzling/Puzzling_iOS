@@ -76,6 +76,14 @@ final class ProjectCalendarView: UIView {
 }
 
 extension ProjectCalendarView {
+    
+    func setting() {
+        setUI()
+        setLayout()
+        setDelegate()
+        setDateFormatter()
+        fetchReviewDetail()
+    }
     private func setUI() {
         calendarView.do {
             $0.select(dateFormatter.date(from: selectedDate))
@@ -244,14 +252,19 @@ extension ProjectCalendarView {
     }
     
     func selectDate(date: String) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        dateFormatter.locale = Locale(identifier: "ko_KR")
-        dateFormatter.timeZone = TimeZone(identifier: "KST")
-        selectedDate = date
-        calendarView.select(dateFormatter.date(from: date))
+        print(date)
+        self.selectedDate = date
+        (self.selectedDate)
+        let dateAsDate: Date = dateFormatter.date(from: date) ?? Date()
+        calendarView.select(dateAsDate)
         let currentPage = calendarView.currentPage
+        
         headerLabel.text = headerDateFormatter.string(from: currentPage)
+        
+        
+        let returnDate = dateFormatter.string(from: dateAsDate)
+        guard let model = self.findData(date: returnDate) else { return }
+        self.delegate?.reviewDate(reviewDetailModel: model)
     }
 }
 
@@ -262,8 +275,9 @@ extension ProjectCalendarView {
     private func fetchReviewDetail() {
         
         guard let memberId = UserDefaults.standard.string(forKey: "memberId") else { return }
-        let projectId = "1"
-        reviewDetailProvider.request(.reviewDetail(memberId: "1", projectId: "1", startDate: startDate, endDate: endDate)) { result in
+        guard let projectId = UserDefaults.standard.string(forKey: "projectId") else { return }
+
+        reviewDetailProvider.request(.reviewDetail(memberId: memberId, projectId: projectId, startDate: startDate, endDate: endDate)) { result in
             switch result {
             case .success(let result):
                 let status = result.statusCode

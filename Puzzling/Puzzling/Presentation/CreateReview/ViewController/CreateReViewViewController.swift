@@ -284,6 +284,13 @@ extension CreateReViewViewController {
                                                object: nil)
     }
     
+    private func gotoReviewDetailView() {
+        let vc = ReviewDetailViewController()
+        vc.sendTitle(projectTitle, date: Date().dateToServerString)
+        vc.showToast(withImage: Image.checkW, message: "저장 완료!")
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     // MARK: - @objc Methods
     
     @objc
@@ -349,7 +356,6 @@ extension CreateReViewViewController {
     
     @objc
     private func saveButtonTapped() {
-//        showToast(message: "저장 완료!")
         let templateID = self.templateID
             switch templateID {
             case 1:
@@ -413,7 +419,11 @@ extension CreateReViewViewController {
     // MARK: - Network
     
         func fetchPreviousTemplate() {
-            previousTemplateProvider.request(.previousTemplate(memberID: "7", projectID: "2")) { result in
+            
+            guard let memberId = UserDefaults.standard.string(forKey: "memberId") else { return }
+            guard let projectId = UserDefaults.standard.string(forKey: "projectId") else { return }
+           
+            previousTemplateProvider.request(.previousTemplate(memberID: memberId, projectID: projectId)) { result in
                 switch result {
                 case .success(let result):
                     let status = result.statusCode
@@ -422,7 +432,6 @@ extension CreateReViewViewController {
                             guard let data = try result.map(GeneralResponse<PreviousTemplateResponce>.self).data else {
                                 return
                             }
-    
                             self.previousTemplateId = data.convertToPreviousTemplate()
                             let template = data
                             print(template)
@@ -451,22 +460,25 @@ extension CreateReViewViewController {
         }
     
     private func postReviewTIL(reviewTemplateId: Int, liked: String, lacked: String, actionPlan: String) {
+        
+        guard let memberId = UserDefaults.standard.string(forKey: "memberId") else { return }
+        guard let projectId = UserDefaults.standard.string(forKey: "projectId") else { return }
+        
         reviewTILModel.reviewTemplateId = reviewTemplateId
         reviewTILModel.liked = liked
         reviewTILModel.lacked = lacked
         reviewTILModel.actionPlan = actionPlan
         
-        reviewProvider.request(.reviewTIL(param: reviewTILModel.makePostReviewTILResponce(), memberID: "7", projectID: "2")) { result in
+        reviewProvider.request(.reviewTIL(param: reviewTILModel.makePostReviewTILResponce(), memberID: memberId, projectID: projectId)) { result in
             switch result {
             case .success(let result):
                 let status = result.statusCode
                 if status >= 200 && status < 300 {
                     do {
                         print("🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀")
-                        self.navigationController?.popViewController(animated: true)
+                        self.gotoReviewDetailView()
                         print("🪀🪀🪀성공적으로 저장 후 화면 전환🪀🪀🪀")
                         print("🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀")
-
                     } catch(let error){
                         print(error.localizedDescription)
                     }
@@ -481,6 +493,10 @@ extension CreateReViewViewController {
     }
     
     private func postReviewFiveF(reviewTemplateId: Int, fact: String, feeling: String, finding: String, feedback: String, actionPlan: String) {
+        
+        guard let memberId = UserDefaults.standard.string(forKey: "memberId") else { return }
+        guard let projectId = UserDefaults.standard.string(forKey: "projectId") else { return }
+        
         reviewFiveFModel.reviewTemplateId = reviewTemplateId
         reviewFiveFModel.fact = fact
         reviewFiveFModel.feeling = feeling
@@ -488,14 +504,13 @@ extension CreateReViewViewController {
         reviewFiveFModel.feedback = feedback
         reviewFiveFModel.actionPlan = actionPlan
         
-        reviewProvider.request(.reviewFiveF(param: reviewFiveFModel.makePostReviewFiveFResponce(), memberID: "7", projectID: "2")) { result in
+        reviewProvider.request(.reviewFiveF(param: reviewFiveFModel.makePostReviewFiveFResponce(), memberID: memberId, projectID: projectId)) { result in
             switch result {
             case .success(let result):
                 let status = result.statusCode
                 if status >= 200 && status < 300 {
                     do {
                         print("🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀")
-                        self.navigationController?.popViewController(animated: true)
                         print("🪀🪀🪀성공적으로 저장 후 화면 전환🪀🪀🪀")
                         print("🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀🪀")
 
@@ -514,6 +529,10 @@ extension CreateReViewViewController {
     
     private func postReviewAAR(reviewTemplateId: Int, initialGoal: String, result: String, difference: String,
                                persistence: String, actionPlan: String) {
+        
+        guard let memberId = UserDefaults.standard.string(forKey: "memberId") else { return }
+        guard let projectId = UserDefaults.standard.string(forKey: "projectId") else { return }
+        
         reviewAARModel.reviewTemplateId = reviewTemplateId
         reviewAARModel.initialGoal = initialGoal
         reviewAARModel.result = result
@@ -521,7 +540,7 @@ extension CreateReViewViewController {
         reviewAARModel.persistence = persistence
         reviewAARModel.actionPlan = actionPlan
         
-        reviewProvider.request(.reivewAAR(param: reviewAARModel.makePostReviewAARResponce(), memberID: "7", projectID: "2")) { result in
+        reviewProvider.request(.reivewAAR(param: reviewAARModel.makePostReviewAARResponce(), memberID: memberId, projectID: projectId)) { result in
             switch result {
             case .success(let result):
                 let status = result.statusCode
