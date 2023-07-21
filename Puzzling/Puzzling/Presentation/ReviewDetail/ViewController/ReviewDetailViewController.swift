@@ -14,16 +14,19 @@ protocol DetailViewType {}
 
 final class ReviewDetailViewController: UIViewController {
     
-    enum reviewDetail: CaseIterable {
-        case review, empty
+    enum reviewDetail {
+        case review
+        case empty
     }
     
     private var currentProjectTitle: String = "Project1"
     private var currentProjectId: Int = 0
     
     private var detailType: reviewDetail = .review
-    private var selectedDate: String = "2023-07-17"
+    private var selectedDate: String = ""
     private let projectCalenderView = ProjectCalendarView()
+    
+    private var navigationBool: Bool = false
     
     private func removeReviewDetailView(status: reviewDetail) {
         reviewDetailView?.alpha = 0
@@ -69,12 +72,18 @@ final class ReviewDetailViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setNavigationBar()
+        if navigationBool == false {
+            setNavigationBar()
+        } else {
+            setTodayNavigation(title: self.currentProjectTitle)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setCalendarViewLayout()
+        projectCalenderView.selectDate(date: self.selectedDate)
+        projectCalenderView.calendarView.reloadData()
     }
     
     deinit {
@@ -137,12 +146,43 @@ extension ReviewDetailViewController: UIGestureRecognizerDelegate {
         }
         navigationController?.interactivePopGestureRecognizer?.delegate = self
     }
+    
+    private func setTodayNavigation(title: String) {
+        self.navigationItem.leftBarButtonItem?.isHidden = true
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: Image.xMark,
+            style: .plain,
+            target: self,
+            action: #selector(gotoTabBar)
+        )
+        navigationItem.rightBarButtonItem?.tintColor = .gray500
+        
+        let attributes: [NSAttributedString.Key: Any] = [
+            NSAttributedString.Key.foregroundColor: UIColor.black000,
+            NSAttributedString.Key.font: UIFont.fontGuide(.heading4_kor)
+        ]
+        
+        if let titleLabel = navigationItem.titleView as? UILabel {
+            titleLabel.attributedText = NSAttributedString(string: title, attributes: attributes)
+        } else {
+            let titleLabel = UILabel()
+            titleLabel.attributedText = NSAttributedString(string: title, attributes: attributes)
+            navigationItem.titleView = titleLabel
+        }
+    }
 }
 
 extension ReviewDetailViewController {
     @objc
     private func backButtonTapped() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc
+    private func gotoTabBar() {
+        let vc = TabBarController()
+        UIApplication.shared.keyWindow?.replaceRootViewController(vc, animated: true, completion: nil)
     }
 }
 
@@ -171,5 +211,13 @@ extension ReviewDetailViewController {
     func passData(id: Int, title: String) {
         self.currentProjectTitle = title
         self.currentProjectId = id
+    }
+    
+    func sendTitle(_ title: String, date: String) {
+        navigationBool = true
+        self.selectedDate = date
+        print("❌❌❌❌❌❌")
+        print(date, self.selectedDate)
+        print("❌❌❌❌❌❌")
     }
 }

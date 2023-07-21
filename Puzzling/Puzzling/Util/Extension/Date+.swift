@@ -12,6 +12,8 @@ extension Date {
     var dateToServerString: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        dateFormatter.timeZone = TimeZone(identifier: "KST")
         let result = dateFormatter.string(from: self)
         return result
     }
@@ -21,6 +23,7 @@ extension Date {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEEEE"
         dateFormatter.locale = Locale(identifier: "ko_KR")
+        dateFormatter.timeZone = TimeZone(identifier: "KST")
         let dayString = dateFormatter.string(from: self)
         return dayString
     }

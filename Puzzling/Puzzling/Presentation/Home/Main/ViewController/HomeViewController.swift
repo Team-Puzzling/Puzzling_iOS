@@ -183,15 +183,15 @@ extension HomeViewController {
                     self?.indivisualDashboardViewController.mainView.reloadPuzzleView(withTodayReviewedCheck: hasReviewed)
                     self?.indivisualDashboardViewController.passBoardCount(count: totalPuzzleBoardCount)
                     
-//                    if data.hasTodayReview == true {
-//                        self?.indivisualDashboardViewController.homeMainButton.enableButton(toType: .done)
-//                        return
-//                    }
-//
-//                    if data.isReviewDay == false {
-//                        self?.indivisualDashboardViewController.homeMainButton.enableButton(toType: .notToday)
-//                        return
-//                    }
+                    if data.hasTodayReview == true {
+                        self?.indivisualDashboardViewController.homeMainButton.enableButton(toType: .done)
+                        return
+                    }
+
+                    if data.isReviewDay == false {
+                        self?.indivisualDashboardViewController.homeMainButton.enableButton(toType: .notToday)
+                        return
+                    }
                     self?.indivisualDashboardViewController.homeMainButton.enableButton(toType: .today)
                 case 400:
                     print(result.description)

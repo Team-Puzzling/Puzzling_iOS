@@ -138,6 +138,7 @@ extension MyProjectTableViewCell {
 extension MyProjectTableViewCell {
     @objc
     private func myReviewButtonTapped() {
+        UserDefaults.standard.set(self.projectId, forKey: "projectId")
         self.delegate?.passTouchEvent(projectTitle: self.projectTitle, projectId: self.projectId)
     }
 }
