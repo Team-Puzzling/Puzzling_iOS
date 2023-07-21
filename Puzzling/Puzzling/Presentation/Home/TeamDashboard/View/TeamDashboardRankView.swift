@@ -12,12 +12,18 @@ import Then
 
 final class TeamDashboardRankView: UIView {
     
+    // MARK: - UI Components
+    
     private let projectTitleLabel = UILabel()
     private var rankView = TeamRankPodiumView()
     private let rankTableView = UITableView()
     private var orderedTableData: [TeamProjectRank] = []
     
+    // MARK: - Properties
+    
     private let rankViewHeight: CGFloat = UIScreen.main.bounds.height/5.2
+    
+    // MARK: - Initializer
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -33,10 +39,7 @@ final class TeamDashboardRankView: UIView {
 
 extension TeamDashboardRankView {
     
-    private func setDelegate() {
-        rankTableView.dataSource = self
-        rankTableView.delegate = self
-    }
+    // MARK: - UI Components Property
     
     private func setUI() {
         projectTitleLabel.do {
@@ -50,6 +53,8 @@ extension TeamDashboardRankView {
             $0.isScrollEnabled = false
         }
     }
+    
+    // MARK: - Layout Helper
     
     private func setLayout() {
         self.addSubviews(projectTitleLabel, rankView, rankTableView)
@@ -70,6 +75,13 @@ extension TeamDashboardRankView {
             $0.top.equalTo(rankView.snp.bottom).offset(10)
             $0.bottom.equalToSuperview()
         }
+    }
+    
+    // MARK: - Methods
+    
+    private func setDelegate() {
+        rankTableView.dataSource = self
+        rankTableView.delegate = self
     }
 }
 

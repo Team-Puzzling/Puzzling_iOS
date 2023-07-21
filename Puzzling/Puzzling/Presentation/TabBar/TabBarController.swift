@@ -20,6 +20,11 @@ class TabBarController: UITabBarController {
         setTabBarUI()
         setTabBarItems()
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
 }
 
 extension TabBarController {
@@ -33,8 +38,6 @@ extension TabBarController {
         
         TabBarItemType.allCases.forEach {
             let tabBarItem = $0.setTabBarItem()
-//            tabBarItem.imageInsets = UIEdgeInsets(top: 12, left: 0, bottom: -12, right: 0)
-//            tabBarItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 12)
             tabs[$0.rawValue].tabBarItem = tabBarItem
             tabs[$0.rawValue].tabBarItem.tag = $0.rawValue
         }
@@ -48,5 +51,6 @@ extension TabBarController {
         tabBar.layer.shadowOpacity = 0.2
         tabBar.layer.shadowOffset = CGSize(width: 0, height: 0)
         tabBar.layer.shadowRadius = 0.7
+        tabBar.tintColor = .blue400
     }
 }

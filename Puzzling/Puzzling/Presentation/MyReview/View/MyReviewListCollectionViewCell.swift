@@ -12,8 +12,6 @@ import Then
 
 final class MyReviewListCollectionViewCell: UICollectionViewCell {
     
-    static var isFromNib: Bool = false
-    
     // MARK: - UI Components
     
     private let view = UIView()
@@ -21,7 +19,11 @@ final class MyReviewListCollectionViewCell: UICollectionViewCell {
     private let descriptionLabel = UILabel()
     private let chevronRightLabel = UIImageView()
     
-    // MARK: - Life Cycles
+    // MARK: - Properties
+    
+    static var isFromNib: Bool = false
+    
+    // MARK: - Initializer
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -35,9 +37,9 @@ final class MyReviewListCollectionViewCell: UICollectionViewCell {
     }
 }
 
-// MARK: - Extensions
-
 extension MyReviewListCollectionViewCell {
+    
+    // MARK: - UI Components Property
     
     private func setUI() {
         view.do {
@@ -59,6 +61,8 @@ extension MyReviewListCollectionViewCell {
             $0.image = Image.chevronRight
         }
     }
+    
+    // MARK: - Layout Helper
     
     private func setLayout() {
         contentView.addSubview(view)
@@ -89,6 +93,8 @@ extension MyReviewListCollectionViewCell {
 }
 
 extension MyReviewListCollectionViewCell {
+    
+    // MARK: - Methods
     
     func setDataBind(_ reviewListData: ReviewListResponse) {
         let dateFormatter = DateFormatter()

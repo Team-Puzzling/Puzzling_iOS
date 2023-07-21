@@ -12,8 +12,12 @@ import Then
 
 final class ActionPlanCollectionViewCell: UICollectionViewCell {
     
+    // MARK: - UI Components
+    
     private let actionTextView = UITextView()
     private let dateLabel = UILabel()
+    
+    // MARK: - Initializer
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -36,6 +40,8 @@ final class ActionPlanCollectionViewCell: UICollectionViewCell {
 }
 
 extension ActionPlanCollectionViewCell {
+    
+    // MARK: - UI Components Property
     
     private func setUI() {
         self.backgroundColor = .gray100
@@ -61,6 +67,8 @@ extension ActionPlanCollectionViewCell {
         }
     }
     
+    // MARK: - Layout Helper
+    
     private func setLayout() {
         self.addSubviews(actionTextView, dateLabel)
         
@@ -78,6 +86,9 @@ extension ActionPlanCollectionViewCell {
 }
 
 extension ActionPlanCollectionViewCell {
+    
+    // MARK: - Methods
+    
     func setDataBind(dateString: String, content: String) {
         let dateConverted = dateString.convertDateToKoreanDateFormat()
         dateLabel.text = dateConverted

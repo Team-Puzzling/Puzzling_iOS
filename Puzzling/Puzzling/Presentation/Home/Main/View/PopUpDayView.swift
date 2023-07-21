@@ -9,13 +9,18 @@ import UIKit
 
 final class PopUpDayView: UIView {
     
-    private var projectTitle: String!
-    
-    private var daysString: String!
+    // MARK: - UI Components
     
     private let projectTitleLabel = UILabel()
     private let daysLabel = UILabel()
     private let commentLabel = UILabel()
+    
+    // MARK: - Properties
+    
+    private var projectTitle: String!
+    private var daysString: String!
+
+    // MARK: - Initializer
     
     init(frame: CGRect, projectTitle: String, daysString: String) {
         self.projectTitle = projectTitle
@@ -31,6 +36,8 @@ final class PopUpDayView: UIView {
 }
 
 extension PopUpDayView {
+    
+    // MARK: - UI Components Property
     
     private func setUI() {
         self.backgroundColor = .white000
@@ -62,6 +69,8 @@ extension PopUpDayView {
             $0.textAlignment = .left
         }
     }
+    
+    // MARK: - Layout Helper
     
     private func setLayout() {
         self.addSubviews(projectTitleLabel, commentLabel, daysLabel)

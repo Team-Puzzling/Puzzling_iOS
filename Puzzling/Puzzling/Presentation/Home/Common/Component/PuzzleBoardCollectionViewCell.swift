@@ -17,8 +17,12 @@ struct PuzzleBoardData {
 
 final class PuzzleBoardCollectionViewCell: UICollectionViewCell {
     
+    // MARK: - UI Components
+    
     private let dateLabel = UILabel()
     private let puzzleImageView = UIImageView()
+    
+    // MARK: - Initializer
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -33,6 +37,8 @@ final class PuzzleBoardCollectionViewCell: UICollectionViewCell {
 
 extension PuzzleBoardCollectionViewCell {
     
+    // MARK: - UI Components Property
+    
     private func setUI() {
         dateLabel.do {
             $0.font = .fontGuide(.body2_bold_kor)
@@ -43,6 +49,8 @@ extension PuzzleBoardCollectionViewCell {
             $0.contentMode = .scaleAspectFit
         }
     }
+    
+    // MARK: - Layout Helper
     
     private func setLayout() {
         self.addSubviews(dateLabel, puzzleImageView)
@@ -61,6 +69,9 @@ extension PuzzleBoardCollectionViewCell {
 }
 
 extension PuzzleBoardCollectionViewCell {
+    
+    // MARK: - Methods
+    
     func passPuzzleInformation(dateString: String, puzzleImageName: String) {
         self.dateLabel.text = dateString
         self.puzzleImageView.image = UIImage(named: puzzleImageName)

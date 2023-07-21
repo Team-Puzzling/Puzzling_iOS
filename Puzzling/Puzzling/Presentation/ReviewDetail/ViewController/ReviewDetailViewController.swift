@@ -19,49 +19,20 @@ final class ReviewDetailViewController: UIViewController {
         case empty
     }
     
-    private var currentProjectTitle: String = "Project1"
-    private var currentProjectId: Int = 0
+    // MARK: - UI Components
     
-    private var detailType: reviewDetail = .review
-    private var selectedDate: String = ""
     private let projectCalenderView = ProjectCalendarView()
-    
-    private var navigationBool: Bool = false
-    
-    private func removeReviewDetailView(status: reviewDetail) {
-        reviewDetailView?.alpha = 0
-        reviewDetailView?.removeFromSuperview()
-        reviewDetailView = nil
-        detailType = status
-    }
-    
-    private func addReviewDetailView(data: ReviewDetailModel?) {
-        guard let data else { return }
-        reviewDetailView = ReviewDetailView()
-        reviewDetailView?.setDataBind(data: data)
-        
-        view.addSubview(reviewDetailView ?? UIView())
-        
-        reviewDetailView?.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(160)
-            $0.horizontalEdges.bottom.equalToSuperview()
-        }
-    }
-    
-    private func addEmptyView() {
-        reviewDetailView = ReviewDetailEmptyView()
-        
-        view.addSubview(reviewDetailView ?? UIView())
-        
-        reviewDetailView?.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).offset(160)
-            $0.horizontalEdges.bottom.equalToSuperview()
-        }
-    }
-    
     private var reviewDetailView: DetailTypeView?
     
-    // MARK: - Lifecycle
+    // MARK: - Properties
+    
+    private var currentProjectTitle: String = "Project1"
+    private var currentProjectId: Int = 0
+    private var detailType: reviewDetail = .review
+    private var selectedDate: String = ""
+    private var navigationBool: Bool = false
+    
+    // MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,13 +64,47 @@ final class ReviewDetailViewController: UIViewController {
 
 extension ReviewDetailViewController {
     
-    private func setDelegate() {
-        projectCalenderView.delegate = self
+    private func removeReviewDetailView(status: reviewDetail) {
+        reviewDetailView?.alpha = 0
+        reviewDetailView?.removeFromSuperview()
+        reviewDetailView = nil
+        detailType = status
     }
+    
+    private func addReviewDetailView(data: ReviewDetailModel?) {
+        guard let data else { return }
+        reviewDetailView = ReviewDetailView()
+        reviewDetailView?.setDataBind(data: data)
+        
+        view.addSubview(reviewDetailView ?? UIView())
+        
+        reviewDetailView?.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(160)
+            $0.horizontalEdges.bottom.equalToSuperview()
+        }
+    }
+    
+    private func addEmptyView() {
+        reviewDetailView = ReviewDetailEmptyView()
+        
+        view.addSubview(reviewDetailView ?? UIView())
+        
+        reviewDetailView?.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(160)
+            $0.horizontalEdges.bottom.equalToSuperview()
+        }
+    }
+}
+
+extension ReviewDetailViewController {
+    
+    // MARK: - UI Components Property
     
     private func setUI() {
         view.backgroundColor = .white000
     }
+    
+    // MARK: - Layout Helper
     
     private func setLayout() {
         view.addSubviews(projectCalenderView)
@@ -121,6 +126,12 @@ extension ReviewDetailViewController {
 }
 
 extension ReviewDetailViewController: UIGestureRecognizerDelegate {
+    
+    // MARK: - Methods
+    
+    private func setDelegate() {
+        projectCalenderView.delegate = self
+    }
     
     private func setNavigationBar() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(
@@ -149,7 +160,6 @@ extension ReviewDetailViewController: UIGestureRecognizerDelegate {
     
     private func setTodayNavigation(title: String) {
         self.navigationItem.leftBarButtonItem?.isHidden = true
-        
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: Image.xMark,
             style: .plain,
@@ -174,6 +184,9 @@ extension ReviewDetailViewController: UIGestureRecognizerDelegate {
 }
 
 extension ReviewDetailViewController {
+    
+    // MARK: - @objc Methods
+    
     @objc
     private func backButtonTapped() {
         self.navigationController?.popViewController(animated: true)

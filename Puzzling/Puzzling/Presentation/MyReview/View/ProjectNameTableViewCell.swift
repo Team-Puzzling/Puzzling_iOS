@@ -12,6 +12,14 @@ import Then
 
 final class ProjectNameTableViewCell: UITableViewCell {
     
+    // MARK: - UI Components
+    
+    private let nameLabel = UILabel()
+    private let divisionLabel = UILabel()
+    private let pointImageView = UIImageView()
+    
+    // MARK: - Properties
+    
     private var name: String = "Project Name" {
         didSet {
             nameLabel.text = name
@@ -19,9 +27,7 @@ final class ProjectNameTableViewCell: UITableViewCell {
     }
     private var id: Int = 0
     
-    private let nameLabel = UILabel()
-    private let divisionLabel = UILabel()
-    private let pointImageView = UIImageView()
+    // MARK: - Initializer
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -41,6 +47,8 @@ final class ProjectNameTableViewCell: UITableViewCell {
 }
 
 extension ProjectNameTableViewCell {
+    
+    // MARK: - UI Components Property
     
     private func setUI() {
         contentView.backgroundColor = .background050
@@ -62,6 +70,8 @@ extension ProjectNameTableViewCell {
             $0.isHidden = true
         }
     }
+    
+    // MARK: - Layout Helper
     
     private func setLayout() {
         
@@ -86,6 +96,9 @@ extension ProjectNameTableViewCell {
 }
 
 extension ProjectNameTableViewCell {
+    
+    // MARK: - Methods
+    
     func setDataBind(id: Int, name: String) {
         self.id = id
         self.name = name

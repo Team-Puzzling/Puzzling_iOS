@@ -13,13 +13,15 @@ import Then
 
 final class ReviewDetailCollectionViewCell: UICollectionViewCell {
     
-    static var isFromNib: Bool = false
-    
     // MARK: - UI Components
     
     private let titleLabel = UILabel()
     private let descriptionTextView = UITextView()
     private let divisionLabel = UILabel()
+    
+    // MARK: - Properties
+    
+    static var isFromNib: Bool = false
     
     // MARK: - Life Cycles
     
@@ -35,9 +37,9 @@ final class ReviewDetailCollectionViewCell: UICollectionViewCell {
     }
 }
 
-// MARK: - Extensions
-
 extension ReviewDetailCollectionViewCell {
+    
+    // MARK: - UI Components Property
     
     private func setUI() {
         titleLabel.do {
@@ -58,6 +60,8 @@ extension ReviewDetailCollectionViewCell {
             $0.backgroundColor = .gray300
         }
     }
+    
+    // MARK: - Layout Helper
     
     private func setLayout() {
         contentView.addSubviews(titleLabel, descriptionTextView, divisionLabel)
@@ -82,6 +86,8 @@ extension ReviewDetailCollectionViewCell {
 }
 
 extension ReviewDetailCollectionViewCell {
+    
+    // MARK: - Methods
     
     func setDataBind(title: String, description: String) {
         titleLabel.text = title

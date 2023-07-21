@@ -335,6 +335,8 @@ extension FiveFView {
         }
     }
     
+    // MARK: - Methods
+    
     private func setDelegate() {
         factTextView.delegate = self
         feelingTextView.delegate = self

@@ -12,8 +12,15 @@ import Then
 
 final class MyProjectTableHeaderView: UITableViewHeaderFooterView {
     
-    private let nickname: String = UserDefaults.standard.string(forKey: "name") ?? "공듀"
+    // MARK: - UI Components
+    
     private let nicknameLabel = UILabel()
+    
+    // MARK: - Properties
+    
+    private let nickname: String = UserDefaults.standard.string(forKey: "name") ?? "공듀"
+    
+    // MARK: - Initializer
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
@@ -24,6 +31,11 @@ final class MyProjectTableHeaderView: UITableViewHeaderFooterView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+extension MyProjectTableHeaderView {
+    
+    // MARK: - UI Components Property
     
     private func setUI() {
         nicknameLabel.do {
@@ -32,6 +44,8 @@ final class MyProjectTableHeaderView: UITableViewHeaderFooterView {
             $0.font = .fontGuide(.heading2_kor)
         }
     }
+    
+    // MARK: - View Life Cycle
     
     private func setLayout() {
         contentView.addSubview(nicknameLabel)

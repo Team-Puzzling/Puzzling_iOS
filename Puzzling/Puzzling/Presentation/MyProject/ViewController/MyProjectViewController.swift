@@ -13,19 +13,18 @@ import Moya
 
 final class MyProjectViewController: UIViewController {
     
-    private let myProjectProvider = MoyaProvider<MyProjectService>(plugins:[NetworkLoggerPlugin()])
-    private let myProjectTableView = UITableView(frame: .zero, style: .grouped)
-    private var myProjectData: [ProjectListResponse] = []
+    // MARK: - UI Components
     
+    private let myProjectTableView = UITableView(frame: .zero, style: .grouped)
+    
+    // MARK: - Properties
+    
+    private let myProjectProvider = MoyaProvider<MyProjectService>(plugins:[NetworkLoggerPlugin()])
+    private var myProjectData: [ProjectListResponse] = []
     private var currentProjectId: Int = 0
     private var currentProjectTitle: String = ""
     
-    // MARK: - Lifecycle
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setNavigationBar()
-    }
+    // MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,12 +34,30 @@ final class MyProjectViewController: UIViewController {
         setRegister()
         fetchProjectList()
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setNavigationBar()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    
     deinit {
         print(className)
     }
 }
 
 extension MyProjectViewController {
+    
+    // MARK: - UI Components Property
     
     private func setUI() {
         view.backgroundColor = .white000
@@ -49,6 +66,8 @@ extension MyProjectViewController {
             $0.backgroundColor = .clear
         }
     }
+    
+    // MARK: - Layout Helper
     
     private func setLayout() {
         view.addSubviews(myProjectTableView)
@@ -59,6 +78,8 @@ extension MyProjectViewController {
             $0.bottom.equalToSuperview()
         }
     }
+    
+    // MARK: - Methods
     
     private func setDelegate() {
         myProjectTableView.delegate = self
@@ -100,8 +121,11 @@ extension MyProjectViewController {
 }
 
 extension MyProjectViewController {
+    
+    // MARK: - @objc Methods
     @objc
     private func notificationButtonTapped() { }
+    
 }
 
 extension MyProjectViewController: UITableViewDataSource, UITableViewDelegate {
@@ -112,6 +136,7 @@ extension MyProjectViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueCell(type: MyProjectTableViewCell.self, indexPath: indexPath)
         cell.delegate = self
+        cell.delegateVC = self
         cell.setDataBind(myProjectData[indexPath.row])
         return cell
     }
@@ -130,13 +155,22 @@ extension MyProjectViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-extension MyProjectViewController: MyProjectPassEventDelegate {
+extension MyProjectViewController: MyProjectPassEventDelegate, MyProjectSwitchTabDelegate {
+    func passTouchEvent(newProject: Int) {
+        self.tabBarController?.selectedIndex = 0
+        UserDefaults.standard.setValue(newProject, forKey: "projectId")
+    }
+    
     func passTouchEvent(projectTitle: String, projectId: Int) {
         self.currentProjectTitle = projectTitle
         self.currentProjectId = projectId
         let vc = MyReviewListViewController()
         vc.passData(id: self.currentProjectId, title: self.currentProjectTitle)
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func passReviewButton() {
+        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Network

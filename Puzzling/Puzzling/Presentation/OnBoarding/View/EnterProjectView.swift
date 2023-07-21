@@ -11,9 +11,9 @@ import SnapKit
 import Then
 
 class EnterProjectView: UIView {
-
+    
     // MARK: - UI Components
-
+    
     private let titleImage = UIImageView()
     private let newProjectLogo = UIImageView()
     private let newProjectTitle = UILabel()
@@ -29,24 +29,27 @@ class EnterProjectView: UIView {
     var joinButtonHandler: (() -> Void)?
     
     // MARK: - Initializer
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUI()
         setLayout()
         setAddTarget()
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
 
+extension EnterProjectView {
+    
     // MARK: - UI Components Property
-
+    
     private func setUI(){
         
         self.backgroundColor = .white000
-
+        
         titleImage.do {
             $0.image = Image.puzzlingTitle
         }
@@ -88,10 +91,10 @@ class EnterProjectView: UIView {
             $0.titleLabel?.font = .fontGuide(.body1_bold_kor)
         }
     }
-
-
+    
+    
     // MARK: - Layout Helper
-
+    
     private func setLayout() {
         
         addSubviews(titleImage, newProjectLogo, newProjectTitle,
@@ -143,9 +146,9 @@ class EnterProjectView: UIView {
             $0.centerX.equalToSuperview()
         }
     }
-
+    
     // MARK: - Methods
-
+    
     private func setAddTarget() {
         newProjectButton.addTarget(self, action: #selector(newProjectButtonDidTap), for: .touchUpInside)
         joinButton.addTarget(self, action: #selector(joinButtonDidTap), for: .touchUpInside)
@@ -155,7 +158,7 @@ class EnterProjectView: UIView {
         let screenHeight = UIScreen.main.bounds.height
         return screenHeight / 2
     }
-
+    
     // MARK: - @objc Methods
     
     @objc

@@ -14,20 +14,25 @@ import Moya
 
 final class TeamMemberCalendarView: UIView {
     
-    private var selectedDate: String = ""
+    // MARK: - UI Components
+    
     private lazy var calendarView = FSCalendar(frame: .zero)
-    private var calendarViewHeight = NSLayoutConstraint()
     private lazy var headerLabel = UILabel()
     private lazy var testLabel = UILabel()
     
+    // MARK: - Properties
+    
+    private var calendarViewHeight = NSLayoutConstraint()
+    private var selectedDate: String = ""
     private let dateFormatter = DateFormatter()
     private var teamMemberList: [TeamMemberModel] = [TeamMemberModel(reviewDay: "", reviewDate: "", reviewWriters: nil, nonReviewWriters: nil)]
-
     private let headerDateFormatter = DateFormatter().then {
         $0.dateFormat = "YYYY년 M월"
         $0.locale = Locale(identifier: "ko_kr")
         $0.timeZone = TimeZone(identifier: "KST")
     }
+    
+    // MARK: - Initializer
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -51,6 +56,9 @@ final class TeamMemberCalendarView: UIView {
 }
 
 extension TeamMemberCalendarView {
+    
+    // MARK: - UI Components Property
+    
     private func setUI() {
         calendarView.do {
             
@@ -88,6 +96,9 @@ extension TeamMemberCalendarView {
     }
     
     private func setLayout() {
+        
+        // MARK: - Layout Helper
+        
         self.addSubviews(calendarView, headerLabel)
         
         calendarView.snp.makeConstraints {
@@ -99,6 +110,8 @@ extension TeamMemberCalendarView {
             $0.leading.equalToSuperview().inset(8)
         }
     }
+    
+    // MARK: - Methods
     
     private func setDelegate() {
         calendarView.delegate = self
@@ -138,6 +151,9 @@ extension TeamMemberCalendarView {
 }
 
 extension TeamMemberCalendarView {
+    
+    // MARK: - @objc Methods
+    
     @objc
     private func getListNotification(_ notification: Notification) {
         let listNotification = notification.userInfo?["userInfo"]
@@ -154,6 +170,7 @@ extension TeamMemberCalendarView {
 }
 
 extension TeamMemberCalendarView: FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
+    
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
         let currentPage = calendarView.currentPage
         headerLabel.text = headerDateFormatter.string(from: currentPage)

@@ -10,21 +10,31 @@ import UIKit
 import SnapKit
 import Then
 
+protocol MyProjectSwitchTabDelegate: AnyObject {
+    func passTouchEvent(newProject: Int)
+}
+
 protocol MyProjectPassEventDelegate: AnyObject {
     func passTouchEvent(projectTitle: String, projectId: Int)
 }
 
 final class MyProjectTableViewCell: UITableViewCell {
     
-    weak var delegate: MyProjectPassEventDelegate?
+    // MARK: - UI Components
     
     private let view = UIView()
     private let projectNameLabel = UILabel()
     private let durationLabel = UILabel()
     private let dashboardButton = UIButton()
     let myReviewButton = UIButton()
+    
+    // MARK: - Properties
+    
     private var projectTitle: String = ""
     private var projectId: Int = 0
+    
+    weak var delegate: MyProjectPassEventDelegate?
+    weak var delegateVC: MyProjectSwitchTabDelegate?
     
     private let dateFormatter = DateFormatter().then {
         $0.dateFormat = "yyyy-MM-dd"
@@ -32,9 +42,10 @@ final class MyProjectTableViewCell: UITableViewCell {
         $0.timeZone = TimeZone(identifier: "KST")
     }
     
+    // MARK: - Initializer
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
         setUI()
         setLayout()
         setAddTarget()
@@ -48,8 +59,9 @@ final class MyProjectTableViewCell: UITableViewCell {
 
 extension MyProjectTableViewCell {
     
+    // MARK: - UI Components Property
+    
     private func setUI() {
-        
         separatorInset.left = 0
         selectionStyle = .none
         
@@ -84,7 +96,10 @@ extension MyProjectTableViewCell {
         }
     }
     
+    // MARK: - Layout Helper
+    
     private func setLayout() {
+        
         contentView.addSubview(view)
         view.addSubviews(projectNameLabel, durationLabel, dashboardButton, myReviewButton)
         
@@ -120,7 +135,10 @@ extension MyProjectTableViewCell {
         }
     }
     
+    // MARK: - Methods
+    
     private func setAddTarget() {
+        dashboardButton.addTarget(self, action: #selector(dashboardButtonTapped), for: .touchUpInside)
         myReviewButton.addTarget(self, action: #selector(myReviewButtonTapped), for: .touchUpInside)
     }
     
@@ -136,14 +154,27 @@ extension MyProjectTableViewCell {
 }
 
 extension MyProjectTableViewCell {
+    
+    // MARK: - @objc Methods
+    
     @objc
     private func myReviewButtonTapped() {
         UserDefaults.standard.set(self.projectId, forKey: "projectId")
         self.delegate?.passTouchEvent(projectTitle: self.projectTitle, projectId: self.projectId)
+//        self.delegate?.passReviewButton()
+//        @objc
+//        private func gotoTabBar() {
+//        }
+    }
+    
+    @objc
+    private func dashboardButtonTapped() {
+        self.delegateVC?.passTouchEvent(newProject: self.projectId)
     }
 }
 
 extension MyProjectTableViewCell {
+    
     private func calculateDays(date: String) -> Int {
         var daysCount: Int = 0
         guard let startDate = dateFormatter.date(from: date) else { return 0 }
@@ -160,6 +191,7 @@ extension MyProjectTableViewCell {
 }
 
 extension MyProjectTableViewCell {
+    
     func setDataBind(_ data: ProjectListResponse) {
         self.projectTitle = data.projectName
         self.projectId = data.projectId

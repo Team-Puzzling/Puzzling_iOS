@@ -12,9 +12,13 @@ import Then
 
 final class TeamMemberTableViewCell: UITableViewCell {
     
+    // MARK: - UI Components
+    
     private let nicknameLabel = UILabel()
     private let partLabel = UILabel()
     private let divisionLabel = UILabel()
+    
+    // MARK: - Initializer
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -26,6 +30,11 @@ final class TeamMemberTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
+}
+
+extension TeamMemberTableViewCell {
+    
+    // MARK: - UI Components Property
     
     private func setUI() {
         
@@ -46,6 +55,8 @@ final class TeamMemberTableViewCell: UITableViewCell {
             $0.backgroundColor = .gray200
         }
     }
+    
+    // MARK: - Layout Helper
     
     private func setLayout() {
         
@@ -72,6 +83,9 @@ final class TeamMemberTableViewCell: UITableViewCell {
 }
 
 extension TeamMemberTableViewCell {
+    
+    // MARK: - Methods
+    
     func setDataBind(nickname: String, part: String) {
         nicknameLabel.text = nickname
         partLabel.text = part

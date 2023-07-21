@@ -8,16 +8,18 @@
 import UIKit
 
 final class TeamRankTableViewCell: UITableViewCell {
+    
+    // MARK: - UI Components
 
     private let rankNumberLabel = UILabel()
-    
     private let userStackView = UIStackView()
     private let userNameLabel = UILabel()
     private let roleLabel = UILabel()
-    
     private let piecesStackView = UIStackView()
     private let piecesCountLabel = UILabel()
     private let pieceLabel = UILabel()
+    
+    // MARK: - Initializer
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -31,6 +33,8 @@ final class TeamRankTableViewCell: UITableViewCell {
 }
 
 extension TeamRankTableViewCell {
+    
+    // MARK: - UI Components Property
 
     private func setUI() {
         self.backgroundColor = .clear
@@ -75,6 +79,8 @@ extension TeamRankTableViewCell {
         }
     }
     
+    // MARK: - Layout Helper
+    
     private func setLayout() {
         self.addSubviews(rankNumberLabel, userStackView, piecesStackView)
         
@@ -107,6 +113,9 @@ extension TeamRankTableViewCell {
 }
 
 extension TeamRankTableViewCell {
+    
+    // MARK: - Methods
+    
     func setDataBind(rank: Int, teamData: TeamProjectRank) {
         rankNumberLabel.text = "\(rank)"
         userNameLabel.text = teamData.memberNickname

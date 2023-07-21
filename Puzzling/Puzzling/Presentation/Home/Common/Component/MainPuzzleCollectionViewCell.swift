@@ -9,11 +9,18 @@ import UIKit
 
 final class MainPuzzleCollectionViewCell: UICollectionViewCell {
     
+    // MARK: - UI Components
+    
     private let puzzleImageView = UIImageView()
     private let dateLabel = UILabel()
+    
+    // MARK: - Properties
+    
     var reviewId: Int? = nil
     var cellDate: String? = nil
     var todayDate = Date().dateToServerString
+    
+    // MARK: - Initializer
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -37,6 +44,8 @@ final class MainPuzzleCollectionViewCell: UICollectionViewCell {
 
 extension MainPuzzleCollectionViewCell {
     
+    // MARK: - UI Components Property
+    
     private func setUI() {
         puzzleImageView.do {
             $0.contentMode = .scaleAspectFit
@@ -47,6 +56,8 @@ extension MainPuzzleCollectionViewCell {
             $0.textColor = .blue500
         }
     }
+    
+    // MARK: - Layout Helper
     
     private func setLayout() {
         self.addSubviews(puzzleImageView, dateLabel)
@@ -64,6 +75,9 @@ extension MainPuzzleCollectionViewCell {
 }
 
 extension MainPuzzleCollectionViewCell {
+    
+    // MARK: - Methods
+    
     /// IndivisualDashboard 에서 사용합니다.
     func setDataBind(data: UserPuzzleBoard, isTodayReviewed: Bool) {
         // 완성했는지를 boolean 으로 받자.

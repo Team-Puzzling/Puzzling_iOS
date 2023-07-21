@@ -13,9 +13,7 @@ import SnapKit
 
 final class BottomSheetViewController: UIViewController {
     
-    // MARK: - Properties
-    var selectedOption: String?
-    var onOptionSelected: ((Int) -> Void)?
+    // MARK: - UI Components
     
     private let optionFirstView = UIView()
     private let optionSecondView = UIView()
@@ -32,6 +30,11 @@ final class BottomSheetViewController: UIViewController {
     private let optionFirstSubtitle = UILabel()
     private let optionSecondSubtitle = UILabel()
     private let optionThirdSubtitle = UILabel()
+    
+    // MARK: - Properties
+    
+    var selectedOption: String?
+    var onOptionSelected: ((Int) -> Void)?
     
     let templatecaseProvider = MoyaProvider<CreateRetrospectService>(plugins: [NetworkLoggerPlugin()])
     private var templateList: [TemplateCaseModel] = []
