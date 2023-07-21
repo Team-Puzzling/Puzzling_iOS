@@ -125,7 +125,6 @@
 		250D5CC12A68002100F648BD /* TILView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250D5CC02A68002100F648BD /* TILView.swift */; };
 		250D5CC42A68004600F648BD /* BottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250D5CC32A68004600F648BD /* BottomSheetViewController.swift */; };
 		250D5CC62A68005700F648BD /* CreateReViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250D5CC52A68005700F648BD /* CreateReViewViewController.swift */; };
-		250D5CC82A68007000F648BD /* ReviewTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 250D5CC72A68007000F648BD /* ReviewTestViewController.swift */; };
 		251C00D52A5D205300F6838C /* CustomRadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251C00D42A5D205300F6838C /* CustomRadioButton.swift */; };
 		255026DF2A656D8100531543 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255026DE2A656D8100531543 /* OnBoardingViewController.swift */; };
 		255026E52A657FB000531543 /* EnterProjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255026E42A657FB000531543 /* EnterProjectView.swift */; };
@@ -288,7 +287,6 @@
 		250D5CC02A68002100F648BD /* TILView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TILView.swift; sourceTree = "<group>"; };
 		250D5CC32A68004600F648BD /* BottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetViewController.swift; sourceTree = "<group>"; };
 		250D5CC52A68005700F648BD /* CreateReViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReViewViewController.swift; sourceTree = "<group>"; };
-		250D5CC72A68007000F648BD /* ReviewTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTestViewController.swift; sourceTree = "<group>"; };
 		251C00D42A5D205300F6838C /* CustomRadioButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRadioButton.swift; sourceTree = "<group>"; };
 		255026DE2A656D8100531543 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
 		255026E42A657FB000531543 /* EnterProjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterProjectView.swift; sourceTree = "<group>"; };
@@ -927,7 +925,6 @@
 			children = (
 				250D5CC32A68004600F648BD /* BottomSheetViewController.swift */,
 				250D5CC52A68005700F648BD /* CreateReViewViewController.swift */,
-				250D5CC72A68007000F648BD /* ReviewTestViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1301,7 +1298,6 @@
 				03E6D2682A53334A00F4453C /* UITextField+.swift in Sources */,
 				583BA7C72A62FFB00030CF14 /* ProjectServiceTemporary.swift in Sources */,
 				03E6D26E2A53337600F4453C /* UICollectionView+.swift in Sources */,
-				250D5CC82A68007000F648BD /* ReviewTestViewController.swift in Sources */,
 				0967560D2A61E08C00A1E691 /* ProjectCalendarView.swift in Sources */,
 				03FFD2CE2A5B1A8B00A3B70D /* AppleSDGothicNeoType.swift in Sources */,
 				0935C8052A66E7D400790A1B /* EnterProjectViewController.swift in Sources */,

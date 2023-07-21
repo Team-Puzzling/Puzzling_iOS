@@ -1,4 +1,3 @@
-
 //
 //  BottomSheetViewController.swift
 //  Puzzling
@@ -17,6 +16,10 @@ final class BottomSheetViewController: UIViewController {
     // MARK: - Properties
     var selectedOption: String?
     var onOptionSelected: ((Int) -> Void)?
+    
+    private let optionFirstView = UIView()
+    private let optionSecondView = UIView()
+    private let optionThirdView = UIView()
     
     let optionFirstButton = CustomRadioButton(frame: CGRect(x: 0, y: 0, width: 16, height: 16))
     let optionSecondButton = CustomRadioButton(frame: CGRect(x: 0, y: 0, width: 16, height: 16))
@@ -49,7 +52,7 @@ final class BottomSheetViewController: UIViewController {
         print("BottomSheetViewController deinit")
     }
 }
- 
+
 extension BottomSheetViewController {
 
     // MARK: - UI Components Property
@@ -104,61 +107,86 @@ extension BottomSheetViewController {
 
     private func setLayout() {
         
-        view.addSubviews(optionFirstButton, optionFirstTitle, optionFirstSubtitle,
-                         optionSecondButton, optionSecondTitle, optionSecondSubtitle,
-                         optionThirdButton, optionThirdTitle, optionThirdSubtitle)
+        view.addSubviews(optionFirstView, optionSecondView, optionThirdView)
+        
+        optionFirstView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(50)
+            $0.leading.trailing.equalToSuperview().inset(16)
+            $0.height.equalTo(40)
+
+        }
+
+        optionSecondView.snp.makeConstraints {
+            $0.top.equalTo(optionFirstView.snp.bottom).offset(16)
+            $0.leading.trailing.equalToSuperview().inset(16)
+            $0.height.equalTo(40)
+
+        }
+
+        optionThirdView.snp.makeConstraints {
+            $0.top.equalTo(optionSecondView.snp.bottom).offset(16)
+            $0.leading.trailing.equalToSuperview().inset(16)
+            $0.height.equalTo(40)
+        }
+        
+        optionFirstView.addSubviews(optionFirstButton, optionFirstTitle, optionFirstSubtitle)
+        optionSecondView.addSubviews(optionSecondButton, optionSecondTitle, optionSecondSubtitle)
+        optionThirdView.addSubviews(optionThirdButton, optionThirdTitle, optionThirdSubtitle)
         
         optionFirstButton.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(57)
-            $0.leading.equalToSuperview().inset(16)
-            $0.width.equalTo(16)
-            $0.height.equalTo(16)
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview()
+            $0.width.height.equalTo(16)
         }
-        
+
         optionFirstTitle.snp.makeConstraints {
             $0.top.equalTo(optionFirstButton.snp.top)
-            $0.leading.equalTo(optionFirstButton.snp.trailing).inset(-20)
+            $0.leading.equalTo(optionFirstButton.snp.trailing).offset(20)
         }
-        
+
         optionFirstSubtitle.snp.makeConstraints {
             $0.top.equalTo(optionFirstTitle.snp.top)
-            $0.leading.equalTo(optionFirstTitle.snp.trailing).inset(-30)
+            $0.leading.equalTo(optionFirstTitle.snp.trailing).offset(27)
         }
-        
+
         optionSecondButton.snp.makeConstraints {
-            $0.top.equalTo(optionFirstButton.snp.bottom).offset(40)
-            $0.leading.equalToSuperview().inset(16)
-            $0.width.equalTo(16)
-            $0.height.equalTo(16)
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview()
+            $0.width.height.equalTo(16)
         }
-        
+
         optionSecondTitle.snp.makeConstraints {
             $0.top.equalTo(optionSecondButton.snp.top)
-            $0.leading.equalTo(optionSecondButton.snp.trailing).inset(-20)
+            $0.leading.equalTo(optionSecondButton.snp.trailing).offset(20)
         }
-        
+
         optionSecondSubtitle.snp.makeConstraints {
             $0.top.equalTo(optionSecondTitle.snp.top)
-            $0.leading.equalTo(optionSecondTitle.snp.trailing).inset(-36)
+            $0.leading.equalTo(optionSecondTitle.snp.trailing).offset(33)
         }
-        
+
         optionThirdButton.snp.makeConstraints {
-            $0.top.equalTo(optionSecondButton.snp.bottom).offset(40)
-            $0.leading.equalToSuperview().inset(16)
-            $0.width.equalTo(16)
-            $0.height.equalTo(16)
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview()
+            $0.width.height.equalTo(16)
         }
-        
+
         optionThirdTitle.snp.makeConstraints {
             $0.top.equalTo(optionThirdButton.snp.top)
-            $0.leading.equalTo(optionThirdButton.snp.trailing).inset(-20)
+            $0.leading.equalTo(optionThirdButton.snp.trailing).offset(20)
         }
-        
+
         optionThirdSubtitle.snp.makeConstraints {
             $0.top.equalTo(optionThirdTitle.snp.top)
-            $0.leading.equalTo(optionThirdTitle.snp.trailing).inset(-22)
+            $0.leading.equalTo(optionThirdTitle.snp.trailing).offset(20)
         }
         
+        // 버튼의 터치 영역을 설정합니다.
+        optionFirstView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(optionFirstSelected)))
+        optionSecondView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(optionSecondSelected)))
+        optionThirdView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(optionThirdSelected)))
+
+        // 기존의 selectedOption 값에 따라 버튼의 선택 여부를 설정합니다.
         if selectedOption == "TIL" {
             optionFirstButton.btnSelected = true
             optionFirstButton.innerCircle.isHidden = false
@@ -174,9 +202,8 @@ extension BottomSheetViewController {
     // MARK: - Methods
     
     private func setAddTarget() {
-        optionFirstButton.addTarget(self, action: #selector(optionFirstSelected), for: .touchUpInside)
-        optionSecondButton.addTarget(self, action: #selector(optionSecondSelected), for: .touchUpInside)
-        optionThirdButton.addTarget(self, action: #selector(optionThirdSelected), for: .touchUpInside)
+        // 원래는 버튼에 대한 addTarget을 여기서 설정하던 것을 사용하지 않습니다.
+        // 대신 각 옵션 뷰에 터치 제스처를 추가하여 버튼의 선택을 처리합니다.
     }
     
     func dismissBottomSheet() {
@@ -185,21 +212,24 @@ extension BottomSheetViewController {
     
     // MARK: - @objc Methods
 
-    @objc func optionFirstSelected() {
+    @objc private func optionFirstSelected() {
+        // 첫 번째 옵션 버튼을 탭할 때의 동작을 처리합니다.
         onOptionSelected?(optionFirstButton.tag)
         optionSecondButton.innerCircle.isHidden = true
         optionThirdButton.innerCircle.isHidden = true
         dismiss(animated: true, completion: nil)
     }
     
-    @objc func optionSecondSelected() {
+    @objc private func optionSecondSelected() {
+        // 두 번째 옵션 버튼을 탭할 때의 동작을 처리합니다.
         onOptionSelected?(optionSecondButton.tag)
         optionFirstButton.innerCircle.isHidden = true
         optionThirdButton.innerCircle.isHidden = true
         dismiss(animated: true, completion: nil)
     }
     
-    @objc func optionThirdSelected() {
+    @objc private func optionThirdSelected() {
+        // 세 번째 옵션 버튼을 탭할 때의 동작을 처리합니다.
         onOptionSelected?(optionThirdButton.tag)
         optionFirstButton.innerCircle.isHidden = true
         optionSecondButton.innerCircle.isHidden = true
