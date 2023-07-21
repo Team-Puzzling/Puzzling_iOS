@@ -43,6 +43,8 @@ final class ReviewDetailViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        projectCalenderView.selectDate(date: self.selectedDate)
+        projectCalenderView.calendarView.reloadData()
         if navigationBool == false {
             setNavigationBar()
         } else {
@@ -53,8 +55,6 @@ final class ReviewDetailViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setCalendarViewLayout()
-        projectCalenderView.selectDate(date: self.selectedDate)
-        projectCalenderView.calendarView.reloadData()
     }
     
     deinit {
@@ -159,7 +159,8 @@ extension ReviewDetailViewController: UIGestureRecognizerDelegate {
     }
     
     private func setTodayNavigation(title: String) {
-        self.navigationItem.leftBarButtonItem?.isHidden = true
+        self.navigationItem.hidesBackButton = true
+//        self.navigationItem.backBarButtonItem?.isHidden = true
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: Image.xMark,
             style: .plain,
@@ -194,14 +195,15 @@ extension ReviewDetailViewController {
     
     @objc
     private func gotoTabBar() {
-        let mainViewController = TabBarController()
-        let navigationController = UINavigationController(rootViewController: mainViewController)
-        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
-        guard let delegate = sceneDelegate else {
-            // 에러 알림
-            return
-        }
-        delegate.window?.rootViewController = navigationController
+        UIViewController.modifyRootViewController(TabBarController())
+//        let mainViewController = TabBarController()
+//        let navigationController = UINavigationController(rootViewController: mainViewController)
+//        let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate
+//        guard let delegate = sceneDelegate else {
+//            // 에러 알림
+//            return
+//        }
+//        delegate.window?.rootViewController = navigationController
     }
 }
 
@@ -230,13 +232,18 @@ extension ReviewDetailViewController {
     func passData(id: Int, title: String) {
         self.currentProjectTitle = title
         self.currentProjectId = id
-        
     }
-    
+
     func sendTitle(_ title: String, date: String) {
         navigationBool = true
         self.selectedDate = date
         self.currentProjectTitle = title
         self.navigationBool = false
+    }
+    
+    func sendTitleFromCreateReview(title: String, date: String, isFromCreationView: Bool = true) {
+        self.selectedDate = date
+        self.currentProjectTitle = title
+        self.navigationBool = isFromCreationView
     }
 }
