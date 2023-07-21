@@ -288,7 +288,7 @@ extension CreateReViewViewController {
     
     private func gotoReviewDetailView() {
         let vc = ReviewDetailViewController()
-        vc.sendTitle(projectTitle, date: Date().dateToServerString)
+        vc.sendTitleFromCreateReview(title: self.projectTitle, date: Date().dateToServerString)
         vc.showToast(withImage: Image.checkW, message: "저장 완료!")
         self.navigationController?.pushViewController(vc, animated: true)
     }
