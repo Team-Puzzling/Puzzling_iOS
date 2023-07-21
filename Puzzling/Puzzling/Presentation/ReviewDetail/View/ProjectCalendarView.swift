@@ -260,7 +260,7 @@ extension ProjectCalendarView {
         dateFormatter.dateFormat = "yyyy-MM-dd"
         dateFormatter.locale = Locale(identifier: "ko_KR")
         dateFormatter.timeZone = TimeZone(identifier: "KST")
-        
+        selectedDate = date
         calendarView.select(dateFormatter.date(from: date))
         let currentPage = calendarView.currentPage
         headerLabel.text = headerDateFormatter.string(from: currentPage)
@@ -293,11 +293,13 @@ extension ProjectCalendarView {
                         print("🎒🎒🎒🎒🎒🎒🎒🎒🎒🎒🎒🎒🎒")
                         self.calendarToView()
 //                        print(self.reviewDetailDataModel)
-                        
+                        self.calendarView.reloadData()
                         self.setUI()
                         
                         let myModel = self.findData(date: self.selectedDate)
                         self.delegate?.reviewDate(reviewDetailModel: myModel ?? ReviewDetailModel(reviewId: nil, reviewDay: "월", reviewDate: "2023-07-17", reviewTemplateId: nil, contents: nil))
+                        print(self.selectedDate, "🐻‍❄️🐻‍❄️🐻‍❄️🐻‍❄️🐻‍❄️🐻‍❄️🐻‍❄️🐻‍❄️🐻‍❄️🐻‍❄️🐻‍❄️🐻‍❄️🐻‍❄️🐻‍❄️🐻‍❄️🐻‍❄️")
+                        self.selectDate(date: self.selectedDate)
                         print("♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️")
                         
                     } catch(let error) {
