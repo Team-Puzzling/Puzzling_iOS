@@ -11,10 +11,18 @@ import SnapKit
 import Then
 import Moya
 
+protocol StringTransferDelegate: AnyObject {
+    func passString(_ value: String)
+}
+
 final class MyReviewListViewController: UIViewController {
+    
+    weak var delegate: StringTransferDelegate?
     
     private var currentProjectTitle: String = "Project1"
     private var currentProjectId: Int = 0
+    
+    private var currentReviewDate: String = ""
     
     private let myReviewListCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
@@ -117,15 +125,6 @@ extension MyReviewListViewController {
     private func backButtonTapped() {
         self.navigationController?.popViewController(animated: true)
     }
-    
-    @objc
-    private func getProjectNotification(_ notification: Notification) {
-        if let notification = notification.userInfo?["userInfo"] as? String {
-            currentProjectTitle = notification
-            print("ReviewListVC✉️✉️✉️✉️✉️✉️✉️✉️✉️✉️✉️✉️ \(currentProjectTitle)")
-            reloadHeaderView(text: currentProjectTitle)
-        }
-    }
 }
 
 extension MyReviewListViewController: projectNameProtocol {
@@ -159,9 +158,17 @@ extension MyReviewListViewController: buttonTappedProtocol {
 }
 
 extension MyReviewListViewController: UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = ReviewDetailViewController()
         
+        let vc = ReviewDetailViewController()
+        let cell = collectionView.cellForItem(at: indexPath) as? MyReviewListCollectionViewCell
+        if let selectedCell = cell {
+            currentReviewDate = cell?.getSelectedData() ?? "2023-07-17"
+            print(currentReviewDate, "zzzzzz")
+        }
+//        vc.delegate = self
+        vc.passString(currentReviewDate)
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

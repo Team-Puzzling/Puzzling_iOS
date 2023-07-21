@@ -14,6 +14,7 @@ final class ReviewDetailView: UIView {
     private var reviewDetailData: [ReviewDetailModel] = []
     private var selectedDate: String = "2023-07-17"
     
+    private var specificData: ReviewDetailModel = ReviewDetailModel(reviewId: nil, reviewDay: "", reviewDate: "", reviewTemplateId: nil, contents: nil)
     private func findMyData() -> ReviewDetailModel {
         var data: ReviewDetailModel = ReviewDetailModel(reviewId: nil, reviewDay: "", reviewDate: "", reviewTemplateId: nil, contents: nil)
         reviewDetailData.forEach {
@@ -36,6 +37,7 @@ final class ReviewDetailView: UIView {
         setDelegate()
         setRegister()
         setNotificationCenter()
+        dateNotification() 
         self.backgroundColor = .systemRed
     }
     
@@ -43,15 +45,10 @@ final class ReviewDetailView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func removeFromSuperview() {
-        super.removeFromSuperview()
-        print(className)
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("dateNotification"), object: nil)
-    }
-    
     deinit {
         print(className)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name("dateNotification"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("calendarToView"), object: nil)
     }
 }
 
@@ -85,6 +82,13 @@ extension ReviewDetailView {
         NotificationCenter.default.addObserver(self, selector: #selector(getDateNotification(_:)), name: Notification.Name("dateNotification"), object: nil)
 //        reviewCollectionview.reloadData()
     }
+    
+    private func dateNotification() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(receiveDataFromView1(_:)),
+                                               name: NSNotification.Name("calendarToView"),
+                                               object: nil)
+    }
 }
 
 extension ReviewDetailView {
@@ -107,13 +111,19 @@ extension ReviewDetailView {
         print(selectedDate,"✅✅✅✅??✅✅")
         reviewCollectionview.reloadData()
     }
+    
+    @objc func receiveDataFromView1(_ notification: Notification) {
+        if let data = notification.object as? ReviewDetailModel {
+            specificData = data
+        }
+    }
 }
 
 extension ReviewDetailView: UICollectionViewDelegate { }
 
 extension ReviewDetailView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        var data = findMyData()
+        let data = findMyData()
         guard let count = data.contents?.count else { return 0 }
         return count
     }
@@ -123,7 +133,7 @@ extension ReviewDetailView: UICollectionViewDataSource {
 //        setNotificationCenter()
             print(selectedDate,"ㅋㅋ???ㅋㅋㅋ")
 //        reviewDetailData.forEach {
-        var data = findMyData()
+        let data = findMyData()
         print(data)
             if(data.reviewDate == selectedDate) {
                 guard let title = data.contents?[indexPath.row].title else { return UICollectionViewCell() }

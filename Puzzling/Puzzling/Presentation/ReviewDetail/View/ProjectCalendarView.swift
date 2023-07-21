@@ -13,7 +13,7 @@ import Then
 import Moya
 
 protocol reviewDateProtocol: AnyObject {
-    func reviewDate(text: String)
+    func reviewDate(reviewDetailModel: ReviewDetailModel)
 }
 
 final class ProjectCalendarView: UIView {
@@ -65,6 +65,10 @@ final class ProjectCalendarView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 }
 
 extension ProjectCalendarView {
@@ -99,9 +103,18 @@ extension ProjectCalendarView {
         
         headerLabel.do {
             $0.font = .fontGuide(.heading2_kor)
+            let dateformat = DateFormatter()
+            dateformat.dateFormat = "yyyy-MM-dd"
+            dateformat.locale = Locale(identifier: "ko_KR")
+            dateformat.timeZone = TimeZone(identifier: "KST")
+            guard let yyyymmDate = dateformat.date(from: self.selectedDate) else { return }
+            print(yyyymmDate, "🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥🐥")
             $0.textColor = .black000
-            $0.text = self.headerDateFormatter.string(for: selectedDate)
+            $0.text = self.headerDateFormatter.string(from: yyyymmDate)
+            
+            print($0.text, "33535355353553535355")
         }
+        
         calendarViewHeight.constant = 350
     }
     
@@ -142,6 +155,13 @@ extension ProjectCalendarView {
         )
     }
     
+    private func calendarToView() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(sendDataToView2),
+                                               name: NSNotification.Name("calendarToView"),
+                                               object: nil)
+    }
+    
     private func setDateFormatter() {
         headerDateFormatter.do {
             $0.dateFormat = "YYYY년 M월"
@@ -154,6 +174,12 @@ extension ProjectCalendarView {
             $0.timeZone = TimeZone(abbreviation: "KST")
             $0.dateFormat = "yyyy-MM-dd"
         }
+    }
+}
+
+extension ProjectCalendarView {
+    @objc func sendDataToView2() {
+        NotificationCenter.default.post(name: NSNotification.Name("calendarToView"), object: specificData)
     }
 }
 
@@ -220,8 +246,6 @@ extension ProjectCalendarView: FSCalendarDelegate, FSCalendarDataSource, FSCalen
         print("dpdpdpdp")
         sendDateNotification(string: returnDate)
         sendDateBoolNotification(bool: boolData)
-        
-        self.delegate?.reviewDate(text: returnDate)
     }
 }
 
@@ -229,6 +253,17 @@ extension ProjectCalendarView {
     
     func getCalendarViewHeight() -> CGFloat{
         return self.calendarViewHeight.constant
+    }
+    
+    func selectDate(date: String) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        dateFormatter.timeZone = TimeZone(identifier: "KST")
+        
+        calendarView.select(dateFormatter.date(from: date))
+        let currentPage = calendarView.currentPage
+        headerLabel.text = headerDateFormatter.string(from: currentPage)
     }
 }
 
@@ -256,12 +291,13 @@ extension ProjectCalendarView {
                             self.reviewDetailDataModel.append($0.convertToReviewDetailModel())
                         }
                         print("🎒🎒🎒🎒🎒🎒🎒🎒🎒🎒🎒🎒🎒")
-                        
+                        self.calendarToView()
 //                        print(self.reviewDetailDataModel)
-                        self.calendarView.reloadData()
-                        print(self.selectedDate, "🐸🐸🐸🐸🐸🐸🐸🐸🐸🐸🐸🐸🐸🐸🐸🐸🐸🐸🐸🐸🐸🐸")
-                        self.headerLabel.text = self.headerDateFormatter.string(for: self.selectedDate)
                         
+                        self.setUI()
+                        
+                        let myModel = self.findData(date: self.selectedDate)
+                        self.delegate?.reviewDate(reviewDetailModel: myModel ?? ReviewDetailModel(reviewId: nil, reviewDay: "월", reviewDate: "2023-07-17", reviewTemplateId: nil, contents: nil))
                         print("♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️")
                         
                     } catch(let error) {

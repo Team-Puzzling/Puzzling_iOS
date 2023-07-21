@@ -29,18 +29,10 @@ extension ReviewDetailViewController {
 }
 
 extension ReviewDetailViewController: reviewDateProtocol {
-    func reviewDate(text: String) {
-        selectedDate = text
+    func reviewDate(reviewDetailModel: ReviewDetailModel) {
         
         print(selectedDate, "aaaaaa👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿👿")
-        let userInfo = selectedDate
-        print(userInfo, "xxxxxx")
-        NotificationCenter.default.post(
-            name: Notification.Name("dateNotification"),
-            object: nil,
-            userInfo: ["userInfo": userInfo]
-        )
-        reviewDetailView?.layoutSubviews()
+        
     }
 }
 
@@ -172,5 +164,13 @@ extension ReviewDetailViewController {
             else { setReviewDetailView(status: .empty) }
         }
         layout()
+    }
+}
+
+extension ReviewDetailViewController: StringTransferDelegate {
+    func passString(_ value: String) {
+        selectedDate = value
+        print(selectedDate, "🧢🧢🧢🧢🧢🧢🧢🧢🧢🧢🧢🧢🧢")
+        projectCalenderView.selectDate(date: selectedDate)
     }
 }
