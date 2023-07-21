@@ -28,8 +28,8 @@ final class ProjectCalendarView: UIView {
     // MARK: - Properties
     
     weak var delegate: reviewDateProtocol?
-    private var startDate: String = "2023-04-01"
-    private var endDate: String = "2023-12-13"
+    private var startDate: String = "2023-07-01"
+    private var endDate: String = "2023-08-15"
     private var selectedDate: String = "2023-07-14"
     private var specificData = ReviewDetailModel(reviewId: nil, reviewDay: "", reviewDate: "", reviewTemplateId: nil, contents: nil)
     private var dataList: [ReviewDetailModel] = []
