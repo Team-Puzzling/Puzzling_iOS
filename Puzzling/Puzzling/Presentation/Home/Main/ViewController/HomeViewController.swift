@@ -30,6 +30,8 @@ final class HomeViewController: UIViewController {
     private var currentProjectId: Int = UserDefaults.standard.integer(forKey: "projectId")
     private var memberId: Int = UserDefaults.standard.integer(forKey: "memberId")
     
+    private let authProvider = MoyaProvider<AuthService>(plugins:[NetworkLoggerPlugin()])
+    private var tokenModel: TokenModel = TokenModel(accessToken: "")
     private let dashboardNetworkProvider = MoyaProvider<ProjectServiceKBS>(plugins: [NetworkLoggerPlugin(verbose: true)])
     private var tabBarHeight: CGFloat {
         guard let height = self.tabBarController?.tabBar.frame.size.height else { return 0.0 }
@@ -346,6 +348,33 @@ extension HomeViewController {
                 }
             case .failure(let error):
                 print(error)
+            }
+        }
+        
+    }
+    
+    func getNewToken() {
+        guard let access = KeyChain.read(key: "accessToken") else { return }
+        guard let refresh = KeyChain.read(key: "refreshToken") else { return }
+        authProvider.request(.authToken(Authorization: access, Refresh: refresh)) { result in
+            switch result {
+            case .success(let result):
+                let status = result.statusCode
+                if status >= 200 && status < 300 {
+                    do {
+                        guard let data = try result.map(GeneralResponse<TokenResponse>.self).data else { return }
+                        self.tokenModel = data.convertToTokenModel()
+                        KeyChain.create(key: "accessToken", token: self.tokenModel.accessToken)
+                        APIConstants.accessToken = self.tokenModel.accessToken
+                    } catch(let error) {
+                        print(error.localizedDescription)
+                    }
+                }
+                else if status >= 400 {
+                    print("⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️⚙️")
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
             }
         }
     }
