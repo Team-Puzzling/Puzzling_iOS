@@ -130,13 +130,17 @@ extension MyProjectViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-extension MyProjectViewController: MyProjectPassEventDelegate {
+extension MyProjectViewController: MyProjectPassEventDelegate, ReviewButtonPassEventDelegate {
     func passTouchEvent(projectTitle: String, projectId: Int) {
         self.currentProjectTitle = projectTitle
         self.currentProjectId = projectId
         let vc = MyReviewListViewController()
         vc.passData(id: self.currentProjectId, title: self.currentProjectTitle)
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func passReviewButton() {
+        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Network
